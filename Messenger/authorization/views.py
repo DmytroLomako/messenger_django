@@ -3,6 +3,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from django.http import HttpRequest
 from .forms import RegistrationForm, LoginForm
+from django.contrib.auth.views import LogoutView
+
 # Create your views here.
 
 
@@ -14,6 +16,7 @@ def render_login(request: HttpRequest):
         if form.is_valid():
             user = authenticate(request, username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             login(request, user)
+            return redirect("/")
     return render(request, 'authorization/login/login.html', context = {"form": form})
 
 
@@ -26,3 +29,8 @@ def render_registration(request: HttpRequest):
             user = User.objects.create_user(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             return redirect("login")
     return render(request, 'authorization/registration/registration.html', context={'form': form})
+
+
+
+class CustomLogoutView(LogoutView):
+    next_page = "login"

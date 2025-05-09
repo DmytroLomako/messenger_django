@@ -19,11 +19,13 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from main.views import render_main
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('authorization/', include("authorization.urls"))
+    path('authorization/', include("authorization.urls")),
+    path('', render_main, name= "main")
 ]
 
 

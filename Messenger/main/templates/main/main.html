@@ -1,0 +1,142 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Main Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+
+    <div class="tabsExit">
+        <div class="tabs">
+            <a class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a class="publications tab"><img src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a class="settings tab"><img src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+
+<main>
+    <div class="userInfo">
+        <div class="miniProfile">
+            <div class="avatarNames">
+                <img src="{% static 'images/avatar.png' %}" class="avatar">
+                <div class="names">
+                    <p class="nickname">{{ request.user.username }}</p>
+                    <p class="username">@{{ request.user.username }}123</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="posts">
+                    <p class="count">566</p>
+                    <p class="name">Дописи</p>
+                </div>
+
+                <div class="readers">
+                    <p class="count">12.1K</p>
+                    <p class="name">Читачі</p>
+                </div>
+
+                <div class="friends">
+                    <p class="count">222</p>
+                    <p class="name">Друзі</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="requests">
+            <div class="blockName">
+                <p class="name"><img src="{% static 'images/friends_gray.png' %}">Запити</p>
+                <a href="" class="showAll">Дивитись всі</a>
+            </div>
+            <div class="users">
+                <div class="user">
+                    <img src="{% static 'images/avatar2.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Yehor Aung</p>
+                        <p class="subscribers">4.3k Підписників</p>
+                    </div>
+                </div>
+
+                <div class="user">
+                    <img src="{% static 'images/avatar3.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Ann Ann</p>
+                        <p class="subscribers">1.6k Підписників</p>
+                    </div>
+                </div>
+
+                <div class="user">
+                    <img src="{% static 'images/avatar4.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Yeugen Jenua</p>
+                        <p class="subscribers">10.3k Підписників</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="messages">
+            <div class="blockName">
+                <p class="name"><img src="{% static 'images/messages.png' %}">Повідомлення</p>
+                <a href="" class="showAll">Дивитись всі</a>
+            </div>
+            <div class="users">
+                <div class="user">
+                    <img src="{% static 'images/avatar5.png' %}">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">Mona Lisa</p>
+                            <p class="time">09:41</p>
+                        </div>
+                        <p class="message">Привіт! Як справи?</p>
+                    </div>
+                </div>
+                <div class="user">
+                    <img src="{% static 'images/avatar6.png' %}">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">Ann Ti</p>
+                            <p class="time">25.04.2025</p>
+                        </div>
+                        <p class="message">Привіт!</p>
+                    </div>
+                </div>
+                <div class="user">
+                    <img src="{% static 'images/avatar7.png' %}">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">Ness Ty</p>
+                            <p class="time">25.04.2025</p>
+                        </div>
+                        <p class="message">Привіт!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <textarea class="postsarea">
+
+    </textarea>
+</main>
+
+{% endblock %}
