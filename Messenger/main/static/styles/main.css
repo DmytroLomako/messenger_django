@@ -6,6 +6,7 @@
     font-size: 16px;
     color: #070A1C;
     letter-spacing: -1%;
+    box-sizing: border-box;
 }
 
 @font-face {
@@ -397,11 +398,267 @@ main .messages .users .user img {
 
 
 
-main .postsDiv {
+main .postArea {
     width: 923px;
     height: 120px;
     background-color: white;
-
     border: 1px solid #CDCED2;
     border-radius: 10px;
+    resize: none;
+    padding-left: 16px;
+    padding-top: 16px;
+    box-sizing: border-box;
+}
+
+main .postArea input {
+    width: 891px;
+    height: 22px;
+    outline: none;
+    border: 0;
+}
+
+
+main .postArea .sendDiv {
+    width: 891px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 13px;
+    margin-top: 26px;
+}
+
+
+.imageBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+}
+
+main .postArea .sendDiv .addImageBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .addEmojiBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .sendBtn {
+    width: 130px;
+    height: 40px;
+
+    background-color: #543C52;
+    border-radius: 1234px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .sendBtn #smallImage {
+    height: 20px;
+}
+
+main .postPostInput .post {
+    width: 923px;
+    height: 897px;
+    background-color: white;
+    margin-top: 8px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+main .postPostInput .post .postHeader {
+    width: 923px;
+    height: 89px;
+    border-bottom: 1px solid #CDCED2;
+
+    display: flex;
+    align-items: center;
+
+    display: flex;
+    gap: 10px;
+    box-sizing: border-box;
+
+}
+
+main .postPostInput .post .postHeader .avatar {
+    width: 46px;
+    height: 46px;
+}
+
+main .postPostInput .post .postHeader .text {
+    font-size: 14px;
+}
+
+main .postPostInput .post .postHeader .paintingDiv {
+    display: flex;
+    justify-content: end;
+
+    margin-left: 505px;
+}
+
+.dotsDiv .dots {
+    height: 20px;
+}
+
+.dotsDiv {
+    height: 20px;
+}
+
+.dotsDiv button {
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+main .postPostInput .post .postHeader .paintingDiv .painting {
+    width: 220px;
+    height: 49px;
+}
+
+
+main .postArea .post {
+    background-color: white;
+    width: 923px;
+    height: 897px;
+}
+
+main .postMain {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+}
+
+main .postMain .text {
+    font-weight: 400;
+}
+
+.hashtags {
+    font-weight: 400;
+    color: #543C52;
+}
+
+
+main .postMain .images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 883px;
+    height: 670px;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+main .postMain .images .postImage1 {
+    width: 433px;
+    height: 327px;
+}
+
+main .postMain .images .postImage2 {
+    width: 433px;
+    height: 327px;
+}
+
+main .postMain .images .postImage3 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postMain .images .postImage4 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postMain .images .postImage5 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postFooter img {
+    width: 20px;
+}
+
+.likesViews {
+    width: 100%;
+    height: 20px;
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+}
+
+
+.likesViews .likes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+
+main .responses .response {
+    width: 923px;
+    height: 208px;
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+
+main .responses .response .headerResponse .avatarName img {
+    height: 46px;
+}
+
+main .responses .response .headerResponse .avatarName {
+    width: 847px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+main .responses .response .headerResponse {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 20px;
+    height: 86px;
+    border-bottom: 1px solid #CDCED2;
+}
+
+
+main .responses .response .mainResponse {
+    display: flex;
+    padding-left: 20px;
+    padding-top: 16px;
+
+    flex-direction: column;
+}
+
+.likesImg {
+    height: 20px;
+}
+
+.mona {
+    background-color: #E9E5EE;
+}
+
+.ann {
+    background-color: #E9E5EE;
 }
