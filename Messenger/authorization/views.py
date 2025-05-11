@@ -7,7 +7,7 @@ from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views import View
-from .forms import RegistrationForm
+from .forms import *
 from .models import VerificationCode
 
 class RegisterView(CreateView):
@@ -69,6 +69,7 @@ class VerifyCodeView(View):
 
 class CustomLoginView(LoginView):
     template_name = "authorization/login/login.html"
+    form_class = CustomLoginForm
 
 class CustomLogoutView(LogoutView):
     next_page = "login"
