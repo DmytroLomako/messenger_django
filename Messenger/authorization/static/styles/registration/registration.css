@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+}
+
+@font-face {
+    font-family: MainFontMedium;
+    src: url("/media/fonts/fontMedium.ttf");
+}
+
+
+
+label,
+input {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+input {
+    margin-top: 6px;
+    width: 400px;
+    height: 42px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    padding-left: 16px;
+}
+
+span {
+    display: none;
+}
+
+ul {
+    display: none;
+}
+
+/* #id_password2 {
+    margin-top: -16px;
+} */
+
+
+/* #id_password2 label {
+    margin-top: -16px;
+} */
+
+main {
+    width: 100vw;
+    height: 100vh;
+    padding-left: 255px;
+    padding-top: 236px;
+    background-color: #E9E5EE;
+    box-sizing: border-box;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+}
+
+.formDiv {
+    width: 487px;
+    height: 552px;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 44px;
+    box-sizing: border-box;
+
+    border-radius: 20px;
+    gap: 36px;
+}
+
+.greatings {
+    font-size: 24px;
+    color: #070A1C;
+}
+
+.choosed {
+    font-weight: 700;
+    color: #070A1C;
+    border-bottom: 2px solid black;
+}
+
+.regLogin {
+    display: flex;
+    gap: 24px;
+}
+
+a {
+    font-size: 34px;
+    color: #81818D;
+    width: 186px;
+    height: 47px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.withoutButton {
+    width: 400px;
+    height: 230px;
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.submit {
+    width: 400px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #543C52;
+    border-radius: 1234px;
+
+    color: white;
+    border: 0;
+}
