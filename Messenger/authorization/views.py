@@ -2,17 +2,13 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
-from django.contrib.sites.shortcuts import get_current_site
 from django.template.loader import render_to_string
-from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
-from django.utils.encoding import force_bytes, force_str
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views import View
-
 from .forms import RegistrationForm
-from .tokens import account_activation_token
+from .models import VerificationCode
 
 class RegisterView(CreateView):
     form_class = RegistrationForm
@@ -21,40 +17,55 @@ class RegisterView(CreateView):
     
     def form_valid(self, form):
         user = form.save()
-        current_site = get_current_site(self.request)
+        verification_code = VerificationCode.generate_code()
+        VerificationCode.objects.create(user=user, code=verification_code)
+        
         mail_subject = 'Activate your account'
         message = render_to_string('authorization/email/account_activation_email.html', {
             'user': user,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(user.pk)),
-            'token': account_activation_token.make_token(user),
+            'code': verification_code,
         })
         to_email = form.cleaned_data.get('email')
         email = EmailMessage(
             mail_subject, message, to=[to_email]
         )
         email.send()
+        
+        self.request.session['verification_user_id'] = user.id
         return super().form_valid(form)
 
 class EmailVerificationSentView(View):
     def get(self, request):
+        if 'verification_user_id' not in request.session:
+            return redirect('register')
         return render(request, 'authorization/registration/verification_sent.html')
 
-class ActivateAccountView(View):
-    def get(self, request, uidb64, token):
+class VerifyCodeView(View):
+    def post(self, request):
+        code = request.POST.get('verification_code')
+        user_id = request.session.get('verification_user_id')
+        
+        if not user_id:
+            return redirect('register')
+        
         try:
-            uid = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(pk=uid)
-        except (TypeError, ValueError, OverflowError, User.DoesNotExist):
-            user = None
+            user = User.objects.get(pk=user_id)
+            verification = VerificationCode.objects.get(user=user)
             
-        if user is not None and account_activation_token.check_token(user, token):
-            user.is_active = True
-            user.save()
-            login(request, user)
-            return redirect('login')
-        else:
-            return render(request, 'authorization/registration/activation_invalid.html')
+            if verification.code == code and verification.is_valid():
+                user.is_active = True
+                user.save()
+                verification.delete()
+                
+                if 'verification_user_id' in request.session:
+                    del request.session['verification_user_id']
+                
+                login(request, user)
+                return redirect('login')
+            else:
+                return render(request, 'authorization/registration/verification_failed.html')
+        except (User.DoesNotExist, VerificationCode.DoesNotExist):
+            return render(request, 'authorization/registration/verification_failed.html')
 
 class CustomLoginView(LoginView):
     template_name = "authorization/login/login.html"
