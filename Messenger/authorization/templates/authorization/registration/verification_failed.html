@@ -2,7 +2,9 @@
 
 {% block content %}
 <div class="container">
-    <h2>Verification Code Sent</h2>
+    <h2>Verification Failed</h2>
+    <p>The verification code you entered is invalid or has expired.</p>
+    <p>Please try again or <a href="{% url 'register' %}">register again</a>.</p>
     
     <form method="post" action="{% url 'verify_code' %}">
         {% csrf_token %}

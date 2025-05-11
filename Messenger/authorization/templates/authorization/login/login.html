@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 
+{% load static %}
 
 {% block title %}
 
@@ -7,11 +8,31 @@
 
 {% endblock %}
 
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/login/login.css' %}">
+{% endblock %}
 
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">submit</button>
-</form>
+
+<header>
+
+</header>
+
+<main>
+    <div class="formDiv">
+        <div class="regLogin">
+            <a href="{% url 'register' %}">Реєстрація</a>
+            <a href="{% url 'login' %}" class="choosed">Авторизація</a>
+        </div>
+        <p class="greatings">Раді тебе знову бачити!</p>
+        <form method="post">
+            <div class="withoutButton">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="submit">Увійти</button>
+        </form>
+    </div>
+</main>
 {% endblock %}

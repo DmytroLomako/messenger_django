@@ -36,7 +36,6 @@ class RegistrationForm(UserCreationForm):
         return user
     
 
-
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={"class": 'email', "placeholder": "you@example.com"}))
     password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'password', "placeholder": "Введи пароль"}))
