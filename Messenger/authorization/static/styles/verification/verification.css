@@ -20,11 +20,18 @@ input {
 
 input {
     margin-top: 6px;
-    width: 400px;
-    height: 42px;
+    width: 50px;
+    height: 45px;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     padding-left: 16px;
+}
+
+.inputBlocks {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
 }
 
 span {
@@ -60,8 +67,8 @@ form {
 }
 
 .formDiv {
-    width: 487px;
-    height: 552px;
+    width: 488px;
+    height: 444px;
     background-color: white;
 
     display: flex;
@@ -124,4 +131,11 @@ a {
 
 .username {
     display: none;
+}
+
+
+.guide {
+    width: 400px;
+    height: 54px;
+    text-align: center;
 }

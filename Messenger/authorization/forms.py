@@ -6,7 +6,7 @@ class RegistrationForm(UserCreationForm):
     
     class Meta:
         model = User
-        fields = ['email', 'password1', 'password2']
+        fields = ["username", 'email', 'password1', 'password2']
         widgets = {
             'email': forms.TextInput(attrs={"class": 'email', "placeholder": "you@gmail.com", 'required': True}),
         }
@@ -30,6 +30,10 @@ class RegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
+        user.username = self.cleaned_data["username"]
+        
+
+
         user.is_active = False 
         if commit:
             user.save()

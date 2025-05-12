@@ -1,16 +1,41 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/verification/verification.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <h2>Verification Code Sent</h2>
-    
-    <form method="post" action="{% url 'verify_code' %}">
-        {% csrf_token %}
-        <div class="form-group">
-            <label for="verification_code">Enter Verification Code:</label>
-            <input type="text" name="verification_code" id="verification_code" maxlength="6" required>
-        </div>
-        <button type="submit">Verify</button>
-    </form>
-</div>
+
+<main>
+    <div class="formDiv">
+        <p class="greatings">Приєднуйся до World IT</p>
+        <p class="guide">
+            Ми надіслали 6-значний код на вашу пошту (you@example.com). Введіть його нижче, щоб підтвердити акаунт
+        </p>
+        <form method="post" action="{% url 'verify_code' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="verification_code">Код підтвердження:</label>
+
+                <div class="inputBlocks">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code" id="verification_code" maxlength="1" required
+                        pattern="[0-9]">
+                </div>
+            </div>
+            <button type="submit" class="submit">Підтвердити</button>
+        </form>
+    </div>
+</main>
 {% endblock %}

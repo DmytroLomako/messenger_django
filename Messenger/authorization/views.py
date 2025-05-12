@@ -17,6 +17,7 @@ class RegisterView(CreateView):
     
     def form_valid(self, form):
         user = form.save()
+        user.username = user.pk
         verification_code = VerificationCode.generate_code()
         VerificationCode.objects.create(user=user, code=verification_code)
         
@@ -50,7 +51,7 @@ class VerifyCodeView(View):
         
         try:
             user = User.objects.get(pk=user_id)
-            user.username = user.email
+            
             verification = VerificationCode.objects.get(user=user)
             
             if verification.code == code and verification.is_valid():
