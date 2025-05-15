@@ -1,9 +1,48 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/verification/verification.css' %}">
+{% endblock %}
+
 {% block content %}
-<div class="container">
-    <h2>Verification Email Sent</h2>
-    <p>Please check your email to complete the registration process.</p>
-    <p>If you don't receive an email within a few minutes, please check your spam folder.</p>
-</div>
+
+<header>
+    <img src="{% static 'authorization/img/WIT.png' %}" alt="">
+</header>
+
+
+
+<main>
+    <div class="formDiv">
+        <p class="greatings">Приєднуйся до World IT</p>
+        <p class="guide">
+            Ми надіслали 6-значний код на вашу пошту (you@example.com). Введіть його нижче, щоб підтвердити акаунт
+        </p>
+        <form method="post" action="{% url 'verify_code' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="verification_code">Код підтвердження:</label>
+
+                <div class="inputBlocks">
+                    <input type="text" name="verification_code1" id="verification_code1" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code2" id="verification_code2" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code3" id="verification_code3" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code4" id="verification_code4" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code5" id="verification_code5" maxlength="1" required
+                        pattern="[0-9]">
+                    <input type="text" name="verification_code6" id="verification_code6" maxlength="1" required
+                        pattern="[0-9]">
+                </div>
+            </div>
+            <button type="submit" class="submit">Підтвердити</button>
+            <a href="{% url 'register' %}">Назад</a>
+        </form>
+    </div>
+</main>
 {% endblock %}

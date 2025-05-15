@@ -1,15 +1,31 @@
-{% extends "base.html" %}
-
-{% block title %}
-
-Реестрація
-
+{% load static %}
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/registration/registration.css' %}">
 {% endblock %}
 
+
 {% block content %}
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">submit</button>
-</form>
+
+<header>
+    <img src="{% static 'authorization/img/WIT.png' %}" alt="">
+</header>
+
+<main>
+    <div class="formDiv">
+        <div class="regLogin">
+            <a href="{% url 'register' %}" class="choosed">Реєстрація</a>
+            <a href="{% url 'login' %}">Авторизація</a>
+        </div>
+        <p class="greatings">Приєднуйся до World IT</p>
+        <form method="post">
+            <div class="withoutButton">
+                {% csrf_token %}
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="submit">Створити акаунт</button>
+        </form>
+    </div>
+    <img src="{% static 'authorization/img/laptop.png' %}" class="laptop-img">
+</main>
 {% endblock %}

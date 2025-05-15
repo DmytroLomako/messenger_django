@@ -1,9 +1,10 @@
 {% autoescape off %}
 Hi {{ user.username }},
 
-Please click on the link below to confirm your registration:
+Your verification code is: {{ code }}
 
-http://{{ domain }}{% url 'activate' uidb64=uid token=token %}
+Please enter this code on the verification page to complete your registration.
+This code will expire in 30 minutes.
 
 If you didn't register on our site, please ignore this email.
 {% endautoescape %}

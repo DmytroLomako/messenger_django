@@ -21,6 +21,7 @@
 
 body {
     background-color: #FAF8FF;
+    overflow-y: hidden;
 }
 
 
@@ -649,6 +650,12 @@ main .responses .response .mainResponse {
     padding-top: 16px;
 
     flex-direction: column;
+}
+
+.PostPostInput {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 897px;
 }
 
 .likesImg {

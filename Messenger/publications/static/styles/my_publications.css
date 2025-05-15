@@ -1,0 +1,617 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+    font-weight: 500;
+    font-size: 16px;
+    color: #070A1C;
+    letter-spacing: -1%;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: MainFont;
+    src: url("/media/fonts/font.ttf");
+}
+
+@font-face {
+    font-family: MainFontMedium;
+    src: url("/media/fonts/fontMedium.ttf");
+}
+
+body {
+    background-color: #FAF8FF;
+    overflow: scroll;
+}
+
+
+header {
+    height: 7%;
+    width: 100%;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    padding-left: 4%;
+    gap: 45%;
+
+    margin-bottom: 16px;
+}
+
+header .logo {
+    height: 30%;
+}
+
+header .tabsExit {
+    display: flex;
+    align-items: center;
+    gap: 34px;
+}
+
+header .tabsExit .exit {
+    width: 95px;
+    height: 40px;
+
+    background-color: white;
+    border-radius: 1234px;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+header .tabsExit .exit img {
+    width: 20px;
+    height: 20px;
+}
+
+header .tabsExit .tabs {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+}
+
+header .tabsExit .tabs .tab {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+header .tabsExit .tabs .tab img {
+    display: flex;
+    align-items: center;
+    width: 20px;
+}
+
+
+
+main {
+    padding-left: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 6px;
+}
+
+main .userInfo {
+    width: 351px;
+}
+
+main .miniProfile {
+    width: 350px;
+    height: 271px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    flex-direction: column;
+    padding-top: 16px;
+    box-sizing: border-box;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+main .miniProfile img {
+    width: 96px;
+    height: 96px;
+}
+
+main .miniProfile .avatarNames {
+    width: 348px;
+    height: 175px;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    flex-direction: column;
+    gap: 24px;
+}
+
+main .miniProfile .avatarNames .names {
+    width: 348px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+}
+
+main .miniProfile .avatarNames .names .nickname {
+    width: 348px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-direction: column;
+
+    font-size: 24px;
+    font-weight: 700;
+}
+
+
+main .miniProfile .stats {
+    width: 348px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+main .miniProfile .stats * {
+    width: 115px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    color: #81818D;
+}
+
+main .miniProfile .stats * .count {
+    font-size: 20px;
+    color: #070A1C;
+    font-weight: 700;
+}
+
+main .miniProfile .stats .posts {
+    border-right: 1px solid #CDCED2;
+}
+
+main .miniProfile .stats .readers {
+    border-right: 1px solid #CDCED2;
+}
+
+main .requests {
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+
+    width: 351px;
+    height: 249px;
+
+    display: flex;
+    margin-top: 8px;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    padding-left: 16px;
+    padding-top: 18px;
+
+    gap: 24px;
+}
+
+main .requests .blockName {
+    color: #543C52;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 23px;
+
+    width: 319px;
+}
+
+main .requests .blockName .showAll {
+    color: #543C52;
+    width: 140px;
+}
+
+main .requests .blockName .name {
+
+    width: 319px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #81818D;
+    gap: 8px;
+}
+
+
+
+main .requests .blockName .name img {
+    width: 20px;
+    height: 20px;
+}
+
+main .requests .users {
+
+    width: 319px;
+    height: 170px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+main .requests .users .user {
+
+    width: 319px;
+    height: 46px;
+
+    display: flex;
+    gap: 12px;
+}
+
+main .requests .users .user .nameSubscribers {
+
+    width: 261px;
+    height: 38px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+main .requests .users .user .nameSubscribers .name {
+    width: 100%;
+    height: 18px;
+}
+
+main .requests .users .user .nameSubscribers .subscribers {
+    width: 100%;
+    height: 18px;
+    color: #81818D;
+    font-size: 14px;
+    letter-spacing: normal;
+    font-weight: 400;
+    height: 16px;
+    width: 115px;
+}
+
+main .requests .users .user img {
+    width: 46px;
+}
+
+
+main .messages {
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+
+    width: 351px;
+    height: 249px;
+
+    display: flex;
+    margin-top: 8px;
+    box-sizing: border-box;
+    flex-direction: column;
+
+    padding-left: 16px;
+    padding-top: 18px;
+
+    gap: 24px;
+}
+
+main .messages .blockName {
+    color: #543C52;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 23px;
+
+    width: 319px;
+}
+
+main .messages .blockName .showAll {
+    color: #543C52;
+    width: 140px;
+}
+
+main .messages .blockName .name {
+
+    width: 319px;
+    height: 23px;
+
+    display: flex;
+    align-items: center;
+    font-size: 20px;
+    color: #81818D;
+    gap: 8px;
+}
+
+main .messages .blockName .name img {
+    width: 20px;
+    height: 20px;
+}
+
+
+main .messages .users {
+
+    width: 319px;
+    height: 170px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+main .messages .users .user {
+
+    width: 319px;
+    height: 46px;
+
+    display: flex;
+    gap: 12px;
+}
+
+main .messages .users .user .nameSubscribers {
+
+    width: 261px;
+    height: 38px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+main .messages .users .user .nameSubscribers .nameTime {
+    width: 98%;
+    height: 18px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main .messages .users .user .nameSubscribers .nameTime .time {
+    color: #81818D;
+    font-size: 12px;
+}
+
+main .messages .users .user .nameSubscribers .message {
+    width: 100%;
+    height: 18px;
+    color: #070A1C;
+    font-size: 14px;
+    letter-spacing: normal;
+    font-weight: 400;
+    width: 125px;
+}
+
+main .messages .users .user img {
+    width: 46px;
+}
+
+
+
+main .postArea {
+    width: 923px;
+    height: 120px;
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    resize: none;
+    padding-left: 16px;
+    padding-top: 16px;
+    box-sizing: border-box;
+}
+
+main .postArea input {
+    width: 891px;
+    height: 22px;
+    outline: none;
+    border: 0;
+}
+
+
+main .postArea .sendDiv {
+    width: 891px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 13px;
+    margin-top: 26px;
+}
+
+
+.imageBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+}
+
+main .postArea .sendDiv .addImageBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .addEmojiBtn {
+    height: 40px;
+    border: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .sendBtn {
+    width: 130px;
+    height: 40px;
+
+    background-color: #543C52;
+    border-radius: 1234px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: white;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+}
+
+main .postArea .sendDiv .sendBtn #smallImage {
+    height: 20px;
+}
+
+main .postPostInput .post {
+    width: 923px;
+    height: 897px;
+    background-color: white;
+    margin-top: 8px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    padding-left: 20px;
+}
+
+main .postPostInput .post .postHeader {
+    width: 923px;
+    height: 89px;
+    border-bottom: 1px solid #CDCED2;
+
+    display: flex;
+    align-items: center;
+
+    display: flex;
+    gap: 10px;
+    box-sizing: border-box;
+
+}
+
+main .postPostInput .post .postHeader .avatar {
+    width: 46px;
+    height: 46px;
+}
+
+main .postPostInput .post .postHeader .text {
+    font-size: 14px;
+}
+
+main .postPostInput .post .postHeader .paintingDiv {
+    display: flex;
+    justify-content: end;
+
+    margin-left: 505px;
+}
+
+.dotsDiv .dots {
+    height: 20px;
+}
+
+.dotsDiv {
+    height: 20px;
+}
+
+.dotsDiv button {
+    border: 0;
+    background-color: white;
+    cursor: pointer;
+}
+
+
+main .postPostInput .post .postHeader .paintingDiv .painting {
+    width: 220px;
+    height: 49px;
+}
+
+
+main .postArea .post {
+    background-color: white;
+    width: 923px;
+    height: 897px;
+}
+
+main .postMain {
+    display: flex;
+    flex-direction: column;
+    padding-top: 16px;
+}
+
+main .postMain .text {
+    font-weight: 400;
+}
+
+.hashtags {
+    font-weight: 400;
+    color: #543C52;
+}
+
+
+main .postMain .images {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    width: 883px;
+    height: 670px;
+    gap: 16px;
+    margin-top: 16px;
+}
+
+main .postMain .images .postImage1 {
+    width: 433px;
+    height: 327px;
+}
+
+main .postMain .images .postImage2 {
+    width: 433px;
+    height: 327px;
+}
+
+main .postMain .images .postImage3 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postMain .images .postImage4 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postMain .images .postImage5 {
+    width: 283px;
+    height: 327px;
+}
+
+main .postFooter img {
+    width: 20px;
+}
+
+.likesViews {
+    width: 100%;
+    height: 20px;
+    margin-top: 16px;
+    display: flex;
+    gap: 24px;
+}
+
+
+.likesViews .likes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.publicationLink{
+    color: #543C52;
+    margin-top: 16px;
+}

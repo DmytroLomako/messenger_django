@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'authorization',
-    "main"
+    "main",
+    "create_tag",
+    "publications"
 ]
 
 MIDDLEWARE = [
@@ -136,10 +138,10 @@ MEDIA_ROOT = BASE_DIR / "media/"
 LOGIN_REDIRECT_URL = reverse_lazy("main")
 
 
-# Email settings
-
 ENV_DIR = Path(__file__).resolve().parent.parent.parent 
 environ.Env.read_env(ENV_DIR / '.env')
+
+load_dotenv(ENV_DIR / '.env')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
