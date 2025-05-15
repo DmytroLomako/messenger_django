@@ -9,7 +9,6 @@ from django.contrib.auth import login
 from django.views import View
 from .forms import *
 from .models import VerificationCode
-
 class RegisterView(CreateView):
     form_class = RegistrationForm
     template_name = "authorization/registration/registration.html"
@@ -37,15 +36,19 @@ class RegisterView(CreateView):
 
 class EmailVerificationSentView(View):
     def get(self, request):
-        if 'verification_user_id' not in request.session:
+        if 'verification_user_id' not in request.session:   
             return redirect('register')
         return render(request, 'authorization/registration/verification_sent.html')
 
+        
+
 class VerifyCodeView(View):
     def post(self, request):
-        code = request.POST.get('verification_code')
+        code = f"{request.POST.get('verification_code1')}{request.POST.get('verification_code2')}{request.POST.get('verification_code3')}{request.POST.get('verification_code4')}{request.POST.get('verification_code5')}{request.POST.get('verification_code6')}"
         user_id = request.session.get('verification_user_id')
-        
+
+        print(code)
+
         if not user_id:
             return redirect('register')
         

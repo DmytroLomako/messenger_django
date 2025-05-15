@@ -1,11 +1,3 @@
-{% extends "base.html" %}
-
-{% block title %}
-
-Реестрація
-
-{% endblock %}
-
 {% load static %}
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/registration/registration.css' %}">
@@ -15,7 +7,7 @@
 {% block content %}
 
 <header>
-
+    <img src="{% static 'authorization/img/WIT.png' %}" alt="">
 </header>
 
 <main>
@@ -34,5 +26,6 @@
             <button type="submit" class="submit">Створити акаунт</button>
         </form>
     </div>
+    <img src="{% static 'authorization/img/laptop.png' %}" class="laptop-img">
 </main>
 {% endblock %}

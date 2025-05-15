@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% load static %}
 
@@ -15,7 +16,7 @@
 {% block content %}
 
 <header>
-
+    <img src="{% static 'authorization/img/WIT.png' %}" alt="">
 </header>
 
 <main>
@@ -34,5 +35,6 @@
             <button type="submit" class="submit">Увійти</button>
         </form>
     </div>
+    <img src="{% static 'authorization/img/laptop.png' %}" class="laptop-img">
 </main>
 {% endblock %}
