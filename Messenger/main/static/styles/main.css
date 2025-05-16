@@ -87,7 +87,9 @@ header .tabsExit .tabs .tab img {
     width: 20px;
 }
 
-
+header a {
+    text-decoration: none;
+}
 
 main {
     padding-left: 80px;
@@ -95,6 +97,7 @@ main {
     flex-direction: row;
     justify-content: center;
     gap: 6px;
+    margin-bottom: 5px;
 }
 
 main .userInfo {
@@ -401,13 +404,13 @@ main .messages .users .user img {
 
 main .postArea {
     width: 923px;
-    height: 120px;
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     resize: none;
     padding-left: 16px;
     padding-top: 16px;
+    padding-bottom: 16px;
     box-sizing: border-box;
 }
 
@@ -475,12 +478,13 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 main .postPostInput .post {
     width: 923px;
-    height: 897px;
+    padding-bottom: 20px;
     background-color: white;
     margin-top: 8px;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     padding-left: 20px;
+    margin-bottom: 15px;
 }
 
 main .postPostInput .post .postHeader {
@@ -537,7 +541,6 @@ main .postPostInput .post .postHeader .paintingDiv .painting {
 main .postArea .post {
     background-color: white;
     width: 923px;
-    height: 897px;
 }
 
 main .postMain {
@@ -548,6 +551,12 @@ main .postMain {
 
 main .postMain .text {
     font-weight: 400;
+}
+
+.link {
+    font-weight: 400;
+    margin-top: 16px;
+    color: #543C52;
 }
 
 .hashtags {
@@ -562,7 +571,6 @@ main .postMain .images {
     flex-wrap: wrap;
 
     width: 883px;
-    height: 670px;
     gap: 16px;
     margin-top: 16px;
 }
@@ -592,6 +600,10 @@ main .postMain .images .postImage5 {
     height: 327px;
 }
 
+main .postFooter {
+    margin-bottom: 16px;
+}
+
 main .postFooter img {
     width: 20px;
 }
@@ -611,7 +623,6 @@ main .postFooter img {
     gap: 8px;
     font-size: 14px;
 }
-
 
 main .responses .response {
     width: 923px;
@@ -671,6 +682,31 @@ main .responses .response .mainResponse {
     background-color: #E9E5EE;
 }
 
-a {
-    text-decoration: none;
+.publicationLink {
+    color: #543C52;
+    margin-top: 16px;
+}
+
+.background-blur {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
+.publication-creation {
+    width: 775px;
+    height: 870px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    padding: 24px 44px 44px 44px;
+    flex-direction: column;
+    gap: 16px;
 }

@@ -478,6 +478,7 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 main .postPostInput .post {
     width: 923px;
+    padding-bottom: 20px;
     background-color: white;
     margin-top: 8px;
     border: 1px solid #CDCED2;
@@ -623,7 +624,6 @@ main .postFooter img {
     font-size: 14px;
 }
 
-
 main .responses .response {
     width: 923px;
     height: 208px;
@@ -680,4 +680,33 @@ main .responses .response .mainResponse {
 
 .ann {
     background-color: #E9E5EE;
+}
+
+.publicationLink {
+    color: #543C52;
+    margin-top: 16px;
+}
+
+.background-blur {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
+.publication-creation {
+    width: 775px;
+    height: 870px;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    padding: 24px 44px 44px 44px;
+    flex-direction: column;
+    gap: 16px;
 }
