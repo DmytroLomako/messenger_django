@@ -16,6 +16,3 @@ class VerificationCode(models.Model):
         expiration_time = timezone.timedelta(minutes=30)
         return timezone.now() < self.created_at + expiration_time
     
-
-
-    

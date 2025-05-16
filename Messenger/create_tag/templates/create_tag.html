@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {% extends "base.html" %}
 
 {% block title %}
@@ -12,4 +13,20 @@ Create_tag
     <button class="submit">Submit</button>
 </form>
 
+=======
+{% extends "base.html" %}
+
+{% block title %}
+Create_tag
+{% endblock %}
+
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="submit">Submit</button>
+</form>
+
+>>>>>>> origin/misha_barylo
 {% endblock %}

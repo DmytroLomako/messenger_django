@@ -16,4 +16,3 @@ class CreateTagView(CreateView):
     def form_valid(self, form):
         tag = form.save(commit=False)
         tag.save()
-        return super().form_valid(form)

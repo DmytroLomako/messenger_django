@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authorization',
     "main",
-    "create_tag"
+    "create_tag",
+    "publications"
 ]
 
 MIDDLEWARE = [
