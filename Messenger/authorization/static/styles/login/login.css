@@ -61,7 +61,6 @@ form {
 
 .formDiv {
     width: 487px;
-    height: 552px;
     background-color: white;
 
     display: flex;
@@ -72,6 +71,7 @@ form {
 
     border-radius: 20px;
     gap: 36px;
+    padding-bottom: 34px;
 }
 
 .greatings {
@@ -142,3 +142,5 @@ header img {
     position: absolute;
     left: 767px;
     top: 248px;
+
+}

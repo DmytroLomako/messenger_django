@@ -21,7 +21,7 @@
 
 body {
     background-color: #FAF8FF;
-    overflow: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -87,7 +87,9 @@ header .tabsExit .tabs .tab img {
     width: 20px;
 }
 
-
+header a {
+    text-decoration: none;
+}
 
 main {
     padding-left: 80px;
@@ -95,6 +97,7 @@ main {
     flex-direction: row;
     justify-content: center;
     gap: 6px;
+    margin-bottom: 5px;
 }
 
 main .userInfo {
@@ -401,13 +404,13 @@ main .messages .users .user img {
 
 main .postArea {
     width: 923px;
-    height: 120px;
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     resize: none;
     padding-left: 16px;
     padding-top: 16px;
+    padding-bottom: 16px;
     box-sizing: border-box;
 }
 
@@ -452,7 +455,6 @@ main .postArea .sendDiv .addEmojiBtn {
 }
 
 main .postArea .sendDiv .sendBtn {
-    width: 130px;
     height: 40px;
 
     background-color: #543C52;
@@ -466,6 +468,8 @@ main .postArea .sendDiv .sendBtn {
     font-size: 14px;
     border: 0;
     cursor: pointer;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 main .postArea .sendDiv .sendBtn #smallImage {
@@ -474,12 +478,12 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 main .postPostInput .post {
     width: 923px;
-    height: 897px;
     background-color: white;
     margin-top: 8px;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     padding-left: 20px;
+    margin-bottom: 15px;
 }
 
 main .postPostInput .post .postHeader {
@@ -536,7 +540,6 @@ main .postPostInput .post .postHeader .paintingDiv .painting {
 main .postArea .post {
     background-color: white;
     width: 923px;
-    height: 897px;
 }
 
 main .postMain {
@@ -547,6 +550,12 @@ main .postMain {
 
 main .postMain .text {
     font-weight: 400;
+}
+
+.link {
+    font-weight: 400;
+    margin-top: 16px;
+    color: #543C52;
 }
 
 .hashtags {
@@ -561,7 +570,6 @@ main .postMain .images {
     flex-wrap: wrap;
 
     width: 883px;
-    height: 670px;
     gap: 16px;
     margin-top: 16px;
 }
@@ -591,6 +599,10 @@ main .postMain .images .postImage5 {
     height: 327px;
 }
 
+main .postFooter {
+    margin-bottom: 16px;
+}
+
 main .postFooter img {
     width: 20px;
 }
@@ -611,7 +623,61 @@ main .postFooter img {
     font-size: 14px;
 }
 
-.publicationLink{
-    color: #543C52;
-    margin-top: 16px;
+
+main .responses .response {
+    width: 923px;
+    height: 208px;
+    background-color: white;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    margin-top: 8px;
+}
+
+
+main .responses .response .headerResponse .avatarName img {
+    height: 46px;
+}
+
+main .responses .response .headerResponse .avatarName {
+    width: 847px;
+    height: 46px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+main .responses .response .headerResponse {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-left: 20px;
+    height: 86px;
+    border-bottom: 1px solid #CDCED2;
+}
+
+
+main .responses .response .mainResponse {
+    display: flex;
+    padding-left: 20px;
+    padding-top: 16px;
+
+    flex-direction: column;
+}
+
+.PostPostInput {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    height: 897px;
+}
+
+.likesImg {
+    height: 20px;
+}
+
+.mona {
+    background-color: #E9E5EE;
+}
+
+.ann {
+    background-color: #E9E5EE;
 }

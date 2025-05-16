@@ -452,7 +452,6 @@ main .postArea .sendDiv .addEmojiBtn {
 }
 
 main .postArea .sendDiv .sendBtn {
-    width: 130px;
     height: 40px;
 
     background-color: #543C52;
@@ -466,6 +465,8 @@ main .postArea .sendDiv .sendBtn {
     font-size: 14px;
     border: 0;
     cursor: pointer;
+    padding-left: 16px;
+    padding-right: 16px;
 }
 
 main .postArea .sendDiv .sendBtn #smallImage {
@@ -668,4 +669,8 @@ main .responses .response .mainResponse {
 
 .ann {
     background-color: #E9E5EE;
+}
+
+a {
+    text-decoration: none;
 }
