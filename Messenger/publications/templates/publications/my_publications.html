@@ -6,6 +6,7 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/my_publications.css' %}">
+<script src="{% static 'js/my_publications.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -71,11 +72,49 @@
                 <button class="addEmojiBtn">
                     <img src="{% static 'images/add_emoji.png' %}" class="addEmoji imageBtn">
                 </button>
-
-
+                
+                
                 <button class="sendBtn">Публікація<img src="{% static 'images/send.png' %}" id="smallImage"></button>
             </div>
         </div>
+        {% for post in all_posts %}
+            <div class="post">
+                <div class="postHeader">
+                    <img src="{% static 'images/avatar.png' %}" class="avatar">
+                    <p class="text">{{ post.user.username }}</p>
+                    <div class="paintingDiv">
+                        <img src="{% static 'images/painting.png' %}" class="painting">
+                    </div>
+                    <div class="dotsDiv">
+                        <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    </div>
+                </div>
+    
+                <div class="postMain">
+                    <p class="text">
+                        {{ post.title }}<br>
+                        {{ post.text }}
+                    </p>
+                    <p class="hashtags">
+                        {% for tag in post.tags.all %}
+                            {{ tag.name }} 
+                        {% endfor %}
+                    </p>
+                    <a href="" class="publicationLink">{{ post.article_link }}</a>
+    
+                    <!-- <div class="images">
+                        
+                    </div> -->
+                </div>
+    
+                <div class="postFooter">
+                    <div class="likesViews">
+                        <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">{{ post.count_likes}} Вподобань</p>
+                        <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }} Переглядів</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
         <div class="post">
             <div class="postHeader">
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
@@ -116,4 +155,13 @@
         </div>
     </div>
 </main>
+
+<div class="background-blur">
+    <form method="post" class="publication-creation">
+        {% csrf_token %}
+        <button id="cancel-bg-blur">x</button>
+        {{ form.as_p }}
+        <button>Публікація</button>
+    </form>
+</div>
 {% endblock %}
