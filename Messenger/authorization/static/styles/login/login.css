@@ -3,6 +3,8 @@
     padding: 0;
     font-family: MainFontMedium;
     box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: hidden;
 }
 
 @font-face {

@@ -150,6 +150,7 @@
 
         </div>
         {% for post in all_posts %}
+        {% if post.user == user %}
         <div class="post">
             <div class="postHeader">
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
@@ -172,11 +173,11 @@
                     {{ tag.name }}
                     {% endfor %}
                 </p>
-                <a href="" class="publicationLink">{{ post.article_link }}</a>
+                <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <!-- <div class="images">
-                        
-                    </div> -->
+                            
+                        </div> -->
             </div>
 
             <div class="postFooter">
@@ -188,6 +189,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
         <div class="post">
             <div class="postHeader">
@@ -236,13 +238,14 @@
     </div>
 </main>
 
-<<<<<<< HEAD=======<div class="background-blur">
+<div class="background-blur">
     <form method="post" class="publication-creation">
         {% csrf_token %}
         <button id="cancel-bg-blur">x</button>
         {{ form.as_p }}
+        <a href="{% url 'create_tag' %}">Створити тег</a>
         <button>Публікація</button>
     </form>
-    </div>
-    >>>>>>> origin/dmytro_lomako
-    {% endblock %}
+</div>
+>>>>>>> origin/dmytro_lomako
+{% endblock %}

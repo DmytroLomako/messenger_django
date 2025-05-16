@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView
 from django.views.generic import TemplateView
 from .forms import CreateTagForm
@@ -11,8 +11,9 @@ from django.urls import reverse_lazy
 class CreateTagView(CreateView):
     form_class = CreateTagForm
     template_name = "create_tag.html"
-    success_url = reverse_lazy("main")
 
     def form_valid(self, form):
         tag = form.save(commit=False)
+        tag.name = f"#{tag.name}"
         tag.save()
+        return redirect(reverse_lazy("my_publications"))
