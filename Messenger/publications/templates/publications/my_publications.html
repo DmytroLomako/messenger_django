@@ -175,7 +175,12 @@
                 </p>
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
+                <div class="images">
+                    <img src="{{ post.images.url }}" class="postImage1">
+                </div>
+
                 <!-- <div class="images">
+
                             
                         </div> -->
             </div>
@@ -232,20 +237,17 @@
             </div>
         </div>
 
-
-
     </div>
     </div>
 </main>
 
 <div class="background-blur">
-    <form method="post" class="publication-creation">
+    <form method="post" class="publication-creation" enctype="multipart/form-data">
         {% csrf_token %}
         <button id="cancel-bg-blur">x</button>
         {{ form.as_p }}
         <a href="{% url 'create_tag' %}">Створити тег</a>
-        <button>Публікація</button>
+        <button type="submit">Публікація</button>
     </form>
 </div>
->>>>>>> origin/dmytro_lomako
 {% endblock %}
