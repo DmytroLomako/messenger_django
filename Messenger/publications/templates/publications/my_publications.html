@@ -176,7 +176,9 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    <img src="{{ post.images.url }}" class="postImage1">
+                    {% for img in post.images_set.all %}
+                        <img src="{{ img.image.url }}" class="postImage1">
+                    {% endfor %}
                 </div>
 
                 <!-- <div class="images">

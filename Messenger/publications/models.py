@@ -9,7 +9,6 @@ class User_Post(models.Model):
     title = models.CharField(max_length=200)
     subject = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tag)
-    images = models.ImageField(upload_to= "images/", null= True)
     text = models.TextField()
     article_link = models.URLField(blank=True, null=True)
     views = models.ManyToManyField(User, related_name='viewed_posts', blank=True)
@@ -23,6 +22,6 @@ class User_Post(models.Model):
     
 
 
-# class Images(models.Model):
-#     post = models.ForeignKey(User_Post, on_delete= models.CASCADE)
-#     image = models.ImageField(upload_to= "images/", null= True)
+class Images(models.Model):
+    post = models.ForeignKey(User_Post, on_delete= models.CASCADE)
+    image = models.ImageField(upload_to= "images/", null= True)
