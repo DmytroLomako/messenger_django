@@ -24,7 +24,7 @@
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
-            <a href="{% url 'main' %}" class="settings tab"><img
+            <a href="{% url 'settings' request.user.id %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
 
         </div>
@@ -176,7 +176,9 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    <img src="{{ post.images.url }}" class="postImage1">
+                    {% for img in post.images_set.all %}
+                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% endfor %}
                 </div>
             </div>
 
@@ -191,58 +193,14 @@
         </div>
         {% endif %}
         {% endfor %}
-        <div class="post">
-            <div class="postHeader">
-                <img src="{% static 'images/avatar.png' %}" class="avatar">
-                <p class="text">{{ user }}</p>
-                <div class="paintingDiv">
-                    <img src="{% static 'images/painting.png' %}" class="painting">
-                </div>
-                <div class="dotsDiv">
-                    <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                </div>
-            </div>
 
-            <div class="postMain">
-                <p class="text">
-                    Інколи найкращі ідеї народжуються в тиші 🌿<br>
-                    Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
-                </p>
-                <p class="hashtags">
-                    #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
-                </p>
-                <a href="https://www.instagram.com/world.it.academy/?locale=ru"
-                    class="link">https://www.instagram.com/world.it.academy/?locale=ru</a>
-
-                <div class="images">
-                    <img src="{% static 'images/post_image6.png' %}" class="postImage1">
-                    <img src="{% static 'images/post_image7.png' %}" class="postImage1">
-                    <img src="{% static 'images/post_image8.png' %}" class="postImage3">
-                    <img src="{% static 'images/post_image9.png' %}" class="postImage3">
-                    <img src="{% static 'images/post_image10.png' %}" class="postImage3">
-                    <img src="{% static 'images/post_image11.png' %}" class="postImage1">
-                    <img src="{% static 'images/post_image11.png' %}" class="postImage1">
-                </div>
-            </div>
-            <div class="postFooter">
-                <div class="likesViews">
-                    <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів</p>
-                </div>
-            </div>
+        <div class="background-blur">
+            <form method="post" class="publication-creation" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button id="cancel-bg-blur">x</button>
+                {{ form.as_p }}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+                <button type="submit">Публікація</button>
+            </form>
         </div>
-
-    </div>
-    </div>
-</main>
-
-<div class="background-blur">
-    <form method="post" class="publication-creation" enctype="multipart/form-data">
-        {% csrf_token %}
-        <button id="cancel-bg-blur">x</button>
-        {{ form.as_p }}
-        <a href="{% url 'create_tag' %}">Створити тег</a>
-        <button type="submit">Публікація</button>
-    </form>
-</div>
-{% endblock %}
+        {% endblock %}

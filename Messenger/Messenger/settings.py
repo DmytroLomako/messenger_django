@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'authorization',
     "main",
     "create_tag",
-    "publications"
+    "publications",
+    "settings_app"
 ]
 
 MIDDLEWARE = [

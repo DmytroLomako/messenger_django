@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from main.views import MainView
 from create_tag.views import CreateTagView
 from publications.views import MyPublicationsView
-
+from settings_app.views import UserUpdateView
 
 
 
@@ -31,10 +31,11 @@ urlpatterns = [
     path('authorization/', include("authorization.urls")),
     path('', MainView.as_view(), name= "main"),
     path("create_tag/", CreateTagView.as_view(), name= "create_tag"),
-    path("publications/", include("publications.urls"))
+    path("publications/", include("publications.urls")),
+    path("settings/?P<pk>\d+", UserUpdateView.as_view(), name= "settings")
 ]
 
 
 if settings.DEBUG:
-     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

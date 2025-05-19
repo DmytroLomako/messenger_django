@@ -23,7 +23,7 @@
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
-            <a href="{% url 'main' %}" class="settings tab"><img
+            <a href="{% url 'settings' request.user.id %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
 
         </div>
@@ -175,7 +175,9 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    <img src="{{ post.images.url }}" class="postImage1">
+                    {% for img in post.images_set.all %}
+                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% endfor %}
                 </div>
             </div>
 
