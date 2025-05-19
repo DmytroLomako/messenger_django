@@ -2,11 +2,7 @@ let buttonSend = document.querySelector('.sendBtn')
 let input = document.querySelector('.areaInput')
 let bgBlur = document.querySelector('.background-blur')
 let cancelBgBlur = document.getElementById('cancel-bg-blur')
-let tags = document.getElementsByName("tags")[0]
-let textForm = document.getElementsByName("text")[0]
-
-tags.style.display = "none"
-
+console.log("nojewrgehnewhh")
 buttonSend.addEventListener('click', function () {
     if (input.value) {
         bgBlur.style.display = 'flex'
@@ -18,12 +14,3 @@ cancelBgBlur.addEventListener('click', function () {
     bgBlur.style.display = 'none'
 })
 
-
-textForm.addEventListener("keydown", (event) => {
-    console.log(event.key)
-    if (event.key == "#") {
-        tags.style.display = "flex"
-    } else {
-        tags.style.display = "none"
-    }
-}) 

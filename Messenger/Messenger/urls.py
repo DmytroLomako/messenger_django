@@ -19,7 +19,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
-from main.views import render_main
+from main.views import MainView
 from create_tag.views import CreateTagView
 from publications.views import MyPublicationsView
 
@@ -29,7 +29,7 @@ from publications.views import MyPublicationsView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('authorization/', include("authorization.urls")),
-    path('', render_main, name= "main"),
+    path('', MainView.as_view(), name= "main"),
     path("create_tag/", CreateTagView.as_view(), name= "create_tag"),
     path("publications/", include("publications.urls"))
 ]

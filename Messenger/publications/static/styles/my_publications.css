@@ -3,7 +3,7 @@
     padding: 0;
     font-family: MainFontMedium;
     font-weight: 500;
-    font-size: 16px;
+    font-size: 0.84vw;
     color: #070A1C;
     letter-spacing: -1%;
     box-sizing: border-box;
@@ -27,30 +27,31 @@ body {
 
 header {
     height: 7%;
-    width: 100%;
+    width: 100vw;
     background-color: white;
 
     display: flex;
     align-items: center;
-    padding-left: 4%;
-    gap: 45%;
+    justify-content: center;
+    gap: 16vw;
+    padding-left: 5vw;
 
-    margin-bottom: 16px;
+    margin-bottom: 3vh;
 }
 
 header .logo {
-    height: 30%;
+    height: 2vh;
 }
 
 header .tabsExit {
     display: flex;
     align-items: center;
-    gap: 34px;
+    gap: 1.78vw;
 }
 
 header .tabsExit .exit {
-    width: 95px;
-    height: 40px;
+    width: 5vw;
+    height: 4.20vh;
 
     background-color: white;
     border-radius: 1234px;
@@ -58,33 +59,33 @@ header .tabsExit .exit {
 
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.42vw;
     justify-content: center;
 
     cursor: pointer;
 }
 
 header .tabsExit .exit img {
-    width: 20px;
-    height: 20px;
+    width: 1.05vw;
+    height: 2.1vh;
 }
 
 header .tabsExit .tabs {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 1.47vw;
 }
 
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.47vw;
 }
 
 header .tabsExit .tabs .tab img {
     display: flex;
     align-items: center;
-    width: 20px;
+    width: 1.05vw;
 }
 
 header a {
@@ -92,83 +93,84 @@ header a {
 }
 
 main {
-    padding-left: 80px;
+    padding-left: 4.20vw;
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 6px;
-    margin-bottom: 5px;
+    gap: 0.31vw;
+    margin-bottom: 0.52vh;
 }
 
 main .userInfo {
-    width: 351px;
+    width: 18.43vw;
 }
 
 main .miniProfile {
-    width: 350px;
-    height: 271px;
+    width: 18.37vw;
+    height: 28.44vh;
     display: flex;
     align-items: center;
     background-color: white;
     flex-direction: column;
-    padding-top: 16px;
+    padding-top: 1.68vh;
     box-sizing: border-box;
     border: 1px solid #CDCED2;
     border-radius: 10px;
 }
 
 main .miniProfile img {
-    width: 96px;
-    height: 96px;
+    width: 5.04vw;
+    height: 10.07vh;
 }
 
 main .miniProfile .avatarNames {
-    width: 348px;
-    height: 175px;
+    width: 18.27vw;
+    height: 18.36vh;
     display: flex;
     align-items: center;
     background-color: white;
     flex-direction: column;
-    gap: 24px;
+    gap: 2.52vh;
 }
 
 main .miniProfile .avatarNames .names {
-    width: 348px;
-    height: 55px;
+    width: 18.27vw;
+    height: 5.77vh;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.05vh;
     flex-direction: column;
 }
 
 main .miniProfile .avatarNames .names .nickname {
-    width: 348px;
-    height: 55px;
+    width: 18.27vw;
+    height: 5.77vh;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 1.05vh;
     flex-direction: column;
 
-    font-size: 24px;
+    font-size: 1.26vw;
     font-weight: 700;
 }
 
 
 main .miniProfile .stats {
-    width: 348px;
-    height: 48px;
+    width: 18.27vw;
+    height: 5.04vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 
-    font-size: 24px;
+    font-size: 1.26vw;
     font-weight: 700;
-    margin-top: 16px;
-    margin-bottom: 16px;
+    margin-top: 0.84vw;
+    margin-bottom: 1.68vh;
 }
 
 main .miniProfile .stats * {
-    width: 115px;
-    height: 48px;
+    width: 6.04vw;
+    height: 5.04vh;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -177,7 +179,7 @@ main .miniProfile .stats * {
 }
 
 main .miniProfile .stats * .count {
-    font-size: 20px;
+    font-size: 1.05vw;
     color: #070A1C;
     font-weight: 700;
 }
@@ -195,18 +197,18 @@ main .requests {
     border: 1px solid #CDCED2;
     border-radius: 10px;
 
-    width: 351px;
-    height: 249px;
+    width: 18.43vw;
+    height: 26.13vh;
 
     display: flex;
-    margin-top: 8px;
+    margin-top: 0.84vh;
     box-sizing: border-box;
     flex-direction: column;
 
-    padding-left: 16px;
-    padding-top: 18px;
+    padding-left: 0.84vw;
+    padding-top: 1.89vh;
 
-    gap: 24px;
+    gap: 1.26vw;
 }
 
 main .requests .blockName {
@@ -214,82 +216,83 @@ main .requests .blockName {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 23px;
+    height: 2.41vh;
 
-    width: 319px;
+    width: 16.75vw;
 }
 
 main .requests .blockName .showAll {
     color: #543C52;
-    width: 140px;
+    width: 7.35vw;
 }
 
 main .requests .blockName .name {
 
-    width: 319px;
-    height: 23px;
+    width: 16.75vw;
+    height: 2.41vh;
 
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 1.05vw;
     color: #81818D;
-    gap: 8px;
+    gap: 0.42vw;
 }
 
 
 
 main .requests .blockName .name img {
-    width: 20px;
-    height: 20px;
+    width: 1.05vw;
+    height: 2.10vh;
 }
 
 main .requests .users {
 
-    width: 319px;
-    height: 170px;
+    width: 16.75vw;
+    height: 17.84vh;
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1.68vh;
 }
 
 main .requests .users .user {
 
-    width: 319px;
-    height: 46px;
+    width: 16.75vw;
+    height: 4.83vh;
 
     display: flex;
-    gap: 12px;
+    gap: 0.63vw;
 }
 
 main .requests .users .user .nameSubscribers {
 
-    width: 261px;
-    height: 38px;
+    width: 13.70vw;
+    height: 3.99vh;
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.42vh;
 }
 
 main .requests .users .user .nameSubscribers .name {
     width: 100%;
-    height: 18px;
+    height: 1.89vh;
 }
 
 main .requests .users .user .nameSubscribers .subscribers {
     width: 100%;
-    height: 18px;
+    height: 1.89vh;
     color: #81818D;
-    font-size: 14px;
+    font-size: 0.73vw;
     letter-spacing: normal;
     font-weight: 400;
-    height: 16px;
-    width: 115px;
+    height: 1.68vh;
+    width: 6.04vw;
 }
 
 main .requests .users .user img {
-    width: 46px;
+    width: 2.41vw;
+    height: 4.83vh;
 }
 
 
@@ -298,18 +301,18 @@ main .messages {
     border: 1px solid #CDCED2;
     border-radius: 10px;
 
-    width: 351px;
-    height: 249px;
+    width: 18.43vw;
+    height: 26.13vh;
 
     display: flex;
-    margin-top: 8px;
+    margin-top: 0.84vh;
     box-sizing: border-box;
     flex-direction: column;
 
-    padding-left: 16px;
-    padding-top: 18px;
+    padding-left: 0.84vw;
+    padding-top: 1.89vh;
 
-    gap: 24px;
+    gap: 2.52vh
 }
 
 main .messages .blockName {
@@ -317,145 +320,146 @@ main .messages .blockName {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 23px;
+    height: 2.41vh;
 
-    width: 319px;
+    width: 16.75vw;
 }
 
 main .messages .blockName .showAll {
     color: #543C52;
-    width: 140px;
+    width: 7.35vw;
 }
 
 main .messages .blockName .name {
 
-    width: 319px;
-    height: 23px;
+    width: 16.75vw;
+    height: 2.41vh;
 
     display: flex;
     align-items: center;
-    font-size: 20px;
+    font-size: 1.05vw;
     color: #81818D;
-    gap: 8px;
+    gap: 0.42vw;
 }
 
 main .messages .blockName .name img {
-    width: 20px;
-    height: 20px;
+    width: 1.05vw;
+    height: 2.10vh;
 }
 
 
 main .messages .users {
 
-    width: 319px;
-    height: 170px;
+    width: 16.75vw;
+    height: 17.84vh;
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 0.84vw;
 }
 
 main .messages .users .user {
 
-    width: 319px;
-    height: 46px;
+    width: 16.75vw;
+    height: 4.83vh;
 
     display: flex;
-    gap: 12px;
+    gap: 1.26vh;
 }
 
 main .messages .users .user .nameSubscribers {
 
-    width: 261px;
-    height: 38px;
+    width: 13.70vw;
+    height: 3.99vh;
 
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.42vh;
 }
 
 main .messages .users .user .nameSubscribers .nameTime {
     width: 98%;
-    height: 18px;
+    height: 1.89vh;
     display: flex;
     justify-content: space-between;
 }
 
 main .messages .users .user .nameSubscribers .nameTime .time {
     color: #81818D;
-    font-size: 12px;
+    font-size: 0.63vw;
 }
 
 main .messages .users .user .nameSubscribers .message {
     width: 100%;
-    height: 18px;
+    height: 1.89vh;
     color: #070A1C;
-    font-size: 14px;
+    font-size: 0.73vw;
     letter-spacing: normal;
     font-weight: 400;
-    width: 125px;
+    width: 6.56vw;
 }
 
 main .messages .users .user img {
-    width: 46px;
+    width: 2.41vw;
+    height: 4.83vh;
 }
 
 
 
 main .postArea {
-    width: 923px;
+    width: 48.45vw;
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 10px;
     resize: none;
-    padding-left: 16px;
-    padding-top: 16px;
-    padding-bottom: 16px;
+    padding-left: 0.84vw;
+    padding-top: 1.68vh;
+    padding-bottom: 1.68vh;
     box-sizing: border-box;
 }
 
 main .postArea input {
-    width: 891px;
-    height: 22px;
+    width: 46.77vw;
+    height: 2.31vh;
     outline: none;
     border: 0;
 }
 
 
 main .postArea .sendDiv {
-    width: 891px;
-    height: 40px;
+    width: 46.77vw;
+    height: 4.20vh;
 
     display: flex;
     align-items: center;
     justify-content: end;
-    gap: 13px;
-    margin-top: 26px;
+    gap: 1.68vh;
+    margin-top: 2.73vh;
 }
 
 
 .imageBtn {
-    height: 40px;
+    height: 4.20vh;
     border: none;
     background-color: white;
 }
 
 main .postArea .sendDiv .addImageBtn {
-    height: 40px;
+    height: 4.20vh;
     border: none;
     background-color: white;
     cursor: pointer;
 }
 
 main .postArea .sendDiv .addEmojiBtn {
-    height: 40px;
+    height: 4.20vh;
     border: none;
     background-color: white;
     cursor: pointer;
 }
 
 main .postArea .sendDiv .sendBtn {
-    height: 40px;
+    height: 4.20vh;
 
     background-color: #543C52;
     border-radius: 1234px;
@@ -463,66 +467,66 @@ main .postArea .sendDiv .sendBtn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.73vw;
     color: white;
-    font-size: 14px;
+    font-size: 0.73vw;
     border: 0;
     cursor: pointer;
-    padding-left: 16px;
-    padding-right: 16px;
+    padding-left: 0.84vw;
+    padding-right: 0.84vw;
 }
 
 main .postArea .sendDiv .sendBtn #smallImage {
-    height: 20px;
+    height: 2.10vh;
 }
 
 main .postPostInput .post {
-    width: 923px;
-    padding-bottom: 20px;
+    width: 48.45vw;
+    padding-bottom: 2.10vh;
     background-color: white;
-    margin-top: 8px;
+    margin-top: 0.42vh;
     border: 1px solid #CDCED2;
     border-radius: 10px;
-    padding-left: 20px;
-    margin-bottom: 15px;
+    padding-left: 2.10vh;
+    margin-bottom: 0.79vh;
 }
 
 main .postPostInput .post .postHeader {
-    width: 923px;
-    height: 89px;
+    width: 48.45vw;
+    height: 9.34vh;
     border-bottom: 1px solid #CDCED2;
 
     display: flex;
     align-items: center;
 
     display: flex;
-    gap: 10px;
+    gap: 0.52vw;
     box-sizing: border-box;
 
 }
 
 main .postPostInput .post .postHeader .avatar {
-    width: 46px;
-    height: 46px;
+    width: 2.41vw;
+    height: 4.83vh;
 }
 
 main .postPostInput .post .postHeader .text {
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 main .postPostInput .post .postHeader .paintingDiv {
     display: flex;
     justify-content: end;
 
-    margin-left: 505px;
+    margin-left: 26.51vw;
 }
 
 .dotsDiv .dots {
-    height: 20px;
+    height: 2.10vh;
 }
 
 .dotsDiv {
-    height: 20px;
+    height: 2.10vh;
 }
 
 .dotsDiv button {
@@ -533,20 +537,20 @@ main .postPostInput .post .postHeader .paintingDiv {
 
 
 main .postPostInput .post .postHeader .paintingDiv .painting {
-    width: 220px;
-    height: 49px;
+    width: 11.55vw;
+    height: 5.14vh;
 }
 
 
 main .postArea .post {
     background-color: white;
-    width: 923px;
+    width: 48.45vw;
 }
 
 main .postMain {
     display: flex;
     flex-direction: column;
-    padding-top: 16px;
+    padding-top: 1.68vh;
 }
 
 main .postMain .text {
@@ -555,7 +559,7 @@ main .postMain .text {
 
 .link {
     font-weight: 400;
-    margin-top: 16px;
+    margin-top: 1.68vh;
     color: #543C52;
 }
 
@@ -570,24 +574,24 @@ main .postMain .images {
     flex-direction: row;
     flex-wrap: wrap;
 
-    width: 883px;
-    gap: 16px;
-    margin-top: 16px;
+    width: 46.35vw;
+    gap: 0.84vw;
+    margin-top: 1.68vh;
 }
 
 main .postMain .images .postImage1 {
-    width: 433px;
-    height: 327px;
+    width: 22.73vw;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage2 {
-    width: 433px;
-    height: 327px;
+    width: 22.73vw;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage3 {
-    width: 283px;
-    height: 327px;
+    width: 14.86vw;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage4 {
@@ -601,49 +605,49 @@ main .postMain .images .postImage5 {
 }
 
 main .postFooter {
-    margin-bottom: 16px;
+    margin-bottom: 1.68vh;
 }
 
 main .postFooter img {
-    width: 20px;
+    width: 1.05vw;
 }
 
 .likesViews {
     width: 100%;
-    height: 20px;
-    margin-top: 16px;
+    height: 2.10vh;
+    margin-top: 1.68vh;
     display: flex;
-    gap: 24px;
+    gap: 2.52vh;
 }
 
 
 .likesViews .likes {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 14px;
+    gap: 0.84vh;
+    font-size: 0.73vw;
 }
 
 main .responses .response {
-    width: 923px;
-    height: 208px;
+    width: 48.45vw;
+    height: 21.83vh;
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 10px;
-    margin-top: 8px;
+    margin-top: 0.84vh;
 }
 
 
 main .responses .response .headerResponse .avatarName img {
-    height: 46px;
+    height: 4.83vh;
 }
 
 main .responses .response .headerResponse .avatarName {
-    width: 847px;
-    height: 46px;
+    width: 44.46vw;
+    height: 4.83vh;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 0.63vw;
 }
 
 main .responses .response .headerResponse {
@@ -658,8 +662,8 @@ main .responses .response .headerResponse {
 
 main .responses .response .mainResponse {
     display: flex;
-    padding-left: 20px;
-    padding-top: 16px;
+    padding-left: 1.05vw;
+    padding-top: 1.68vh;
 
     flex-direction: column;
 }
@@ -667,11 +671,11 @@ main .responses .response .mainResponse {
 .PostPostInput {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 897px;
+    height: 94.12vh;
 }
 
 .likesImg {
-    height: 20px;
+    height: 2.10vh;
 }
 
 .mona {
@@ -684,7 +688,7 @@ main .responses .response .mainResponse {
 
 .publicationLink {
     color: #543C52;
-    margin-top: 16px;
+    margin-top: 1.68vh;
 }
 
 .background-blur {
@@ -701,12 +705,12 @@ main .responses .response .mainResponse {
 }
 
 .publication-creation {
-    width: 775px;
-    height: 870px;
+    width: 40.68vw;
+    height: 91.29vh;
     background-color: white;
     border-radius: 20px;
     display: flex;
-    padding: 24px 44px 44px 44px;
+    padding: 2.52vh 2.31vw 4.62vh 2.31vw;
     flex-direction: column;
-    gap: 16px;
+    gap: 0.84vw;
 }

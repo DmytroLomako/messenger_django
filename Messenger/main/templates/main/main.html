@@ -149,10 +149,11 @@
             </div>
 
         </div>
+        {% for post in all_posts %}
         <div class="post">
             <div class="postHeader">
-                <img src="{% static 'images/avatar8.png' %}" class="avatar">
-                <p class="text">X_AE_A-13</p>
+                <img src="{% static 'images/avatar.png' %}" class="avatar">
+                <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
                     <img src="{% static 'images/painting.png' %}" class="painting">
                 </div>
@@ -163,158 +164,44 @@
 
             <div class="postMain">
                 <p class="text">
-                    Інколи найкращі ідеї народжуються в тиші 🌿<br>
-                    Природа, книга і спокій — усе, що потрібно, аби перезавантажитись.
+                    {{ post.title }}<br>
+                    {{ post.text }}
                 </p>
                 <p class="hashtags">
-                    #відпочинок #натхнення #життя #природа #читання #спокій #гармонія
+                    {% for tag in post.tags.all %}
+                    {{ tag.name }}
+                    {% endfor %}
                 </p>
+                <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    <img src="{% static 'images/post_image1.png' %}" class="postImage1">
-                    <img src="{% static 'images/post_image2.png' %}" class="postImage2">
-                    <img src="{% static 'images/post_image3.png' %}" class="postImage3">
-                    <img src="{% static 'images/post_image4.png' %}" class="postImage4">
-                    <img src="{% static 'images/post_image5.png' %}" class="postImage5">
+                    <img src="{{ post.images.url }}" class="postImage1">
                 </div>
             </div>
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів</p>
+                    <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">{{ post.count_likes}}
+                        Вподобань</p>
+                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                        Переглядів</p>
                 </div>
             </div>
         </div>
-
-        <div class="responses">
-            <div class="response">
-                <div class="headerResponse">
-                    <div class="avatarName">
-                        <img src="{% static 'images/avatar9.png' %}" class="avatar">
-                        <p class="name">Alex_03</p>
-                    </div>
-                    <div class="dotsDiv">
-                        <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                    </div>
-                </div>
-
-                <div class="mainResponse">
-                    <p class="text">
-                        буває такий настрій: просто лежиш і існуєш 😅<br>
-                        чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                    </p>
-                    <p class="hashtags">
-                        #вайб
-                    </p>
-
-                    <div class="postFooter">
-                        <div class="likesViews">
-                            <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань
-                            </p>
-                            <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="response">
-                <div class="headerResponse">
-                    <div class="avatarName">
-                        <img src="{% static 'images/avatar10.png' %}" class="avatar">
-                        <p class="name">Alex_03</p>
-                    </div>
-                    <div class="dotsDiv">
-                        <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                    </div>
-                </div>
-
-                <div class="mainResponse">
-                    <p class="text">
-                        буває такий настрій: просто лежиш і існуєш 😅<br>
-                        чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                    </p>
-                    <p class="hashtags">
-                        #вайб
-                    </p>
-
-                    <div class="postFooter">
-                        <div class="likesViews">
-                            <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань
-                            </p>
-                            <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="response">
-                <div class="headerResponse">
-                    <div class="avatarName">
-                        <img src="{% static 'images/avatar11.png' %}" class="avatar">
-                        <p class="name">Alex_03</p>
-                    </div>
-                    <div class="dotsDiv">
-                        <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                    </div>
-                </div>
-
-                <div class="mainResponse">
-                    <p class="text">
-                        буває такий настрій: просто лежиш і існуєш 😅<br>
-                        чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                    </p>
-                    <p class="hashtags">
-                        #вайб
-                    </p>
-
-                    <div class="postFooter">
-                        <div class="likesViews">
-                            <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань
-                            </p>
-                            <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="response">
-                <div class="headerResponse">
-                    <div class="avatarName">
-                        <img src="{% static 'images/avatar12.png' %}" class="avatar">
-                        <p class="name">Alex_03</p>
-                    </div>
-                    <div class="dotsDiv">
-                        <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                    </div>
-                </div>
-
-                <div class="mainResponse">
-                    <p class="text">
-                        буває такий настрій: просто лежиш і існуєш 😅<br>
-                        чай в одній руці, телефон в іншій, думки десь у космосі 🌌 і знаєте шо? норм
-                    </p>
-                    <p class="hashtags">
-                        #вайб
-                    </p>
-
-                    <div class="postFooter">
-                        <div class="likesViews">
-                            <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">120 Вподобань
-                            </p>
-                            <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">890 Переглядів
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
+        {% endfor %}
     </div>
+
+    <div class="background-blur">
+        <form method="post" class="publication-creation" enctype="multipart/form-data">
+            {% csrf_token %}
+            <button id="cancel-bg-blur">x</button>
+            {{ form.as_p }}
+            <a href="{% url 'create_tag' %}">Створити тег</a>
+            <button type="submit">Публікація</button>
+        </form>
+    </div>
+
+    <script src="{% static 'js/my_publications.js' %}"></script>
 </main>
 
 {% endblock %}
