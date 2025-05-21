@@ -144,7 +144,7 @@
                 <button class="addEmojiBtn">
                     <img src="{% static 'images/add_emoji.png' %}" class="addEmoji imageBtn">
                 </button>
-                <button class="sendBtn">Перейти до оформлення</button>
+                <button class="sendBtn submit">Перейти до оформлення</button>
 
             </div>
 
@@ -198,9 +198,48 @@
             <form method="post" class="publication-creation" enctype="multipart/form-data">
                 {% csrf_token %}
                 <button id="cancel-bg-blur">x</button>
-                {{ form.as_p }}
+
+                {% for field in form %}
+
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="picture" id="add-tag-btn"></button>
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="field">{{ field }}</div>
+                    <div class="divAddTags">
+                        <label for="image-input" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+
+                    </div>
+                </div>
+
+                {% elif field.name == "images" %}
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <div class="divSubmit">
+
+                        <label for="image-input" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
                 <a href="{% url 'create_tag' %}">Створити тег</a>
-                <button type="submit">Публікація</button>
+
             </form>
         </div>
         {% endblock %}

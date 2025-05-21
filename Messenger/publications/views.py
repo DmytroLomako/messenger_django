@@ -1,6 +1,7 @@
 from django.views.generic import CreateView
 from .models import User_Post, Images
 from django.urls import reverse_lazy
+from django.shortcuts import redirect
 from .forms import CreatePostForm
 
 class MyPublicationsView(CreateView):
@@ -11,6 +12,10 @@ class MyPublicationsView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         post = form.save()
+
+        # if len(form.images) >= 6:
+        #     return redirect(reverse_lazy("my_publications"))
+
         files = self.request.FILES.getlist('images')
         for file in files:
             Images.objects.create(post=post, image=file)

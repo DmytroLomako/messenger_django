@@ -19,8 +19,9 @@ class MultipleFileField(forms.ImageField):
         return result
 
 class CreatePostForm(forms.ModelForm):
-    images = MultipleFileField(required=False)
     
     class Meta():
         model = User_Post
-        fields = ['title', 'subject', 'tags', 'text', 'article_link']
+        fields = ['title', 'subject', 'tags', 'text', 'article_link']   
+        
+    images = MultipleFileField(required=False)
