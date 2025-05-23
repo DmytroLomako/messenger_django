@@ -837,7 +837,15 @@ input {
     width: 140px;
 }
 
+#id_text{
+    resize: none;
+}
+
 #imageForPost {
     width: 218px;
     height: 265px;
+}
+
+.liked{
+    border: 2px solid green;
 }

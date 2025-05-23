@@ -715,3 +715,6 @@ main .responses .response .mainResponse {
     flex-direction: column;
     gap: 0.84vw;
 }
+.liked{
+    border: 2px solid green;
+}

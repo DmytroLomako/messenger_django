@@ -1,8 +1,9 @@
 from django.views.generic import CreateView
 from .models import User_Post, Images
 from django.urls import reverse_lazy
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from .forms import CreatePostForm
+from django.http import JsonResponse
 
 class MyPublicationsView(CreateView):
     template_name = "publications/my_publications.html"
@@ -27,3 +28,15 @@ class MyPublicationsView(CreateView):
         context = super().get_context_data(**kwargs)
         context['all_posts'] = User_Post.objects.all()
         return context
+    
+def likes(request, post_pk):
+    try:
+        if request.method == 'POST':
+            post = User_Post.objects.get(id=post_pk)
+            if request.user not in post.likes.all():
+                post.likes.add(request.user)
+            else:
+                post.likes.remove(request.user)
+            return JsonResponse({'status': 'success'})
+    except:
+        return JsonResponse({'status': 'error'})
