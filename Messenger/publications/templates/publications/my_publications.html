@@ -203,27 +203,38 @@
 
                 {% if field.name == "tags" %}
                 <div class="showTagsBtn">
-                    <button type="button" name="picture" id="add-tag-btn"></button>
+                    <button type="button" name="add-tag" id="add-tag-btn"></button>
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
                     <div id="field">{{ field }}</div>
                     <div class="divAddTags">
-                        <label for="image-input" class="image-input-label">
+
+                        <div class="beforeBtton">
+
+                        </div>
+
+                        <label for="add-tag-btn" class="image-input-label">
                             <img src="{% static 'images/add_tag.png' %}" class="imageTags">
                         </label>
 
                     </div>
                 </div>
 
+
+
                 {% elif field.name == "images" %}
+                <div class="for-images">
+
+                </div>
                 <div class="post-div">
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
+                    <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
+                        id="image-input-id" multiple></input>
                     <div class="divSubmit">
-
-                        <label for="image-input" class="image-input-label">
+                        <label for="image-input-id" class="image-input-label">
                             <img src="{% static 'images/add_image.png' %}" class="image">
                         </label>
 

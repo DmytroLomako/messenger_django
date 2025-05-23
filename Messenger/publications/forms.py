@@ -23,5 +23,8 @@ class CreatePostForm(forms.ModelForm):
     class Meta():
         model = User_Post
         fields = ['title', 'subject', 'tags', 'text', 'article_link']   
+
+
+
         
     images = MultipleFileField(required=False)
