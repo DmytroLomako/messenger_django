@@ -6,13 +6,14 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/my_publications.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
 <script src="{% static 'js/my_publications.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <header>
     <img src="{% static 'images/logo.png' %}" class="logo">
-
+    {% csrf_token %}
     <div class="tabsExit">
         <div class="tabs">
             <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
@@ -194,8 +195,7 @@
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes"><img src="{% static 'images/likes.png' %}" class="likesImg">{{ post.count_likes}}
-                        Вподобань</p>
+                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}" id="{% url 'likes' post.pk %}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}" class="likesImg"><b>{{ post.count_likes }}</b> Вподобань</p>
                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
                         Переглядів</p>
                 </div>
@@ -242,7 +242,7 @@
                         {{field.label_tag}}
                     </div>
                     <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
-                        id="image-input-id" multiple></input>
+                        id="image-input-id" multiple>
                     <div class="divSubmit">
                         <label for="image-input-id" class="image-input-label">
                             <img src="{% static 'images/add_image.png' %}" class="image">

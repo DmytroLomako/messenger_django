@@ -84,32 +84,60 @@ allTags.forEach((element) => {
 
 
 console.log(finalAllTags)
-buttonSend.addEventListener('click', function () {
-    if (input.value) {
-        bgBlur.style.display = 'flex'
-        let contentInput = bgBlur.querySelector('textarea')
-        contentInput.textContent = input.value
-    }
-})
+if (buttonSend) {
+    buttonSend.addEventListener('click', function () {
+        if (input.value) {
+            bgBlur.style.display = 'flex'
+            let contentInput = bgBlur.querySelector('textarea')
+            contentInput.textContent = input.value
+        }
+    })
+}
 cancelBgBlur.addEventListener('click', function () {
     bgBlur.style.display = 'none'
 })
 
-
-addTag.addEventListener("click", () => {
-    tagsField.style.display = "block"
-
-    let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
-
-})
+if (addTag) {
+    addTag.addEventListener("click", () => {
+        tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
+        let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
+    })
+}
 
 selectTags.addEventListener("change", (event) => {
-    tagsField.style.display = "none"
+    divAddTags.textContent = ''
+    selectTags.querySelectorAll('option').forEach((option) => {
+        if (option.selected) {
+            let hashTagElement = document.createElement("p")
+            hashTagElement.classList.add("hashTag")
+            hashTagElement.textContent = finalAllTags[option.value - 1]
+            divAddTags.appendChild(hashTagElement)
+        }
+    })
+})
 
-    let hashTagElement = document.createElement("p")
-    hashTagElement.classList.add("hashTag")
-    hashTagElement.textContent = finalAllTags[event.target.value - 1]
-    divAddTags.appendChild(hashTagElement)
-
-    console.log(selectTags.textContent)
+let likeButtons = document.querySelectorAll('.like-button')
+likeButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+        let likeCount = button.querySelector('b')
+        let isLiked = button.classList.contains('liked')
+        if (isLiked) {
+            likeCount.textContent = parseInt(likeCount.textContent) - 1
+            button.classList.remove('liked')
+        } else {
+            likeCount.textContent = parseInt(likeCount.textContent) + 1
+            button.classList.add('liked')
+        }
+        console.log(button.id)
+        $.ajax({
+            url: `${button.id}`,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        })
+    })
 })

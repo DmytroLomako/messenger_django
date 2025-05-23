@@ -882,6 +882,10 @@ input {
     width: 140px;
 }
 
+#id_text {
+    resize: none;
+}
+
 #imageForPost {
     width: 218px;
     height: 265px;
@@ -906,4 +910,8 @@ input {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+}
+
+.liked {
+    border: 2px solid green;
 }
