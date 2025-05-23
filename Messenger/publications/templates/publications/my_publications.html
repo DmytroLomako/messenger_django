@@ -160,6 +160,16 @@
                 </div>
                 <div class="dotsDiv">
                     <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
+                    </div>
+                    <hr>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="delete" name="delete" value="{{ post.id }}">
+                            <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                            Видлалити пост
+                        </button>
+                    </form>
                 </div>
             </div>
 

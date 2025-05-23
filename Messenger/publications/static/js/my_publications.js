@@ -10,16 +10,66 @@ let selectTags = document.getElementById("id_tags")
 let divAddTags = document.querySelector(".beforeBtton")
 let imagesDiv = document.querySelector(".for-images")
 let imageInput = document.querySelector('.image-input')
+let dotsMenu = document.querySelectorAll(".dotsDiv")
+let editBtns = document.querySelectorAll(".edit")
+let deleteBtns = document.querySelectorAll(".delete")
+
+
+let listFiles = []
+
+for (let count = 0; count < dotsMenu.length; count++) {
+    dotsMenu[count].addEventListener("click", () => {
+        console.log(count)
+        if (dotsMenu[count].style.width == "150px") {
+            dotsMenu[count].style.width = "30px"
+            dotsMenu[count].style.height = "30px"
+            editBtns[count].style.display = "none"
+            deleteBtns[count].style.display = "none"
+        } else {
+            dotsMenu[count].style.width = "150px"
+            dotsMenu[count].style.height = "75px"
+            dotsMenu[count].style.backgroundColor = "white"
+            editBtns[count].style.display = "flex"
+            deleteBtns[count].style.display = "flex"
+        }
+    })
+}
 
 
 imageInput.addEventListener('change', function () {
-    let file = imageInput.files[0]
-    let createImage = document.createElement("img")
-    createImage.id = "imageForPost"
-    if (file) {
-        createImage.setAttribute('src', URL.createObjectURL(file));
-        imagesDiv.appendChild(createImage)
+    console.log(imageInput.files.length)
+
+    for (let count = 0; count < imageInput.files.length; count++) {
+        console.log(imageInput.files[count])
+        let file = imageInput.files[count]
+        let divImage = document.createElement("div")
+        divImage.classList.add("divImageDelete")
+        let createImage = document.createElement("img")
+        let deleteBtn = document.createElement("img")
+        deleteBtn.src = "/static/images/delete.png"
+        deleteBtn.classList.add("deleteBtn")
+        deleteBtn.id = "delete" + count
+        divImage.id = count
+        listFiles.push(imageInput.files[count])
+        createImage.id = "imageForPost"
+        if (file) {
+            createImage.setAttribute('src', URL.createObjectURL(file));
+            divImage.appendChild(createImage)
+            divImage.appendChild(deleteBtn)
+            imagesDiv.appendChild(divImage)
+        }
     }
+
+
+    let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
+    let allImages = document.querySelectorAll(".divImageDelete")
+
+    deleteBtnsArray.forEach(element => {
+        element.addEventListener("click", () => {
+
+            document.getElementById(Number(element.id.split("delete")[1])).remove()
+        })
+    });
 
 });
 
