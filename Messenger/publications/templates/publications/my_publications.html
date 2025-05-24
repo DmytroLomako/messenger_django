@@ -152,7 +152,7 @@
         </div>
         {% for post in all_posts %}
         {% if post.user == user %}
-        <div class="post">
+        <div class="post" id="post{{post.id}}">
             <div class="postHeader">
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
@@ -164,13 +164,10 @@
                     <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
                     </div>
                     <hr>
-                    <form method="post">
-                        {% csrf_token %}
-                        <button class="delete" name="delete" value="{{ post.id }}">
-                            <img class="minilogo" src="{% static 'images/deletePost.png' %}">
-                            Видлалити пост
-                        </button>
-                    </form>
+                    <button class="delete" name="delete" value="{% url 'delete' post.pk %}" id="{{post.pk}}">
+                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                        Видлалити пост
+                    </button>
                 </div>
             </div>
 
@@ -195,7 +192,11 @@
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}" id="{% url 'likes' post.pk %}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}" class="likesImg"><b>{{ post.count_likes }}</b> Вподобань</p>
+                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
+                        id="{{ post.id   }}" value="{% url 'likes' post.pk %}"><img
+                            src="{% static 'images/likes.png' %}" class="likesImg"
+                            id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                        Вподобань</p>
                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
                         Переглядів</p>
                 </div>

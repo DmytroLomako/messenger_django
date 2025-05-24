@@ -911,7 +911,3 @@ input {
     flex-wrap: wrap;
     width: 100%;
 }
-
-.liked {
-    border: 2px solid green;
-}

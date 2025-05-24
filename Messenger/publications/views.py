@@ -28,19 +28,18 @@ class MyPublicationsView(CreateView):
         context = super().get_context_data(**kwargs)
         context['all_posts'] = User_Post.objects.all()
         return context
-    def post(self, request, **kwargs):
-        data = request.POST  # Исправлено: request.POST вместо request.POS
-        delete_id = data.get("delete")  # Используем .get() чтобы избежать KeyError
-        
-        if not delete_id:  # Проверяем, что ID не пустой
-            return redirect(reverse_lazy("my_publications"))
-        
+    
+def delete(request, post_pk):
+    try:
+        if request.method == "POST":
+            object = User_Post.objects.get(id=post_pk)
+            object.delete()
 
-        delete_id = int(delete_id)  # Преобразуем в число
-        object = User_Post.objects.get(id=delete_id)
-        object.delete()
-        return redirect(reverse_lazy("my_publications"))
+        return JsonResponse({'status': 'success'})
+    except:
+        return JsonResponse({'status': 'error'})
 
+    
     
 def likes(request, post_pk):
     try:

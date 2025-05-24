@@ -119,6 +119,11 @@ selectTags.addEventListener("change", (event) => {
 let likeButtons = document.querySelectorAll('.like-button')
 likeButtons.forEach((button) => {
     button.addEventListener('click', function () {
+        if (!button.classList.contains("liked")) {
+            document.querySelector(`#like${button.id}`).src = "/static/images/liked.png"
+        } else {
+            document.querySelector(`#like${button.id}`).src = "/static/images/likes.png"
+        }
         let likeCount = button.querySelector('b')
         let isLiked = button.classList.contains('liked')
         if (isLiked) {
@@ -131,6 +136,27 @@ likeButtons.forEach((button) => {
         console.log(button.id)
         $.ajax({
             url: `${button.id}`,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        })
+    })
+})
+
+let likesImages = document.querySelectorAll(".likesImg")
+
+
+deleteBtns.forEach((button) => {
+    button.addEventListener("click", function () {
+        let postObject = document.querySelector(`#post${button.id}`)
+        console.log(`post${button.id}`)
+        postObject.remove()
+        $.ajax({
+            url: `${button.value}`,
             type: 'POST',
             data: {
                 'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
