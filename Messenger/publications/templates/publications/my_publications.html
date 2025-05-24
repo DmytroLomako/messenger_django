@@ -160,7 +160,7 @@
                     <img src="{% static 'images/painting.png' %}" class="painting">
                 </div>
                 <div class="dotsDiv">
-                    <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    <button><img src="{% static 'images/dots_menu.png' %}" class="dots" id="{{post.pk}}"></button>
                     <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
                     </div>
                     <hr>
@@ -207,8 +207,72 @@
 
         <div class="background-blur">
             <form method="post" class="publication-creation" enctype="multipart/form-data">
+                <input class="hidden" name="post" value="post">
                 {% csrf_token %}
                 <button id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Створення публікації</p>
+
+                {% for field in form %}
+
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn"></button>
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="field">{{ field }}</div>
+                    <div class="divAddTags">
+
+                        <div class="beforeBtton">
+
+                        </div>
+
+                        <label for="add-tag-btn" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+
+                    </div>
+                </div>
+
+
+
+                {% elif field.name == "images" %}
+                <div class="for-images">
+
+                </div>
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
+                        id="image-input-id" multiple>
+                    <div class="divSubmit">
+                        <label for="image-input-id" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+
+            </form>
+
+
+
+
+            <form method="post" class="publication-redact" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Створення публікації</p>
 
                 {% for field in form %}
 
@@ -264,4 +328,5 @@
 
             </form>
         </div>
+
         {% endblock %}

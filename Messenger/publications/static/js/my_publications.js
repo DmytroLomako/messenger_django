@@ -13,20 +13,28 @@ let imageInput = document.querySelector('.image-input')
 let dotsMenu = document.querySelectorAll(".dotsDiv")
 let editBtns = document.querySelectorAll(".edit")
 let deleteBtns = document.querySelectorAll(".delete")
+let postRedact = document.querySelector(".publication-redact")
 
 
 let listFiles = []
 
+for (let count = 0; count < editBtns.length; count++) {
+    editBtns[count].addEventListener("click", () => {
+        postRedact.style.display = "block"
+    })
+
+}
+
 for (let count = 0; count < dotsMenu.length; count++) {
     dotsMenu[count].addEventListener("click", () => {
         console.log(count)
-        if (dotsMenu[count].style.width == "150px") {
+        if (dotsMenu[count].style.width == "175px") {
             dotsMenu[count].style.width = "30px"
             dotsMenu[count].style.height = "30px"
             editBtns[count].style.display = "none"
             deleteBtns[count].style.display = "none"
         } else {
-            dotsMenu[count].style.width = "150px"
+            dotsMenu[count].style.width = "175px"
             dotsMenu[count].style.height = "75px"
             dotsMenu[count].style.backgroundColor = "white"
             editBtns[count].style.display = "flex"
@@ -108,9 +116,12 @@ selectTags.addEventListener("change", (event) => {
     divAddTags.textContent = ''
     selectTags.querySelectorAll('option').forEach((option) => {
         if (option.selected) {
-            let hashTagElement = document.createElement("p")
+            let hashTagElement = document.createElement("div")
+            let hashTagText = document.createElement("p")
             hashTagElement.classList.add("hashTag")
-            hashTagElement.textContent = finalAllTags[option.value - 1]
+            hashTagText.classList.add("hashTagText")
+            hashTagText.textContent = finalAllTags[option.value - 1]
+            hashTagElement.appendChild(hashTagText)
             divAddTags.appendChild(hashTagElement)
         }
     })

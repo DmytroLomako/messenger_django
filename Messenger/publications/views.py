@@ -17,7 +17,10 @@ class MyPublicationsView(CreateView):
         # if len(form.images) >= 6:
         #     return redirect(reverse_lazy("my_publications"))
 
-        files = self.request.FILES.getlist('images')
+        files = self.request.FILES.getlist('images')    
+        if self.request.POST.get("post") == None:
+            pass
+
         for file in files:
             Images.objects.create(post=post, image=file)
         post.save()

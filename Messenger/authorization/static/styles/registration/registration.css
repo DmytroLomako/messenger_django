@@ -4,6 +4,7 @@
     font-family: MainFontMedium;
     overflow-x: hidden;
     overflow-y: hidden;
+    font-size: 0.84vw;
 }
 
 @font-face {
@@ -17,16 +18,18 @@ label,
 input {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.31vw;
+    width: 13.12vw;
 }
 
+
 input {
-    margin-top: 6px;
-    width: 400px;
-    height: 42px;
+    margin-top: 0.63vh;
+    width: 21.00vw;
+    height: 4.41vh;
     border: 1px solid #CDCED2;
     border-radius: 10px;
-    padding-left: 16px;
+    padding-left: 0.84vw;
 }
 
 span {
@@ -49,8 +52,8 @@ ul {
 main {
     width: 100vw;
     height: 100vh;
-    padding-left: 255px;
-    padding-top: 100px;
+    padding-left: 13.39vw;
+    padding-top: 10.49vh;
     background-color: #E9E5EE;
     box-sizing: border-box;
 }
@@ -58,27 +61,27 @@ main {
 form {
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 1.89vw;
 }
 
 .formDiv {
-    width: 487px;
+    width: 25.56vw;
     background-color: white;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 44px;
+    padding-top: 4.62vh;
     box-sizing: border-box;
 
     border-radius: 20px;
-    gap: 36px;
+    gap: 1.89vw;
     z-index: 100;
-    padding-bottom: 36px;
+    padding-bottom: 3.78vh;
 }
 
 .greatings {
-    font-size: 24px;
+    font-size: 1.26vw;
     color: #070A1C;
 }
 
@@ -90,29 +93,36 @@ form {
 
 .regLogin {
     display: flex;
-    gap: 24px;
+    gap: 1.26vw;
+    padding-right: 0.52vw;
 }
 
+.regLogin {
+    display: flex;
+    gap: 1.26vw;
+    padding-right: 0.52vw;
+}
+
+
 a {
-    font-size: 34px;
+    font-size: 1.78vw;
     color: #81818D;
-    width: 186px;
-    height: 47px;
+    height: 4.93vh;
     text-align: center;
     text-decoration: none;
 }
 
 .withoutButton {
-    width: 400px;
+    width: 21.00vw;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
-    gap: 16px;
+    gap: 0.84vw;
 }
 
 .submit {
-    width: 400px;
-    height: 52px;
+    width: 21.00vw;
+    height: 5.46vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,7 +141,7 @@ a {
 
 header {
     width: 100%;
-    height: 88px;
+    height: 9.23vh;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -139,14 +149,14 @@ header {
 }
 
 header img {
-    width: 145px;
-    height: 18px;
+    width: 7.61vw;
+    height: 1.89vh;
 }
 
 .laptop-img {
-    width: 680px;
-    height: 527px;
+    width: 35.70vw;
+    height: 27.66vw;
     position: absolute;
-    left: 767px;
-    top: 248px;
+    left: 40.26vw;
+    top: 26.02vh;
 }
