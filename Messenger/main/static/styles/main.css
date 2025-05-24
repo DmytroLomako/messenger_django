@@ -458,9 +458,90 @@ main .postArea .sendDiv .addEmojiBtn {
     cursor: pointer;
 }
 
-main .postArea .sendDiv .sendBtn {
+.divSubmit {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+.divAddTags {
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    width: 100%;
+}
+
+
+.image-input {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    right: 755px;
+    width: 40px;
+    height: 40px;
+}
+
+.imageTags {
+    width: 20px;
+    height: 20px;
+}
+
+
+.image {
+    width: 40px;
+    height: 40px;
+}
+
+
+.hidden * {
+    display: none;
+}
+
+.image-input-label {
+    display: block;
+}
+
+#field {
+    display: none;
+}
+
+#add-tag-btn {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    right: 1285px;
+    width: 20px;
+    height: 20px;
+}
+
+.sendBtn {
     height: 4.20vh;
 
+    background-color: #543C52;
+    border-radius: 1234px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.73vw;
+    color: white;
+    font-size: 0.73vw;
+    border: 0;
+    cursor: pointer;
+    padding-left: 0.84vw;
+    padding-right: 0.84vw;
+}
+
+.sendBtnModal {
+    height: 4.20vh;
+    width: 130px;
 
     background-color: #543C52;
     border-radius: 1234px;
@@ -479,6 +560,10 @@ main .postArea .sendDiv .sendBtn {
 
 main .postArea .sendDiv .sendBtn #smallImage {
     height: 2.10vh;
+}
+
+main .PostPostInput {
+    overflow-y: scroll;
 }
 
 main .postPostInput .post {
@@ -503,6 +588,7 @@ main .postPostInput .post .postHeader {
     display: flex;
     gap: 0.52vw;
     box-sizing: border-box;
+    position: relative;
 
 }
 
@@ -522,12 +608,49 @@ main .postPostInput .post .postHeader .paintingDiv {
     margin-left: 26.51vw;
 }
 
+.dotsDiv {
+    position: absolute;
+    right: 2.10vw;
+    top: 3.15vh;
+    border-radius: 5px;
+
+}
+
+
 .dotsDiv .dots {
     height: 2.10vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.minilogo {
+    width: 1.05vw;
+    height: 1.05vw;
+}
+
+.edit {
+    width: 100%;
+    height: 3.15vh;
+    display: flex;
+    align-items: center;
+    gap: 0.26vw;
+    display: none;
+}
+
+.delete {
+    width: 100%;
+    height: 3.15vh;
+    display: flex;
+    align-items: center;
+    gap: 0.26vw;
+    display: none;
 }
 
 .dotsDiv {
     height: 2.10vh;
+    background-color: white;
+    padding-left: 0.26vw;
 }
 
 .dotsDiv button {
@@ -654,9 +777,9 @@ main .responses .response .headerResponse .avatarName {
 main .responses .response .headerResponse {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-left: 20px;
-    height: 86px;
+    gap: 0.63vw;
+    padding-left: 1.05vw;
+    height: 9.02vh;
     border-bottom: 1px solid #CDCED2;
 }
 
@@ -711,10 +834,78 @@ main .responses .response .mainResponse {
     background-color: white;
     border-radius: 20px;
     display: flex;
-    padding: 2.52vh 2.31vw 4.62vh 2.31vw;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
     gap: 0.84vw;
+    overflow-y: scroll;
 }
-.liked{
-    border: 2px solid green;
+
+input {
+    width: 18.01vw;
+    height: 4.41vh;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+.beforeBtton {
+    display: flex;
+    gap: 0.52vw;
+}
+
+.hashtag {
+    width: 4.78vw;
+    height: 2.94vh;
+    border-radius: 6px;
+    font-weight: 400;
+    font-size: 0.73vw;
+    color: #543C52;
+
+    background-color: #E9E5EE;
+    text-align: center;
+
+}
+
+#cancel-bg-blur {
+    width: 100%;
+    height: 2.62vh;
+    text-align: end;
+    background-color: white;
+    border: 0;
+    font-size: 0.84vw;
+    cursor: pointer;
+}
+
+#id_tags {
+    width: 7.35vw;
+}
+
+#id_text {
+    resize: none;
+}
+
+#imageForPost {
+    width: 11.44vw;
+    height: 27.81vh;
+    border-radius: 15px;
+}
+
+.deleteBtn {
+    width: 2.10vw;
+    height: 4.20vh;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.divImageDelete {
+    position: relative;
+    width: 11.44vw;
+    height: 26.86vh;
+}
+
+.for-images {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
 }

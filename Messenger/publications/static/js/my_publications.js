@@ -133,9 +133,9 @@ likeButtons.forEach((button) => {
             likeCount.textContent = parseInt(likeCount.textContent) + 1
             button.classList.add('liked')
         }
-        console.log(button.id)
+        console.log(button.getAttribute("value"))
         $.ajax({
-            url: `${button.id}`,
+            url: `${button.getAttribute("value")}`,
             type: 'POST',
             data: {
                 'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value

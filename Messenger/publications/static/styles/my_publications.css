@@ -564,7 +564,6 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 main .PostPostInput {
     overflow-y: scroll;
-    height: 875px;
 }
 
 main .postPostInput .post {
@@ -611,8 +610,8 @@ main .postPostInput .post .postHeader .paintingDiv {
 
 .dotsDiv {
     position: absolute;
-    right: 40px;
-    top: 30px;
+    right: 2.10vw;
+    top: 3.15vh;
     border-radius: 5px;
 
 }
@@ -625,34 +624,33 @@ main .postPostInput .post .postHeader .paintingDiv {
     top: 0;
 }
 
-
 .minilogo {
-    width: 20px;
-    height: 20px;
+    width: 1.05vw;
+    height: 1.05vw;
 }
 
 .edit {
     width: 100%;
-    height: 30px;
+    height: 3.15vh;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.26vw;
     display: none;
 }
 
 .delete {
     width: 100%;
-    height: 30px;
+    height: 3.15vh;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 0.26vw;
     display: none;
 }
 
 .dotsDiv {
     height: 2.10vh;
     background-color: white;
-    padding-left: 5px;
+    padding-left: 0.26vw;
 }
 
 .dotsDiv button {
@@ -779,9 +777,9 @@ main .responses .response .headerResponse .avatarName {
 main .responses .response .headerResponse {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding-left: 20px;
-    height: 86px;
+    gap: 0.63vw;
+    padding-left: 1.05vw;
+    height: 9.02vh;
     border-bottom: 1px solid #CDCED2;
 }
 
@@ -794,7 +792,7 @@ main .responses .response .mainResponse {
     flex-direction: column;
 }
 
-dotsDiv .PostPostInput {
+.PostPostInput {
     overflow-y: scroll;
     overflow-x: hidden;
     height: 94.12vh;
@@ -843,8 +841,8 @@ dotsDiv .PostPostInput {
 }
 
 input {
-    width: 343px;
-    height: 42px;
+    width: 18.01vw;
+    height: 4.41vh;
     border-radius: 10px;
     border: 1px solid black;
 }
@@ -852,15 +850,15 @@ input {
 
 .beforeBtton {
     display: flex;
-    gap: 10px;
+    gap: 0.52vw;
 }
 
 .hashtag {
-    width: 91px;
-    height: 28px;
+    width: 4.78vw;
+    height: 2.94vh;
     border-radius: 6px;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 0.73vw;
     color: #543C52;
 
     background-color: #E9E5EE;
@@ -870,16 +868,16 @@ input {
 
 #cancel-bg-blur {
     width: 100%;
-    height: 25px;
+    height: 2.62vh;
     text-align: end;
     background-color: white;
     border: 0;
-    font-size: 16px;
+    font-size: 0.84vw;
     cursor: pointer;
 }
 
 #id_tags {
-    width: 140px;
+    width: 7.35vw;
 }
 
 #id_text {
@@ -887,14 +885,14 @@ input {
 }
 
 #imageForPost {
-    width: 218px;
-    height: 265px;
+    width: 11.44vw;
+    height: 27.81vh;
     border-radius: 15px;
 }
 
 .deleteBtn {
-    width: 40px;
-    height: 40px;
+    width: 2.10vw;
+    height: 4.20vh;
     position: absolute;
     right: 10px;
     top: 10px;
@@ -902,8 +900,8 @@ input {
 
 .divImageDelete {
     position: relative;
-    width: 218px;
-    height: 256px;
+    width: 11.44vw;
+    height: 26.86vh;
 }
 
 .for-images {

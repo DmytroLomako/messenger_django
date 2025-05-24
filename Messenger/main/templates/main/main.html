@@ -5,8 +5,9 @@
 {% block title %} Main Page {% endblock %}
 
 {% block link %}
-<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+<link rel="stylesheet" href="{% static 'styles/my_publications.css' %}">
 <script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'js/my_publications.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -139,19 +140,18 @@
 
     <div class="PostPostInput">
         <div class="postArea">
+            <input type="text" class="areaInput" placeholder="Про що ти зараз думаєш?">
             <div class="sendDiv">
-                <input type="text" class="areaInput" placeholder="Про що ти зараз думаєш?">
                 <button class="addEmojiBtn">
                     <img src="{% static 'images/add_emoji.png' %}" class="addEmoji imageBtn">
                 </button>
+                <button class="sendBtn submit">Перейти до оформлення</button>
 
-
-                <button class="sendBtn">Перейти до оформлення</button>
             </div>
 
         </div>
         {% for post in all_posts %}
-        <div class="post">
+        <div class="post" id="post{{post.id}}">
             <div class="postHeader">
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
@@ -160,6 +160,13 @@
                 </div>
                 <div class="dotsDiv">
                     <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
+                    </div>
+                    <hr>
+                    <button class="delete" name="delete" value="{% url 'delete' post.pk %}" id="{{post.pk}}">
+                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                        Видлалити пост
+                    </button>
                 </div>
             </div>
 
@@ -184,26 +191,75 @@
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}" id="{% url 'likes' post.pk %}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}" class="likesImg"><b>{{ post.count_likes }}</b> Вподобань</p>
+                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
+                        id="{{ post.id   }}" value="{% url 'likes' post.pk %}"><img
+                            src="{% static 'images/likes.png' %}" class="likesImg"
+                            id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                        Вподобань</p>
                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
                         Переглядів</p>
                 </div>
             </div>
         </div>
         {% endfor %}
-    </div>
 
-    <div class="background-blur">
-        <form method="post" class="publication-creation" enctype="multipart/form-data">
-            {% csrf_token %}
-            <button id="cancel-bg-blur">x</button>
-            {{ form.as_p }}
-            <a href="{% url 'create_tag' %}">Створити тег</a>
-            <button type="submit">Публікація</button>
-        </form>
-    </div>
+        <div class="background-blur">
+            <form method="post" class="publication-creation" enctype="multipart/form-data">
+                {% csrf_token %}
+                <button id="cancel-bg-blur">x</button>
 
-    <script src="{% static 'js/my_publications.js' %}"></script>
-</main>
+                {% for field in form %}
 
-{% endblock %}
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn"></button>
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="field">{{ field }}</div>
+                    <div class="divAddTags">
+
+                        <div class="beforeBtton">
+
+                        </div>
+
+                        <label for="add-tag-btn" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+
+                    </div>
+                </div>
+
+
+
+                {% elif field.name == "images" %}
+                <div class="for-images">
+
+                </div>
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
+                        id="image-input-id" multiple>
+                    <div class="divSubmit">
+                        <label for="image-input-id" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+                {% else %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+
+            </form>
+        </div>
+        {% endblock %}
