@@ -38,7 +38,8 @@ for (let count = 0; count < dotsMenu.length; count++) {
 
 imageInput.addEventListener('change', function () {
     console.log(imageInput.files.length)
-
+    imagesDiv.innerHTML = ''
+    listFiles = []
     for (let count = 0; count < imageInput.files.length; count++) {
         console.log(imageInput.files[count])
         let file = imageInput.files[count]
@@ -66,7 +67,7 @@ imageInput.addEventListener('change', function () {
 
     deleteBtnsArray.forEach(element => {
         element.addEventListener("click", () => {
-
+            delete listFiles[Number(element.id.split("delete")[1])];
             document.getElementById(Number(element.id.split("delete")[1])).remove()
         })
     });
@@ -166,4 +167,17 @@ deleteBtns.forEach((button) => {
             }
         })
     })
+})
+
+let sendBtnModal = document.querySelector(".sendBtnModal")
+
+sendBtnModal.addEventListener("click", function () {
+    console.log(listFiles)
+    const dataTransfer = new DataTransfer();
+    listFiles.forEach((file) => {
+        if (file){
+            dataTransfer.items.add(file)
+        }
+    });
+    imageInput.files = dataTransfer.files;
 })
