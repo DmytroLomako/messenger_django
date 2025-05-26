@@ -169,14 +169,19 @@ editBtns.forEach(element => {
         console.log("feadweg")
         blurRedact.style.display = "flex"
         $.ajax({
-            url: `redact/${element.id}`,
+            url: `/publications/redact/${element.id}/`,
             type: 'POST',
             data: {
-                'pk': element.id
+                'pk': element.id,
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
             },
             success: function (response) {
-                console.log(response)
-                response["post"]
+                let post = JSON.parse(response)[0]["fields"]
+                console.log(post)
+                document.querySelector(".title").value = post["title"]
+                document.querySelector(".subject").value = post["subject"]
+                document.querySelector(".textField").textContent = post["text"]
+                document.querySelector(".link").value = post["article_link"]
             }
         })
     })

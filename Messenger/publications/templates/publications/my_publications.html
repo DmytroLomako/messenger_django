@@ -160,16 +160,21 @@
                     <img src="{% static 'images/painting.png' %}" class="painting">
                 </div>
                 <div class="dotsDiv">
-                    <button><img src="{% static 'images/dots_menu.png' %}" class="dots" id="{{post.pk}}"></button>
-                    <button class="edit" id="{{post.pk}}"><img class="minilogo" src="{% static 'images/edit.png' %}"
-                            alt="">Редагувати
-                        пост
-                    </button>
-                    <hr>
-                    <button class="delete" name="delete" value="{% url 'delete' post.pk %}" id="{{post.pk}}">
-                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
-                        Видлалити пост
-                    </button>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button type="button"><img src="{% static 'images/dots_menu.png' %}" class="dots"
+                                id="{{post.pk}}"></button>
+                        <button class="edit" id="{{post.pk}}" type="button"><img class="minilogo"
+                                src="{% static 'images/edit.png' %}" alt="">Редагувати
+                            пост
+                        </button>
+                        <hr>
+                        <button type="button" class="delete" name="delete" value="{% url 'delete' post.pk %}"
+                            id="{{post.pk}}">
+                            <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                            Видлалити пост
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -257,6 +262,7 @@
                     </div>
                 </div>
 
+
                 {% else %}
                 <div class="input-div">
                     <div class="label">{{ field.label_tag }}</div>
@@ -281,6 +287,7 @@
 
                 {% if field.name == "tags" %}
                 <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn"></button>
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
@@ -298,11 +305,7 @@
                     </div>
                 </div>
 
-                {% elif field.name == "title" %}
-                <div class="input-div">
-                    <div class="label">{{ field.label_tag }}</div>
-                    <div class="field"><input type="text" placeholder="Напишить назву публікації"></div>
-                </div>
+
 
                 {% elif field.name == "images" %}
                 <div class="for-images">
@@ -323,16 +326,36 @@
                     </div>
                 </div>
 
-                {% else %}
+                {% elif field.name == "title" %}
                 <div class="input-div">
-                    <div class="label">{{ field.label_tag }}</div>
-                    <div class="field">{{ field }}</div>
+                    <div class="label">Назва публікації</div>
+                    <div class="field"><input class="title" type="text" placeholder="Напишить назву публікації"></div>
                 </div>
+
+                {% elif field.name == "subject" %}
+                <div class="input-div">
+                    <div class="label">Тема публікації</div>
+                    <div class="field"><input class="subject" type="text" placeholder="Напишить тему публікації"></div>
+                </div>
+
+                {% elif field.name == "text" %}
+                <div class="input-div">
+                    <div class="field"><textarea type="text" class="textField"
+                            placeholder="Напишить текст публікації"></textarea></div>
+                </div>
+                {% elif field.name == "article_link" %}
+                <div class="input-div">
+                    <label class="label">Посилання</label>
+                    <div class="field"><input class="link" type="text" placeholder="Додайте посилання до публікації">
+                    </div>
+                </div>
+
                 {% endif %}
                 {% endfor %}
                 <a href="{% url 'create_tag' %}">Створити тег</a>
 
             </form>
+
         </div>
 
         {% endblock %}

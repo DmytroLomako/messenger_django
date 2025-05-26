@@ -4,6 +4,8 @@ from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from .forms import CreatePostForm
 from django.http import JsonResponse
+from django.core import serializers
+import json
 
 class MyPublicationsView(CreateView):
     template_name = "publications/my_publications.html"
@@ -18,14 +20,16 @@ class MyPublicationsView(CreateView):
         #     return redirect(reverse_lazy("my_publications"))
 
         files = self.request.FILES.getlist('images')    
-        if self.request.POST.get("post") == None:
-            pass
+        if self.request.POST.get("post") != None:
 
-        for file in files:
-            Images.objects.create(post=post, image=file)
-        post.save()
-        return super().form_valid(form)
-    
+            for file in files:
+                Images.objects.create(post=post, image=file)
+            post.save()
+            return super().form_valid(form)
+        else:
+            print(post.id)
+            return super().form_valid(form)
+
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -59,6 +63,5 @@ def likes(request, post_pk):
 
 def redact_data(request, post_pk):
     if request.method == 'POST':
-        post = User_Post.objects.get(id = post_pk)
-        return JsonResponse({"post": post})
-    
+        post = [User_Post.objects.get(id = post_pk)]
+        return JsonResponse(serializers.serialize("json", post), safe=False)
