@@ -31,6 +31,7 @@ class MyPublicationsView(CreateView):
         context = super().get_context_data(**kwargs)
         context['all_posts'] = User_Post.objects.all()
         return context
+
     
 def delete(request, post_pk):
     try:
@@ -55,3 +56,9 @@ def likes(request, post_pk):
             return JsonResponse({'status': 'success'})
     except:
         return JsonResponse({'status': 'error'})
+
+def redact_data(request, post_pk):
+    if request.method == 'POST':
+        post = User_Post.objects.get(id = post_pk)
+        return JsonResponse({"post": post})
+    

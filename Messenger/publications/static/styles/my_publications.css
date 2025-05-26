@@ -827,6 +827,19 @@ main .responses .response .mainResponse {
     align-items: center;
 }
 
+.background-blur-redact {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
 label,
 input {
     display: flex;
@@ -845,6 +858,32 @@ input {
     overflow-y: scroll;
 }
 
+.publication-redact {
+    width: 40.68vw;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
+    flex-direction: column;
+    gap: 0.84vw;
+    overflow-y: scroll;
+}
+
+.publication-redact input {
+    border: 1px solid #CDCED2;
+}
+
+.publication-redact textarea {
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    padding-left: 0.84vw;
+    padding-top: 1.68vh;
+    width: 35.96vw;
+    height: 13.22vh;
+}
+
 .publication-creation input {
     border: 1px solid #CDCED2;
 }
@@ -859,6 +898,10 @@ input {
     width: 35.96vw;
     height: 13.22vh;
 }
+
+
+
+
 
 .hashtagText {
     font-size: 14px;
@@ -878,8 +921,6 @@ input {
     display: flex;
     gap: 0.52vw;
 }
-
-
 
 .NameTitle {
     font-size: 34px;
@@ -906,6 +947,16 @@ input {
 }
 
 #cancel-bg-blur {
+    width: 100%;
+    height: 2.62vh;
+    text-align: end;
+    background-color: white;
+    border: 0;
+    font-size: 0.84vw;
+    cursor: pointer;
+}
+
+#cancel-bg-blur-redact {
     width: 100%;
     height: 2.62vh;
     text-align: end;

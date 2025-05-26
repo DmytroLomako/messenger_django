@@ -161,8 +161,10 @@
                 </div>
                 <div class="dotsDiv">
                     <button><img src="{% static 'images/dots_menu.png' %}" class="dots" id="{{post.pk}}"></button>
-                    <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
-                    </div>
+                    <button class="edit" id="{{post.pk}}"><img class="minilogo" src="{% static 'images/edit.png' %}"
+                            alt="">Редагувати
+                        пост
+                    </button>
                     <hr>
                     <button class="delete" name="delete" value="{% url 'delete' post.pk %}" id="{{post.pk}}">
                         <img class="minilogo" src="{% static 'images/deletePost.png' %}">
@@ -266,19 +268,19 @@
 
             </form>
 
+        </div>
 
-
+        <div class="background-blur-redact">
 
             <form method="post" class="publication-redact" enctype="multipart/form-data">
                 {% csrf_token %}
-                <button id="cancel-bg-blur">x</button>
-                <p class="NameTitle">Створення публікації</p>
+                <button id="cancel-bg-blur-redact">x</button>
+                <p class="NameTitle">Редагування публікації</p>
 
                 {% for field in form %}
 
                 {% if field.name == "tags" %}
                 <div class="showTagsBtn">
-                    <button type="button" name="add-tag" id="add-tag-btn"></button>
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
@@ -296,7 +298,11 @@
                     </div>
                 </div>
 
-
+                {% elif field.name == "title" %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field"><input type="text" placeholder="Напишить назву публікації"></div>
+                </div>
 
                 {% elif field.name == "images" %}
                 <div class="for-images">

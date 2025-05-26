@@ -13,17 +13,11 @@ let imageInput = document.querySelector('.image-input')
 let dotsMenu = document.querySelectorAll(".dotsDiv")
 let editBtns = document.querySelectorAll(".edit")
 let deleteBtns = document.querySelectorAll(".delete")
-let postRedact = document.querySelector(".publication-redact")
+let blurRedact = document.querySelector(".background-blur-redact")
+let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 
 
 let listFiles = []
-
-for (let count = 0; count < editBtns.length; count++) {
-    editBtns[count].addEventListener("click", () => {
-        postRedact.style.display = "block"
-    })
-
-}
 
 for (let count = 0; count < dotsMenu.length; count++) {
     dotsMenu[count].addEventListener("click", () => {
@@ -74,11 +68,9 @@ imageInput.addEventListener('change', function () {
 
     deleteBtnsArray.forEach(element => {
         element.addEventListener("click", () => {
-
             document.getElementById(Number(element.id.split("delete")[1])).remove()
         })
     });
-
 });
 
 let allTags = selectTags.textContent.split("\n")
@@ -89,7 +81,6 @@ allTags.forEach((element) => {
         finalAllTags.push(element.trim())
     }
 })
-
 
 console.log(finalAllTags)
 if (buttonSend) {
@@ -166,15 +157,29 @@ deleteBtns.forEach((button) => {
         let postObject = document.querySelector(`#post${button.id}`)
         console.log(`post${button.id}`)
         postObject.remove()
+    })
+})
+
+
+
+editBtns.forEach(element => {
+    element.addEventListener("click", () => {
+        console.log("feadweg")
+        blurRedact.style.display = "flex"
         $.ajax({
-            url: `${button.value}`,
+            url: `redact/${element.id}`,
             type: 'POST',
             data: {
-                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'pk': element.id
             },
             success: function (response) {
                 console.log(response)
+                response["post"]
             }
         })
     })
+})
+
+cancelBgBlurRedact.addEventListener('click', () => {
+    blurRedact.style.display = 'none'
 })

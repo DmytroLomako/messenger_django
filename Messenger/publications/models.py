@@ -6,7 +6,7 @@ from create_tag.models import Tag
 # Create your models here.
 class User_Post(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     subject = models.CharField(max_length=200)
     tags = models.ManyToManyField(Tag)
     text = models.TextField()
