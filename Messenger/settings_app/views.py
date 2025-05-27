@@ -4,9 +4,10 @@ from django.shortcuts import render
 
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
+from .forms import UserUpdateForm
 
 
 class UserUpdateView(UpdateView):
     model = User
-    fields = ["username"]
+    form_class = UserUpdateForm
     template_name = "settings.html"
