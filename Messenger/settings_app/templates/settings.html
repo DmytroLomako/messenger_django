@@ -3,8 +3,8 @@
 {% load static %}
 
 {% block link %}
-<link rel="stylesheet" href="{% static 'styles/settings/settings.css' %}">
-<script src="{% static 'authorization/js/verification.js' %}" defer></script>
+<link rel="stylesheet" href="{% static 'settings_app/css/settings.css' %}">
+<script src="{% static 'settings_app/js/settings.js' %}" defer></script>
 {% endblock %}
 
 
@@ -24,7 +24,7 @@
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
-            <a href="{% url 'settings' %}" class="settings tab"><img
+            <a href="{% url 'settings' request.user.id %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
 
         </div>
@@ -39,6 +39,18 @@
 
 
 <main>
-
+    <form method="post">
+        {% csrf_token %}
+        <!-- {{ form.as_p }} -->
+        {% for field in form %}
+        {% if field.name != "password" %}
+        <div class="field-with-label">
+            <div>{{field.label}}</div>
+            <div>{{field}}</div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        <button>Надіслати</button>
+    </form>
 </main>
 {% endblock %}

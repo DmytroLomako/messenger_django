@@ -20,15 +20,25 @@ class MyPublicationsView(CreateView):
         #     return redirect(reverse_lazy("my_publications"))
 
         files = self.request.FILES.getlist('images')    
-        if self.request.POST.get("post") != None:
 
-            for file in files:
-                Images.objects.create(post=post, image=file)
-            post.save()
-            return super().form_valid(form)
-        else:
-            print(post.id)
-            return super().form_valid(form)
+
+        for file in files:
+            Images.objects.create(post=post, image=file)
+        post.save()
+        print(",kmegewoirko")
+        return super().form_valid(form)
+        
+
+    def post(self, request, *args, **kwargs):
+        if request.POST.get("create") == None:
+            print(request.POST.get("post_id"))      
+            post_now = User_Post.objects.get(id = int(request.POST.get("post_id")))
+            post_now.title = request.POST.get("title")
+            post_now.subject = request.POST.get("subject")
+            post_now.text = request.POST.get("text")
+            post_now.article_link = request.POST.get("link")
+            post_now.save()
+        return super().post(request, *args, **kwargs)
 
     
     def get_context_data(self, **kwargs):

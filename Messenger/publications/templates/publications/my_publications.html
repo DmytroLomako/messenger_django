@@ -45,7 +45,7 @@
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
                 <div class="names">
                     <p class="nickname">{{ request.user.username }}</p>
-                    <p class="username">@{{ request.user.username }}123</p>
+                    <p class="username">@{{ request.user.last_name }}</p>
                 </div>
             </div>
             <div class="stats">
@@ -152,7 +152,7 @@
         </div>
         {% for post in all_posts %}
         {% if post.user == user %}
-        <div class="post" id="post{{post.id}}">
+        <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
                 <img src="{% static 'images/avatar.png' %}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
@@ -162,6 +162,7 @@
                 <div class="dotsDiv">
                     <form method="post">
                         {% csrf_token %}
+
                         <button type="button"><img src="{% static 'images/dots_menu.png' %}" class="dots"
                                 id="{{post.pk}}"></button>
                         <button class="edit" id="{{post.pk}}" type="button"><img class="minilogo"
@@ -214,7 +215,7 @@
 
         <div class="background-blur">
             <form method="post" class="publication-creation" enctype="multipart/form-data">
-                <input class="hidden" name="post" value="post">
+                <input class="hidden" name="create" value="post">
                 {% csrf_token %}
                 <button id="cancel-bg-blur">x</button>
                 <p class="NameTitle">Створення публікації</p>
@@ -280,13 +281,14 @@
 
             <form method="post" class="publication-redact" enctype="multipart/form-data">
                 {% csrf_token %}
+                <input type="hidden" class="postPkInput" name="post_id" value="">
                 <button id="cancel-bg-blur-redact">x</button>
                 <p class="NameTitle">Редагування публікації</p>
 
                 {% for field in form %}
 
                 {% if field.name == "tags" %}
-                <div class="showTagsBtn">
+                <!-- <div class="showTagsBtn">
                     <button type="button" name="add-tag" id="add-tag-btn"></button>
                     <div class="hidden">
                         {{field.label_tag}}
@@ -303,8 +305,8 @@
                         </label>
 
                     </div>
-                </div>
-
+                </div> -->
+                <p></p>
 
 
                 {% elif field.name == "images" %}
@@ -329,24 +331,27 @@
                 {% elif field.name == "title" %}
                 <div class="input-div">
                     <div class="label">Назва публікації</div>
-                    <div class="field"><input class="title" type="text" placeholder="Напишить назву публікації"></div>
+                    <div class="field"><input class="title" name="title" type="text"
+                            placeholder="Напишить назву публікації"></div>
                 </div>
 
                 {% elif field.name == "subject" %}
                 <div class="input-div">
                     <div class="label">Тема публікації</div>
-                    <div class="field"><input class="subject" type="text" placeholder="Напишить тему публікації"></div>
+                    <div class="field"><input class="subject" type="text" name="subject"
+                            placeholder="Напишить тему публікації"></div>
                 </div>
 
                 {% elif field.name == "text" %}
                 <div class="input-div">
-                    <div class="field"><textarea type="text" class="textField"
+                    <div class="field"><textarea type="text" name="text" class="textField"
                             placeholder="Напишить текст публікації"></textarea></div>
                 </div>
                 {% elif field.name == "article_link" %}
                 <div class="input-div">
                     <label class="label">Посилання</label>
-                    <div class="field"><input class="link" type="text" placeholder="Додайте посилання до публікації">
+                    <div class="field"><input class="link" name="link" type="text"
+                            placeholder="Додайте посилання до публікації">
                     </div>
                 </div>
 

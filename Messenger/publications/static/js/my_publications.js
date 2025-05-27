@@ -15,7 +15,7 @@ let editBtns = document.querySelectorAll(".edit")
 let deleteBtns = document.querySelectorAll(".delete")
 let blurRedact = document.querySelector(".background-blur-redact")
 let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
-
+let postPkInput = document.querySelector(".postPkInput")
 
 let listFiles = []
 
@@ -168,6 +168,7 @@ editBtns.forEach(element => {
     element.addEventListener("click", () => {
         console.log("feadweg")
         blurRedact.style.display = "flex"
+        postPkInput.value = element.id
         $.ajax({
             url: `/publications/redact/${element.id}/`,
             type: 'POST',
