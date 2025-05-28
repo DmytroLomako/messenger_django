@@ -16,6 +16,8 @@ let deleteBtns = document.querySelectorAll(".delete")
 let blurRedact = document.querySelector(".background-blur-redact")
 let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 let postPkInput = document.querySelector(".postPkInput")
+let tagsHidden = document.querySelector("#tagsHidden")
+tagsHidden.style.display = "none"
 
 let listFiles = []
 
@@ -84,6 +86,7 @@ allTags.forEach((element) => {
     }
 })
 
+
 console.log(finalAllTags)
 if (buttonSend) {
     buttonSend.addEventListener('click', function () {
@@ -100,12 +103,15 @@ cancelBgBlur.addEventListener('click', function () {
 
 if (addTag) {
     addTag.addEventListener("click", () => {
+        console.log(":wgbemweorpim")
+        tagsHidden.style.display = tagsField.style.display === "block" ? "none" : "block";
         tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
     })
 }
 
 selectTags.addEventListener("change", (event) => {
+    console.log("l,kphwrm")
     divAddTags.textContent = ''
     selectTags.querySelectorAll('option').forEach((option) => {
         if (option.selected) {

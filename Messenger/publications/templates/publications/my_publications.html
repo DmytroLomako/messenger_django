@@ -228,7 +228,7 @@
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
-                    <div id="field">{{ field }}</div>
+                    <div>{{ field }}</div>
                     <div class="divAddTags">
 
                         <div class="beforeBtton">
@@ -288,12 +288,12 @@
                 {% for field in form %}
 
                 {% if field.name == "tags" %}
-                <!-- <div class="showTagsBtn">
+                <div class="showTagsBtn">
                     <button type="button" name="add-tag" id="add-tag-btn"></button>
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
-                    <div id="field">{{ field }}</div>
+                    <div id="tagsHidden">{{ field }}</div>
                     <div class="divAddTags">
 
                         <div class="beforeBtton">
@@ -305,8 +305,8 @@
                         </label>
 
                     </div>
-                </div> -->
-                <p></p>
+                </div>
+
 
 
                 {% elif field.name == "images" %}
