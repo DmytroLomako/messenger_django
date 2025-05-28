@@ -8,6 +8,7 @@ let addTag = document.getElementById("add-tag-btn")
 let tagsField = document.getElementById("field")
 let selectTags = document.getElementById("id_tags")
 let divAddTags = document.querySelector(".beforeBtton")
+let divAddTagsRedact = document.querySelector(".beforeBttonRedact")
 let imagesDiv = document.querySelector(".for-images")
 let imageInput = document.querySelector('.image-input')
 let dotsMenu = document.querySelectorAll(".dotsDiv")
@@ -16,8 +17,11 @@ let deleteBtns = document.querySelectorAll(".delete")
 let blurRedact = document.querySelector(".background-blur-redact")
 let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 let postPkInput = document.querySelector(".postPkInput")
-let tagsHidden = document.querySelector("#tagsHidden")
-tagsHidden.style.display = "none"
+
+let selectRedact = document.querySelectorAll("#tagsHiddenRedact select option")
+let addTagBtnRedact = document.getElementById("add-tag-btn-redact")
+let tagsHiddenRedact = document.getElementById("tagsHiddenRedact")
+let tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select")
 
 let listFiles = []
 
@@ -104,8 +108,15 @@ cancelBgBlur.addEventListener('click', function () {
 if (addTag) {
     addTag.addEventListener("click", () => {
         console.log(":wgbemweorpim")
-        tagsHidden.style.display = tagsField.style.display === "block" ? "none" : "block";
         tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
+        let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
+    })
+}
+
+if (addTagBtnRedact) {
+    addTagBtnRedact.addEventListener("click", () => {
+        console.log(":wgbemweorpim")
+        tagsHiddenRedact.style.display = tagsHiddenRedact.style.display === "block" ? "none" : "block";
         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
     })
 }
@@ -125,6 +136,23 @@ selectTags.addEventListener("change", (event) => {
         }
     })
 })
+
+tagsHiddenRedact.addEventListener("change", (event) => {
+    console.log("l,kphwrm")
+    divAddTagsRedact.textContent = ''
+    tagsHiddenRedact.querySelectorAll('option').forEach((option) => {
+        if (option.selected) {
+            let hashTagElement = document.createElement("div")
+            let hashTagText = document.createElement("p")
+            hashTagElement.classList.add("hashTag")
+            hashTagText.classList.add("hashTagText")
+            hashTagText.textContent = finalAllTags[option.value - 1]
+            hashTagElement.appendChild(hashTagText)
+            divAddTagsRedact.appendChild(hashTagElement)
+        }
+    })
+})
+
 
 let likeButtons = document.querySelectorAll('.like-button')
 likeButtons.forEach((button) => {
@@ -189,6 +217,29 @@ editBtns.forEach(element => {
                 document.querySelector(".subject").value = post["subject"]
                 document.querySelector(".textField").textContent = post["text"]
                 document.querySelector(".link").value = post["article_link"]
+
+                let tagsFromPost = post["tags"]
+
+                tagsFromPost.forEach(element => {
+                    if (selectRedact[element - 1]) {
+                        selectRedact[element - 1].selected = true;
+                    }
+                })
+
+                selectRedact.forEach((option) => {
+                    if (option.selected) {
+                        let hashTagElement = document.createElement("div")
+                        let hashTagText = document.createElement("p")
+                        hashTagElement.classList.add("hashTag")
+                        hashTagText.classList.add("hashTagText")
+                        hashTagText.textContent = finalAllTags[option.value - 1]
+                        hashTagElement.appendChild(hashTagText)
+                        divAddTagsRedact.appendChild(hashTagElement)
+                    }
+                })
+
+
+
             }
         })
     })
@@ -208,4 +259,6 @@ sendBtnModal.addEventListener("click", function () {
         }
     });
     imageInput.files = dataTransfer.files;
+    document.getElementsByClassName("tags-list").value = ""
 })
+

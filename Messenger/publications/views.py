@@ -30,13 +30,13 @@ class MyPublicationsView(CreateView):
         
 
     def post(self, request, *args, **kwargs):
-        if request.POST.get("create") == None:
-            print(request.POST.get("post_id"))      
+        if request.POST.get("create") == None:    
             post_now = User_Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
             post_now.subject = request.POST.get("subject")
             post_now.text = request.POST.get("text")
             post_now.article_link = request.POST.get("link")
+            print(request.POST.get("tags"))
             post_now.save()
         return super().post(request, *args, **kwargs)
 

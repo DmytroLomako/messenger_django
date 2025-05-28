@@ -228,7 +228,7 @@
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
-                    <div>{{ field }}</div>
+                    <div id="field">{{ field }}</div>
                     <div class="divAddTags">
 
                         <div class="beforeBtton">
@@ -289,18 +289,19 @@
 
                 {% if field.name == "tags" %}
                 <div class="showTagsBtn">
-                    <button type="button" name="add-tag" id="add-tag-btn"></button>
+                    <button type="button" name="add-tag" id="add-tag-btn-redact"></button>
+                    <input type="hidden" value="" name="tags-list" class="tags-list">
                     <div class="hidden">
                         {{field.label_tag}}
                     </div>
-                    <div id="tagsHidden">{{ field }}</div>
+                    <div id="tagsHiddenRedact">{{ field }}</div>
                     <div class="divAddTags">
 
-                        <div class="beforeBtton">
+                        <div class="beforeBttonRedact">
 
                         </div>
 
-                        <label for="add-tag-btn" class="image-input-label">
+                        <label for="add-tag-btn-redact" class="image-input-label">
                             <img src="{% static 'images/add_tag.png' %}" class="imageTags">
                         </label>
 
@@ -354,6 +355,7 @@
                             placeholder="Додайте посилання до публікації">
                     </div>
                 </div>
+
 
                 {% endif %}
                 {% endfor %}

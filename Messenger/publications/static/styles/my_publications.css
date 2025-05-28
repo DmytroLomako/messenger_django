@@ -908,6 +908,10 @@ input {
     color: #543C52;
 }
 
+#tagsHiddenRedact {
+    display: none;
+}
+
 input {
     width: 18.01vw;
     height: 4.41vh;
@@ -918,6 +922,11 @@ input {
 
 
 .beforeBtton {
+    display: flex;
+    gap: 0.52vw;
+}
+
+.beforeBttonRedact {
     display: flex;
     gap: 0.52vw;
 }
