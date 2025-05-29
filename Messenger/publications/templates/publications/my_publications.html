@@ -290,8 +290,8 @@
                 {% if field.name == "tags" %}
                 <div class="showTagsBtn">
                     <button type="button" name="add-tag" id="add-tag-btn-redact"></button>
-                    <input type="hidden" value="" name="tags-list" class="tags-list">
                     <div class="hidden">
+                        <input name="tags-list" class="tags-list">
                         {{field.label_tag}}
                     </div>
                     <div id="tagsHiddenRedact">{{ field }}</div>
@@ -304,7 +304,6 @@
                         <label for="add-tag-btn-redact" class="image-input-label">
                             <img src="{% static 'images/add_tag.png' %}" class="imageTags">
                         </label>
-
                     </div>
                 </div>
 

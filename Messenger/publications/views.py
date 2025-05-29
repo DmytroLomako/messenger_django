@@ -36,7 +36,8 @@ class MyPublicationsView(CreateView):
             post_now.subject = request.POST.get("subject")
             post_now.text = request.POST.get("text")
             post_now.article_link = request.POST.get("link")
-            print(request.POST.get("tags"))
+            print(request.POST.get("tags-list").split(","))
+            post_now.tags.set(request.POST.get("tags-list").split(","))
             post_now.save()
         return super().post(request, *args, **kwargs)
 
