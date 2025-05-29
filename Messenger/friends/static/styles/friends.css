@@ -1,0 +1,311 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+    font-weight: 500;
+    font-size: 0.84vw;
+    color: #070A1C;
+    letter-spacing: -1%;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: MainFont;
+    src: url("/media/fonts/font.ttf");
+}
+
+@font-face {
+    font-family: MainFontMedium;
+    src: url("/media/fonts/fontMedium.ttf");
+}
+
+body {
+    background-color: #FAF8FF;
+    overflow-y: scroll;
+}
+
+
+header {
+    height: 7%;
+    width: 100vw;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16vw;
+
+    margin-bottom: 3vh;
+}
+
+header .logo {
+    height: 2vh;
+}
+
+header .tabsExit {
+    display: flex;
+    align-items: center;
+    gap: 1.78vw;
+}
+
+header .tabsExit .exit {
+    width: 5vw;
+    height: 4.20vh;
+
+    background-color: white;
+    border-radius: 1234px;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    gap: 0.42vw;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+header .tabsExit .exit img {
+    width: 1.05vw;
+    height: 2.1vh;
+}
+
+header .tabsExit .tabs {
+    display: flex;
+    align-items: center;
+    gap: 1.47vw;
+}
+
+header .tabsExit .tabs .tab {
+    display: flex;
+    align-items: center;
+    gap: 0.47vw;
+}
+
+header .tabsExit .tabs .tab img {
+    display: flex;
+    align-items: center;
+    width: 1.05vw;
+}
+
+header a {
+    text-decoration: none;
+}
+
+.main-div{
+    display: flex;
+}
+
+.menu-friends{
+    display: flex;
+    flex-direction: column;
+    width: 254px;
+    height: 152px;
+    margin-left: 80px;
+    gap: 16px;
+}
+
+.menu-urls{
+    text-decoration: none;
+}
+
+#MainText{
+    font-weight: 700;
+}
+
+#Requests{
+    color: #81818D;
+}
+
+#Recomendations{
+    color: #81818D;
+}
+
+#AllFriends{
+    color: #81818D;
+}
+
+.all-menu-friends-div{
+    display: flex;
+    flex-direction: column;
+    width: 923px;
+    height: 1545px;
+    margin-left: 437px;
+    gap: 8px;
+}
+
+.requests-friends{
+    display: flex;
+    flex-direction: column;
+    width: 923px;
+    height: 329px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.requests-friends-header{
+    display: flex;
+    width: 883px;
+    height: 18px;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-top: 16px;
+}
+
+.see-all-urls{
+    text-decoration: none;
+    color: #543C52;
+}
+
+.requests-friends-div{
+    display: flex;
+    width: 586px;
+    height: 263px;
+    gap: 8px;
+    margin-left: 20px;
+    margin-top: 16px;
+}
+
+.recommendations-friends{
+    display: flex;
+    flex-direction: column;
+    width: 923px;
+    height: 600px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.recommendations-friends-div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 883px;
+    height: 534px;
+    gap: 8px;
+    margin-left: 20px;
+    margin-top: 16px;
+}
+
+.all-friends{
+    display: flex;
+    flex-direction: column;
+    width: 923px;
+    height: 600px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.all-friends-div{
+    display: flex;
+    flex-wrap: wrap;
+    width: 883px;
+    height: 534px;
+    gap: 8px;
+    margin-left: 20px;
+    margin-top: 16px;
+}
+
+.friend-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 289px;
+    height: 263px;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+    gap: 16px;
+}
+
+.avatar-nickname-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 289px;
+    height: 175px;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.avatar-images{
+    width: 96px;
+    height: 96px;
+}
+
+.nickname-name{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 289px;
+    height: 55px;
+    gap: 10px;
+}
+
+.nickname-text{
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.buttons-div-requests{
+    display: flex;
+    justify-content: space-between;
+    width: 221px;
+    height: 40px;
+    gap: 16px;
+}
+
+.buttons-div-recommendations{
+    display: flex;
+    justify-content: space-between;
+    width: 189px;
+    height: 40px;
+    gap: 16px;
+}
+
+.buttons-div-all-friends{
+    display: flex;
+    justify-content: space-between;
+    width: 233px;
+    height: 40px;
+    gap: 16px;
+}
+
+.accept-button{
+    width: 111px;
+    height: 40px;
+    border-radius: 1324px;
+    gap: 8px;
+    background-color: #543C52;
+    border: 0;
+    color: white;
+    font-size: 14px;
+}
+
+.delete-button{
+    width: 94px;
+    height: 40px;
+    border-radius: 1324px;
+    gap: 8px;
+    background-color: white;
+    border: 1px solid #543C52;
+    color: #543C52;
+}
+
+.add-button{
+    width: 79px;
+    height: 40px;
+    border-radius: 1324px;
+    gap: 8px;
+    background-color: #543C52;
+    border: 0;
+    color: white;
+    font-size: 14px;
+}
+
+.message-button{
+    width: 123px;
+    height: 40px;
+    border-radius: 1324px;
+    gap: 8px;
+    background-color: #543C52;
+    border: 0;
+    color: white;
+    font-size: 14px;
+}
