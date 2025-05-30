@@ -39,6 +39,16 @@
 
 
 <main>
+    <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% if request.user.profile.photo %}
+            <img src="{{ request.user.profile.photo.url }}" style="width: 200px;" alt="">
+        {% else %}
+            <img src="{% static 'images/avatar.png' %}" alt="">
+        {% endif %}
+        <input type="file" name="photo">
+        <button>Редагувати</button>
+    </form>
     <form method="post">
         {% csrf_token %}
         <!-- {{ form.as_p }} -->

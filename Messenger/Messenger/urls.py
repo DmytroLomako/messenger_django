@@ -32,7 +32,8 @@ urlpatterns = [
     path('', MainView.as_view(), name= "main"),
     path("create_tag/", CreateTagView.as_view(), name= "create_tag"),
     path("publications/", include("publications.urls")),
-    path("settings/?P<pk>\d+", UserUpdateView.as_view(), name= "settings")
+    path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),
+    path("settings/", include("settings_app.urls"))
 ]
 
 
