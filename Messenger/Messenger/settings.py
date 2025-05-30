@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     "create_tag",
     "publications",
     "settings_app",
-    "friends"
+    "friends",
+    "options"
 ]
 
 MIDDLEWARE = [

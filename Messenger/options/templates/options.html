@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} friends Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/options.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    {% csrf_token %}
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'options' %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+    </div>
+</header>
+
+<main>
+    <div class="main-div">
+        <div class="menu-options">
+            <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
+            <a class="menu-urls" id="Alboms" href="">Альбоми</a>
+        </div>
+        <div class="options-div">
+            <div class="card-profile-div">
+                <div class="card-profile-header">
+                    <p>Картка профілю</p>
+                    <button class="edit-information-btn"><img src="{% static 'images/edit2.png' %}" alt="">Редагувати інформацію</button>
+                </div>
+                <div class="avatar-and-textdiv">
+                    <img src="{% static 'images/avatar13.png' %}" alt="">
+                    <div class="nickname-name">
+                        <p class="nickname-text">Lina Li</p>
+                        <p>@thelili</p>
+                    </div>
+                </div>
+            </div>
+            <div class="personal-information-div">
+                <div class="personal-information-header">
+                    <p>Особиста інформація</p>
+                    <button class="edit-information-btn"><img src="{% static 'images/edit2.png' %}" alt="">Редагувати інформацію</button>
+                </div>
+                <div class="all-inputs-div">
+                    <div class="input-div">
+                        <p>Ім'я</p>
+                        <div class="name-input-div">
+                            <input type="text" placeholder="Lina"><img src="{% static 'images/viewOption.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <p>Прізвище</p>
+                        <div class="name-input-div">
+                            <input type="text" placeholder="Li"><img src="{% static 'images/viewOption.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <p>Дата народження</p>
+                        <div class="name-input-div">
+                            <input type="text" placeholder="15.04.2001"><img src="{% static 'images/notviewOption.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <p>Електронна адреса</p>
+                        <div class="name-input-div">
+                            <input type="text" placeholder="you@example.com"><img src="{% static 'images/notviewOption.png' %}" alt="">
+                        </div>
+                    </div>
+                    <div class="input-div">
+                        <p>Пароль</p>
+                        <div class="password-div">
+                            <input type="text"  placeholder="⁕⁕⁕⁕⁕⁕⁕⁕⁕⁕"><img src="" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="signature-options-div">
+                <div class="signature-options-header">
+                    <p>Варіанти</p>
+                    <button class="edit-information-btn"><img src="{% static 'images/edit2.png' %}" alt="">Редагувати інформацію</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock %}
