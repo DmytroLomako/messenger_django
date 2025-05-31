@@ -23,6 +23,8 @@ from main.views import MainView
 from create_tag.views import CreateTagView
 from publications.views import MyPublicationsView
 from settings_app.views import UserUpdateView
+from friends.views import FriendsView
+from options.views import OptionsView
 
 
 
@@ -31,9 +33,11 @@ urlpatterns = [
     path('authorization/', include("authorization.urls")),
     path('', MainView.as_view(), name= "main"),
     path("create_tag/", CreateTagView.as_view(), name= "create_tag"),
+    path("friends/", FriendsView.as_view(), name= "friends"),
     path("publications/", include("publications.urls")),
     path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),
-    path("settings/", include("settings_app.urls"))
+    path("settings/", include("settings_app.urls")),
+    path("options/", OptionsView.as_view(), name= "options")
 ]
 
 

@@ -1,0 +1,243 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} friends Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/friends.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    {% csrf_token %}
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'options' %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+<main>
+    <div class="main-div">
+        <div class="menu-friends">
+            <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Головна</u></a>
+            <a class="menu-urls" id="Requests" href="">Запити</a>
+            <a class="menu-urls" id="Recomendations" href="">Рекомендації</a>
+            <a class="menu-urls" id="AllFriends" href="">Всі друзі</a>
+        </div>
+        <div class="all-menu-friends-div">
+            <div class="requests-friends">
+                <div class="requests-friends-header">
+                    <p>Запити</p>
+                    <a class="see-all-urls" href="">Дивитись всі</a>
+                </div>
+                <div class="requests-friends-div">
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-requests">
+                            <button class="accept-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar6.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Ann Ann</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-requests">
+                            <button class="accept-button">Підтвердити</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="recommendations-friends">
+                <div class="requests-friends-header">
+                    <p>Рекомендації</p>
+                    <a class="see-all-urls" href="">Дивитись всі</a>
+                </div>
+                <div class="recommendations-friends-div">
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar4.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button">Додати</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar12.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button">Додати</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar11.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button">Додати</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button">Додати</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button">Додати</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="all-friends">
+                <div class="requests-friends-header">
+                    <p>Всі друзі</p>
+                    <a class="see-all-urls" href="">Дивитись всі</a>
+                </div>
+                <div class="all-friends-div">
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar8.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar9.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            <div class="nickname-name">
+                                <p class="nickname-text">Yehor Aung</p>
+                                <p>@thelili</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
