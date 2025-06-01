@@ -310,15 +310,15 @@
 
 
                 {% elif field.name == "images" %}
-                <div class="for-images">
+                <div class="for-images-redact">
 
                 </div>
                 <div class="post-div">
                     <div class="hidden">
                         {{field.label_tag}}
+                        <input type="file" accept="image/png, image/jpeg" name="images" class="image-input-redact"
+                            id="image-input-id" multiple>
                     </div>
-                    <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
-                        id="image-input-id" multiple>
                     <div class="divSubmit">
                         <label for="image-input-id" class="image-input-label">
                             <img src="{% static 'images/add_image.png' %}" class="image">

@@ -11,6 +11,8 @@ let divAddTags = document.querySelector(".beforeBtton")
 let divAddTagsRedact = document.querySelector(".beforeBttonRedact")
 let imagesDiv = document.querySelector(".for-images")
 let imageInput = document.querySelector('.image-input')
+let imagesDivRedact = document.querySelector(".for-images-redact")
+let imageInputRedact = document.querySelector('.image-input-redact')
 let dotsMenu = document.querySelectorAll(".dotsDiv")
 let editBtns = document.querySelectorAll(".edit")
 let deleteBtns = document.querySelectorAll(".delete")
@@ -22,6 +24,8 @@ let selectRedact = document.querySelectorAll("#tagsHiddenRedact select option")
 let addTagBtnRedact = document.getElementById("add-tag-btn-redact")
 let tagsHiddenRedact = document.getElementById("tagsHiddenRedact")
 let tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select")
+
+let imagesPost = document.querySelector(".postImage1")
 
 let listFiles = []
 
@@ -187,6 +191,29 @@ deleteBtns.forEach((button) => {
 editBtns.forEach(element => {
     element.addEventListener("click", () => {
         console.log("feadweg")
+        imagesDiv.innerHTML = ''
+        listFiles = []
+        console.log(imagesPost)
+        for (let count = 0; count < imageInput.files.length; count++) {
+            console.log(imageInput.files[count])
+            let file = imageInput.files[count]
+            let divImage = document.createElement("div")
+            divImage.classList.add("divImageDelete")
+            let createImage = document.createElement("img")
+            let deleteBtn = document.createElement("img")
+            deleteBtn.src = "/static/images/delete.png"
+            deleteBtn.classList.add("deleteBtn")
+            deleteBtn.id = "delete" + count
+            divImage.id = count
+            listFiles.push(imageInput.files[count])
+            createImage.id = "imageForPost"
+            if (file) {
+                createImage.setAttribute('src', URL.createObjectURL(file));
+                divImage.appendChild(createImage)
+                divImage.appendChild(deleteBtn)
+                imagesDiv.appendChild(divImage)
+            }
+        }
         blurRedact.style.display = "flex"
         postPkInput.value = element.id
         $.ajax({
@@ -224,6 +251,7 @@ editBtns.forEach(element => {
                     list_tags.push(element.value)
                 });
 
+                document.querySelector(".tags-list").value = `${list_tags}`
 
                 selectRedact.forEach((option) => {
                     if (option.selected) {
@@ -282,7 +310,6 @@ cancelBgBlurRedact.addEventListener('click', () => {
 let sendBtnModal = document.querySelector(".sendBtnModal")
 
 sendBtnModal.addEventListener("click", function (event) {
-    event.preventDefault()
     console.log(listFiles)
     const dataTransfer = new DataTransfer();
     listFiles.forEach((file) => {
