@@ -39,18 +39,74 @@
 
 
 <main>
-    <form method="post">
-        {% csrf_token %}
-        <!-- {{ form.as_p }} -->
-        {% for field in form %}
-        {% if field.name != "password" %}
-        <div class="field-with-label">
-            <div>{{field.label}}</div>
-            <div>{{field}}</div>
+
+    <main>
+        <div class="main-div">
+            <div class="menu-options">
+                <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
+                <a class="menu-urls" id="Alboms" href="">Альбоми</a>
+            </div>
+            <div class="options-div">
+                <div class="card-profile-div">
+                    <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data"
+                        class="avatar-and-textdiv">
+                        <div class="card-profile-header">
+                            <p>Картка профілю</p>
+                            <button class="edit-information-btn-header"><img class="editImg"
+                                    src="{% static 'images/edit2.png' %}" alt="">Редагувати інформацію</button>
+                        </div>
+                        {% csrf_token %}
+                        {% if request.user.profile.photo %}
+                        <div class="avatarDiv">
+                            <label for="imageInput">
+                                <img src="{{ request.user.profile.photo.url }}" alt="">
+                            </label>
+                        </div>
+                        {% else %}
+                        <img src="{% static 'images/avatar.png' %}" alt="">
+                        {% endif %}
+                        <input type="button" name="photo" class="hidden" id="imageInput">
+                        <div class="nickname-name">
+                            <p class="nickname-text">Lina Li</p>
+                            <p>@thelili</p>
+                        </div>
+                    </form>
+                    <!-- <img src="{% static 'images/avatar13.png' %}" alt="">
+                        <div class="nickname-name">
+                            <p class="nickname-text">Lina Li</p>
+                            <p>@thelili</p>
+                        </div> -->
+                </div>
+                <div class="personal-information-div">
+                    <form method="post">
+                        <div class="personal-information-header">
+                            <p>Особиста інформація</p>
+                            <button class="edit-information-btn-main redact"><img class="editImg"
+                                    src="{% static 'images/edit2.png' %}" alt="" type="button">Редагувати
+                                інформацію</button>
+                        </div>
+                        <div class="all-inputs-div">
+                            {% csrf_token %}
+                            {% for field in form %}
+                            {% if field.name != "password" %}
+                            <div class="input-div">
+                                <p>{{field.label}}</p>
+                                <div class="name-input-div">{{field}}</div>
+                            </div>
+                            {% endif %}
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+                <div class="signature-options-div">
+                    <div class="signature-options-header">
+                        <p>Варіанти</p>
+                        <button class="edit-information-btn"><img class="editImg" src="{% static 'images/edit2.png' %}"
+                                alt="">Редагувати інформацію</button>
+                    </div>
+                </div>
+            </div>
         </div>
-        {% endif %}
-        {% endfor %}
-        <button>Надіслати</button>
-    </form>
+    </main>
 </main>
 {% endblock %}

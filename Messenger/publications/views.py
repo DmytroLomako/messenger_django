@@ -5,7 +5,9 @@ from django.shortcuts import redirect, render
 from .forms import CreatePostForm
 from django.http import JsonResponse
 from django.core import serializers
+from authorization.models import UserProfile
 import json
+
 
 class MyPublicationsView(CreateView):
     template_name = "publications/my_publications.html"
@@ -45,6 +47,7 @@ class MyPublicationsView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['all_posts'] = User_Post.objects.all()
+        context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
         return context
 
     
