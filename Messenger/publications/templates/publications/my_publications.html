@@ -156,7 +156,7 @@
         {% if post.user == user %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
-                <img src="{% static 'images/avatar.png' %}" class="avatar">
+                <img src="{{post.user.profile.photo.url}}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
                     <img src="{% static 'images/painting.png' %}" class="painting">

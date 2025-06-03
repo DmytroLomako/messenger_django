@@ -17,3 +17,9 @@ class CreateTagView(CreateView):
         tag.name = f"#{tag.name}"
         tag.save()
         return redirect(reverse_lazy("my_publications"))
+    def dispatch(self, request, *args, **kwargs):
+        print(request.user)
+        if request.user.username:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect("login")

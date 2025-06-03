@@ -27,6 +27,16 @@ class UserUpdateView(UpdateView):
             login(self.request, user)
         return redirect(self.get_success_url())
     
+    def dispatch(self, request, pk,*args, **kwargs):
+        print(request.user)
+        if request.user.username:
+            if request.user.id == pk:
+                return super().dispatch(request, *args, **kwargs)
+            else:
+                return redirect(f"/settings/{request.user.id}")
+        else:
+            return redirect("login")
+
 def save_user_photo(request):
     if request.method == 'POST':
         if request.user.is_authenticated:

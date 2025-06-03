@@ -11,7 +11,6 @@
 {% block content %}
 <header>
     <img src="{% static 'images/logo.png' %}" class="logo">
-    {% csrf_token %}
     <div class="tabsExit">
         <div class="tabs">
             <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
@@ -84,7 +83,27 @@
                     <a class="see-all-urls" href="">Дивитись всі</a>
                 </div>
                 <div class="recommendations-friends-div">
+                    {% for friend in recomended_friends %}
                     <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            {% if friend.profile.photo.url != None %}
+                            <img class="avatar-images" src="{{friend.profile.photo.url}}" alt="">
+                            {% endif %}
+                            <div class="nickname-name">
+                                <p class="nickname-text">{{friend.username}}</p>
+                                <p>@{{friend.last_name}}</p>
+                            </div>
+                        </div>
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="buttons-div-recommendations">
+                                <button class="add-button" name="add" value="{{friend.id}}">Додати</button>
+                                <button class="delete-button" name="delete" value="{{friend.id}}">Видалити</button>
+                            </div>
+                        </form>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="friend-profile">
                         <div class="avatar-nickname-div">
                             <img class="avatar-images" src="{% static 'images/avatar4.png' %}" alt="">
                             <div class="nickname-name">
@@ -148,7 +167,7 @@
                             <button class="add-button">Додати</button>
                             <button class="delete-button">Видалити</button>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="all-friends">

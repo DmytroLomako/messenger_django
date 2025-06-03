@@ -63,12 +63,16 @@
                             </label>
                         </div>
                         {% else %}
-                        <img src="{% static 'images/avatar.png' %}" alt="">
+                        <div class="avatarDiv">
+                            <label for="imageInput">
+                                <img src="{% static 'images/avatar.png' %}" alt="">
+                            </label>
+                        </div>
                         {% endif %}
                         <input type="button" name="photo" class="hidden" id="imageInput">
                         <div class="nickname-name">
-                            <p class="nickname-text">Lina Li</p>
-                            <p>@thelili</p>
+                            <p class="nickname-text">{{user.username}}</p>
+                            <p>@{{user.last_name}}</p>
                         </div>
                     </form>
                     <!-- <img src="{% static 'images/avatar13.png' %}" alt="">

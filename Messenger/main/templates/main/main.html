@@ -13,7 +13,6 @@
 {% block content %}
 <header>
     <img src="{% static 'images/logo.png' %}" class="logo">
-    {% csrf_token %}
     <div class="tabsExit">
         <div class="tabs">
             <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
@@ -25,7 +24,7 @@
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
-            <a href="{% url 'options' %}" class="settings tab"><img
+            <a href="{% url 'settings' user.pk %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
 
         </div>
@@ -42,10 +41,13 @@
     <div class="userInfo">
         <div class="miniProfile">
             <div class="avatarNames">
-                <img src="{% static 'images/avatar.png' %}" class="avatar">
+                {% if user_image.url != None %}
+                <img src="{{ user_image.url }}" class="avatar">
+                {% endif %}
+
                 <div class="names">
                     <p class="nickname">{{ request.user.username }}</p>
-                    <p class="username">@{{ request.user.username }}123</p>
+                    <p class="username">@{{ request.user.last_name }}</p>
                 </div>
             </div>
             <div class="stats">
@@ -151,22 +153,12 @@
 
         </div>
         {% for post in all_posts %}
-        <div class="post" id="post{{post.id}}">
+        <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
-                <img src="{% static 'images/avatar.png' %}" class="avatar">
+                <img src="{{ post.user.profile.photo.url }}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
                     <img src="{% static 'images/painting.png' %}" class="painting">
-                </div>
-                <div class="dotsDiv">
-                    <button><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
-                    <div class="edit"><img class="minilogo" src="{% static 'images/edit.png' %}" alt="">Редагувати пост
-                    </div>
-                    <hr>
-                    <button class="delete" name="delete" value="{% url 'delete' post.pk %}" id="{{post.pk}}">
-                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
-                        Видлалити пост
-                    </button>
                 </div>
             </div>
 
@@ -205,8 +197,10 @@
 
         <div class="background-blur">
             <form method="post" class="publication-creation" enctype="multipart/form-data">
+                <input class="hidden" name="create" value="post">
                 {% csrf_token %}
                 <button id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Створення публікації</p>
 
                 {% for field in form %}
 
@@ -251,6 +245,7 @@
                     </div>
                 </div>
 
+
                 {% else %}
                 <div class="input-div">
                     <div class="label">{{ field.label_tag }}</div>
@@ -261,5 +256,94 @@
                 <a href="{% url 'create_tag' %}">Створити тег</a>
 
             </form>
+
         </div>
+
+        <div class="background-blur-redact">
+
+            <form method="post" class="publication-redact" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" class="postPkInput" name="post_id" value="">
+                <button id="cancel-bg-blur-redact">x</button>
+                <p class="NameTitle">Редагування публікації</p>
+
+                {% for field in form %}
+
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn-redact"></button>
+                    <div class="hidden">
+                        <input name="tags-list" class="tags-list">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="tagsHiddenRedact">{{ field }}</div>
+                    <div class="divAddTags">
+
+                        <div class="beforeBttonRedact">
+
+                        </div>
+
+                        <label for="add-tag-btn-redact" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+                    </div>
+                </div>
+
+
+
+                {% elif field.name == "images" %}
+                <div class="for-images-redact">
+
+                </div>
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                        <input type="file" accept="image/png, image/jpeg" name="images" class="image-input-redact"
+                            id="image-input-id" multiple>
+                    </div>
+                    <div class="divSubmit">
+                        <label for="image-input-id" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+                {% elif field.name == "title" %}
+                <div class="input-div">
+                    <div class="label">Назва публікації</div>
+                    <div class="field"><input class="title" name="title" type="text"
+                            placeholder="Напишить назву публікації"></div>
+                </div>
+
+                {% elif field.name == "subject" %}
+                <div class="input-div">
+                    <div class="label">Тема публікації</div>
+                    <div class="field"><input class="subject" type="text" name="subject"
+                            placeholder="Напишить тему публікації"></div>
+                </div>
+
+                {% elif field.name == "text" %}
+                <div class="input-div">
+                    <div class="field"><textarea type="text" name="text" class="textField"
+                            placeholder="Напишить текст публікації"></textarea></div>
+                </div>
+                {% elif field.name == "article_link" %}
+                <div class="input-div">
+                    <label class="label">Посилання</label>
+                    <div class="field"><input class="link" name="link" type="text"
+                            placeholder="Додайте посилання до публікації">
+                    </div>
+                </div>
+
+
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+
+            </form>
+
+        </div>
+
         {% endblock %}

@@ -8,7 +8,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views import View
 from .forms import *
-from .models import VerificationCode
+from .models import VerificationCode, UserProfile
+
+
 class RegisterView(CreateView):
     form_class = RegistrationForm
     template_name = "authorization/registration/registration.html"
@@ -60,6 +62,8 @@ class VerifyCodeView(View):
             if verification.code == code and verification.is_valid():
                 user.is_active = True
                 user.save()
+                user_profile = UserProfile.objects.create(user_id = user_id)
+                user_profile.save()
                 verification.delete()
                 
                 if 'verification_user_id' in request.session:
@@ -72,6 +76,7 @@ class VerifyCodeView(View):
         except (User.DoesNotExist, VerificationCode.DoesNotExist):
             return render(request, 'authorization/registration/verification_failed.html')
 
+    
 class CustomLoginView(LoginView):
     template_name = "authorization/login/login.html"
     form_class = CustomLoginForm

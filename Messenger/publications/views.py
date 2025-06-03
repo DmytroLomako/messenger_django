@@ -50,6 +50,12 @@ class MyPublicationsView(CreateView):
         context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
         return context
 
+    def dispatch(self, request, *args, **kwargs):
+        print(request.user)
+        if request.user.username:
+            return super().dispatch(request, *args, **kwargs)
+        else:
+            return redirect("login")
     
 def delete(request, post_pk):
     try:
