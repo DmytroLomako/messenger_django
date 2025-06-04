@@ -7,32 +7,42 @@ class UserUpdateForm(forms.ModelForm):
     new_password = forms.CharField(
         widget=forms.PasswordInput(attrs={'readonly': True, "class": "input"}),  
         required=False,
-        label="Password"
+        label="Пароль"
     )
     
     birthday = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'date-field', "readonly": True, "class": "input"}),
         required=False,
-        label="Birthday"
+        label="Дата народження"
+    )
+
+    first_name = forms.CharField(
+        widget=forms.TextInput(attrs={'readonly': True, "class": "input"}),  
+        required=False,
+        label="Ім'я"
+    )
+
+    last_name = forms.CharField(
+        widget=forms.TextInput(attrs={'readonly': True, "class": "input"}),  
+        required=False,
+        label="Призвіще"
     )
     
+    email = forms.CharField(
+        widget=forms.EmailInput(attrs={'readonly': True, "class": "input"}),  
+        required=False,
+        label="Електронна адресса"
+    )
+
     class Meta:
         model = User
-        fields = ["username", 'last_name', 'email']
+        fields = ["first_name", 'last_name', 'email']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
             try:
                 self.fields['birthday'].initial = self.instance.profile.birthday
-                self.fields['username'].widget.attrs['readonly'] = True
-                self.fields['last_name'].widget.attrs['readonly'] = True 
-                self.fields['email'].widget.attrs['readonly'] = True
-                
-                self.fields['birthday'].widget.attrs['class'] = "input"
-                self.fields['username'].widget.attrs['class'] = "input"
-                self.fields['last_name'].widget.attrs['class'] = "input" 
-                self.fields['email'].widget.attrs['class'] = "input"
 
             except UserProfile.DoesNotExist:
                 pass

@@ -46,8 +46,8 @@
                 {% endif %}
 
                 <div class="names">
-                    <p class="nickname">{{ request.user.username }}</p>
-                    <p class="username">@{{ request.user.last_name }}</p>
+                    <p class="nickname">{{ request.user.first_name }} {{request.user.last_name}}</p>
+                    <p class="username">@{{ request.user.username }}</p>
                 </div>
             </div>
             <div class="stats">

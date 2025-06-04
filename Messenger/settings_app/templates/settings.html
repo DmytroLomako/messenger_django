@@ -71,8 +71,8 @@
                         {% endif %}
                         <input type="text" name="photo" class="hidden" id="imageInput" value="photo">
                         <div class="nickname-name">
-                            <p class="nickname-text">{{user.username}}</p>
-                            <p>@{{user.last_name}}</p>
+                            <p class="nickname-text">{{user.first_name}} {{user.last_name}}</p>
+                            <p>@{{user.username}}</p>
                         </div>
                     </form>
                     <!-- <img src="{% static 'images/avatar13.png' %}" alt="">

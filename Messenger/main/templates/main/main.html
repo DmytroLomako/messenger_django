@@ -5,7 +5,7 @@
 {% block title %} Main Page {% endblock %}
 
 {% block link %}
-<link rel="stylesheet" href="{% static 'styles/my_publications.css' %}">
+<link rel="stylesheet" href="{% static 'styles/main.css' %}">
 <script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
 <script src="{% static 'js/main.js' %}" defer></script>
 {% endblock %}
@@ -46,8 +46,8 @@
                 {% endif %}
 
                 <div class="names">
-                    <p class="nickname">{{ request.user.username }}</p>
-                    <p class="username">@{{ request.user.last_name }}</p>
+                    <p class="nickname">{{ request.user.first_name }} {{request.user.last_name}}</p>
+                    <p class="username">@{{ request.user.username }}</p>
                 </div>
             </div>
             <div class="stats">
@@ -151,6 +151,8 @@
 
             </div>
 
+
+
         </div>
         {% for post in all_posts %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
@@ -158,7 +160,7 @@
                 <img src="{{ post.user.profile.photo.url }}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{{user.profile.sign.url}}" class="painting">
+                    <img src="{{post.user.profile.sign.url}}" class="painting">
                 </div>
             </div>
 
@@ -345,4 +347,39 @@
 
         </div>
 
+
+        {% if not user.last_name %}
+        <div class="bgBlur2">
+            <form action="{% url 'add_info' %}" method="post" class="add_info_form">
+                {% csrf_token %}
+                <p class="title">Додай деталі про себе</p>
+                <div class="inputs">
+                    <div class="inputBlock">
+                        <label for="name" class="label">Ім’я</label>
+                        <input required type="text" name="name" class="input" id="name" placeholder="Введіть Ваше ім’я">
+                    </div>
+                    <div class="inputBlock">
+                        <label for="name" class="label">Призвіще</label>
+                        <input required type="text" name="last_name" class="input" id="last_name"
+                            placeholder="Введіть Ваше призвіще">
+                    </div>
+                    <div class="inputBlock">
+                        <label for="name" class="label">Ім’я користувача</label>
+                        <input required type="text" name="username" class="input" id="username" placeholder="@">
+                        <p class="chooseVariant">Або оберіть:&nbsp
+                            <a style="color: #22C55E;" id="anotherVariant">Запропоновані варіанти відповідно до Ім’я та
+                                Прізвища</a>
+                        </p>
+                    </div>
+
+                    <div class="button-shell">
+                        <button type="submit" class="submit">
+                            Продовжити
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        {% endif %}
         {% endblock %}

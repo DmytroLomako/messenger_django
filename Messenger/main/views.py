@@ -6,6 +6,7 @@ from django.views.generic import CreateView
 from publications.forms import CreatePostForm
 from django.urls import reverse_lazy
 from authorization.models import UserProfile
+from django.contrib.auth.models import User
 # Create your views here.
 
 class MainView(CreateView):
@@ -32,3 +33,26 @@ class MainView(CreateView):
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect("login")
+        
+def create_name_surname(request):
+    if request.method == "POST":
+        name = request.POST.get("name")
+        last_name = request.POST.get("last_name")
+        username = request.POST.get("username")
+
+        user_now = User.objects.get(id = request.user.id)
+
+        user_now.first_name = name
+        user_now.last_name = last_name
+        if "@" in username:
+            user_now.username = f"{username}"
+        else:
+            user_now.username = f"@{username}"
+
+        user_now.save()
+
+        print(name, "\n", last_name, "\n", username, "\n")
+
+
+        
+        return redirect("main")

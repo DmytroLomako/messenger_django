@@ -36,6 +36,7 @@ urlpatterns = [
     path("publications/", include("publications.urls")),
     path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),
     path("settings/", include("settings_app.urls")),
+    path("", include("main.urls"))
 ]
 
 

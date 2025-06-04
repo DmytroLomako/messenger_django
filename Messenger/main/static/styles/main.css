@@ -34,7 +34,6 @@ header {
     align-items: center;
     justify-content: center;
     gap: 16vw;
-    padding-left: 5vw;
 
     margin-bottom: 3vh;
 }
@@ -489,8 +488,8 @@ main .postArea .sendDiv .addEmojiBtn {
 }
 
 .imageTags {
-    width: 20px;
-    height: 20px;
+    width: 23px;
+    height: 25px;
 }
 
 
@@ -828,9 +827,28 @@ main .responses .response .mainResponse {
     align-items: center;
 }
 
+.background-blur-redact {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
+label,
+input {
+    display: flex;
+    flex-direction: column;
+    gap: 0.31vw;
+}
+
 .publication-creation {
     width: 40.68vw;
-    height: 91.29vh;
     background-color: white;
     border-radius: 20px;
     display: flex;
@@ -840,11 +858,66 @@ main .responses .response .mainResponse {
     overflow-y: scroll;
 }
 
+.publication-redact {
+    width: 40.68vw;
+    background-color: white;
+    border-radius: 20px;
+    display: flex;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
+    flex-direction: column;
+    gap: 0.84vw;
+    overflow-y: scroll;
+}
+
+.publication-redact input {
+    border: 1px solid #CDCED2;
+}
+
+.publication-redact textarea {
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    padding-left: 0.84vw;
+    padding-top: 1.68vh;
+    width: 35.96vw;
+    height: 13.22vh;
+}
+
+.publication-creation input {
+    border: 1px solid #CDCED2;
+}
+
+.publication-creation textarea {
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    box-sizing: border-box;
+
+    padding-left: 0.84vw;
+    padding-top: 1.68vh;
+    width: 35.96vw;
+    height: 13.22vh;
+}
+
+
+
+
+
+.hashtagText {
+    font-size: 14px;
+    color: #543C52;
+}
+
+#tagsHiddenRedact {
+    display: none;
+}
+
 input {
     width: 18.01vw;
     height: 4.41vh;
     border-radius: 10px;
     border: 1px solid black;
+    padding-left: 0.84vw;
 }
 
 
@@ -853,8 +926,21 @@ input {
     gap: 0.52vw;
 }
 
+.beforeBttonRedact {
+    display: flex;
+    gap: 0.52vw;
+}
+
+.NameTitle {
+    font-size: 34px;
+    margin-bottom: 24px;
+}
+
+.hidden {
+    display: none;
+}
+
 .hashtag {
-    width: 4.78vw;
     height: 2.94vh;
     border-radius: 6px;
     font-weight: 400;
@@ -862,11 +948,24 @@ input {
     color: #543C52;
 
     background-color: #E9E5EE;
-    text-align: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 6px;
+    padding-right: 6px;
 }
 
 #cancel-bg-blur {
+    width: 100%;
+    height: 2.62vh;
+    text-align: end;
+    background-color: white;
+    border: 0;
+    font-size: 0.84vw;
+    cursor: pointer;
+}
+
+#cancel-bg-blur-redact {
     width: 100%;
     height: 2.62vh;
     text-align: end;
@@ -894,8 +993,8 @@ input {
     width: 2.10vw;
     height: 4.20vh;
     position: absolute;
-    right: 10px;
-    top: 10px;
+    right: 0.52vw;
+    top: 1.05vh;
 }
 
 .divImageDelete {
@@ -908,4 +1007,88 @@ input {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+}
+
+.bgBlur2 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_info_form {
+    width: 490px;
+    height: 445px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+    gap: 24px;
+}
+
+.add_info_form .title {
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+}
+
+.input {
+    width: 402px;
+    height: 42px;
+    font-size: 16px;
+    padding-left: 16px;
+}
+
+.label {
+    font-size: 16px;
+}
+
+.chooseVariant {
+    display: flex;
+    font-size: 12px;
+}
+
+.chooseVariant a {
+    display: flex;
+    font-size: 12px;
+}
+
+.button-shell {
+    width: 402px;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.submit {
+    width: 112px;
+    height: 40px;
+    background-color: #543C52;
+    border-radius: 1234px;
+    border: 0;
+    color: white;
+    font-size: 14px;
 }
