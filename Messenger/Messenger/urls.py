@@ -25,6 +25,7 @@ from publications.views import MyPublicationsView
 from settings_app.views import UserUpdateView
 from friends.views import FriendsView
 from options.views import OptionsView
+from chats.views import ChatsView
 
 
 
@@ -36,6 +37,7 @@ urlpatterns = [
     path("friends/", FriendsView.as_view(), name= "friends"),
     path("publications/", include("publications.urls")),
     path("options/", OptionsView.as_view(), name= "options"),
+    path("chats/", ChatsView.as_view(), name= "chats"),
     path("settings/?P<pk>\d+", UserUpdateView.as_view(), name= "settings")
 ]
 

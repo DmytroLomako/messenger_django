@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+    font-weight: 500;
+    font-size: 0.84vw;
+    color: #070A1C;
+    letter-spacing: -1%;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: MainFont;
+    src: url("/media/fonts/font.ttf");
+}
+
+@font-face {
+    font-family: MainFontMedium;
+    src: url("/media/fonts/fontMedium.ttf");
+}
+
+body {
+    background-color: #FAF8FF;
+    overflow-y: scroll;
+}
+
+
+header {
+    height: 7%;
+    width: 100vw;
+    background-color: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16vw;
+
+    margin-bottom: 3vh;
+}
+
+header .logo {
+    height: 2vh;
+}
+
+header .tabsExit {
+    display: flex;
+    align-items: center;
+    gap: 1.78vw;
+}
+
+header .tabsExit .exit {
+    width: 5vw;
+    height: 4.20vh;
+
+    background-color: white;
+    border-radius: 1234px;
+    border: 1px solid black;
+
+    display: flex;
+    align-items: center;
+    gap: 0.42vw;
+    justify-content: center;
+
+    cursor: pointer;
+}
+
+header .tabsExit .exit img {
+    width: 1.05vw;
+    height: 2.1vh;
+}
+
+header .tabsExit .tabs {
+    display: flex;
+    align-items: center;
+    gap: 1.47vw;
+}
+
+header .tabsExit .tabs .tab {
+    display: flex;
+    align-items: center;
+    gap: 0.47vw;
+}
+
+header .tabsExit .tabs .tab img {
+    display: flex;
+    align-items: center;
+    width: 1.05vw;
+}
+
+header a {
+    text-decoration: none;
+}
+
+main{
+    display: flex;
+}
+
+.contacts-and-create-div{
+    display: flex;
+    flex-direction: column;
+    width: 351px;
+    height: 834px;
+    gap: 8px;
+    margin-left: 80px;
+}
+
+.create-chat-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 351px;
+    height: 40px;
+    gap: 8px;
+    border-radius: 1234px;
+    background-color: #543C52;
+    color: white;
+    border: none;
+    font-size: 14px;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 350.87px;
+    height: 811px;
+    gap: 24px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+}
+
+.contacts-header{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 318.87px;
+    height: 23px;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.contacts-header p{
+    font-size: 20px;
+    color: #81818D;
+}
+
+.search{
+    width: 318.87px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+}
+
+.all-contacts{
+    display: flex;
+    flex-direction: column;
+    width: 318.87px;
+    height: 653px;
+    gap: 16px;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    width: 318.87px;
+    height: 46px;
+    gap: 16px;
+}
+
+.profile-text-div{
+    display: flex;
+    align-items: start;
+    width: 260.87px;
+    height: 18px;
+}
+
+.profile-text-div p{
+    font-size: 16px;
+}
+
+.speak-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 564px;
+    height: 833px;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+    margin-left: 9px;
+    background-color: white;
+}
+
+.start-new-messages{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 532px;
+    height: 87px;
+    gap: 24px;
+}
+
+.title-of-div{
+    font-size: 24px;
+}
+
+.choose-contact{
+    text-align: center;
+}
+
+.chat-messages-div{
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    height: 834px;
+    gap: 8px;
+    margin-left: 4.75px;
+    background-color: white;
+}

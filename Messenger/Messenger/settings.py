@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     "publications",
     "settings_app",
     "friends",
-    "options"
+    "options",
+    "chats"
 ]
 
 MIDDLEWARE = [

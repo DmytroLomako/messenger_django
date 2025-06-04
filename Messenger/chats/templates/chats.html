@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Main Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/chats.css' %}">
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    {% csrf_token %}
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'options' %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+<main>
+    <div class="contacts-and-create-div">
+        <button class="create-chat-btn"><img src="{% static 'images/plus.png' %}" alt="">Створити груповий чат</button>
+        <div class="contacts">
+            <div class="contacts-header">
+                <img src="{% static 'images/people.png' %}" alt=""><p>Контакти</p>
+            </div>
+            <input class="search" type="text" placeholder="Пошук">
+            <div class="all-contacts">
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="speak-div">
+        <div class="start-new-messages">
+            <p class="title-of-div">Почніть нове спілкування</p>
+            <p class="choose-contact">Оберіть контакт зі списку ліворуч <br>
+                або створіть групу, щоб почати спілкування</p>
+        </div>
+    </div>
+    <div class="chat-messages-div">
+
+    </div>
+</main>
+{% endblock %}
