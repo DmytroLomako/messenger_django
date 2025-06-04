@@ -322,3 +322,8 @@ sendBtnModal.addEventListener("click", function (event) {
 
 })
 
+
+document.querySelectorAll(".liked img").forEach(element => {
+    console.log(element)
+    element.src = "/static/images/liked.png"
+});

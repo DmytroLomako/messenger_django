@@ -7,7 +7,7 @@
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/my_publications.css' %}">
 <script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
-<script src="{% static 'js/my_publications.js' %}" defer></script>
+<script src="{% static 'js/main.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -158,7 +158,7 @@
                 <img src="{{ post.user.profile.photo.url }}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{% static 'images/painting.png' %}" class="painting">
+                    <img src="{{user.profile.sign.url}}" class="painting">
                 </div>
             </div>
 
@@ -184,9 +184,8 @@
             <div class="postFooter">
                 <div class="likesViews">
                     <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
-                        id="{{ post.id   }}" value="{% url 'likes' post.pk %}"><img
-                            src="{% static 'images/likes.png' %}" class="likesImg"
-                            id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                        id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
+                            class="likesImg" id="like{{post.id}}"><b>{{post.count_likes}}</b>
                         Вподобань</p>
                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
                         Переглядів</p>

@@ -159,7 +159,7 @@
                 <img src="{{post.user.profile.photo.url}}" class="avatar">
                 <p class="text">{{ post.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{% static 'images/painting.png' %}" class="painting">
+                    <img src="{{user.profile.sign.url}}" class="painting">
                 </div>
                 <div class="dotsDiv">
                     <form method="post">

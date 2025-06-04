@@ -333,3 +333,117 @@ button {
 .input {
     border: 1px solid #81818D;
 }
+
+
+.signature-options-div {
+    display: flex;
+    flex-direction: column;
+    width: 924.5px;
+    height: 267px;
+    gap: 16px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+}
+
+.name-and-signature-div {
+    display: flex;
+    flex-direction: column;
+    width: 638px;
+    height: 179px;
+    gap: 24px;
+    margin-left: 16px;
+}
+
+.name-and-surname {
+    display: flex;
+    flex-direction: column;
+    width: 638px;
+    height: 54px;
+    gap: 16px;
+}
+
+.name-and-surname-header {
+    display: flex;
+    width: 160px;
+    height: 20px;
+    gap: 8px;
+}
+
+.name-and-surname-header p {
+    opacity: 50%;
+    color: #543C52;
+}
+
+.name-and-surname-header img {
+    width: 20px;
+    height: 20px;
+    opacity: 50%;
+}
+
+.signature-only-div {
+    display: flex;
+    flex-direction: column;
+    width: 220px;
+    height: 101px;
+    gap: 16px;
+}
+
+.signature-only-div-header {
+    display: flex;
+    width: 210px;
+    height: 20px;
+    gap: 8px;
+}
+
+.signature-only-div-header p {
+    opacity: 50%;
+    color: #543C52;
+}
+
+.signature-only-div-header img {
+    width: 20px;
+    height: 20px;
+    opacity: 50%;
+}
+
+.signature-img-div {
+    display: flex;
+    align-items: center;
+    width: 220px;
+    height: 65px;
+    justify-content: center;
+}
+
+.signature-options-header {
+    display: flex;
+    justify-content: space-between;
+    width: 892.5px;
+    height: 40px;
+    gap: 16px;
+    margin-left: 16px;
+    margin-top: 16px;
+}
+
+.edit-information-btn-sign {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 203px;
+    height: 40px;
+    border-radius: 1900px;
+    gap: 10px;
+    background-color: #FFFFFF;
+    border: 1px solid #543C52;
+    color: #543C52;
+    font-size: 14px;
+}
+
+.edit-information-btn-sign img {
+    width: 20px;
+    height: 20px;
+}
+
+.signImage {
+    width: 132px;
+    height: 51px;
+}

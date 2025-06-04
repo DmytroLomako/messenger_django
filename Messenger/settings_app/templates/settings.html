@@ -69,7 +69,7 @@
                             </label>
                         </div>
                         {% endif %}
-                        <input type="button" name="photo" class="hidden" id="imageInput">
+                        <input type="text" name="photo" class="hidden" id="imageInput" value="photo">
                         <div class="nickname-name">
                             <p class="nickname-text">{{user.username}}</p>
                             <p>@{{user.last_name}}</p>
@@ -102,13 +102,34 @@
                         </div>
                     </form>
                 </div>
-                <div class="signature-options-div">
+                <form class="signature-options-div" action="{% url 'save_sign' %}" method="post"
+                    enctype="multipart/form-data">
+                    {% csrf_token %}
                     <div class="signature-options-header">
-                        <p>Варіанти</p>
-                        <button class="edit-information-btn"><img class="editImg" src="{% static 'images/edit2.png' %}"
+                        <p>Варіанти підпису</p>
+                        <button class="edit-information-btn-sign"><img src="{% static 'images/edit2.png' %}"
                                 alt="">Редагувати інформацію</button>
                     </div>
-                </div>
+                    <div class="name-and-signature-div">
+                        <div class="name-and-surname">
+                            <div class="name-and-surname-header">
+                                <img src="{% static 'images/checkbox.png' %}" alt="">
+                                <p>Ім’я та прізвище</p>
+                            </div>
+                            <p>{{user.username}}</p>
+                        </div>
+                        <div class="signature-only-div">
+                            <div class="signature-only-div-header">
+                                <img src="{% static 'images/checkbox.png' %}" alt="">
+                                <p>Мій електронний підпис</p>
+                            </div>
+                            <label for="signInput" class="signature-img-div">
+                                <img src="{{user.profile.sign.url}}" class="signImage">
+                            </label>
+                            <input type="button" id="signInput" class="hidden" name="sign">
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </main>

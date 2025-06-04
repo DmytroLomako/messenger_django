@@ -9,8 +9,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name= "profile")
     birthday = models.DateField(null=True, blank=True)
     photo = models.ImageField(upload_to='profile_photos/', null=True, blank=True, default="images/standart_user_image.png")
+    sign = models.ImageField(upload_to= "profile_signs/", null=True, blank=True, default="images/standart_sign.png")
     requests = models.ManyToManyField(User, related_name="requests")
     friends = models.ManyToManyField(User, related_name="friends")
+
 
     def __str__(self):
         return f"{self.user.username}"

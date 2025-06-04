@@ -24,7 +24,6 @@ from create_tag.views import CreateTagView
 from publications.views import MyPublicationsView
 from settings_app.views import UserUpdateView
 from friends.views import FriendsView
-from options.views import OptionsView
 
 
 
@@ -37,7 +36,6 @@ urlpatterns = [
     path("publications/", include("publications.urls")),
     path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),
     path("settings/", include("settings_app.urls")),
-    path("options/", OptionsView.as_view(), name= "options")
 ]
 
 

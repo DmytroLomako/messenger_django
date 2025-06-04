@@ -22,7 +22,7 @@
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
-            <a href="{% url 'options' %}" class="settings tab"><img
+            <a href="{% url 'settings' user.pk %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
 
         </div>

@@ -18,9 +18,10 @@ class FriendsView(TemplateView):
 
             print(all_requests)
 
-            if user not in all_requests:
-                profile_now.requests.set(all_requests)
-                profile_now.save()
+        
+
+            profile_now.requests.set(all_requests)
+            profile_now.save()
 
         elif request.POST.get("delete"):
             button = request.POST.get("delete")
@@ -31,15 +32,20 @@ class FriendsView(TemplateView):
 
         context = super().get_context_data(**kwargs)
 
-        recomended_friends = list(reversed(User.objects.all()))[0:6]    
+        recomended_friends = [][0:6]    
         user_object = User.objects.get(username = self.request.user)
+        all_friends = list(User.objects.all())
+        all_friends_requests = list(user_object.profile.requests.all())
+        final_friends = []
+
+        for friend in all_friends:
+            if friend != user_object and friend not in all_friends_requests:
+                final_friends.append(friend)
+                print(friend.profile)
+
 
         if user_object in recomended_friends:
             final_recomended_friends = []
-            for user in recomended_friends:
-                if user != user_object:
-                    final_recomended_friends.append(user)
-                    print(user.profile)
             print(final_recomended_friends)
             context["recomended_friends"] = final_recomended_friends
         else:   

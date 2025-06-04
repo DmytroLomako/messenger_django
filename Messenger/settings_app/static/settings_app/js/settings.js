@@ -6,7 +6,9 @@ const imageInput = document.querySelector("#imageInput")
 const imageInputDiv = document.querySelector(".avatarDiv label img")
 let inputs = document.querySelectorAll(".input")
 const editBtnMain = document.querySelector(".edit-information-btn-main")
-
+const editBtnSign = document.querySelector(".edit-information-btn-sign")
+const forSignImage = document.querySelector(".signImage")
+const signInput = document.querySelector("#signInput")
 
 if (passwordField) {
     const wrapper = document.createElement('div');
@@ -62,5 +64,25 @@ editBtnMain.addEventListener("click", (event) => {
         });
     } else {
         editBtnMain.type = "submit"
+    }
+})
+
+editBtnSign.addEventListener("click", () => {
+    if (editBtnSign.type == "submit") {
+        const signInput = document.querySelector("#signInput")
+        signInput.type = "file"
+        editBtnSign.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
+        editBtnSign.type = "button"
+    } else {
+        const signInput = document.querySelector("#signInput")
+        signInput.type = "file"
+        editBtnSign.type = "submit"
+    }
+})
+
+signInput.addEventListener("change", () => {
+    let file = signInput.files[0]
+    if (file) {
+        forSignImage.setAttribute('src', URL.createObjectURL(file));
     }
 })
