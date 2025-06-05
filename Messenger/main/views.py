@@ -40,14 +40,14 @@ def create_name_surname(request):
         last_name = request.POST.get("last_name")
         username = request.POST.get("username")
 
+        if "@" in username:
+          username = username.split("@")[-1]
+
         user_now = User.objects.get(id = request.user.id)
 
         user_now.first_name = name
         user_now.last_name = last_name
-        if "@" in username:
-            user_now.username = f"{username}"
-        else:
-            user_now.username = f"@{username}"
+        user_now.username = username
 
         user_now.save()
 
