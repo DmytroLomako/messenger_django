@@ -215,5 +215,114 @@ main{
     height: 834px;
     gap: 8px;
     margin-left: 4.75px;
+}
+
+.messages{
+    display: flex;
+    flex-direction: column;
+    width: 351px;
+    height: 389px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
     background-color: white;
+    gap: 24px;
+
+}
+
+.message-header{
+    display: flex;
+    justify-content: space-between;
+    width: 351px;
+    height: 23px;
+    margin-top: 16px;
+    gap: 66px;
+}
+
+.message-header-text{
+    display: flex;
+    width: 160px;
+    height: 23px;
+    gap: 8px;
+    margin-left: 16px;
+}
+
+.message-header-text p{
+    font-size: 20px;
+    color: #81818D;
+}
+
+.see-all{
+    margin-right: 15px;
+    color: #543C52;
+    text-decoration: none;
+}
+
+.profiles-all-div{
+    display: flex;
+    flex-direction: column;
+    width: 351px;
+    height: 310px;
+
+}
+
+.profiles-div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 348px;
+    height: 62px;
+    gap: 16px;
+}
+
+.profles{
+    display: flex;
+    align-items: center;
+    width: 316px;
+    height: 46px;
+    gap: 12px;
+}
+
+.profiles-text{
+    display: flex;
+    flex-direction: column;
+    width: 258px;
+    height: 44px;
+    gap: 4px;
+}
+
+.profiles-text p{
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.header-time-prfl-text{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 258px;
+    height: 18px;
+}
+
+.time-text{
+    font-weight: 400;
+    font-size: 12px;
+    color: #81818D;
+}
+
+.group-chats{
+    display: flex;
+    flex-direction: column;
+    width: 351px;
+    height: 437px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    background-color: white;
+    gap: 24px;
+}
+
+.groups-all-div{
+    display: flex;
+    flex-direction: column;
+    width: 351px;
+    height: 372px;
 }
