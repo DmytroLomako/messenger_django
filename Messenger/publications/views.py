@@ -27,7 +27,6 @@ class MyPublicationsView(CreateView):
         for file in files:
             Images.objects.create(post=post, image=file)
         post.save()
-        print(",kmegewoirko")
         return super().form_valid(form)
         
 
@@ -38,8 +37,12 @@ class MyPublicationsView(CreateView):
             post_now.subject = request.POST.get("subject")
             post_now.text = request.POST.get("text")
             post_now.article_link = request.POST.get("link")
-            print(request.POST.get("tags-list").split(","))
             post_now.tags.set(request.POST.get("tags-list").split(","))
+            post_now.images_set.all().delete()
+            if request.FILES:
+                files = request.FILES.getlist('images')
+                for file in files:
+                    Images.objects.create(post=post_now, image=file)
             post_now.save()
         return super().post(request, *args, **kwargs)
 
@@ -51,7 +54,6 @@ class MyPublicationsView(CreateView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        print(request.user)
         if request.user.username:
             return super().dispatch(request, *args, **kwargs)
         else:
@@ -84,4 +86,7 @@ def likes(request, post_pk):
 def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [User_Post.objects.get(id = post_pk)]
+        images = Images.objects.filter(post = post[0])
+        for image in images:
+            post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)

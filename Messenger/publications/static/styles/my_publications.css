@@ -1003,7 +1003,7 @@ input {
     height: 26.86vh;
 }
 
-.for-images {
+.for-images, .for-images-redact {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
