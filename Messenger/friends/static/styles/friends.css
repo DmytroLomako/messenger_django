@@ -21,7 +21,7 @@
 
 body {
     background-color: #FAF8FF;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -36,6 +36,7 @@ header {
     gap: 16vw;
 
     margin-bottom: 3vh;
+    padding-left: 70px;
 }
 
 header .logo {
@@ -78,7 +79,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
     gap: 0.47vw;
+    height: 26px;
 }
 
 header .tabsExit .tabs .tab img {
@@ -91,40 +95,45 @@ header a {
     text-decoration: none;
 }
 
-.main-div{
+.tab-now {
+    background-color: #E9E5EE;
+}
+
+.main-div {
     display: flex;
 }
 
-.menu-friends{
+.menu-friends {
     display: flex;
     flex-direction: column;
     width: 254px;
     height: 152px;
     margin-left: 80px;
     gap: 16px;
+    margin-right: -55px;
 }
 
-.menu-urls{
+.menu-urls {
     text-decoration: none;
 }
 
-#MainText{
+#MainText {
     font-weight: 700;
 }
 
-#Requests{
+#Requests {
     color: #81818D;
 }
 
-#Recomendations{
+#Recomendations {
     color: #81818D;
 }
 
-#AllFriends{
+#AllFriends {
     color: #81818D;
 }
 
-.all-menu-friends-div{
+.all-menu-friends-div {
     display: flex;
     flex-direction: column;
     width: 923px;
@@ -134,7 +143,7 @@ header a {
     background-color: white;
 }
 
-.requests-friends{
+.requests-friends {
     display: flex;
     flex-direction: column;
     width: 923px;
@@ -143,7 +152,7 @@ header a {
     border-radius: 10px;
 }
 
-.requests-friends-header{
+.requests-friends-header {
     display: flex;
     width: 883px;
     height: 18px;
@@ -152,12 +161,12 @@ header a {
     margin-top: 16px;
 }
 
-.see-all-urls{
+.see-all-urls {
     text-decoration: none;
     color: #543C52;
 }
 
-.requests-friends-div{
+.requests-friends-div {
     display: flex;
     width: 586px;
     height: 263px;
@@ -166,7 +175,7 @@ header a {
     margin-top: 16px;
 }
 
-.recommendations-friends{
+.recommendations-friends {
     display: flex;
     flex-direction: column;
     width: 923px;
@@ -175,7 +184,7 @@ header a {
     border-radius: 10px;
 }
 
-.recommendations-friends-div{
+.recommendations-friends-div {
     display: flex;
     flex-wrap: wrap;
     width: 883px;
@@ -185,7 +194,7 @@ header a {
     margin-top: 16px;
 }
 
-.all-friends{
+.all-friends {
     display: flex;
     flex-direction: column;
     width: 923px;
@@ -194,7 +203,7 @@ header a {
     border-radius: 10px;
 }
 
-.all-friends-div{
+.all-friends-div {
     display: flex;
     flex-wrap: wrap;
     width: 883px;
@@ -204,7 +213,7 @@ header a {
     margin-top: 16px;
 }
 
-.friend-profile{
+.friend-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -215,7 +224,7 @@ header a {
     gap: 16px;
 }
 
-.avatar-nickname-div{
+.avatar-nickname-div {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -225,12 +234,12 @@ header a {
     margin-top: 16px;
 }
 
-.avatar-images{
+.avatar-images {
     width: 96px;
     height: 96px;
 }
 
-.nickname-name{
+.nickname-name {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -239,12 +248,12 @@ header a {
     gap: 10px;
 }
 
-.nickname-text{
+.nickname-text {
     font-weight: 700;
     font-size: 24px;
 }
 
-.buttons-div-requests{
+.buttons-div-requests {
     display: flex;
     justify-content: space-between;
     width: 221px;
@@ -252,7 +261,7 @@ header a {
     gap: 16px;
 }
 
-.buttons-div-recommendations{
+.buttons-div-recommendations {
     display: flex;
     justify-content: space-between;
     width: 189px;
@@ -260,7 +269,7 @@ header a {
     gap: 16px;
 }
 
-.buttons-div-all-friends{
+.buttons-div-all-friends {
     display: flex;
     justify-content: space-between;
     width: 233px;
@@ -268,7 +277,7 @@ header a {
     gap: 16px;
 }
 
-.accept-button{
+.accept-button {
     width: 111px;
     height: 40px;
     border-radius: 1324px;
@@ -279,7 +288,7 @@ header a {
     font-size: 14px;
 }
 
-.delete-button{
+.delete-button {
     width: 94px;
     height: 40px;
     border-radius: 1324px;
@@ -289,7 +298,7 @@ header a {
     color: #543C52;
 }
 
-.add-button{
+.add-button {
     width: 79px;
     height: 40px;
     border-radius: 1324px;
@@ -300,7 +309,7 @@ header a {
     font-size: 14px;
 }
 
-.message-button{
+.message-button {
     width: 123px;
     height: 40px;
     border-radius: 1324px;

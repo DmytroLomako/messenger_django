@@ -36,6 +36,7 @@ header {
     gap: 16vw;
 
     margin-bottom: 3vh;
+    padding-left: 70px;
 }
 
 header .logo {
@@ -78,7 +79,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
     gap: 0.47vw;
+    height: 26px;
 }
 
 header .tabsExit .tabs .tab img {
@@ -141,7 +145,7 @@ main .miniProfile .avatarNames .names {
     flex-direction: column;
 }
 
-main .miniProfile .avatarNames .names .nickname {
+submit main .miniProfile .avatarNames .names .nickname {
     width: 18.27vw;
     height: 5.77vh;
     display: flex;
@@ -208,6 +212,7 @@ main .requests {
     padding-top: 1.89vh;
 
     gap: 1.26vw;
+    opacity: 0;
 }
 
 main .requests .blockName {
@@ -308,10 +313,10 @@ main .messages {
     box-sizing: border-box;
     flex-direction: column;
 
-    padding-left: 0.84vw;
     padding-top: 1.89vh;
 
-    gap: 2.52vh
+    gap: 2.52vh;
+    opacity: 0;
 }
 
 main .messages .blockName {
@@ -322,6 +327,7 @@ main .messages .blockName {
     height: 2.41vh;
 
     width: 16.75vw;
+    margin-left: 0.84vw;
 }
 
 main .messages .blockName .showAll {
@@ -354,16 +360,16 @@ main .messages .users {
 
     display: flex;
     flex-direction: column;
-    gap: 0.84vw;
 }
 
 main .messages .users .user {
 
-    width: 16.75vw;
-    height: 4.83vh;
+    width: 351px;
+    height: 62px;
 
     display: flex;
     gap: 1.26vh;
+    padding-left: 16px;
 }
 
 main .messages .users .user .nameSubscribers {
@@ -1007,4 +1013,100 @@ input {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+}
+
+.bgBlur2 {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add_info_form {
+    width: 490px;
+    height: 445px;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+    gap: 24px;
+}
+
+.add_info_form .title {
+    font-size: 34px;
+    font-weight: 500;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+}
+
+.inputBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+}
+
+.input {
+    width: 402px;
+    height: 42px;
+    font-size: 16px;
+    padding-left: 16px;
+}
+
+.label {
+    font-size: 16px;
+}
+
+.chooseVariant {
+    display: flex;
+    font-size: 12px;
+}
+
+.chooseVariant a {
+    display: flex;
+    font-size: 12px;
+}
+
+.button-shell {
+    width: 402px;
+    height: 40px;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+.submit {
+    width: 112px;
+    height: 40px;
+    background-color: #543C52;
+    border-radius: 1234px;
+    border: 0;
+    color: white;
+    font-size: 14px;
+}
+
+.tab-now {
+    background-color: #E9E5EE;
+}
+
+.tag-input {
+    width: 189px;
+    height: 28px;
+    border: 4px;
+    background-color: white;
+    border: 1px solid #81818D;
 }

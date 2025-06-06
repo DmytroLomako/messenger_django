@@ -18,7 +18,8 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab tab-now"><img
+                    src="{% static 'images/friends.png' %}">Друзі</a>
 
             <a href="{% url 'main' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -103,71 +104,7 @@
                         </form>
                     </div>
                     {% endfor %}
-                    <!-- <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar4.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-recommendations">
-                            <button class="add-button">Додати</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar12.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-recommendations">
-                            <button class="add-button">Додати</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar11.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-recommendations">
-                            <button class="add-button">Додати</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-recommendations">
-                            <button class="add-button">Додати</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-recommendations">
-                            <button class="add-button">Додати</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div> -->
+
                 </div>
             </div>
             <div class="all-friends">

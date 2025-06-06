@@ -21,7 +21,7 @@
 
 body {
     background-color: #FAF8FF;
-    overflow-y: scroll;
+    overflow-y: hidden;
 }
 
 
@@ -36,6 +36,7 @@ header {
     gap: 16vw;
 
     margin-bottom: 3vh;
+    padding-left: 70px;
 }
 
 header .logo {
@@ -78,7 +79,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
     gap: 0.47vw;
+    height: 26px;
 }
 
 header .tabsExit .tabs .tab img {
@@ -91,6 +95,11 @@ header a {
     text-decoration: none;
 }
 
+
+.tab-now {
+    background-color: #E9E5EE;
+}
+
 .main-div {
     display: flex;
 }
@@ -101,6 +110,7 @@ header a {
     width: 254px;
     height: 152px;
     margin-left: 80px;
+    margin-right: -55px;
     gap: 16px;
 }
 
@@ -254,7 +264,7 @@ header a {
     background: url('images/notviewOption.png');
 }
 
-.signature-options-div {
+menu-options .signature-options-div {
     display: flex;
     flex-direction: column;
     width: 924.5px;
@@ -446,4 +456,15 @@ button {
 .signImage {
     width: 132px;
     height: 51px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+    font-weight: 500;
+    font-size: 0.84vw;
+    color: #070A1C;
+    letter-spacing: -1%;
+    box-sizing: border-box;
 }

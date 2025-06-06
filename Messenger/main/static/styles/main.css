@@ -36,6 +36,7 @@ header {
     gap: 16vw;
 
     margin-bottom: 3vh;
+    padding-left: 70px;
 }
 
 header .logo {
@@ -78,7 +79,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
+    padding-left: 8px;
+    padding-right: 8px;
     gap: 0.47vw;
+    height: 26px;
 }
 
 header .tabsExit .tabs .tab img {
@@ -308,7 +312,6 @@ main .messages {
     box-sizing: border-box;
     flex-direction: column;
 
-    padding-left: 0.84vw;
     padding-top: 1.89vh;
 
     gap: 2.52vh
@@ -322,6 +325,7 @@ main .messages .blockName {
     height: 2.41vh;
 
     width: 16.75vw;
+    margin-left: 0.84vw;
 }
 
 main .messages .blockName .showAll {
@@ -354,16 +358,16 @@ main .messages .users {
 
     display: flex;
     flex-direction: column;
-    gap: 0.84vw;
 }
 
 main .messages .users .user {
 
-    width: 16.75vw;
-    height: 4.83vh;
+    width: 351px;
+    height: 62px;
 
     display: flex;
     gap: 1.26vh;
+    padding-left: 16px;
 }
 
 main .messages .users .user .nameSubscribers {
@@ -920,7 +924,6 @@ input {
     padding-left: 0.84vw;
 }
 
-
 .beforeBtton {
     display: flex;
     gap: 0.52vw;
@@ -1091,4 +1094,8 @@ input {
     border: 0;
     color: white;
     font-size: 14px;
+}
+
+.tab-now {
+    background-color: #E9E5EE;
 }

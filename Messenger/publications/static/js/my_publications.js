@@ -1,4 +1,4 @@
-let buttonSend = document.querySelector('.submit')
+let buttonSend = document.querySelector('.submitJs')
 let input = document.querySelector('.areaInput')
 let bgBlur = document.querySelector('.background-blur')
 let cancelBgBlur = document.getElementById('cancel-bg-blur')

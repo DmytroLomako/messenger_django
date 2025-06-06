@@ -85,3 +85,11 @@ def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [User_Post.objects.get(id = post_pk)]
         return JsonResponse(serializers.serialize("json", post), safe=False)
+
+
+def save_tag(request):
+    post_texts = request.POST.get("list_tags")
+    if request.metod == "POST":
+        for post_text in post_texts:
+            post = User_Post.objects.create(name = post_text)
+            post.save()
