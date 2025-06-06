@@ -219,7 +219,7 @@
             <form method="post" class="publication-creation" enctype="multipart/form-data">
                 <input class="hidden" name="create" value="post">
                 {% csrf_token %}
-                <button id="cancel-bg-blur">x</button>
+                <button type="button" id="cancel-bg-blur">x</button>
                 <p class="NameTitle">Створення публікації</p>
 
                 {% for field in form %}
@@ -284,7 +284,7 @@
             <form method="post" class="publication-redact" enctype="multipart/form-data">
                 {% csrf_token %}
                 <input type="hidden" class="postPkInput" name="post_id" value="">
-                <button id="cancel-bg-blur-redact">x</button>
+                <button type="button" id="cancel-bg-blur-redact">x</button>
                 <p class="NameTitle">Редагування публікації</p>
 
                 {% for field in form %}
@@ -319,10 +319,10 @@
                     <div class="hidden">
                         {{field.label_tag}}
                         <input type="file" accept="image/png, image/jpeg" name="images" class="image-input-redact"
-                            id="image-input-id" multiple>
+                            id="image-input-redact-id" multiple>
                     </div>
                     <div class="divSubmit">
-                        <label for="image-input-id" class="image-input-label">
+                        <label for="image-input-redact-id" class="image-input-label">
                             <img src="{% static 'images/add_image.png' %}" class="image">
                         </label>
 
