@@ -24,19 +24,16 @@ body {
     overflow-y: hidden;
 }
 
-
 header {
-    height: 7%;
+    height: 7vh;
     width: 100vw;
     background-color: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16vw;
-
     margin-bottom: 3vh;
-    padding-left: 70px;
+    padding-left: 3.65vw;
 }
 
 header .logo {
@@ -52,22 +49,19 @@ header .tabsExit {
 header .tabsExit .exit {
     width: 5vw;
     height: 4.20vh;
-
     background-color: white;
-    border-radius: 1234px;
+    border-radius: 64.27vw;
     border: 1px solid black;
-
     display: flex;
     align-items: center;
     gap: 0.42vw;
     justify-content: center;
-
     cursor: pointer;
 }
 
 header .tabsExit .exit img {
     width: 1.05vw;
-    height: 2.1vh;
+    height: 2.10vh;
 }
 
 header .tabsExit .tabs {
@@ -79,10 +73,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 0.42vw;
+    padding-right: 0.42vw;
     gap: 0.47vw;
-    height: 26px;
+    height: 2.41vh;
 }
 
 header .tabsExit .tabs .tab img {
@@ -118,7 +112,7 @@ main .miniProfile {
     padding-top: 1.68vh;
     box-sizing: border-box;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 }
 
 main .miniProfile img {
@@ -145,18 +139,16 @@ main .miniProfile .avatarNames .names {
     flex-direction: column;
 }
 
-submit main .miniProfile .avatarNames .names .nickname {
+main .miniProfile .avatarNames .names .nickname {
     width: 18.27vw;
     height: 5.77vh;
     display: flex;
     align-items: center;
     gap: 1.05vh;
     flex-direction: column;
-
     font-size: 1.26vw;
     font-weight: 700;
 }
-
 
 main .miniProfile .stats {
     width: 18.27vw;
@@ -164,7 +156,6 @@ main .miniProfile .stats {
     display: flex;
     align-items: center;
     justify-content: center;
-
     font-size: 1.26vw;
     font-weight: 700;
     margin-top: 0.84vw;
@@ -198,19 +189,15 @@ main .miniProfile .stats .readers {
 main .requests {
     background-color: white;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
-
+    border-radius: 0.52vw;
     width: 18.43vw;
     height: 26.13vh;
-
     display: flex;
     margin-top: 0.84vh;
     box-sizing: border-box;
     flex-direction: column;
-
     padding-left: 0.84vw;
     padding-top: 1.89vh;
-
     gap: 1.26vw;
     opacity: 0;
 }
@@ -221,7 +208,6 @@ main .requests .blockName {
     justify-content: space-between;
     align-items: center;
     height: 2.41vh;
-
     width: 16.75vw;
 }
 
@@ -231,10 +217,8 @@ main .requests .blockName .showAll {
 }
 
 main .requests .blockName .name {
-
     width: 16.75vw;
     height: 2.41vh;
-
     display: flex;
     align-items: center;
     font-size: 1.05vw;
@@ -242,37 +226,29 @@ main .requests .blockName .name {
     gap: 0.42vw;
 }
 
-
-
 main .requests .blockName .name img {
     width: 1.05vw;
     height: 2.10vh;
 }
 
 main .requests .users {
-
     width: 16.75vw;
     height: 17.84vh;
-
     display: flex;
     flex-direction: column;
     gap: 1.68vh;
 }
 
 main .requests .users .user {
-
     width: 16.75vw;
     height: 4.83vh;
-
     display: flex;
     gap: 0.63vw;
 }
 
 main .requests .users .user .nameSubscribers {
-
     width: 13.70vw;
     height: 3.99vh;
-
     display: flex;
     flex-direction: column;
     gap: 0.42vh;
@@ -299,22 +275,17 @@ main .requests .users .user img {
     height: 4.83vh;
 }
 
-
 main .messages {
     background-color: white;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
-
+    border-radius: 0.52vw;
     width: 18.43vw;
     height: 26.13vh;
-
     display: flex;
     margin-top: 0.84vh;
     box-sizing: border-box;
     flex-direction: column;
-
     padding-top: 1.89vh;
-
     gap: 2.52vh;
     opacity: 0;
 }
@@ -325,7 +296,6 @@ main .messages .blockName {
     justify-content: space-between;
     align-items: center;
     height: 2.41vh;
-
     width: 16.75vw;
     margin-left: 0.84vw;
 }
@@ -336,10 +306,8 @@ main .messages .blockName .showAll {
 }
 
 main .messages .blockName .name {
-
     width: 16.75vw;
     height: 2.41vh;
-
     display: flex;
     align-items: center;
     font-size: 1.05vw;
@@ -352,31 +320,24 @@ main .messages .blockName .name img {
     height: 2.10vh;
 }
 
-
 main .messages .users {
-
     width: 16.75vw;
     height: 17.84vh;
-
     display: flex;
     flex-direction: column;
 }
 
 main .messages .users .user {
-
-    width: 351px;
-    height: 62px;
-
+    width: 18.28vw;
+    height: 5.74vh;
     display: flex;
     gap: 1.26vh;
-    padding-left: 16px;
+    padding-left: 0.83vw;
 }
 
 main .messages .users .user .nameSubscribers {
-
     width: 13.70vw;
     height: 3.99vh;
-
     display: flex;
     flex-direction: column;
     gap: 0.42vh;
@@ -409,13 +370,11 @@ main .messages .users .user img {
     height: 4.83vh;
 }
 
-
-
 main .postArea {
     width: 48.45vw;
     background-color: white;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     resize: none;
     padding-left: 0.84vw;
     padding-top: 1.68vh;
@@ -430,18 +389,15 @@ main .postArea input {
     border: 0;
 }
 
-
 main .postArea .sendDiv {
     width: 46.77vw;
     height: 4.20vh;
-
     display: flex;
     align-items: center;
     justify-content: end;
     gap: 1.68vh;
     margin-top: 2.73vh;
 }
-
 
 .imageBtn {
     height: 4.20vh;
@@ -467,43 +423,35 @@ main .postArea .sendDiv .addEmojiBtn {
     display: flex;
     justify-content: end;
     align-items: center;
-
-    gap: 10px;
-
+    gap: 0.52vw;
     width: 100%;
 }
-
 
 .divAddTags {
     display: flex;
     align-items: center;
-
-    gap: 10px;
-
+    gap: 0.52vw;
     width: 100%;
 }
-
 
 .image-input {
     opacity: 0;
     position: absolute;
     cursor: pointer;
-    right: 755px;
-    width: 40px;
-    height: 40px;
+    right: 39.32vw;
+    width: 2.08vw;
+    height: 3.70vh;
 }
 
 .imageTags {
-    width: 23px;
-    height: 25px;
+    width: 1.20vw;
+    height: 2.31vh;
 }
-
 
 .image {
-    width: 40px;
-    height: 40px;
+    width: 2.08vw;
+    height: 3.70vh;
 }
-
 
 .hidden * {
     display: none;
@@ -521,17 +469,15 @@ main .postArea .sendDiv .addEmojiBtn {
     opacity: 0;
     position: absolute;
     cursor: pointer;
-    right: 1285px;
-    width: 20px;
-    height: 20px;
+    right: 66.93vw;
+    width: 1.04vw;
+    height: 1.85vh;
 }
 
 .sendBtn {
     height: 4.20vh;
-
     background-color: #543C52;
-    border-radius: 1234px;
-
+    border-radius: 64.27vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -546,11 +492,9 @@ main .postArea .sendDiv .addEmojiBtn {
 
 .sendBtnModal {
     height: 4.20vh;
-    width: 130px;
-
+    width: 6.77vw;
     background-color: #543C52;
-    border-radius: 1234px;
-
+    border-radius: 64.27vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -577,7 +521,7 @@ main .postPostInput .post {
     background-color: white;
     margin-top: 0.42vh;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     padding-left: 2.10vh;
     margin-bottom: 0.79vh;
 }
@@ -586,15 +530,12 @@ main .postPostInput .post .postHeader {
     width: 48.45vw;
     height: 9.34vh;
     border-bottom: 1px solid #CDCED2;
-
     display: flex;
     align-items: center;
-
     display: flex;
     gap: 0.52vw;
     box-sizing: border-box;
     position: relative;
-
 }
 
 main .postPostInput .post .postHeader .avatar {
@@ -609,7 +550,6 @@ main .postPostInput .post .postHeader .text {
 main .postPostInput .post .postHeader .paintingDiv {
     display: flex;
     justify-content: end;
-
     margin-left: 26.51vw;
 }
 
@@ -617,10 +557,8 @@ main .postPostInput .post .postHeader .paintingDiv {
     position: absolute;
     right: 2.10vw;
     top: 3.15vh;
-    border-radius: 5px;
-
+    border-radius: 0.26vw;
 }
-
 
 .dotsDiv .dots {
     height: 2.10vh;
@@ -664,12 +602,10 @@ main .postPostInput .post .postHeader .paintingDiv {
     cursor: pointer;
 }
 
-
 main .postPostInput .post .postHeader .paintingDiv .painting {
     width: 11.55vw;
     height: 5.14vh;
 }
-
 
 main .postArea .post {
     background-color: white;
@@ -697,12 +633,10 @@ main .postMain .text {
     color: #543C52;
 }
 
-
 main .postMain .images {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-
     width: 46.35vw;
     gap: 0.84vw;
     margin-top: 1.68vh;
@@ -724,13 +658,13 @@ main .postMain .images .postImage3 {
 }
 
 main .postMain .images .postImage4 {
-    width: 283px;
-    height: 327px;
+    width: 14.74vw;
+    height: 30.28vh;
 }
 
 main .postMain .images .postImage5 {
-    width: 283px;
-    height: 327px;
+    width: 14.74vw;
+    height: 30.28vh;
 }
 
 main .postFooter {
@@ -749,7 +683,6 @@ main .postFooter img {
     gap: 2.52vh;
 }
 
-
 .likesViews .likes {
     display: flex;
     align-items: center;
@@ -762,10 +695,9 @@ main .responses .response {
     height: 21.83vh;
     background-color: white;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     margin-top: 0.84vh;
 }
-
 
 main .responses .response .headerResponse .avatarName img {
     height: 4.83vh;
@@ -788,12 +720,10 @@ main .responses .response .headerResponse {
     border-bottom: 1px solid #CDCED2;
 }
 
-
 main .responses .response .mainResponse {
     display: flex;
     padding-left: 1.05vw;
     padding-top: 1.68vh;
-
     flex-direction: column;
 }
 
@@ -856,7 +786,7 @@ input {
 .publication-creation {
     width: 40.68vw;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 1.04vw;
     display: flex;
     padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
@@ -867,7 +797,7 @@ input {
 .publication-redact {
     width: 40.68vw;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 1.04vw;
     display: flex;
     padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
@@ -881,9 +811,8 @@ input {
 
 .publication-redact textarea {
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     box-sizing: border-box;
-
     padding-left: 0.84vw;
     padding-top: 1.68vh;
     width: 35.96vw;
@@ -896,21 +825,16 @@ input {
 
 .publication-creation textarea {
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     box-sizing: border-box;
-
     padding-left: 0.84vw;
     padding-top: 1.68vh;
     width: 35.96vw;
     height: 13.22vh;
 }
 
-
-
-
-
 .hashtagText {
-    font-size: 14px;
+    font-size: 0.73vw;
     color: #543C52;
 }
 
@@ -921,11 +845,10 @@ input {
 input {
     width: 18.01vw;
     height: 4.41vh;
-    border-radius: 10px;
+    border-radius: 0.52vw;
     border: 1px solid black;
     padding-left: 0.84vw;
 }
-
 
 .beforeBtton {
     display: flex;
@@ -938,8 +861,8 @@ input {
 }
 
 .NameTitle {
-    font-size: 34px;
-    margin-bottom: 24px;
+    font-size: 1.77vw;
+    margin-bottom: 2.22vh;
 }
 
 .hidden {
@@ -948,17 +871,16 @@ input {
 
 .hashtag {
     height: 2.94vh;
-    border-radius: 6px;
+    border-radius: 0.31vw;
     font-weight: 400;
     font-size: 0.73vw;
     color: #543C52;
-
     background-color: #E9E5EE;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-left: 6px;
-    padding-right: 6px;
+    padding-left: 0.31vw;
+    padding-right: 0.31vw;
 }
 
 #cancel-bg-blur {
@@ -992,7 +914,7 @@ input {
 #imageForPost {
     width: 11.44vw;
     height: 27.81vh;
-    border-radius: 15px;
+    border-radius: 0.78vw;
 }
 
 .deleteBtn {
@@ -1009,7 +931,8 @@ input {
     height: 26.86vh;
 }
 
-.for-images, .for-images-redact {
+.for-images,
+.for-images-redact {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -1029,74 +952,72 @@ input {
 }
 
 .add_info_form {
-    width: 490px;
-    height: 445px;
-    border-radius: 20px;
+    width: 25.52vw;
+    height: 41.20vh;
+    border-radius: 1.04vw;
     background-color: #FFFFFF;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 24px;
-    gap: 24px;
+    padding-top: 2.22vh;
+    gap: 2.22vh;
 }
 
 .add_info_form .title {
-    font-size: 34px;
+    font-size: 1.77vw;
     font-weight: 500;
 }
 
 .inputs {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 1.48vh;
     align-items: center;
 }
 
 .inputBlock {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-
+    gap: 0.56vh;
 }
 
 .input {
-    width: 402px;
-    height: 42px;
-    font-size: 16px;
-    padding-left: 16px;
+    width: 20.94vw;
+    height: 3.89vh;
+    font-size: 0.83vw;
+    padding-left: 0.83vw;
 }
 
 .label {
-    font-size: 16px;
+    font-size: 0.83vw;
 }
 
 .chooseVariant {
     display: flex;
-    font-size: 12px;
+    font-size: 0.63vw;
 }
 
 .chooseVariant a {
     display: flex;
-    font-size: 12px;
+    font-size: 0.63vw;
 }
 
 .button-shell {
-    width: 402px;
-    height: 40px;
+    width: 20.94vw;
+    height: 3.70vh;
     display: flex;
     justify-content: end;
     align-items: end;
 }
 
 .submit {
-    width: 112px;
-    height: 40px;
+    width: 5.83vw;
+    height: 3.70vh;
     background-color: #543C52;
-    border-radius: 1234px;
+    border-radius: 64.27vw;
     border: 0;
     color: white;
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 .tab-now {
@@ -1104,9 +1025,9 @@ input {
 }
 
 .tag-input {
-    width: 189px;
-    height: 28px;
-    border: 4px;
+    width: 9.84vw;
+    height: 2.59vh;
+    border: 0.21vw;
     background-color: white;
     border: 1px solid #81818D;
 }

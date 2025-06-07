@@ -24,19 +24,16 @@ body {
     overflow-y: hidden;
 }
 
-
 header {
-    height: 7%;
+    height: 7vh;
     width: 100vw;
     background-color: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16vw;
-
     margin-bottom: 3vh;
-    padding-left: 70px;
+    padding-left: 3.65vw;
 }
 
 header .logo {
@@ -52,22 +49,19 @@ header .tabsExit {
 header .tabsExit .exit {
     width: 5vw;
     height: 4.20vh;
-
     background-color: white;
-    border-radius: 1234px;
+    border-radius: 64.27vw;
     border: 1px solid black;
-
     display: flex;
     align-items: center;
     gap: 0.42vw;
     justify-content: center;
-
     cursor: pointer;
 }
 
 header .tabsExit .exit img {
     width: 1.05vw;
-    height: 2.1vh;
+    height: 2.10vh;
 }
 
 header .tabsExit .tabs {
@@ -79,10 +73,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 0.42vw;
+    padding-right: 0.42vw;
     gap: 0.47vw;
-    height: 26px;
+    height: 2.41vh;
 }
 
 header .tabsExit .tabs .tab img {
@@ -106,11 +100,11 @@ header a {
 .menu-friends {
     display: flex;
     flex-direction: column;
-    width: 254px;
-    height: 152px;
-    margin-left: 80px;
-    gap: 16px;
-    margin-right: -55px;
+    width: 13.23vw;
+    height: 14.07vh;
+    margin-left: 4.17vw;
+    gap: 1.48vh;
+    margin-right: -2.86vw;
 }
 
 .menu-urls {
@@ -136,29 +130,29 @@ header a {
 .all-menu-friends-div {
     display: flex;
     flex-direction: column;
-    width: 923px;
-    height: 1545px;
-    margin-left: 437px;
-    gap: 8px;
+    width: 48.07vw;
+    height: 143.06vh;
+    margin-left: 22.76vw;
+    gap: 0.74vh;
     background-color: white;
 }
 
 .requests-friends {
     display: flex;
     flex-direction: column;
-    width: 923px;
-    height: 329px;
+    width: 48.07vw;
+    height: 30.46vh;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 }
 
 .requests-friends-header {
     display: flex;
-    width: 883px;
-    height: 18px;
+    width: 45.99vw;
+    height: 1.67vh;
     justify-content: space-between;
-    margin-left: 20px;
-    margin-top: 16px;
+    margin-left: 1.04vw;
+    margin-top: 1.48vh;
 }
 
 .see-all-urls {
@@ -168,154 +162,154 @@ header a {
 
 .requests-friends-div {
     display: flex;
-    width: 586px;
-    height: 263px;
-    gap: 8px;
-    margin-left: 20px;
-    margin-top: 16px;
+    width: 30.52vw;
+    height: 24.35vh;
+    gap: 0.74vh;
+    margin-left: 1.04vw;
+    margin-top: 1.48vh;
 }
 
 .recommendations-friends {
     display: flex;
     flex-direction: column;
-    width: 923px;
-    height: 600px;
+    width: 48.07vw;
+    height: 55.56vh;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 }
 
 .recommendations-friends-div {
     display: flex;
     flex-wrap: wrap;
-    width: 883px;
-    height: 534px;
-    gap: 8px;
-    margin-left: 20px;
-    margin-top: 16px;
+    width: 45.99vw;
+    height: 49.44vh;
+    gap: 0.74vh;
+    margin-left: 1.04vw;
+    margin-top: 1.48vh;
 }
 
 .all-friends {
     display: flex;
     flex-direction: column;
-    width: 923px;
-    height: 600px;
+    width: 48.07vw;
+    height: 55.56vh;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 }
 
 .all-friends-div {
     display: flex;
     flex-wrap: wrap;
-    width: 883px;
-    height: 534px;
-    gap: 8px;
-    margin-left: 20px;
-    margin-top: 16px;
+    width: 45.99vw;
+    height: 49.44vh;
+    gap: 0.74vh;
+    margin-left: 1.04vw;
+    margin-top: 1.48vh;
 }
 
 .friend-profile {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 289px;
-    height: 263px;
-    border-radius: 10px;
+    width: 15.05vw;
+    height: 24.35vh;
+    border-radius: 0.52vw;
     border: 1px solid #CDCED2;
-    gap: 16px;
+    gap: 1.48vh;
 }
 
 .avatar-nickname-div {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 289px;
-    height: 175px;
-    gap: 24px;
-    margin-top: 16px;
+    width: 15.05vw;
+    height: 16.20vh;
+    gap: 2.22vh;
+    margin-top: 1.48vh;
 }
 
 .avatar-images {
-    width: 96px;
-    height: 96px;
+    width: 5.00vw;
+    height: 8.89vh;
 }
 
 .nickname-name {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 289px;
-    height: 55px;
-    gap: 10px;
+    width: 15.05vw;
+    height: 5.09vh;
+    gap: 0.93vh;
 }
 
 .nickname-text {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .buttons-div-requests {
     display: flex;
     justify-content: space-between;
-    width: 221px;
-    height: 40px;
-    gap: 16px;
+    width: 11.51vw;
+    height: 3.70vh;
+    gap: 1.48vh;
 }
 
 .buttons-div-recommendations {
     display: flex;
     justify-content: space-between;
-    width: 189px;
-    height: 40px;
-    gap: 16px;
+    width: 9.84vw;
+    height: 3.70vh;
+    gap: 1.48vh;
 }
 
 .buttons-div-all-friends {
     display: flex;
     justify-content: space-between;
-    width: 233px;
-    height: 40px;
-    gap: 16px;
+    width: 12.14vw;
+    height: 3.70vh;
+    gap: 1.48vh;
 }
 
 .accept-button {
-    width: 111px;
-    height: 40px;
-    border-radius: 1324px;
-    gap: 8px;
+    width: 5.78vw;
+    height: 3.70vh;
+    border-radius: 68.96vw;
+    gap: 0.42vw;
     background-color: #543C52;
     border: 0;
     color: white;
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 .delete-button {
-    width: 94px;
-    height: 40px;
-    border-radius: 1324px;
-    gap: 8px;
+    width: 4.90vw;
+    height: 3.70vh;
+    border-radius: 68.96vw;
+    gap: 0.42vw;
     background-color: white;
     border: 1px solid #543C52;
     color: #543C52;
 }
 
 .add-button {
-    width: 79px;
-    height: 40px;
-    border-radius: 1324px;
-    gap: 8px;
+    width: 4.11vw;
+    height: 3.70vh;
+    border-radius: 68.96vw;
+    gap: 0.42vw;
     background-color: #543C52;
     border: 0;
     color: white;
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 .message-button {
-    width: 123px;
-    height: 40px;
-    border-radius: 1324px;
-    gap: 8px;
+    width: 6.41vw;
+    height: 3.70vh;
+    border-radius: 68.96vw;
+    gap: 0.42vw;
     background-color: #543C52;
     border: 0;
     color: white;
-    font-size: 14px;
+    font-size: 0.73vw;
 }

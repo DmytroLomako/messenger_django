@@ -1,0 +1,344 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: MainFontMedium;
+    font-weight: 500;
+    font-size: 0.84vw;
+    color: #070A1C;
+    letter-spacing: -1%;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: MainFont;
+    src: url("/media/fonts/font.ttf");
+}
+
+@font-face {
+    font-family: MainFontMedium;
+    src: url("/media/fonts/fontMedium.ttf");
+}
+
+body {
+    background-color: #FAF8FF;
+    overflow-y: hidden;
+}
+
+header {
+    height: 7vh;
+    width: 100vw;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16vw;
+    margin-bottom: 3vh;
+    padding-left: 3.65vw;
+}
+
+header .logo {
+    height: 2vh;
+}
+
+header .tabsExit {
+    display: flex;
+    align-items: center;
+    gap: 1.78vw;
+}
+
+header .tabsExit .exit {
+    width: 5vw;
+    height: 4.20vh;
+    background-color: white;
+    border-radius: 64.27vw;
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 0.42vw;
+    justify-content: center;
+    cursor: pointer;
+}
+
+header .tabsExit .exit img {
+    width: 1.05vw;
+    height: 2.10vh;
+}
+
+header .tabsExit .tabs {
+    display: flex;
+    align-items: center;
+    gap: 1.47vw;
+}
+
+header .tabsExit .tabs .tab {
+    display: flex;
+    align-items: center;
+    padding-left: 0.42vw;
+    padding-right: 0.42vw;
+    gap: 0.47vw;
+    height: 2.41vh;
+}
+
+header .tabsExit .tabs .tab img {
+    display: flex;
+    align-items: center;
+    width: 1.05vw;
+}
+
+header a {
+    text-decoration: none;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+}
+
+.contacts-and-create-div {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 77.22vh;
+    gap: 0.74vh;
+    margin-left: 4.17vw;
+}
+
+.create-chat-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.28vw;
+    height: 3.70vh;
+    gap: 0.42vw;
+    border-radius: 64.27vw;
+    background-color: #543C52;
+    color: white;
+    border: none;
+    font-size: 0.73vw;
+}
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 18.27vw;
+    height: 75.09vh;
+    gap: 2.22vh;
+    background-color: white;
+    border-radius: 0.52vw;
+    border: 1px solid #CDCED2;
+}
+
+.contacts-header {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 16.61vw;
+    height: 2.13vh;
+    gap: 0.42vw;
+    margin-top: 1.48vh;
+}
+
+.contacts-header p {
+    font-size: 1.04vw;
+    color: #81818D;
+}
+
+.search {
+    width: 16.61vw;
+    height: 3.89vh;
+    border-radius: 0.52vw;
+    border: 1px solid #CDCED2;
+}
+
+.all-contacts {
+    display: flex;
+    flex-direction: column;
+    width: 16.61vw;
+    height: 60.46vh;
+    gap: 1.48vh;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    width: 16.61vw;
+    height: 4.26vh;
+    gap: 1.48vh;
+}
+
+.profile-text-div {
+    display: flex;
+    align-items: start;
+    width: 13.59vw;
+    height: 1.67vh;
+}
+
+.profile-text-div p {
+    font-size: 0.83vw;
+}
+
+.speak-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29.38vw;
+    height: 77.13vh;
+    border-radius: 0.52vw;
+    border: 1px solid #CDCED2;
+    margin-left: 0.47vw;
+    background-color: white;
+}
+
+.start-new-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 27.71vw;
+    height: 8.06vh;
+    gap: 2.22vh;
+}
+
+.title-of-div {
+    font-size: 1.25vw;
+}
+
+.choose-contact {
+    text-align: center;
+}
+
+.chat-messages-div {
+    display: flex;
+    flex-direction: column;
+    width: 18.23vw;
+    height: 77.22vh;
+    gap: 0.74vh;
+    margin-left: 0.25vw;
+}
+
+.messages {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 36.02vh;
+    border: 1px solid #CDCED2;
+    border-radius: 0.52vw;
+    background-color: white;
+    gap: 2.22vh;
+}
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    width: 18.28vw;
+    height: 2.13vh;
+    margin-top: 1.48vh;
+    gap: 3.44vw;
+}
+
+.message-header-text {
+    display: flex;
+    width: 8.33vw;
+    height: 2.13vh;
+    gap: 0.42vw;
+    margin-left: 0.83vw;
+}
+
+.message-header-text p {
+    font-size: 1.04vw;
+    color: #81818D;
+}
+
+.see-all {
+    margin-right: 0.78vw;
+    color: #543C52;
+    text-decoration: none;
+}
+
+.profiles-all-div {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 28.70vh;
+}
+
+.profiles-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.12vw;
+    height: 5.74vh;
+    gap: 1.48vh;
+}
+
+.profles {
+    display: flex;
+    align-items: center;
+    width: 16.46vw;
+    height: 4.26vh;
+    gap: 0.63vw;
+}
+
+.profiles-text {
+    display: flex;
+    flex-direction: column;
+    width: 13.44vw;
+    height: 4.07vh;
+    gap: 0.37vh;
+}
+
+.profiles-text p {
+    font-size: 0.73vw;
+    font-weight: 400;
+}
+
+.header-time-prfl-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 13.44vw;
+    height: 1.67vh;
+}
+
+.time-text {
+    font-weight: 400;
+    font-size: 0.63vw;
+    color: #81818D;
+}
+
+.group-chats {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 40.46vh;
+    border: 1px solid #CDCED2;
+    border-radius: 0.52vw;
+    background-color: white;
+    gap: 2.22vh;
+}
+
+.groups-all-div {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 34.44vh;
+}
+
+.tab-now {
+    background-color: #E9E5EE;
+}
+
+.avatarImage {
+    width: 2.45vw;
+    height: 4.26vh;
+}
+
+.contacts-icon {
+    width: 1.09vw;
+    height: 1.94vh;
+}
+
+.plus-icon {
+    width: 1.09vw;
+    height: 1.85vh;
+}

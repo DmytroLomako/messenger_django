@@ -24,19 +24,16 @@ body {
     overflow-y: hidden;
 }
 
-
 header {
-    height: 7%;
+    height: 7vh;
     width: 100vw;
     background-color: white;
-
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 16vw;
-
     margin-bottom: 3vh;
-    padding-left: 70px;
+    padding-left: 3.646vw;
 }
 
 header .logo {
@@ -52,16 +49,13 @@ header .tabsExit {
 header .tabsExit .exit {
     width: 5vw;
     height: 4.20vh;
-
     background-color: white;
-    border-radius: 1234px;
-    border: 1px solid black;
-
+    border-radius: 64.271vw;
+    border: 0.052vw solid black;
     display: flex;
     align-items: center;
     gap: 0.42vw;
     justify-content: center;
-
     cursor: pointer;
 }
 
@@ -79,10 +73,10 @@ header .tabsExit .tabs {
 header .tabsExit .tabs .tab {
     display: flex;
     align-items: center;
-    padding-left: 8px;
-    padding-right: 8px;
+    padding-left: 0.417vw;
+    padding-right: 0.417vw;
     gap: 0.47vw;
-    height: 26px;
+    height: 2.407vh;
 }
 
 header .tabsExit .tabs .tab img {
@@ -95,7 +89,6 @@ header a {
     text-decoration: none;
 }
 
-
 .tab-now {
     background-color: #E9E5EE;
 }
@@ -107,11 +100,11 @@ header a {
 .menu-options {
     display: flex;
     flex-direction: column;
-    width: 254px;
-    height: 152px;
-    margin-left: 80px;
-    margin-right: -55px;
-    gap: 16px;
+    width: 13.229vw;
+    height: 14.074vh;
+    margin-left: 4.167vw;
+    margin-right: -2.865vw;
+    gap: 1.481vh;
 }
 
 .menu-urls {
@@ -129,192 +122,192 @@ header a {
 .options-div {
     display: flex;
     flex-direction: column;
-    width: 924.5px;
-    height: 1036px;
-    gap: 8px;
-    margin-left: 435.5px;
-    background-color: white
+    width: 48.151vw;
+    height: 95.926vh;
+    gap: 0.741vh;
+    margin-left: 22.682vw;
+    background-color: white;
 }
 
 .card-profile-div {
     display: flex;
     flex-direction: column;
-    width: 924.5px;
-    height: 263px;
-    gap: 16px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
+    width: 48.151vw;
+    height: 24.352vh;
+    gap: 1.481vh;
+    border: 0.052vw solid #CDCED2;
+    border-radius: 0.521vw;
 }
 
 .card-profile-header {
     display: flex;
     justify-content: space-between;
-    width: 892.5px;
-    height: 40px;
-    gap: 16px;
-    margin-left: 16px;
-    margin-top: 16px;
+    width: 46.484vw;
+    height: 3.704vh;
+    gap: 1.481vh;
+    margin-left: 0.833vw;
+    margin-top: 1.481vh;
 }
 
 .avatar-and-textdiv {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 892.5px;
-    height: 175px;
-    gap: 24px;
+    width: 46.484vw;
+    height: 16.204vh;
+    gap: 2.222vh;
 }
 
 .avatar-and-textdiv img {
-    width: 96px;
-    height: 96px;
+    width: 5vw;
+    height: 8.889vh;
 }
 
 .nickname-name {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 892.5px;
-    height: 55px;
-    gap: 10px;
+    width: 46.484vw;
+    height: 5.093vh;
+    gap: 0.926vh;
 }
 
 .nickname-text {
     font-weight: 700;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .personal-information-div {
     display: flex;
     flex-direction: column;
-    width: 924.5px;
-    height: 490px;
-    gap: 16px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
+    width: 48.151vw;
+    height: 45.37vh;
+    gap: 1.481vh;
+    border: 0.052vw solid #CDCED2;
+    border-radius: 0.521vw;
 }
 
 .personal-information-header {
     display: flex;
     justify-content: space-between;
-    width: 892.5px;
-    height: 40px;
-    gap: 16px;
-    margin-left: 14px;
-    margin-top: 16px;
+    width: 46.484vw;
+    height: 3.704vh;
+    gap: 1.481vh;
+    margin-left: 0.729vw;
+    margin-top: 1.481vh;
 }
 
 .all-inputs-div {
     display: flex;
     flex-direction: column;
-    width: 343px;
-    height: 394px;
-    gap: 16px;
-    margin-left: 14px;
+    width: 17.865vw;
+    height: 36.481vh;
+    gap: 1.481vh;
+    margin-left: 0.729vw;
 }
 
 .input-div {
     display: flex;
     flex-direction: column;
-    width: 343px;
-    height: 66px;
-    gap: 10px;
+    width: 17.865vw;
+    height: 6.111vh;
+    gap: 0.926vh;
 }
 
 .input-div p {
     color: #81818D;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 0.833vw;
 }
 
 .name-input-div {
     display: flex;
     align-items: center;
-    width: 343px;
-    height: 42px;
-    gap: 10px;
+    width: 17.865vw;
+    height: 3.889vh;
+    gap: 0.926vh;
 }
 
 .name-input-div input {
-    width: 313px;
-    height: 42px;
-    border-radius: 10px;
-    border: 1px solid #81818D;
-    padding-left: 16px;
-    gap: 10px;
+    width: 16.302vw;
+    height: 3.889vh;
+    border-radius: 0.521vw;
+    border: 0.052vw solid #81818D;
+    padding-left: 0.833vw;
+    gap: 0.926vh;
 }
 
 .name-input-div img {
-    width: 20px;
-    height: 20px;
+    width: 1.042vw;
+    height: 1.852vh;
 }
 
 .password-div {
-    width: 343px;
-    height: 42px;
+    width: 17.865vw;
+    height: 3.889vh;
 }
 
 .password-div input {
-    width: 343px;
-    height: 42px;
-    border-radius: 10px;
-    border: 1px solid #81818D;
-    padding-left: 16px;
-    gap: 10px;
+    width: 17.865vw;
+    height: 3.889vh;
+    border-radius: 0.521vw;
+    border: 0.052vw solid #81818D;
+    padding-left: 0.833vw;
+    gap: 0.926vh;
     background: url('images/notviewOption.png');
 }
 
 menu-options .signature-options-div {
     display: flex;
     flex-direction: column;
-    width: 924.5px;
-    height: 267px;
-    gap: 16px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
+    width: 48.151vw;
+    height: 24.722vh;
+    gap: 1.481vh;
+    border: 0.052vw solid #CDCED2;
+    border-radius: 0.521vw;
 }
 
 .signature-options-header {
     display: flex;
     justify-content: space-between;
-    width: 892.5px;
-    height: 40px;
-    gap: 16px;
-    margin-left: 16px;
-    margin-top: 16px;
+    width: 46.484vw;
+    height: 3.704vh;
+    gap: 1.481vh;
+    margin-left: 0.833vw;
+    margin-top: 1.481vh;
 }
 
 .edit-information-btn-header {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 203px;
-    height: 40px;
-    border-radius: 1900px;
-    gap: 10px;
+    width: 10.573vw;
+    height: 3.704vh;
+    border-radius: 98.958vw;
+    gap: 0.926vh;
     background-color: #FFFFFF;
-    border: 1px solid #543C52;
+    border: 0.052vw solid #543C52;
     color: #543C52;
-    font-size: 14px;
+    font-size: 0.729vw;
 }
 
 .edit-information-btn-main {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 203px;
-    height: 40px;
-    border-radius: 1900px;
-    gap: 10px;
+    width: 10.573vw;
+    height: 3.704vh;
+    border-radius: 98.958vw;
+    gap: 0.926vh;
     background-color: #FFFFFF;
-    border: 1px solid #543C52;
+    border: 0.052vw solid #543C52;
     color: #543C52;
-    font-size: 14px;
+    font-size: 0.729vw;
 }
 
 .edit-information-btn img {
-    width: 20px;
-    height: 20px;
+    width: 1.042vw;
+    height: 1.852vh;
 }
 
 .hidden {
@@ -326,57 +319,55 @@ button {
 }
 
 .check-mark {
-    width: 20px;
+    width: 1.042vw;
 }
 
-
 .avatar-and-textdiv .editImg {
-    width: 21px;
-    height: 20px;
+    width: 1.094vw;
+    height: 1.852vh;
 }
 
 .editImg {
-    width: 21px;
-    height: 20px;
+    width: 1.094vw;
+    height: 1.852vh;
 }
 
 .input {
-    border: 1px solid #81818D;
+    border: 0.052vw solid #81818D;
 }
-
 
 .signature-options-div {
     display: flex;
     flex-direction: column;
-    width: 924.5px;
-    height: 267px;
-    gap: 16px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
+    width: 48.151vw;
+    height: 24.722vh;
+    gap: 1.481vh;
+    border: 0.052vw solid #CDCED2;
+    border-radius: 0.521vw;
 }
 
 .name-and-signature-div {
     display: flex;
     flex-direction: column;
-    width: 638px;
-    height: 179px;
-    gap: 24px;
-    margin-left: 16px;
+    width: 33.229vw;
+    height: 16.574vh;
+    gap: 2.222vh;
+    margin-left: 0.833vw;
 }
 
 .name-and-surname {
     display: flex;
     flex-direction: column;
-    width: 638px;
-    height: 54px;
-    gap: 16px;
+    width: 33.229vw;
+    height: 5vh;
+    gap: 1.481vh;
 }
 
 .name-and-surname-header {
     display: flex;
-    width: 160px;
-    height: 20px;
-    gap: 8px;
+    width: 8.333vw;
+    height: 1.852vh;
+    gap: 0.417vw;
 }
 
 .name-and-surname-header p {
@@ -385,24 +376,24 @@ button {
 }
 
 .name-and-surname-header img {
-    width: 20px;
-    height: 20px;
+    width: 1.042vw;
+    height: 1.852vh;
     opacity: 50%;
 }
 
 .signature-only-div {
     display: flex;
     flex-direction: column;
-    width: 220px;
-    height: 101px;
-    gap: 16px;
+    width: 11.458vw;
+    height: 9.352vh;
+    gap: 1.481vh;
 }
 
 .signature-only-div-header {
     display: flex;
-    width: 210px;
-    height: 20px;
-    gap: 8px;
+    width: 10.938vw;
+    height: 1.852vh;
+    gap: 0.417vw;
 }
 
 .signature-only-div-header p {
@@ -411,60 +402,54 @@ button {
 }
 
 .signature-only-div-header img {
-    width: 20px;
-    height: 20px;
+    width: 1.042vw;
+    height: 1.852vh;
     opacity: 50%;
 }
 
 .signature-img-div {
     display: flex;
     align-items: center;
-    width: 220px;
-    height: 65px;
+    width: 11.458vw;
+    height: 6.019vh;
     justify-content: center;
 }
 
 .signature-options-header {
     display: flex;
     justify-content: space-between;
-    width: 892.5px;
-    height: 40px;
-    gap: 16px;
-    margin-left: 16px;
-    margin-top: 16px;
+    width: 46.484vw;
+    height: 3.704vh;
+    gap: 1.481vh;
+    margin-left: 0.833vw;
+    margin-top: 1.481vh;
 }
 
 .edit-information-btn-sign {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 203px;
-    height: 40px;
-    border-radius: 1900px;
-    gap: 10px;
+    width: 10.573vw;
+    height: 3.704vh;
+    border-radius: 98.958vw;
+    gap: 0.926vh;
     background-color: #FFFFFF;
-    border: 1px solid #543C52;
+    border: 0.052vw solid #543C52;
     color: #543C52;
-    font-size: 14px;
+    font-size: 0.729vw;
 }
 
 .edit-information-btn-sign img {
-    width: 20px;
-    height: 20px;
+    width: 1.042vw;
+    height: 1.852vh;
 }
 
 .signImage {
-    width: 132px;
-    height: 51px;
+    width: 6.875vw;
+    height: 4.722vh;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    font-family: MainFontMedium;
-    font-weight: 500;
-    font-size: 0.84vw;
-    color: #070A1C;
-    letter-spacing: -1%;
-    box-sizing: border-box;
+#id_birthday {
+    border: 0.052vw solid #543C52;
+    font-size: 0.729vw;
 }
