@@ -19,6 +19,7 @@ let deleteBtns = document.querySelectorAll(".delete")
 let blurRedact = document.querySelector(".background-blur-redact")
 let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 let postPkInput = document.querySelector(".postPkInput")
+let imageTags = document.querySelector(".imageTags")
 
 let selectRedact = document.querySelectorAll("#tagsHiddenRedact select option")
 let addTagBtnRedact = document.getElementById("add-tag-btn-redact")
@@ -141,7 +142,7 @@ selectTags.addEventListener("change", (event) => {
             hashTagText.classList.add("hashTagText")
             hashTagText.textContent = finalAllTags[option.value - 1]
             hashTagElement.appendChild(hashTagText)
-            divAddTags.appendChild(hashTagElement)
+            divAddTags.insertBefore(hashTagElement, imageTags)
         }
     })
 })

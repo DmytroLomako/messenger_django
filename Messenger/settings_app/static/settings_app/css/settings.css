@@ -159,8 +159,9 @@ header a {
 }
 
 .avatar-and-textdiv img {
-    width: 5vw;
-    height: 8.889vh;
+    width: 62.5px;
+    height: 62.5px;
+    border-radius: 1234px;
 }
 
 .nickname-name {
