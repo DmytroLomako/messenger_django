@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Friend Requests {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/friends.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'js/friends.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab tab-now"><img
+                    src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'settings' user.pk %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+<main>
+    <div class="main-div">
+        <div class="menu-friends">
+            <a class="menu-urls" id="Friends" href="{% url 'friends' %}">Головна</a>
+            <a class="menu-urls" id="Requests" href="{% url 'requests' %}"><u id="MainText" title="Подчеркнутый текст">Запити</u></a>
+            <a class="menu-urls" id="Recomendations" href="{% url 'recomendations' %}">Рекомендації</a>
+            <a class="menu-urls" id="AllFriends" href="{% url 'all_friends' %}">Всі друзі</a>
+        </div>
+        <div class="all-menu-friends-div">
+            <div class="requests-friends">
+                <div class="requests-friends-header">
+                    <p>Запити</p>
+                    <a class="see-all-urls" href="">Дивитись всі</a>
+                </div>
+                <div class="requests-friends-div">
+                    {% for request in requests %}
+                        <div class="friend-profile">
+                            <div class="avatar-nickname-div">
+                                {% if request.profile.photo.url != None %}
+                                    <img class="avatar-images" src="{{ request.profile.photo.url }}" alt="">
+                                {% else %}
+                                    <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                                {% endif %}
+                                <div class="nickname-name">
+                                    <p class="nickname-text">{{ request.first_name }} {{ request.last_name }}</p>
+                                    <p>@{{ request.username }}</p>
+                                </div>
+                            </div>
+                            <div class="buttons-div-requests">
+                                <button class="accept-button">Підтвердити</button>
+                                <button class="delete-button">Видалити</button>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}
