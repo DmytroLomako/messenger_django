@@ -234,32 +234,41 @@
                     <div class="divAddTags">
 
                         <div class="beforeBtton">
-                            
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Відпочинок</p>
+
+                            <div class="hashTag" value="1">
+                                <p class="hashTagText">#Відпочинок</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Натхнення</p>
+                            <div class="hashTag" value="2">
+                                <p class="hashTagText">#Натхнення</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Життя</p>
+                            <div class="hashTag" value="3">
+                                <p class="hashTagText">#Життя</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Природа</p>
+                            <div class="hashTag" value="4">
+                                <p class="hashTagText">#Природа</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Читання</p>
+                            <div class="hashTag" value="5">
+                                <p class="hashTagText">#Читання</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Спокій</p>
+                            <div class="hashTag" value="6">
+                                <p class="hashTagText">#Спокій</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Гармонія</p>
+                            <div class="hashTag" value="7">
+                                <p class="hashTagText">#Гармонія</p>
                             </div>
-                            <div class = "hashTag">
-                                <p class = "hashTagText">#Фільми</p>
+                            <div class="hashTag" value="8">
+                                <p class="hashTagText">#Музика</p>
                             </div>
-    
+                            <div class="hashTag" value="9">
+                                <p class="hashTagText">#Фільми</p>
+                            </div>
+                            <div class="hashTag" value="10">
+                                <p class="hashTagText">#Подорожі</p>
+                            </div>
+
+                            <input type="text" placeholder="#" class="inputAddTag hidden">
+                            <input type="hidden" value="{% url 'save_tag' %}" class="urlToCreateTag">
+
                             <label for="add-tag-btn" class="image-input-label">
                                 <img src="{% static 'images/add_tag.png' %}" class="imageTags">
                             </label>

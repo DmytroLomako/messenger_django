@@ -543,6 +543,10 @@ main .postPostInput .post .postHeader .avatar {
     height: 4.83vh;
 }
 
+.avatar {
+    border-radius: 1234px;
+}
+
 main .postPostInput .post .postHeader .text {
     font-size: 0.73vw;
 }
@@ -1032,11 +1036,21 @@ input {
     border: 1px solid #81818D;
 }
 
-.beforeBtton{
+.beforeBtton {
     display: flex;
     flex-wrap: wrap;
 }
 
-.beforeBtton label{
+.beforeBtton label {
+    order: 999999;
+}
+
+
+.inputAddTag {
+    width: 9.84vw;
+    height: 2.59vh;
+    border: 0.21vw;
+    background-color: white;
+    border: 1px solid #81818D;
     order: 999999;
 }

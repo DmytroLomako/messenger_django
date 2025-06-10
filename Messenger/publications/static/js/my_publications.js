@@ -20,6 +20,7 @@ let blurRedact = document.querySelector(".background-blur-redact")
 let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 let postPkInput = document.querySelector(".postPkInput")
 let imageTags = document.querySelector(".imageTags")
+let inputAddTag = document.querySelector(".inputAddTag")
 
 let selectRedact = document.querySelectorAll("#tagsHiddenRedact select option")
 let addTagBtnRedact = document.getElementById("add-tag-btn-redact")
@@ -28,8 +29,12 @@ let tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select")
 
 let imagesPost = document.querySelector(".postImage1")
 
+let formCratePost = document.querySelector(".publication-creation")
+
 let listFiles = []
 let listFilesRedact = []
+
+let listTags = ["#Відпочинок", "#Натхнення", "#Життя", "#Природа", "#Читання", "#Спокій", "#Гармонія", "#Музика", "#Фільми", "#Подорожі",]
 
 for (let count = 0; count < dotsMenu.length; count++) {
     dotsMenu[count].addEventListener("click", () => {
@@ -62,7 +67,7 @@ function updateDeleteButtons() {
     });
 }
 
-function displayImage(input, div, filesList){
+function displayImage(input, div, filesList) {
     div.innerHTML = ''
     filesList.length = 0
     for (let count = 0; count < input.files.length; count++) {
@@ -120,32 +125,94 @@ cancelBgBlur.addEventListener('click', function () {
 
 if (addTag) {
     addTag.addEventListener("click", () => {
-        tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
-        let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
-    })
-}
 
-if (addTagBtnRedact) {
-    addTagBtnRedact.addEventListener("click", () => {
-        tagsHiddenRedact.style.display = tagsHiddenRedact.style.display === "block" ? "none" : "block";
-        let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
-    })
-}
+        inputAddTag.style.display = inputAddTag.style.display === "block" ? "none" : "block";
+        console.log(imageTags.src)
+        if (imageTags.src == "http://127.0.0.1:8005/static/images/add_tag.png") {
+            imageTags.src = "/static/images/submit.png"
+            inputAddTag.value = ""
+        } else {
+            if (!inputAddTag.value.includes("#")) {
+                finalHashTag = `#${inputAddTag.value}`
+            }
+            if (finalHashTag != "#") {
+                let hashTagElement = document.createElement("div")
+                let hashTagText = document.createElement("p")
+                hashTagElement.classList.add("hashTag")
+                hashTagText.classList.add("hashTagText")
 
-selectTags.addEventListener("change", (event) => {
-    divAddTags.textContent = ''
-    selectTags.querySelectorAll('option').forEach((option) => {
-        if (option.selected) {
-            let hashTagElement = document.createElement("div")
-            let hashTagText = document.createElement("p")
-            hashTagElement.classList.add("hashTag")
-            hashTagText.classList.add("hashTagText")
-            hashTagText.textContent = finalAllTags[option.value - 1]
-            hashTagElement.appendChild(hashTagText)
-            divAddTags.insertBefore(hashTagElement, imageTags)
+                let option = document.createElement("option")
+
+
+                alert(document.querySelectorAll("#field #id_tags option")[document.querySelectorAll("#field #id_tags option").length - 1])
+
+                let valueOption = parseInt(document.querySelectorAll("#field #id_tags option")[document.querySelectorAll("#field #id_tags option").length - 1].value) + 1
+
+                hashTagText.textContent = finalHashTag
+                option.textContent = finalHashTag
+                listTags.push(finalHashTag)
+
+                option.setAttribute("selected", true)
+                option.value = valueOption
+
+
+                selectTags.appendChild(option)
+
+
+
+                hashTagElement.appendChild(hashTagText)
+                divAddTags.appendChild(hashTagElement, imageTags)
+
+                $.ajax({
+                    url: document.querySelector(".urlToCreateTag").value,
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'list_tags': finalHashTag,
+                        'page-to-return': "publications"
+                    },
+                    success: function (response) {
+                        console.log(response)
+                    }
+                })
+            }
+            imageTags.src = "/static/images/add_tag.png"
+
+
         }
     })
-})
+}
+
+
+
+// if (addTag) {
+//     addTag.addEventListener("click", () => {
+//         tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
+//         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
+//     })
+// }
+
+// if (addTagBtnRedact) {
+//     addTagBtnRedact.addEventListener("click", () => {
+//         tagsHiddenRedact.style.display = tagsHiddenRedact.style.display === "block" ? "none" : "block";
+//         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
+//     })
+// }
+
+// selectTags.addEventListener("change", (event) => {
+//     divAddTags.textContent = ''
+//     selectTags.querySelectorAll('option').forEach((option) => {
+//         if (option.selected) {
+//             let hashTagElement = document.createElement("div")
+//             let hashTagText = document.createElement("p")
+//             hashTagElement.classList.add("hashTag")
+//             hashTagText.classList.add("hashTagText")
+//             hashTagText.textContent = finalAllTags[option.value - 1]
+//             hashTagElement.appendChild(hashTagText)
+//             divAddTags.insertBefore(hashTagElement, imageTags)
+//         }
+//     })
+// })
 
 
 
@@ -187,6 +254,16 @@ deleteBtns.forEach((button) => {
     button.addEventListener("click", function () {
         let postObject = document.querySelector(`#post${button.id}`)
         postObject.remove()
+        $.ajax({
+            url: `${button.getAttribute("value")}`,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        })
     })
 })
 
@@ -260,11 +337,11 @@ editBtns.forEach(element => {
                     const existingImageUrl = element.fields.image;
                     if (existingImageUrl) {
                         fetch(`/media/${existingImageUrl}`)
-                        .then(response => response.blob())
-                        .then(blob => {
-                            const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
-                            listFilesRedact.push(file);
-                        });
+                            .then(response => response.blob())
+                            .then(blob => {
+                                const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
+                                listFilesRedact.push(file);
+                            });
                         let divImage = document.createElement("div")
                         divImage.classList.add("divImageDelete")
                         let createImage = document.createElement("img")
@@ -336,7 +413,7 @@ cancelBgBlurRedact.addEventListener('click', () => {
 })
 let sendBtnModal = document.querySelector(".sendBtnModal")
 
-sendBtnModal.addEventListener("click", function (event) {
+formCratePost.addEventListener("submit", function (event) {
     const dataTransfer = new DataTransfer();
     listFiles.forEach((file) => {
         if (file) {
@@ -344,7 +421,6 @@ sendBtnModal.addEventListener("click", function (event) {
         }
     });
     imageInput.files = dataTransfer.files;
-
 })
 document.querySelector('.publication-redact').addEventListener('submit', (event) => {
     const dataTransferRedact = new DataTransfer();
@@ -359,3 +435,4 @@ document.querySelector('.publication-redact').addEventListener('submit', (event)
 document.querySelectorAll(".liked img").forEach(element => {
     element.src = "/static/images/liked.png"
 });
+

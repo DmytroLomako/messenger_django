@@ -249,7 +249,7 @@ main {
     color: #81818D;
 }
 
-.see-all {
+groups-all-div .see-all {
     margin-right: 0.78vw;
     color: #543C52;
     text-decoration: none;
@@ -269,6 +269,7 @@ main {
     width: 18.12vw;
     height: 5.74vh;
     gap: 1.48vh;
+
 }
 
 .profles {
@@ -320,8 +321,10 @@ main {
 .groups-all-div {
     display: flex;
     flex-direction: column;
+    gap: 5px;
     width: 18.28vw;
     height: 34.44vh;
+    overflow-y: scroll;
 }
 
 .tab-now {
@@ -341,4 +344,188 @@ main {
 .plus-icon {
     width: 1.09vw;
     height: 1.85vh;
+}
+
+
+
+.background-blur {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
+.group-create {
+    width: 490px;
+    height: 777px;
+    background-color: white;
+    border-radius: 1.04vw;
+    display: flex;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+}
+
+#cancel-bg-blur {
+    width: 100%;
+    height: 2.62vh;
+    text-align: end;
+    background-color: white;
+    border: 0;
+    font-size: 0.84vw;
+    cursor: pointer;
+}
+
+.NameTitle {
+    font-size: 34px;
+}
+
+.input_find {
+    width: 402px;
+    height: 42px;
+    border-radius: 10px;
+    border: 1px solid #CDCED2;
+    color: #81818D;
+    font-size: 16px;
+    background-image: url('http://i50.tinypic.com/20keohf.jpg');
+    background-repeat: no-repeat;
+    background-position: left top;
+    padding-left: 15px;
+}
+
+.choosed-num {
+    color: #81818D;
+    width: 402px;
+}
+
+.list-of-friends {
+    height: 432px;
+    overflow-y: scroll;
+}
+
+.list-of-friends {
+    height: 432px;
+    width: 402px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.userChoose {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 402px;
+    height: 62px;
+    margin-left: 16px;
+}
+
+.letter {
+    font-size: 12px;
+    margin-bottom: 8px;
+    margin-top: 8px;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+
+    margin-top: 13px;
+    margin-bottom: 13px;
+}
+
+.nameLastName {
+    width: 280px;
+    font-size: 16px;
+}
+
+.btn {
+    height: 40px;
+    border-radius: 1234px;
+
+
+}
+
+.btns {
+    gap: 16px;
+    width: 402px;
+    display: flex;
+    justify-content: end;
+}
+
+.btns button {
+    padding: 0 16px 0 16px;
+    color: white;
+    border: 1px solid #543C52;
+}
+
+.btns .next {
+    background-color: #543C52;
+}
+
+.btns .skipBtn {
+    color: #543C52;
+    background-color: white;
+}
+
+.group-create-2-step {
+    display: none;
+}
+
+.nameLabel {
+    font-size: 16px;
+    width: 402px;
+}
+
+.nameInputBlock {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.GroupAvatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 1234px;
+}
+
+.small_logo {
+    width: 20px;
+    height: 20px;
+}
+
+.GroupAvatarChoose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.divPhoto {
+    display: flex;
+    gap: 24px;
+}
+
+.choosePhoto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.addPhoto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hidden {
+    display: none;
 }

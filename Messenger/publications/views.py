@@ -6,6 +6,7 @@ from .forms import CreatePostForm
 from django.http import JsonResponse
 from django.core import serializers
 from authorization.models import UserProfile
+from create_tag.models import Tag
 import json
 
 
@@ -27,6 +28,7 @@ class MyPublicationsView(CreateView):
         for file in files:
             Images.objects.create(post=post, image=file)
         post.save()
+        print(post)
         return super().form_valid(form)
         
 
@@ -64,9 +66,10 @@ def delete(request, post_pk):
         if request.method == "POST":
             object = User_Post.objects.get(id=post_pk)
             object.delete()
-
+        print(post_pk, "ewgbmobbfenr")
         return JsonResponse({'status': 'success'})
     except:
+        print(post_pk)
         return JsonResponse({'status': 'error'})
 
     
@@ -93,8 +96,11 @@ def redact_data(request, post_pk):
 
 
 def save_tag(request):
-    post_texts = request.POST.get("list_tags")
-    if request.metod == "POST":
-        for post_text in post_texts:
-            post = User_Post.objects.create(name = post_text)
-            post.save()
+    tags_text = request.POST.get("list_tags")
+    print(tags_text)
+    print(request.POST)
+    if request.method == "POST":
+        post = Tag.objects.create(name = tags_text)
+        post.save()
+        if request.POST.get("page-to-return")  == "publications":
+            return redirect("my_publications")

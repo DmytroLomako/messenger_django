@@ -21,7 +21,6 @@
 
 body {
     background-color: #FAF8FF;
-    overflow-y: hidden;
 }
 
 header {
@@ -137,6 +136,10 @@ main .miniProfile .avatarNames .names {
     align-items: center;
     gap: 1.05vh;
     flex-direction: column;
+}
+
+.avatar {
+    border-radius: 1234px;
 }
 
 main .miniProfile .avatarNames .names .nickname {
