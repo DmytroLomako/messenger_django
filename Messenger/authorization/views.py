@@ -1,11 +1,12 @@
 from django.views.generic.edit import CreateView
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LogoutView
+from django.views.generic.edit import FormView
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, authenticate
 from django.views import View
 from .forms import *
 from .models import VerificationCode, UserProfile
@@ -18,7 +19,7 @@ class RegisterView(CreateView):
     
     def form_valid(self, form):
         user = form.save()
-        user.username = user.pk
+        user.username = ""
         verification_code = VerificationCode.generate_code()
         VerificationCode.objects.create(user=user, code=verification_code)
         
@@ -77,9 +78,23 @@ class VerifyCodeView(View):
             return render(request, 'authorization/registration/verification_failed.html')
 
     
-class CustomLoginView(LoginView):
-    template_name = "authorization/login/login.html"
+class CustomLoginView(FormView):
+    template_name="authorization/login/login.html"
     form_class = CustomLoginForm
+    success_url =reverse_lazy("main")
+
+    def form_valid(self, form):
+        email = form.cleaned_data['email']
+        password = form.cleaned_data['password']
+        user = authenticate(username = email, password = password)
+        if user is not None:
+            login(self.request, user ,backend='authorization.backends.LoginEmail')
+
+            return super().form_valid(form)
+        else:
+            form.add_error(None, "Невірна пошта або пароль")
+            return self.form_invalid(form)
+    
 
 class CustomLogoutView(LogoutView):
     next_page = "login"

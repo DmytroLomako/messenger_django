@@ -15,6 +15,15 @@ let goToBack = document.querySelector(".skipBtn-2-step")
 
 let createGroupForm = document.querySelector("#create_group")
 
+let groupList = document.querySelectorAll(".profiles-text")
+
+
+
+groupList.forEach(element => {
+    element.addEventListener("click", () => {
+        window.location.href = `/chats/chat/${element.id}`
+    })
+});
 
 goToBack.addEventListener("click", () => {
     groupCreateFirst.style.display = "flex"
@@ -61,3 +70,35 @@ function displayImage(input, div, filesList) {
 imageInput.addEventListener('change', function (event) {
     displayImage(imageInput, imagesDiv, imageInput.files);
 });
+
+
+
+let addedCheckbox = document.querySelectorAll(".addedCheckbox")
+let arrayOfUsers = ""
+let create_group = document.querySelector("#create_group")
+
+let group_id = document.querySelector(".group_id").value
+
+let choosedUsers = document.querySelector(".choosedUsers")
+
+create_group.addEventListener("submit", (event) => {
+    addedCheckbox.forEach(element => {
+        if (element.checked) {
+            choosedUsers.value += `${element.value}_`
+        }
+    });
+
+    let input_find = document.querySelector(".input_find").value
+
+    $.ajax({
+        url: `add/${arrayOfUsers}/${group_id}`,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            "group_name": input_find
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    })
+})

@@ -70,6 +70,21 @@
                         </div>
                         {% endif %}
                         <input type="text" name="photo" class="hidden" id="imageInput" value="photo">
+                        <div class="divPhoto">
+                            <label for="imageInput">
+                                <div class="AddPhoto">
+                                    <img src="{% static 'images/add_tag.png' %}" class="small_logo">
+                                    <p class="AddPhotoText">Додайте фото</p>
+                                </div>
+                            </label>
+
+                            <label for="imageInput">
+                                <div class="choosePhoto">
+                                    <img src="{% static 'images/publications.png' %}" class="small_logo">
+                                    <p class="AddPhotoText">Оберіть фото</p>
+                                </div>
+                            </label>
+                        </div>
                         <div class="nickname-name">
                             <p class="nickname-text">{{user.first_name}} {{user.last_name}}</p>
                             <p>@{{user.username}}</p>

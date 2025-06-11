@@ -10,7 +10,18 @@ https://docs.djangoproject.com/en/5.2/howto/deployment/asgi/
 import os
 
 from django.core.asgi import get_asgi_application
+from channels.routing import ProtocolTypeRouter, URLRouter
+from chats.routing import websocket_urlpatterns
+from channels.auth import AuthMiddlewareStack
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Messenger.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'messenger.settings')
 
-application = get_asgi_application()
+# Об'єкт додатку, який обробляє асинхронні запити
+application = ProtocolTypeRouter({
+    # Якщо звичайний http запит, тоді звичайна обробка запиту django
+    'http': get_asgi_application(),
+    # Якщо websocket запит
+    'websocket': AuthMiddlewareStack( # AuthMiddlewareStack дає доступ до об'єкта аввторизованого користувача через self.scope у ChatConsumer
+        URLRouter(websocket_urlpatterns) # Вказуємо файл з маршрутизацією для обробки websocket-запитів
+    )
+})

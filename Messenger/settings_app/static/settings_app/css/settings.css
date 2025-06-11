@@ -21,7 +21,8 @@
 
 body {
     background-color: #FAF8FF;
-    overflow-y: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 header {
@@ -32,8 +33,9 @@ header {
     align-items: center;
     justify-content: center;
     gap: 16vw;
-    margin-bottom: 3vh;
+
     padding-left: 3.646vw;
+    position: fixed;
 }
 
 header .logo {
@@ -93,8 +95,47 @@ header a {
     background-color: #E9E5EE;
 }
 
+main {
+    display: flex;
+    padding-top: 6vh;
+}
+
 .main-div {
     display: flex;
+}
+
+.divPhoto {
+    display: none;
+    gap: 24px;
+}
+
+.avatar-and-textdiv .divPhoto img {
+    width: 20px;
+    height: 20px;
+    border-radius: 0;
+}
+
+
+
+.choosePhoto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.addPhoto {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hidden {
+    display: none;
+}
+
+.small_logo {
+    width: 20px;
+    height: 20px;
 }
 
 .menu-options {
@@ -258,7 +299,7 @@ header a {
     background: url('images/notviewOption.png');
 }
 
-menu-options .signature-options-div {
+.signature-options-div {
     display: flex;
     flex-direction: column;
     width: 48.151vw;

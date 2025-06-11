@@ -6,7 +6,9 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/chats.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
 <script src="{% static 'js/chat.js' %}" defer></script>
+<script src="{% static 'js/oneChat.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -47,7 +49,15 @@
             </div>
             <input class="search" type="text" placeholder="Пошук">
             <div class="all-contacts">
+                {% for friend in friends %}
                 <div class="profile">
+                    <img class="avatarImage" src="{{friend.profile.photo.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.first_name}} {{friend.last_name}}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="profile">
                     <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
                     <div class="profile-text-div">
                         <p>Jane Cooper</p>
@@ -100,7 +110,7 @@
                     <div class="profile-text-div">
                         <p>Jane Cooper</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -196,8 +206,8 @@
                 {% for group in user.group.all %}
                 <div class="profiles-div">
                     <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
+                        <img class="avatarImage" src="{{group.avatar_group.url}}" alt="">
+                        <div class="profiles-text" id="{{group.id}}">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>
                                 <p class="time-text">09.41</p>
@@ -285,6 +295,8 @@
     <div class="background-blur">
 
         <form method="post" enctype="multipart/form-data" id="create_group">
+            <input type="hidden" class="group_id" value="{{group_id}}">
+            <input type="hidden" class="choosedUsers" name="choosedUsers">
             <div class="group-create">
                 {% csrf_token %}
                 <input type="hidden" class="postPkInput" name="post_id" value="">
@@ -292,597 +304,14 @@
                 <p class="NameTitle">Нова група</p>
                 <input type="text" placeholder="Пошук" class="input_find" id="">
                 <p class="choosed-num">Вибрано: 3</p>
-
                 <div class="list-of-friends">
-                    <p class="letter">A</p>
-                    <hr>
+                    {% for friend in user.profile.friends.all %}
                     <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Аuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
+                        <img src="{{friend.profile.photo.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile.user.first_name}} {{friend.profile.user.last_name}}</p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile.pk}}">
                     </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Аuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Аuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Б</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">В</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Vuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Vuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Vuy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Г</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Д</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Е</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ё</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ж</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">З</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">И</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">К</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Л</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">М</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Н</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">О</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">П</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Р</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">С</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Т</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">У</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ф</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Х</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ч</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ш</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Щ</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Э</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-                    <hr>
-                    <p class="letter">Ю</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-
-                    <hr>
-                    <p class="letter">Я</p>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-                    <hr>
-                    <div class="userChoose">
-                        <img src="{% static 'images/avatar16.png' %}" class="avatar">
-                        <p class="nameLastName">Buy Hawkins</p>
-                        <input type="checkbox" class="addedCheckbox">
-                    </div>
-
-
+                    {% endfor %}
                 </div>
                 <div class="btns">
                     <button class="skipBtn btn" type="button">Скасувати</button>

@@ -21,7 +21,6 @@
 
 body {
     background-color: #FAF8FF;
-    overflow-y: hidden;
 }
 
 header {
@@ -34,6 +33,7 @@ header {
     gap: 16vw;
     margin-bottom: 3vh;
     padding-left: 3.65vw;
+    position: fixed;
 }
 
 header .logo {
@@ -97,6 +97,11 @@ header a {
     display: flex;
 }
 
+main {
+    display: flex;
+    padding-top: 10vh;
+}
+
 .menu-friends {
     display: flex;
     flex-direction: column;
@@ -112,18 +117,14 @@ header a {
 }
 
 #MainText {
+    color: #070A1C;
     font-weight: 700;
 }
 
-recommendations-friends #Requests {
-    color: #81818D;
-}
-
-#Recomendations {
-    color: #81818D;
-}
-
-#AllFriends {
+#Requests,
+#Recomendations,
+#AllFriends,
+#Friends {
     color: #81818D;
 }
 
@@ -134,18 +135,16 @@ recommendations-friends #Requests {
     height: 1145px;
     margin-left: 22.76vw;
     gap: 0.74vh;
-    background-color: white;
-    overflow-y: scroll;
-    overflow-x: hidden;
 }
 
 .requests-friends {
     display: flex;
     flex-direction: column;
     width: 48.07vw;
-    height: 30.46vh;
+    /* height: 30.46vh; */
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
+    background-color: white;
 }
 
 .requests-friends-header {
@@ -164,20 +163,23 @@ recommendations-friends #Requests {
 
 .requests-friends-div {
     display: flex;
-    width: 30.52vw;
-    height: 24.35vh;
+    width: 48vw;
+    flex-wrap: wrap;
+    /* height: 24.35vh; */
     gap: 0.74vh;
     margin-left: 1.04vw;
     margin-top: 1.48vh;
+    margin-bottom: 1.48vh;
 }
 
 .recommendations-friends {
     display: flex;
     flex-wrap: wrap;
     width: 48.07vw;
-    height: 55.56vh;
+    max-height: 55.56vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
+    background-color: white;
 }
 
 .recommendations-friends-div {
@@ -197,6 +199,7 @@ recommendations-friends #Requests {
     height: 55.56vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
+    background-color: white;
 }
 
 .all-friends-div {

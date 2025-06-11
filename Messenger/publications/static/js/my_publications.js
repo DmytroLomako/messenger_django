@@ -7,6 +7,7 @@ let textForm = document.getElementsByName("text")[0]
 let addTag = document.getElementById("add-tag-btn")
 let tagsField = document.getElementById("field")
 let selectTags = document.getElementById("id_tags")
+let selectTagsAll = document.querySelector("#id_tags option")
 let divAddTags = document.querySelector(".beforeBtton")
 let divAddTagsRedact = document.querySelector(".beforeBttonRedact")
 let imagesDiv = document.querySelector(".for-images")
@@ -34,7 +35,7 @@ let formCratePost = document.querySelector(".publication-creation")
 let listFiles = []
 let listFilesRedact = []
 
-let listTags = ["#Відпочинок", "#Натхнення", "#Життя", "#Природа", "#Читання", "#Спокій", "#Гармонія", "#Музика", "#Фільми", "#Подорожі",]
+let listTags = ["#Відпочинок", "#Натхнення", "#Життя", "#Природа", "#Читання", "#Спокій", "#Гармонія", "#Музика", "#Фільми", "#Подорожі"]
 
 for (let count = 0; count < dotsMenu.length; count++) {
     dotsMenu[count].addEventListener("click", () => {
@@ -115,7 +116,15 @@ if (buttonSend) {
         if (input.value) {
             bgBlur.style.display = 'flex'
             let contentInput = bgBlur.querySelector('textarea')
+            let alloptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
             contentInput.textContent = input.value
+
+
+
+            for (let count = 0; count <= 9; count++) {
+                alloptions[count].setAttribute("selected", true)
+                console.log(alloptions[count])
+            }
         }
     })
 }
@@ -123,12 +132,16 @@ cancelBgBlur.addEventListener('click', function () {
     bgBlur.style.display = 'none'
 })
 
+
+
+
+
 if (addTag) {
     addTag.addEventListener("click", () => {
 
         inputAddTag.style.display = inputAddTag.style.display === "block" ? "none" : "block";
         console.log(imageTags.src)
-        if (imageTags.src == "http://127.0.0.1:8005/static/images/add_tag.png") {
+        if (imageTags.src.split("/")[imageTags.src.split("/").length - 1] == `add_tag.png`) {
             imageTags.src = "/static/images/submit.png"
             inputAddTag.value = ""
         } else {
@@ -144,9 +157,11 @@ if (addTag) {
                 let option = document.createElement("option")
 
 
-                alert(document.querySelectorAll("#field #id_tags option")[document.querySelectorAll("#field #id_tags option").length - 1])
 
                 let valueOption = parseInt(document.querySelectorAll("#field #id_tags option")[document.querySelectorAll("#field #id_tags option").length - 1].value) + 1
+                if (document.querySelectorAll("#field #id_tags option").length - 1 == 0) {
+                    valueOption = 0
+                }
 
                 hashTagText.textContent = finalHashTag
                 option.textContent = finalHashTag

@@ -52,7 +52,7 @@
             </div>
             <div class="stats">
                 <div class="posts">
-                    <p class="count">566</p>
+                    <p class="count">{{ user.profile.posts.all | length }}</p>
                     <p class="name">Дописи</p>
                 </div>
 
@@ -71,17 +71,26 @@
         <div class="requests">
             <div class="blockName">
                 <p class="name"><img src="{% static 'images/friends_gray.png' %}">Запити</p>
-                <a href="" class="showAll">Дивитись всі</a>
+                <a href="{% url 'friends' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
+                {% for request in user.requests.all %}
                 <div class="user">
+                    <img src="{{ request.user.profile.photo.url }}">
+                    <div class="nameSubscribers">
+                        <p class="name">{{request.user.first_name}} {{request.user.last_name}}</p>
+                        <p class="subscribers">100k Підписників</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="user">
                     <img src="{% static 'images/avatar2.png' %}">
                     <div class="nameSubscribers">
                         <p class="name">Yehor Aung</p>
                         <p class="subscribers">4.3k Підписників</p>
                     </div>
                 </div>
-
+    
                 <div class="user">
                     <img src="{% static 'images/avatar3.png' %}">
                     <div class="nameSubscribers">
@@ -89,21 +98,21 @@
                         <p class="subscribers">1.6k Підписників</p>
                     </div>
                 </div>
-
+    
                 <div class="user">
                     <img src="{% static 'images/avatar4.png' %}">
                     <div class="nameSubscribers">
                         <p class="name">Yeugen Jenua</p>
                         <p class="subscribers">10.3k Підписників</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
 
         <div class="messages">
             <div class="blockName">
                 <p class="name"><img src="{% static 'images/messages.png' %}">Повідомлення</p>
-                <a href="" class="showAll">Дивитись всі</a>
+                <a href="{% url 'chats' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
                 <div class="user mona">
@@ -200,7 +209,7 @@
             <form method="post" class="publication-creation" enctype="multipart/form-data">
                 <input class="hidden" name="create" value="post">
                 {% csrf_token %}
-                <button id="cancel-bg-blur">x</button>
+                <button type="button" id="cancel-bg-blur">x</button>
                 <p class="NameTitle">Створення публікації</p>
 
                 {% for field in form %}
@@ -216,11 +225,44 @@
 
                         <div class="beforeBtton">
 
-                        </div>
+                            <div class="hashTag" value="1">
+                                <p class="hashTagText">#Відпочинок</p>
+                            </div>
+                            <div class="hashTag" value="2">
+                                <p class="hashTagText">#Натхнення</p>
+                            </div>
+                            <div class="hashTag" value="3">
+                                <p class="hashTagText">#Життя</p>
+                            </div>
+                            <div class="hashTag" value="4">
+                                <p class="hashTagText">#Природа</p>
+                            </div>
+                            <div class="hashTag" value="5">
+                                <p class="hashTagText">#Читання</p>
+                            </div>
+                            <div class="hashTag" value="6">
+                                <p class="hashTagText">#Спокій</p>
+                            </div>
+                            <div class="hashTag" value="7">
+                                <p class="hashTagText">#Гармонія</p>
+                            </div>
+                            <div class="hashTag" value="8">
+                                <p class="hashTagText">#Музика</p>
+                            </div>
+                            <div class="hashTag" value="9">
+                                <p class="hashTagText">#Фільми</p>
+                            </div>
+                            <div class="hashTag" value="10">
+                                <p class="hashTagText">#Подорожі</p>
+                            </div>
 
-                        <label for="add-tag-btn" class="image-input-label">
-                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
-                        </label>
+                            <input type="text" placeholder="#" class="inputAddTag hidden">
+                            <input type="hidden" value="{% url 'save_tag' %}" class="urlToCreateTag">
+
+                            <label for="add-tag-btn" class="image-input-label">
+                                <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                            </label>
+                        </div>
 
                     </div>
                 </div>

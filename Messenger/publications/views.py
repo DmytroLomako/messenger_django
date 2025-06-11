@@ -50,13 +50,13 @@ class MyPublicationsView(CreateView):
 
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)    
         context['all_posts'] = User_Post.objects.all()
         context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
         return context
 
     def dispatch(self, request, *args, **kwargs):
-        if request.user.username:
+        if request.user.email:
             return super().dispatch(request, *args, **kwargs)
         else:
             return redirect("login")

@@ -6,6 +6,8 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'styles/friends.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'js/friends.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -39,9 +41,9 @@
     <div class="main-div">
         <div class="menu-friends">
             <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Головна</u></a>
-            <a class="menu-urls" id="Requests" href="">Запити</a>
-            <a class="menu-urls" id="Recomendations" href="">Рекомендації</a>
-            <a class="menu-urls" id="AllFriends" href="">Всі друзі</a>
+            <a class="menu-urls" id="Requests" href="{% url 'requests' %}">Запити</a>
+            <a class="menu-urls" id="Recomendations" href="{% url 'recomendations' %}">Рекомендації</a>
+            <a class="menu-urls" id="AllFriends" href="{% url 'all_friends' %}">Всі друзі</a>
         </div>
         <div class="all-menu-friends-div">
             <div class="requests-friends">
@@ -50,34 +52,29 @@
                     <a class="see-all-urls" href="">Дивитись всі</a>
                 </div>
                 <div class="requests-friends-div">
+                    {% for request in requests %}
                     <div class="friend-profile">
                         <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            {% if request.profile.photo.url != None %}
+                            <img class="avatar-images" src="{{ request.profile.photo.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                            {% endif %}
                             <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
+                                <p class="nickname-text">{{ request.first_name }} {{ request.last_name }}</p>
+                                <p>@{{ request.username }}</p>
                             </div>
                         </div>
                         <div class="buttons-div-requests">
-                            <button class="accept-button">Підтвердити</button>
-                            <button class="delete-button">Видалити</button>
+                            <button class="accept-button"
+                                value="{% url 'accept_friend' request.id %}">Підтвердити</button>
+                            <button class="delete-button" value="">Видалити</button>
                         </div>
                     </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar6.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Ann Ann</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-requests">
-                            <button class="accept-button">Підтвердити</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
+            <p></p>
             <div class="recommendations-friends">
                 <div class="requests-friends-header">
                     <p>Рекомендації</p>
@@ -88,20 +85,20 @@
                     <div class="friend-profile">
                         <div class="avatar-nickname-div">
                             {% if friend.profile.photo.url != None %}
-                            <img class="avatar-images" src="{{friend.profile.photo.url}}" alt="">
+                            <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
                             {% endif %}
                             <div class="nickname-name">
-                                <p class="nickname-text">{{friend.username}}</p>
-                                <p>@{{friend.last_name}}</p>
+                                <p class="nickname-text">{{ friend.first_name }} {{ friend.last_name }}</p>
+                                <p>@{{ friend.username }}</p>
                             </div>
                         </div>
-                        <form method="post">
-                            {% csrf_token %}
-                            <div class="buttons-div-recommendations">
-                                <button class="add-button" name="add" value="{{friend.id}}">Додати</button>
-                                <button class="delete-button" name="delete" value="{{friend.id}}">Видалити</button>
-                            </div>
-                        </form>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button" name="add"
+                                value="{% url 'request_friend' friend.id %}">Додати</button>
+                            <button class="delete-button" name="delete" value="{{friend.id}}">Видалити</button>
+                        </div>
                     </div>
                     {% endfor %}
 
@@ -113,84 +110,25 @@
                     <a class="see-all-urls" href="">Дивитись всі</a>
                 </div>
                 <div class="all-friends-div">
+                    {% for friend in friends %}
                     <div class="friend-profile">
                         <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
+                            {% if friend.profile.photo.url != None %}
+                            <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                            {% endif %}
                             <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
+                                <p class="nickname-text">{{ friend.first_name }} {{ friend.last_name }}</p>
+                                <p>@{{ friend.username }}</p>
                             </div>
                         </div>
                         <div class="buttons-div-all-friends">
                             <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
+                            <button class="delete-button" value="{% url 'delete_friend' friend.id %}">Видалити</button>
                         </div>
                     </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar8.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar9.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            <img class="avatar-images" src="{% static 'images/avatar2.png' %}" alt="">
-                            <div class="nickname-name">
-                                <p class="nickname-text">Yehor Aung</p>
-                                <p>@thelili</p>
-                            </div>
-                        </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
-                        </div>
-                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

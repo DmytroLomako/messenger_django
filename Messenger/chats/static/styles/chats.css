@@ -149,6 +149,7 @@ main {
     height: 3.89vh;
     border-radius: 0.52vw;
     border: 1px solid #CDCED2;
+    padding-left: 16px;
 }
 
 .all-contacts {
@@ -181,21 +182,100 @@ main {
 .speak-div {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: start;
+    flex-direction: column;
     width: 29.38vw;
     height: 77.13vh;
     border-radius: 0.52vw;
     border: 1px solid #CDCED2;
     margin-left: 0.47vw;
     background-color: white;
+    padding-top: 16px;
+}
+
+.headerGroup {
+    width: 532px;
+    height: 58px;
+
+    display: flex;
+    border-bottom: 1px solid #CDCED2;
+}
+
+.headerStart {
+    display: flex;
+    align-items: center;
+
+    width: 366px;
+    height: 48px;
+    gap: 16px;
+}
+
+.backImg {
+    width: 20px;
+    height: 20px;
+}
+
+.avatarGroup {
+    width: 46px;
+    height: 46px;
+}
+
+.nameAndMembers {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.groupName {
+    color: #070A1C;
+    font-size: 24px;
+}
+
+.membersCount {
+    color: #81818D;
+    font-size: 14px;
+}
+
+
+.mainGroup {
+    height: 576px;
+    width: 532px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 10px;
+    overflow-y: scroll;
+    margin-bottom: 24px;
+}
+
+.backImg {
+    cursor: pointer;
+}
+
+
+
+.bottomGroup form {
+    display: flex;
+    width: 532px;
+    justify-content: space-between;
+}
+
+.input {
+    width: 356px;
+    height: 42px;
+    padding-left: 16px;
+    color: #81818D;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
 }
 
 .start-new-messages {
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 27.71vw;
-    height: 8.06vh;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
     gap: 2.22vh;
 }
 
@@ -233,7 +313,7 @@ main {
     width: 18.28vw;
     height: 2.13vh;
     margin-top: 1.48vh;
-    gap: 3.44vw;
+    gap: 3.34vw;
 }
 
 .message-header-text {
@@ -249,7 +329,7 @@ main {
     color: #81818D;
 }
 
-groups-all-div .see-all {
+.see-all {
     margin-right: 0.78vw;
     color: #543C52;
     text-decoration: none;
@@ -334,6 +414,7 @@ groups-all-div .see-all {
 .avatarImage {
     width: 2.45vw;
     height: 4.26vh;
+    border-radius: 1234px;
 }
 
 .contacts-icon {
@@ -440,6 +521,11 @@ groups-all-div .see-all {
 
     margin-top: 13px;
     margin-bottom: 13px;
+    border-radius: 1234px;
+}
+
+main .addedCheckbox {
+    cursor: pointer;
 }
 
 .nameLastName {
@@ -514,6 +600,7 @@ groups-all-div .see-all {
     gap: 24px;
 }
 
+
 .choosePhoto {
     display: flex;
     align-items: center;
@@ -528,4 +615,81 @@ groups-all-div .see-all {
 
 .hidden {
     display: none;
+}
+
+
+
+#sendMessage {
+    width: 40px;
+    height: 40px;
+    background-color: #543C52;
+    border: 0;
+    border-radius: 1234px;
+    cursor: pointer;
+}
+
+.sendImg {
+    width: 20px;
+    height: 20px;
+}
+
+.avatarMessage {
+    width: 46px;
+    height: 46px;
+
+    border-radius: 1234px;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.nonAvatar {
+    padding-right: 58px;
+    height: 62px;
+
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #E9E5EE;
+    border-radius: 6px;
+    padding-top: 10px;
+    padding-left: 10px;
+    gap: 4px;
+}
+
+.nonAvatarFromMe {
+    padding-right: 58px;
+    height: 62px;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 6px;
+    background-color: #CDCED2;
+    border: 1px solid #CDCED2;
+    padding-left: 10px;
+    gap: 4px;
+}
+
+
+.messageFromMe {
+    display: flex;
+    justify-content: end;
+    height: 62px;
+    width: 100%;
+}
+
+
+.authorUsename {
+    font-size: 10px;
+    color: #543C52;
+}
+
+.messageContent {
+    font-size: 14px;
+    color: #070A1C;
 }

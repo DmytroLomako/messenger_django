@@ -34,6 +34,8 @@ if (passwordField) {
 editBtnHeader.addEventListener("click", () => {
     if (editBtnHeader.type == "submit") {
         const imageInput = document.querySelector("#imageInput")
+        const imageInput2 = document.querySelector(".divPhoto")
+        imageInput2.style.display = "flex"
         imageInput.type = "file"
         editBtnHeader.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
         editBtnHeader.type = "button"
@@ -41,6 +43,7 @@ editBtnHeader.addEventListener("click", () => {
         const imageInput = document.querySelector("#imageInput")
         imageInput.type = "file"
         editBtnHeader.type = "submit"
+        imageInput2.style.display = "none"
     }
 })
 

@@ -67,7 +67,7 @@ form {
 
 .formDiv {
     width: 25.56vw;
-    height: 396px;
+    height: 50.92593vh;
     background-color: white;
 
     display: flex;
@@ -80,6 +80,7 @@ form {
     gap: 1.89vw;
     z-index: 100;
     padding-bottom: 3.78vh;
+    margin-top: -7.40741vh;
 }
 
 .greatings {

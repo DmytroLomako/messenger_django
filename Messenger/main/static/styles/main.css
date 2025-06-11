@@ -21,6 +21,7 @@
 
 body {
     background-color: #FAF8FF;
+    overflow-y: hidden;
 }
 
 header {
@@ -138,10 +139,6 @@ main .miniProfile .avatarNames .names {
     flex-direction: column;
 }
 
-.avatar {
-    border-radius: 1234px;
-}
-
 main .miniProfile .avatarNames .names .nickname {
     width: 18.27vw;
     height: 5.77vh;
@@ -202,6 +199,8 @@ main .requests {
     padding-left: 0.84vw;
     padding-top: 1.89vh;
     gap: 1.26vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 main .requests .blockName {
@@ -523,13 +522,13 @@ main .postPostInput .post {
     margin-top: 0.42vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
-    padding-left: 1.95vh;
-    margin-bottom: 0.73vh;
+    padding-left: 2.10vh;
+    margin-bottom: 0.79vh;
 }
 
 main .postPostInput .post .postHeader {
     width: 48.45vw;
-    height: 8.65vh;
+    height: 9.34vh;
     border-bottom: 1px solid #CDCED2;
     display: flex;
     align-items: center;
@@ -542,6 +541,10 @@ main .postPostInput .post .postHeader {
 main .postPostInput .post .postHeader .avatar {
     width: 2.41vw;
     height: 4.83vh;
+}
+
+.avatar {
+    border-radius: 1234px;
 }
 
 main .postPostInput .post .postHeader .text {
@@ -557,7 +560,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 .dotsDiv {
     position: absolute;
     right: 2.10vw;
-    top: 2.92vh;
+    top: 3.15vh;
     border-radius: 0.26vw;
 }
 
@@ -575,7 +578,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 
 .edit {
     width: 100%;
-    height: 2.92vh;
+    height: 3.15vh;
     display: flex;
     align-items: center;
     gap: 0.26vw;
@@ -584,7 +587,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 
 .delete {
     width: 100%;
-    height: 2.92vh;
+    height: 3.15vh;
     display: flex;
     align-items: center;
     gap: 0.26vw;
@@ -605,7 +608,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 
 main .postPostInput .post .postHeader .paintingDiv .painting {
     width: 11.55vw;
-    height: 4.76vh;
+    height: 5.14vh;
 }
 
 main .postArea .post {
@@ -645,17 +648,17 @@ main .postMain .images {
 
 main .postMain .images .postImage1 {
     width: 22.73vw;
-    height: 31.78vh;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage2 {
     width: 22.73vw;
-    height: 31.78vh;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage3 {
     width: 14.86vw;
-    height: 31.78vh;
+    height: 34.31vh;
 }
 
 main .postMain .images .postImage4 {
@@ -693,7 +696,7 @@ main .postFooter img {
 
 main .responses .response {
     width: 48.45vw;
-    height: 20.21vh;
+    height: 21.83vh;
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
@@ -717,7 +720,7 @@ main .responses .response .headerResponse {
     align-items: center;
     gap: 0.63vw;
     padding-left: 1.05vw;
-    height: 8.35vh;
+    height: 9.02vh;
     border-bottom: 1px solid #CDCED2;
 }
 
@@ -731,7 +734,7 @@ main .responses .response .mainResponse {
 .PostPostInput {
     overflow-y: scroll;
     overflow-x: hidden;
-    height: 87.15vh;
+    height: 94.12vh;
 }
 
 .likesImg {
@@ -789,7 +792,7 @@ input {
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
-    padding: 0.42vh 0.75vw 4.28vh 2.31vw;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
     gap: 0.84vw;
     overflow-y: scroll;
@@ -800,7 +803,7 @@ input {
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
-    padding: 0.42vh 0.75vw 4.28vh 2.31vw;
+    padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
     gap: 0.84vw;
     overflow-y: scroll;
@@ -817,7 +820,7 @@ input {
     padding-left: 0.84vw;
     padding-top: 1.68vh;
     width: 35.96vw;
-    height: 12.24vh;
+    height: 13.22vh;
 }
 
 .publication-creation input {
@@ -831,7 +834,7 @@ input {
     padding-left: 0.84vw;
     padding-top: 1.68vh;
     width: 35.96vw;
-    height: 12.24vh;
+    height: 13.22vh;
 }
 
 .hashtagText {
@@ -871,7 +874,7 @@ input {
 }
 
 .hashtag {
-    height: 2.72vh;
+    height: 2.94vh;
     border-radius: 0.31vw;
     font-weight: 400;
     font-size: 0.73vw;
@@ -886,7 +889,7 @@ input {
 
 #cancel-bg-blur {
     width: 100%;
-    height: 2.43vh;
+    height: 2.62vh;
     text-align: end;
     background-color: white;
     border: 0;
@@ -896,7 +899,7 @@ input {
 
 #cancel-bg-blur-redact {
     width: 100%;
-    height: 2.43vh;
+    height: 2.62vh;
     text-align: end;
     background-color: white;
     border: 0;
@@ -914,7 +917,7 @@ input {
 
 #imageForPost {
     width: 11.44vw;
-    height: 25.74vh;
+    height: 27.81vh;
     border-radius: 0.78vw;
 }
 
@@ -923,16 +926,17 @@ input {
     height: 4.20vh;
     position: absolute;
     right: 0.52vw;
-    top: 0.97vh;
+    top: 1.05vh;
 }
 
 .divImageDelete {
     position: relative;
     width: 11.44vw;
-    height: 24.87vh;
+    height: 26.86vh;
 }
 
-.for-images {
+.for-images,
+.for-images-redact {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -1022,4 +1026,31 @@ input {
 
 .tab-now {
     background-color: #E9E5EE;
+}
+
+.tag-input {
+    width: 9.84vw;
+    height: 2.59vh;
+    border: 0.21vw;
+    background-color: white;
+    border: 1px solid #81818D;
+}
+
+.beforeBtton {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.beforeBtton label {
+    order: 999999;
+}
+
+
+.inputAddTag {
+    width: 9.84vw;
+    height: 2.59vh;
+    border: 0.21vw;
+    background-color: white;
+    border: 1px solid #81818D;
+    order: 999999;
 }
