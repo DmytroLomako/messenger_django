@@ -137,6 +137,8 @@ class AllFriendsView(TemplateView):
             friends.append(friend.user)
         for friend in user_object.profile.friends.all():
             friends.append(friend)
+
+
         
         context["friends"] = friends
         return context

@@ -57,9 +57,30 @@ class ChatsView(CreateView):
         user_profile_now = UserProfile.objects.get(id = self.request.user.id)
         print(user_profile_now.friends)
 
-        context["friends"] = user_profile_now.friends.all()
+        user_object = User.objects.get(username = self.request.user)
+        friends = []
+        for friend in user_object.friends.all():
+            friends.append(friend.user)
+        for friend in user_object.profile.friends.all():
+            friends.append(friend)
+        
+        list_personal_chats = ChatGroup.objects.filter(personal_chat = True)
 
-        print(ChatGroup.objects.last())
+        messeges = ChatMessage.objects.all()
+        not_viewed_messeges = []
+
+        for message in messeges:
+
+            if user_object not in message.views.all() and user_object in message.chat_group.users.all():
+                not_viewed_messeges.append(message)
+        context["not_viewed_messeges"] = not_viewed_messeges
+  
+
+        context["friends"] = friends
+        context["personal_chats"] = list_personal_chats
+        
+
+        print(user_profile_now.friends.all())
         if len(ChatGroup.objects.all()) == 0:
             context["group_id"] =  0
         else:
@@ -89,12 +110,12 @@ def create_chat(request, user_pk):
     group_personal_chat = groups_of_user_to_connect.filter(users = current_user).first()
     if not group_personal_chat:
         group_personal_chat = ChatGroup.objects.create(
-            name=f'personal, users: {current_user}-{user_to_connect}',
+            name=f'{current_user}-{user_to_connect}',
             personal_chat=True
         )
         group_personal_chat.users.set([current_user,user_to_connect])
         group_personal_chat.save()
-    return redirect("chat_group",group_personal_chat.pk)
+    return redirect(f"chat", group_personal_chat.pk)
 
 
 class ChatView(FormView):
@@ -116,10 +137,16 @@ class ChatView(FormView):
         chat_group = ChatGroup.objects.get(pk=chat_group_pk)
         # Якщо користувач є у списку учасників групи
         if user in chat_group.users.all():
-            # Продовжуємо обробку запиту.
+            # Отримпуємо усі повідомлення, що знаходяться у цій групі
+            all_messages = ChatMessage.objects.filter(chat_group = chat_group)
+            # Перебараємо усі повідомлення
+            for message in all_messages:
+                # Додаємо корисстувача у поле views за зв'язком ManyToMany
+                message.views.add(user)
+                # Збрегіаємо зв'язок з користувачем у БД
+                message.save()
             return super().dispatch(request, *args, **kwargs)
-        # Перенаправляємо користувача на головну сторінку.
-        return redirect("group_list")
+        return redirect("chats")
     
     def get_context_data(self, **kwargs):
         '''

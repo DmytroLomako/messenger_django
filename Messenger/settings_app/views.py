@@ -60,3 +60,13 @@ def save_user_sign(request):
                 profile.sign = sign
                 profile.save()
             return redirect('settings', pk=request.user.pk)
+
+def save_username(request, username):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            user= User.objects.get(id=request.user.id)
+            print(username)
+            user.username = username
+
+            user.save()
+            return redirect('settings', pk=request.user.pk)

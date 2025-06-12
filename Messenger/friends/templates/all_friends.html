@@ -43,7 +43,8 @@
             <a class="menu-urls" id="Friends" href="{% url 'friends' %}">Головна</a>
             <a class="menu-urls" id="Requests" href="{% url 'requests' %}">Запити</a>
             <a class="menu-urls" id="Recomendations" href="{% url 'recomendations' %}">Рекомендації</a>
-            <a class="menu-urls" id="AllFriends" href="{% url 'all_friends' %}"><u id="MainText" title="Подчеркнутый текст">Всі друзі</u></a>
+            <a class="menu-urls" id="AllFriends" href="{% url 'all_friends' %}"><u id="MainText"
+                    title="Подчеркнутый текст">Всі друзі</u></a>
         </div>
         <div class="all-menu-friends-div">
             <div class="all-friends">
@@ -53,23 +54,23 @@
                 </div>
                 <div class="all-friends-div">
                     {% for friend in friends %}
-                        <div class="friend-profile">
-                            <div class="avatar-nickname-div">
-                                {% if friend.profile.photo.url != None %}
-                                    <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
-                                {% else %}
-                                    <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
-                                {% endif %}
-                                <div class="nickname-name">
-                                    <p class="nickname-text">{{ friend.first_name }} {{ friend.last_name }}</p>
-                                    <p>@{{ friend.username }}</p>
-                                </div>
-                            </div>
-                            <div class="buttons-div-all-friends">
-                                <button class="message-button">Повідомлення</button>
-                                <button class="delete-button">Видалити</button>
+                    <div class="friend-profile">
+                        <div class="avatar-nickname-div">
+                            {% if friend.profile.photo.url != None %}
+                            <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                            {% endif %}
+                            <div class="nickname-name">
+                                <p class="nickname-text">{{ friend.first_name }} {{ friend.last_name }}</p>
+                                <p>@{{ friend.username }}</p>
                             </div>
                         </div>
+                        <div class="buttons-div-all-friends">
+                            <button class="message-button" id="{{friend.profile.id}}">Повідомлення</button>
+                            <button class="delete-button">Видалити</button>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

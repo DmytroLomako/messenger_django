@@ -50,7 +50,7 @@ class MyPublicationsView(CreateView):
 
     
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)    
+        context = super().get_context_data(**kwargs)  
         context['all_posts'] = User_Post.objects.all()
         context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
         return context

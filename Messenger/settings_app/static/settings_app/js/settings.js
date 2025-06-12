@@ -31,16 +31,38 @@ if (passwordField) {
 }
 
 
+const title = document.querySelector(".title")
+const headerDivEdit = document.querySelector(".card-profile-div")
+const labelUsername = document.querySelector(".username")
+const username = document.querySelector("#inputUsername")
+const usernameP = document.querySelector(".username")
+
 editBtnHeader.addEventListener("click", () => {
     if (editBtnHeader.type == "submit") {
         const imageInput = document.querySelector("#imageInput")
         const imageInput2 = document.querySelector(".divPhoto")
+        title.style.display = "block"
         imageInput2.style.display = "flex"
         imageInput.type = "file"
         editBtnHeader.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
         editBtnHeader.type = "button"
+        headerDivEdit.style.height = "325px"
+        labelUsername.style.display = "flex"
+        username.style.display = "flex"
+        usernameP.style.display = "none"
     } else {
+        $.ajax({
+            url: `/save_username/${document.querySelector("#inputUsername").value}/`,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        })
         const imageInput = document.querySelector("#imageInput")
+        title.style.display = "none"
         imageInput.type = "file"
         editBtnHeader.type = "submit"
         imageInput2.style.display = "none"

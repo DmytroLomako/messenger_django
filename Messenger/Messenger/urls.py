@@ -23,7 +23,7 @@ from main.views import MainView
 from create_tag.views import CreateTagView
 from settings_app.views import UserUpdateView
 from chats.views import ChatsView
-
+from settings_app.views import save_username
 
 
 urlpatterns = [
@@ -37,7 +37,8 @@ urlpatterns = [
     path("settings/", include("settings_app.urls")),
     path("", include("main.urls")),
     path("chats/", ChatsView.as_view(), name= "chats"),
-    path("chats/", include("chats.urls"))
+    path("chats/", include("chats.urls")),
+    path("save_username/<str:username>/", save_username, name= "save_username")
 ]
 
 

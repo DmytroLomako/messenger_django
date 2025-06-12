@@ -52,7 +52,7 @@
             </div>
             <div class="stats">
                 <div class="posts">
-                    <p class="count">566</p>
+                    <p class="count">{{request.user.posts.all | length}}</p>
                     <p class="name">Дописи</p>
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="friends">
-                    <p class="count">222</p>
+                    <p class="count">{{user.friends.all | length}}</p>
                     <p class="name">Друзі</p>
                 </div>
             </div>
@@ -393,7 +393,6 @@
 
                 {% endif %}
                 {% endfor %}
-                <a href="{% url 'create_tag' %}">Створити тег</a>
 
             </form>
 

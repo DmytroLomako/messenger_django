@@ -102,3 +102,26 @@ create_group.addEventListener("submit", (event) => {
         }
     })
 })
+
+let profilesList = document.querySelectorAll(".profile")
+
+console.log(profilesList)
+
+profilesList.forEach(element => {
+    element.addEventListener("click", () => {
+        console.log(element.id)
+
+        window.location.href = `create_chat/${element.id}/`
+    })
+
+});
+
+
+const datesAndTimes = document.querySelectorAll('.time-text')
+// Перебираємо отримані HTML-елементи з датами та часом
+for (let dt of datesAndTimes) {
+    // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
+    let dateAndTime = dt.textContent
+
+    dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
+}

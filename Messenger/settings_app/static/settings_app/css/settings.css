@@ -164,11 +164,26 @@ main {
     display: flex;
     flex-direction: column;
     width: 48.151vw;
-    height: 95.926vh;
     gap: 0.741vh;
     margin-left: 22.682vw;
     background-color: white;
 }
+
+.label {
+    width: 313px;
+    color: #81818D;
+    display: none;
+}
+
+#inputUsername {
+    width: 313px;
+    height: 42px;
+    padding-left: 16px;
+    border: 1px solid #81818D;
+    border-radius: 10px;
+    display: none;
+}
+
 
 .card-profile-div {
     display: flex;
@@ -195,7 +210,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 46.484vw;
-    height: 16.204vh;
+    height: 100%;
     gap: 2.222vh;
 }
 
@@ -210,7 +225,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 46.484vw;
-    height: 5.093vh;
+    /* height: 5.093vh; */
     gap: 0.926vh;
 }
 

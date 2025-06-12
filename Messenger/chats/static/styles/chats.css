@@ -242,10 +242,31 @@ main {
     width: 532px;
     display: flex;
     flex-direction: column;
-    justify-content: end;
-    gap: 10px;
-    overflow-y: scroll;
+    overflow-y: auto;
     margin-bottom: 24px;
+    gap: 10px;
+}
+
+
+
+.message {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.nonAvatar {
+    padding: 10px 23px 10px 10px;
+
+    display: flex;
+    align-items: end;
+    border-radius: 6px;
+    background-color: white;
+    border: 1px solid #E9E5EE;
+    padding-left: 10px;
+    gap: 10px;
+    max-width: 200px;
+
 }
 
 .backImg {
@@ -305,6 +326,9 @@ main {
     border-radius: 0.52vw;
     background-color: white;
     gap: 2.22vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
 }
 
 .message-header {
@@ -340,6 +364,8 @@ main {
     flex-direction: column;
     width: 18.28vw;
     height: 28.70vh;
+    gap: 8px;
+    margin-left: 16px;
 }
 
 .profiles-div {
@@ -647,39 +673,41 @@ main .addedCheckbox {
 }
 
 
-.nonAvatar {
-    padding-right: 58px;
-    height: 62px;
 
+.usernameAndTextcontent {
     display: flex;
     flex-direction: column;
-    background-color: white;
-    border: 1px solid #E9E5EE;
-    border-radius: 6px;
-    padding-top: 10px;
-    padding-left: 10px;
     gap: 4px;
 }
 
+.datetime {
+    color: #81818D;
+    font-size: 10px;
+    width: 30px;
+}
+
+#datetimeFromMe {
+    color: #81818D;
+    font-size: 10px;
+    width: 30px;
+}
+
 .nonAvatarFromMe {
-    padding-right: 58px;
-    height: 62px;
+    padding: 10px 23px 10px 10px;
 
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    align-items: end;
     border-radius: 6px;
     background-color: #CDCED2;
     border: 1px solid #CDCED2;
     padding-left: 10px;
-    gap: 4px;
+    gap: 10px;
+    max-width: 300px;
 }
-
 
 .messageFromMe {
     display: flex;
     justify-content: end;
-    height: 62px;
     width: 100%;
 }
 
@@ -692,4 +720,6 @@ main .addedCheckbox {
 .messageContent {
     font-size: 14px;
     color: #070A1C;
+    max-width: 150px;
+    word-wrap: break-word;
 }

@@ -1,7 +1,7 @@
 let addButtons = document.querySelectorAll('.add-button');
 let requestsFriendsDiv = document.querySelector('.requests-friends-div');
-addButtons.forEach(function(addButton) {
-    addButton.addEventListener('click', function() {
+addButtons.forEach(function (addButton) {
+    addButton.addEventListener('click', function () {
         $.ajax({
             url: `${addButton.getAttribute("value")}`,
             type: 'POST',
@@ -17,8 +17,8 @@ addButtons.forEach(function(addButton) {
 
 let acceptButtons = document.querySelectorAll('.accept-button');
 let allFriendsDiv = document.querySelector('.all-friends-div');
-acceptButtons.forEach(function(acceptButton) {
-    acceptButton.addEventListener('click', function() {
+acceptButtons.forEach(function (acceptButton) {
+    acceptButton.addEventListener('click', function () {
         console.log(1)
         $.ajax({
             url: `${acceptButton.getAttribute("value")}`,
@@ -39,8 +39,8 @@ acceptButtons.forEach(function(acceptButton) {
 });
 
 let deleteButtons = document.querySelectorAll('.delete-button');
-deleteButtons.forEach(function(deleteButton) {
-    deleteButton.addEventListener('click', function() {
+deleteButtons.forEach(function (deleteButton) {
+    deleteButton.addEventListener('click', function () {
         $.ajax({
             url: `${deleteButton.getAttribute("value")}`,
             type: 'POST',
@@ -56,4 +56,12 @@ deleteButtons.forEach(function(deleteButton) {
             }
         })
     });
+});
+
+const MessegeBtn = document.querySelectorAll(".message-button")
+
+MessegeBtn.forEach(element => {
+    element.addEventListener("click", () => {
+        window.location.href = `/chats/create_chat/${element.id}/`
+    })
 });

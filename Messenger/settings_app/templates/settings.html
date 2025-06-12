@@ -4,6 +4,7 @@
 
 {% block link %}
 <link rel="stylesheet" href="{% static 'settings_app/css/settings.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
 <script src="{% static 'settings_app/js/settings.js' %}" defer></script>
 {% endblock %}
 
@@ -20,7 +21,7 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'main' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -47,7 +48,7 @@
                 <a class="menu-urls" id="Alboms" href="">Альбоми</a>
             </div>
             <div class="options-div">
-                <div class="card-profile-div">
+                <div class="card-profile-div headerDiv">
                     <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data"
                         class="avatar-and-textdiv">
                         <div class="card-profile-header">
@@ -56,6 +57,7 @@
                                     src="{% static 'images/edit2.png' %}" alt="">Редагувати інформацію</button>
                         </div>
                         {% csrf_token %}
+                        <p class="title hidden">Оберіть або завантажте фото профілю</p>
                         {% if request.user.profile.photo %}
                         <div class="avatarDiv">
                             <label for="imageInput">
@@ -87,7 +89,9 @@
                         </div>
                         <div class="nickname-name">
                             <p class="nickname-text">{{user.first_name}} {{user.last_name}}</p>
-                            <p>@{{user.username}}</p>
+                            <p class="username">@{{user.username}}</p>
+                            <label for="inputUsername" class="label">Ім'я користувача</label>
+                            <input type="text" class="input" id="inputUsername" value="{{user.username}}">
                         </div>
                     </form>
                     <!-- <img src="{% static 'images/avatar13.png' %}" alt="">

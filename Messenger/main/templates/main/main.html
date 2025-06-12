@@ -52,7 +52,7 @@
             </div>
             <div class="stats">
                 <div class="posts">
-                    <p class="count">{{ user.profile.posts.all | length }}</p>
+                    <p class="count">{{ request.user.posts.all | length }}</p>
                     <p class="name">Дописи</p>
                 </div>
 
@@ -62,7 +62,7 @@
                 </div>
 
                 <div class="friends">
-                    <p class="count">222</p>
+                    <p class="count">{{user.friends.all | length}}</p>
                     <p class="name">Друзі</p>
                 </div>
             </div>
@@ -111,11 +111,34 @@
 
         <div class="messages">
             <div class="blockName">
-                <p class="name"><img src="{% static 'images/messages.png' %}">Повідомлення</p>
+                <p class="name"><img src="{% static 'images/chat.png' %}">Повідомлення</p>
                 <a href="{% url 'chats' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
+                {% for message in not_viewed_messeges %}
+                <!-- <div class="profles">
+                    <img class="avatar" src="{{message.author.profile.photo.url}}" alt="">
+                    <div class="profiles-text">
+                        <div class="header-time-prfl-text">
+                            <p>{{message.author.first_name}} {{message.author.last_name}}</p>
+                            <p class="time-text">{{message.date_time}}</p>
+                        </div>
+                        <p>{{message.content}}</p>
+                    </div>
+                </div> -->
+
                 <div class="user mona">
+                    <img src="{{message.author.profile.photo.url}}" class="avatar">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">{{message.author.first_name}} {{message.author.last_name}}</p>
+                            <p class="time">{{message.date_time}}</p>
+                        </div>
+                        <p class="message">Привіт! Як справи?</p>
+                    </div>
+                </div>
+                {% endfor %}
+                <!-- <div class="user mona">
                     <img src="{% static 'images/avatar5.png' %}">
                     <div class="nameSubscribers">
                         <div class="nameTime">
@@ -144,7 +167,7 @@
                         </div>
                         <p class="message">Привіт!</p>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -383,7 +406,6 @@
 
                 {% endif %}
                 {% endfor %}
-                <a href="{% url 'create_tag' %}">Створити тег</a>
 
             </form>
 

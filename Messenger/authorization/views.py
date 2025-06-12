@@ -70,7 +70,7 @@ class VerifyCodeView(View):
                 if 'verification_user_id' in request.session:
                     del request.session['verification_user_id']
                 
-                login(request, user)
+                login(request, user,backend='authorization.backends.LoginEmail')
                 return redirect('login')
             else:
                 return render(request, 'authorization/registration/verification_failed.html')

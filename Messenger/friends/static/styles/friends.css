@@ -233,9 +233,11 @@ main {
     margin-top: 1.48vh;
 }
 
+
 .avatar-images {
     width: 5.00vw;
     height: 8.89vh;
+    border-radius: 1234px;
 }
 
 .nickname-name {

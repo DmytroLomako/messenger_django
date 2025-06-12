@@ -451,3 +451,14 @@ document.querySelectorAll(".liked img").forEach(element => {
     element.src = "/static/images/liked.png"
 });
 
+
+
+const datesAndTimes = document.querySelectorAll('.time')
+// Перебираємо отримані HTML-елементи з датами та часом
+for (let dt of datesAndTimes) {
+    // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
+    let dateAndTime = dt.textContent
+
+    // вказуємо час повідомлення
+    dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
+}

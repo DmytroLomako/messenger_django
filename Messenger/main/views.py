@@ -7,6 +7,7 @@ from publications.forms import CreatePostForm
 from django.urls import reverse_lazy
 from authorization.models import UserProfile
 from django.contrib.auth.models import User
+from chats.models import ChatMessage
 # Create your views here.
 
 class MainView(CreateView):
@@ -26,6 +27,17 @@ class MainView(CreateView):
         context['all_posts'] = User_Post.objects.all()
         print(context['all_posts'], "\n\n\n\n\n\n\n\n\n\n")
         context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
+
+        user_object = User.objects.get(username = self.request.user)
+        messeges = ChatMessage.objects.all()
+        not_viewed_messeges = []
+
+        for message in messeges:
+
+            if user_object not in message.views.all() and user_object in message.chat_group.users.all():
+                not_viewed_messeges.append(message)
+        context["not_viewed_messeges"] = not_viewed_messeges
+
         return context
     
     def dispatch(self, request, *args, **kwargs):
