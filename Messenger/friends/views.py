@@ -185,3 +185,14 @@ def delete_friend(request, pk):
         profile_user.save()
 
     return JsonResponse({"status": "ok"})
+
+class FriendView(TemplateView):
+    template_name = "friend_info.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        friend = User.objects.get(id = self.kwargs['friend_pk'])
+        context["friend"] = friend
+        
+        return context

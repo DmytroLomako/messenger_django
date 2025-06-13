@@ -1,0 +1,9 @@
+.edit-information-btn-header{
+    width: 7vw;
+}
+.avatar-and-textdiv img{
+    border-radius: 0;
+}
+.avatar-and-textdiv{
+    align-items: flex-start;
+}

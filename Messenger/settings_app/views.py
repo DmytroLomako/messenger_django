@@ -3,6 +3,7 @@ from django.contrib.auth import login
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
 from .forms import UserUpdateForm
+from django.views.generic import ListView
 from authorization.models import UserProfile
 
 
@@ -70,3 +71,9 @@ def save_username(request, username):
 
             user.save()
             return redirect('settings', pk=request.user.pk)
+        
+class AlbumsView(ListView):
+    # model = Album
+    model = User
+    template_name = "albums.html"
+    context_object_name = "albums"

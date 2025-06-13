@@ -54,55 +54,49 @@ for (let count = 0; count < dotsMenu.length; count++) {
     })
 }
 
-function updateDeleteButtons() {
-    let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
-    deleteBtnsArray.forEach(element => {
-        element.addEventListener("click", () => {
-            console.log(Number(element.id.split("delete")[1]))
-            console.log(listFilesRedact)
-            delete listFilesRedact[Number(element.id.split("delete")[1])]
-            console.log(listFilesRedact)
-            delete listFiles[Number(element.id.split("delete")[1])];
-            document.getElementById(Number(element.id.split("delete")[1])).remove()
-        })
+if (imageInput) {
+    imageInput.addEventListener('change', function () {
+        console.log(imageInput.files.length)
+        imagesDiv.innerHTML = ''
+        listFiles = []
+        for (let count = 0; count < imageInput.files.length; count++) {
+            console.log(imageInput.files[count])
+            let file = imageInput.files[count]
+            let divImage = document.createElement("div")
+            divImage.classList.add("divImageDelete")
+            let createImage = document.createElement("img")
+            let deleteBtn = document.createElement("img")
+            deleteBtn.src = "/static/images/delete.png"
+            deleteBtn.classList.add("deleteBtn")
+            deleteBtn.id = "delete" + count
+            divImage.id = count
+            listFiles.push(imageInput.files[count])
+            createImage.id = "imageForPost"
+            if (file) {
+                createImage.setAttribute('src', URL.createObjectURL(file));
+                divImage.appendChild(createImage)
+                divImage.appendChild(deleteBtn)
+                imagesDiv.appendChild(divImage)
+            }
+        }
+
+
+        let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
+        let allImages = document.querySelectorAll(".divImageDelete")
+
+        deleteBtnsArray.forEach(element => {
+            element.addEventListener("click", () => {
+                delete listFiles[Number(element.id.split("delete")[1])];
+                document.getElementById(Number(element.id.split("delete")[1])).remove()
+            })
+        });
     });
 }
 
-function displayImage(input, div, filesList) {
-    div.innerHTML = ''
-    filesList.length = 0
-    for (let count = 0; count < input.files.length; count++) {
-        let file = input.files[count]
-        let divImage = document.createElement("div")
-        divImage.classList.add("divImageDelete")
-        let createImage = document.createElement("img")
-        let deleteBtn = document.createElement("img")
-        deleteBtn.src = "/static/images/delete.png"
-        deleteBtn.classList.add("deleteBtn")
-        deleteBtn.id = "delete" + count
-        divImage.id = count
-        filesList.push(input.files[count])
-        createImage.id = "imageForPost"
-        if (file) {
-            createImage.setAttribute('src', URL.createObjectURL(file));
-            divImage.appendChild(createImage)
-            divImage.appendChild(deleteBtn)
-            div.appendChild(divImage)
-        }
-    }
-    updateDeleteButtons();
+let allTags = []
+if (selectTags) {
+    allTags = selectTags.textContent.split("\n")
 }
-
-
-imageInput.addEventListener('change', function () {
-    displayImage(imageInput, imagesDiv, listFiles);
-});
-
-imageInputRedact.addEventListener('change', function () {
-    displayImage(imageInputRedact, imagesDivRedact, listFilesRedact);
-})
-
-let allTags = selectTags.textContent.split("\n")
 let finalAllTags = []
 
 allTags.forEach((element) => {
@@ -221,274 +215,254 @@ if (addTag) {
 
 
 
-        }
-    })
-}
-
-
-
-// if (addTag) {
-//     addTag.addEventListener("click", () => {
-//         tagsField.style.display = tagsField.style.display === "block" ? "none" : "block";
-//         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
-//     })
-// }
-
-// if (addTagBtnRedact) {
-//     addTagBtnRedact.addEventListener("click", () => {
-//         tagsHiddenRedact.style.display = tagsHiddenRedact.style.display === "block" ? "none" : "block";
-//         let hashtagsInnerHtml = document.getElementsByClassName("hashtag")
-//     })
-// }
-
-// selectTags.addEventListener("change", (event) => {
-//     divAddTags.textContent = ''
-//     selectTags.querySelectorAll('option').forEach((option) => {
-//         if (option.selected) {
-//             let hashTagElement = document.createElement("div")
-//             let hashTagText = document.createElement("p")
-//             hashTagElement.classList.add("hashTag")
-//             hashTagText.classList.add("hashTagText")
-//             hashTagText.textContent = finalAllTags[option.value - 1]
-//             hashTagElement.appendChild(hashTagText)
-//             divAddTags.insertBefore(hashTagElement, imageTags)
-//         }
-//     })
-// })
-
-
-
-
-let likeButtons = document.querySelectorAll('.like-button')
-likeButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-        if (!button.classList.contains("liked")) {
-            document.querySelector(`#like${button.id}`).src = "/static/images/liked.png"
-        } else {
-            document.querySelector(`#like${button.id}`).src = "/static/images/likes.png"
-        }
-        let likeCount = button.querySelector('b')
-        let isLiked = button.classList.contains('liked')
-        if (isLiked) {
-            likeCount.textContent = parseInt(likeCount.textContent) - 1
-            button.classList.remove('liked')
-        } else {
-            likeCount.textContent = parseInt(likeCount.textContent) + 1
-            button.classList.add('liked')
-        }
-        $.ajax({
-            url: `${button.getAttribute("value")}`,
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            },
-            success: function (response) {
-                console.log(response)
-            }
-        })
-    })
-})
-
-let likesImages = document.querySelectorAll(".likesImg")
-
-
-deleteBtns.forEach((button) => {
-    button.addEventListener("click", function () {
-        let postObject = document.querySelector(`#post${button.id}`)
-        postObject.remove()
-        $.ajax({
-            url: `${button.getAttribute("value")}`,
-            type: 'POST',
-            data: {
-                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            },
-            success: function (response) {
-                console.log(response)
-            }
-        })
-    })
-})
-
-
-
-editBtns.forEach(element => {
-    element.addEventListener("click", () => {
-        imagesDiv.innerHTML = ''
-        listFiles = []
-        for (let count = 0; count < imageInput.files.length; count++) {
-            let file = imageInput.files[count]
-            let divImage = document.createElement("div")
-            divImage.classList.add("divImageDelete")
-            let createImage = document.createElement("img")
-            let deleteBtn = document.createElement("img")
-            deleteBtn.src = "/static/images/delete.png"
-            deleteBtn.classList.add("deleteBtn")
-            deleteBtn.id = "delete" + count
-            divImage.id = count
-            listFiles.push(imageInput.files[count])
-            createImage.id = "imageForPost"
-            if (file) {
-                createImage.setAttribute('src', URL.createObjectURL(file));
-                divImage.appendChild(createImage)
-                divImage.appendChild(deleteBtn)
-                imagesDiv.appendChild(divImage)
-            }
-        }
-        blurRedact.style.display = "flex"
-        postPkInput.value = element.id
-        $.ajax({
-            url: `/publications/redact/${element.id}/`,
-            type: 'POST',
-            data: {
-                'pk': element.id,
-                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            },
-            success: function (response) {
-                console.log(JSON.parse(response))
-                let post = JSON.parse(response)[0]["fields"]
-                document.querySelector(".title").value = post["title"]
-                document.querySelector(".subject").value = post["subject"]
-                document.querySelector(".textField").textContent = post["text"]
-                document.querySelector(".link").value = post["article_link"]
-
-                let tagsFromPost = post["tags"]
-
-                tagsFromPost.forEach(element => {
-                    if (selectRedact[element - 1]) {
-                        selectRedact[element - 1].selected = true;
-                    }
+            if (selectTags) {
+                selectTags.addEventListener("change", (event) => {
+                    console.log("l,kphwrm")
+                    divAddTags.textContent = ''
+                    selectTags.querySelectorAll('option').forEach((option) => {
+                        if (option.selected) {
+                            let hashTagElement = document.createElement("div")
+                            let hashTagText = document.createElement("p")
+                            hashTagElement.classList.add("hashTag")
+                            hashTagText.classList.add("hashTagText")
+                            hashTagText.textContent = finalAllTags[option.value - 1]
+                            hashTagElement.appendChild(hashTagText)
+                            divAddTags.appendChild(hashTagElement)
+                        }
+                    })
                 })
+            }
 
-                let selectedTags = []
-                selectRedact.forEach(element => {
-                    if (element.selected == true) {
-                        selectedTags.push(element)
+
+
+            let likeButtons = document.querySelectorAll('.like-button')
+            likeButtons.forEach((button) => {
+                button.addEventListener('click', function () {
+                    if (!button.classList.contains("liked")) {
+                        document.querySelector(`#like${button.id}`).src = "/static/images/liked.png"
+                    } else {
+                        document.querySelector(`#like${button.id}`).src = "/static/images/likes.png"
                     }
-                });
+                    let likeCount = button.querySelector('b')
+                    let isLiked = button.classList.contains('liked')
+                    if (isLiked) {
+                        likeCount.textContent = parseInt(likeCount.textContent) - 1
+                        button.classList.remove('liked')
+                    } else {
+                        likeCount.textContent = parseInt(likeCount.textContent) + 1
+                        button.classList.add('liked')
+                    }
+                    $.ajax({
+                        url: `${button.getAttribute("value")}`,
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+                })
+            })
 
-                let list_tags = []
-                selectedTags.forEach(element => {
-                    list_tags.push(element.value)
-                });
+            let likesImages = document.querySelectorAll(".likesImg")
 
-                document.querySelector(".tags-list").value = `${list_tags}`
 
-                let images = JSON.parse(response).slice(1);
-                listFiles = [];
-                images.forEach((element, index) => {
-                    const existingImageUrl = element.fields.image;
-                    if (existingImageUrl) {
-                        fetch(`/media/${existingImageUrl}`)
-                            .then(response => response.blob())
-                            .then(blob => {
-                                const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
-                                listFilesRedact.push(file);
-                            });
+            deleteBtns.forEach((button) => {
+                button.addEventListener("click", function () {
+                    let postObject = document.querySelector(`#post${button.id}`)
+                    postObject.remove()
+                    $.ajax({
+                        url: `${button.getAttribute("value")}`,
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        success: function (response) {
+                            console.log(response)
+                        }
+                    })
+                })
+            })
+
+
+
+            editBtns.forEach(element => {
+                element.addEventListener("click", () => {
+                    imagesDiv.innerHTML = ''
+                    listFiles = []
+                    for (let count = 0; count < imageInput.files.length; count++) {
+                        let file = imageInput.files[count]
                         let divImage = document.createElement("div")
                         divImage.classList.add("divImageDelete")
                         let createImage = document.createElement("img")
                         let deleteBtn = document.createElement("img")
                         deleteBtn.src = "/static/images/delete.png"
                         deleteBtn.classList.add("deleteBtn")
-                        deleteBtn.id = "delete" + index
-                        divImage.id = index
+                        deleteBtn.id = "delete" + count
+                        divImage.id = count
+                        listFiles.push(imageInput.files[count])
                         createImage.id = "imageForPost"
-                        createImage.src = `/media/${existingImageUrl}`;
-                        divImage.appendChild(createImage)
-                        divImage.appendChild(deleteBtn)
-                        imagesDivRedact.appendChild(divImage)
+                        if (file) {
+                            createImage.setAttribute('src', URL.createObjectURL(file));
+                            divImage.appendChild(createImage)
+                            divImage.appendChild(deleteBtn)
+                            imagesDiv.appendChild(divImage)
+                        }
                     }
+                    blurRedact.style.display = "flex"
+                    postPkInput.value = element.id
+                    $.ajax({
+                        url: `/publications/redact/${element.id}/`,
+                        type: 'POST',
+                        data: {
+                            'pk': element.id,
+                            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                        },
+                        success: function (response) {
+                            console.log(JSON.parse(response))
+                            let post = JSON.parse(response)[0]["fields"]
+                            document.querySelector(".title").value = post["title"]
+                            document.querySelector(".subject").value = post["subject"]
+                            document.querySelector(".textField").textContent = post["text"]
+                            document.querySelector(".link").value = post["article_link"]
+
+                            let tagsFromPost = post["tags"]
+
+                            tagsFromPost.forEach(element => {
+                                if (selectRedact[element - 1]) {
+                                    selectRedact[element - 1].selected = true;
+                                }
+                            })
+
+                            let selectedTags = []
+                            selectRedact.forEach(element => {
+                                if (element.selected == true) {
+                                    selectedTags.push(element)
+                                }
+                            });
+
+                            let list_tags = []
+                            selectedTags.forEach(element => {
+                                list_tags.push(element.value)
+                            });
+
+                            document.querySelector(".tags-list").value = `${list_tags}`
+
+                            let images = JSON.parse(response).slice(1);
+                            listFiles = [];
+                            images.forEach((element, index) => {
+                                const existingImageUrl = element.fields.image;
+                                if (existingImageUrl) {
+                                    fetch(`/media/${existingImageUrl}`)
+                                        .then(response => response.blob())
+                                        .then(blob => {
+                                            const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
+                                            listFilesRedact.push(file);
+                                        });
+                                    let divImage = document.createElement("div")
+                                    divImage.classList.add("divImageDelete")
+                                    let createImage = document.createElement("img")
+                                    let deleteBtn = document.createElement("img")
+                                    deleteBtn.src = "/static/images/delete.png"
+                                    deleteBtn.classList.add("deleteBtn")
+                                    deleteBtn.id = "delete" + index
+                                    divImage.id = index
+                                    createImage.id = "imageForPost"
+                                    createImage.src = `/media/${existingImageUrl}`;
+                                    divImage.appendChild(createImage)
+                                    divImage.appendChild(deleteBtn)
+                                    imagesDivRedact.appendChild(divImage)
+                                }
+                            })
+                            updateDeleteButtons();
+
+                            selectRedact.forEach((option) => {
+                                if (option.selected) {
+                                    let hashTagElement = document.createElement("div")
+                                    let hashTagText = document.createElement("p")
+                                    hashTagElement.classList.add("hashTag")
+                                    hashTagText.classList.add("hashTagText")
+                                    hashTagText.textContent = finalAllTags[option.value - 1]
+                                    hashTagElement.appendChild(hashTagText)
+                                    divAddTagsRedact.appendChild(hashTagElement)
+                                }
+                            })
+
+
+                        }
+                    })
                 })
-                updateDeleteButtons();
+            })
 
-                selectRedact.forEach((option) => {
-                    if (option.selected) {
-                        let hashTagElement = document.createElement("div")
-                        let hashTagText = document.createElement("p")
-                        hashTagElement.classList.add("hashTag")
-                        hashTagText.classList.add("hashTagText")
-                        hashTagText.textContent = finalAllTags[option.value - 1]
-                        hashTagElement.appendChild(hashTagText)
-                        divAddTagsRedact.appendChild(hashTagElement)
-                    }
+            if (tagsHiddenRedactSelect) {
+                tagsHiddenRedact.addEventListener("change", (event) => {
+                    console.log("l,kphwrm")
+                    divAddTagsRedact.textContent = ''
+                    let selectedTags = []
+                    selectRedact.forEach(element => {
+                        if (element.selected == true) {
+                            selectedTags.push(element)
+                        }
+                    });
+
+                    let list_tags = []
+                    selectedTags.forEach(element => {
+                        list_tags.push(element.value)
+                    });
+                    console.log(list_tags)
+                    document.querySelector(".tags-list").value = `${list_tags}`
+                    tagsHiddenRedact.querySelectorAll('option').forEach((option) => {
+                        if (option.selected) {
+                            let hashTagElement = document.createElement("div")
+                            let hashTagText = document.createElement("p")
+                            hashTagElement.classList.add("hashTag")
+                            hashTagText.classList.add("hashTagText")
+                            hashTagText.textContent = finalAllTags[option.value - 1]
+                            hashTagElement.appendChild(hashTagText)
+                            divAddTagsRedact.appendChild(hashTagElement)
+                        }
+
+                    })
+
                 })
-
-
             }
-        })
-    })
-})
+
+            cancelBgBlurRedact.addEventListener('click', () => {
+                blurRedact.style.display = 'none'
+            })
+            let sendBtnModal = document.querySelector(".sendBtnModal")
+
+            if (sendBtnModal) {
+                sendBtnModal.addEventListener("click", function (event) {
+                    console.log(listFiles)
+                    const dataTransfer = new DataTransfer();
+                    listFiles.forEach((file) => {
+                        if (file) {
+                            dataTransfer.items.add(file)
+                        }
+                    });
+                    imageInput.files = dataTransfer.files;
 
 
-tagsHiddenRedact.addEventListener("change", (event) => {
-    divAddTagsRedact.textContent = ''
-    let selectedTags = []
-    selectRedact.forEach(element => {
-        if (element.selected == true) {
-            selectedTags.push(element)
-        }
-    });
+                })
+            }
 
-    let list_tags = []
-    selectedTags.forEach(element => {
-        list_tags.push(element.value)
-    });
-    document.querySelector(".tags-list").value = `${list_tags}`
-    tagsHiddenRedact.querySelectorAll('option').forEach((option) => {
-        if (option.selected) {
-            let hashTagElement = document.createElement("div")
-            let hashTagText = document.createElement("p")
-            hashTagElement.classList.add("hashTag")
-            hashTagText.classList.add("hashTagText")
-            hashTagText.textContent = finalAllTags[option.value - 1]
-            hashTagElement.appendChild(hashTagText)
-            divAddTagsRedact.appendChild(hashTagElement)
-        }
-
-    })
-
-})
-
-
-cancelBgBlurRedact.addEventListener('click', () => {
-    blurRedact.style.display = 'none'
-})
-let sendBtnModal = document.querySelector(".sendBtnModal")
-
-formCratePost.addEventListener("submit", function (event) {
-    const dataTransfer = new DataTransfer();
-    listFiles.forEach((file) => {
-        if (file) {
-            dataTransfer.items.add(file)
-        }
-    });
-    imageInput.files = dataTransfer.files;
-})
-document.querySelector('.publication-redact').addEventListener('submit', (event) => {
-    const dataTransferRedact = new DataTransfer();
-    listFilesRedact.forEach((file) => {
-        if (file) {
-            dataTransferRedact.items.add(file)
-        }
-    });
-    imageInputRedact.files = dataTransferRedact.files;
-})
-
-document.querySelectorAll(".liked img").forEach(element => {
-    element.src = "/static/images/liked.png"
-});
+            document.querySelectorAll(".liked img").forEach(element => {
+                element.src = "/static/images/liked.png"
+            });
 
 
 
-const datesAndTimes = document.querySelectorAll('.time')
-// Перебираємо отримані HTML-елементи з датами та часом
-for (let dt of datesAndTimes) {
-    // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
-    let dateAndTime = dt.textContent
+            const datesAndTimes = document.querySelectorAll('.time')
+            // Перебираємо отримані HTML-елементи з датами та часом
+            for (let dt of datesAndTimes) {
+                // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
+                let dateAndTime = dt.textContent
 
-    // вказуємо час повідомлення
-    dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
-}
+                // вказуємо час повідомлення
+                dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
+            }
 
 
 
