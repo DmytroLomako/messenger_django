@@ -133,19 +133,25 @@
                         <div class="name-and-surname">
                             <div class="name-and-surname-header">
                                 <img src="{% static 'images/checkbox.png' %}" alt="">
-                                <p>Ім’я та прізвище</p>
+                                <p class="name-and-surname-text">Ім’я та прізвище</p>
                             </div>
                             <p>{{user.username}}</p>
                         </div>
                         <div class="signature-only-div">
                             <div class="signature-only-div-header">
                                 <img src="{% static 'images/checkbox.png' %}" alt="">
-                                <p>Мій електронний підпис</p>
+                                <p class="sign-text">Мій електронний підпис</p>
                             </div>
-                            <label for="signInput" class="signature-img-div">
+                            <label for="" class="signature-img-div">
                                 <img src="{{user.profile.sign.url}}" class="signImage">
+                                <canvas class="paint-sign"></canvas>
                             </label>
+                            <div class="color-picker">
+                                <div class="color active" data-color="#070A1C"></div>
+                                <div class="color" data-color="#543C52"></div>
+                              </div>
                             <input type="button" id="signInput" class="hidden" name="sign">
+                            <button class="edit-sign-btn">Редагувати підпис</button>
                         </div>
                     </div>
                 </form>
