@@ -134,7 +134,7 @@
                             <p class="name">{{message.author.first_name}} {{message.author.last_name}}</p>
                             <p class="time">{{message.date_time}}</p>
                         </div>
-                        <p class="message">Привіт! Як справи?</p>
+                        <p class="message">{{message.content}}</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -310,7 +310,11 @@
                         <button type="submit" class="sendBtnModal">Публікація</button>
                     </div>
                 </div>
-
+                {% elif field.name == "text" %}
+                <div class="field"><textarea type="text" name="text" class="textField"
+                        placeholder="Напишить текст публікації"></textarea></div>
+                <div class="input-div input-div-text">
+                </div>
 
                 {% else %}
                 <div class="input-div">
@@ -319,7 +323,7 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-                <a href="{% url 'create_tag' %}">Створити тег</a>
+
 
             </form>
 

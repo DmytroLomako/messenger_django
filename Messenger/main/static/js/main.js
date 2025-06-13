@@ -116,15 +116,26 @@ if (buttonSend) {
         if (input.value) {
             bgBlur.style.display = 'flex'
             let contentInput = bgBlur.querySelector('textarea')
-            let alloptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
+            let allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
             contentInput.textContent = input.value
 
+            document.querySelectorAll(".divAddTags .beforeBtton .hashTag").forEach(element => {
+                element.addEventListener("click", () => {
+                    if (!allOptions[parseInt(element.getAttribute("value")) - 1].getAttribute('selected')) {
+                        allOptions[parseInt(element.getAttribute("value")) - 1].setAttribute('selected', true)
+                        let pElement = document.createElement("p")
+                        pElement.classList.add("hashTagText")
+                        pElement.textContent = element.querySelector(".hashTagText").textContent
+                        textArea = document.querySelector(".input-div-text")
+                        textArea.appendChild(pElement)
+                    }
+                })
+            });
 
-
-            for (let count = 0; count <= 9; count++) {
-                alloptions[count].setAttribute("selected", true)
-                console.log(alloptions[count])
-            }
+            // for (let count = 0; count <= 9; count++) {
+            //     alloptions[count].setAttribute("selected", true)
+            //     console.log(alloptions[count])
+            // }
         }
     })
 }
@@ -156,18 +167,20 @@ if (addTag) {
 
                 let option = document.createElement("option")
 
+                let allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
 
-
-                let valueOption = parseInt(document.querySelectorAll("#field #id_tags option")[document.querySelectorAll("#field #id_tags option").length - 1].value) + 1
+                let valueOption = parseInt(allOptions[allOptions.length - 1].value) + 1
                 if (document.querySelectorAll("#field #id_tags option").length - 1 == 0) {
                     valueOption = 0
                 }
+                hashTagElement.setAttribute("value", valueOption)
+
 
                 hashTagText.textContent = finalHashTag
                 option.textContent = finalHashTag
                 listTags.push(finalHashTag)
 
-                option.setAttribute("selected", true)
+
                 option.value = valueOption
 
 
@@ -190,8 +203,22 @@ if (addTag) {
                         console.log(response)
                     }
                 })
+                allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
+                document.querySelectorAll(".divAddTags .beforeBtton .hashTag").forEach(element => {
+                    element.addEventListener("click", () => {
+                        if (!allOptions[parseInt(element.getAttribute("value")) - 1].getAttribute('selected')) {
+                            allOptions[parseInt(element.getAttribute("value")) - 1].setAttribute('selected', true)
+                            let pElement = document.createElement("p")
+                            pElement.classList.add("hashTagText")
+                            pElement.textContent = element.querySelector(".hashTagText").textContent
+                            textArea = document.querySelector(".input-div-text")
+                            textArea.appendChild(pElement)
+                        }
+                    })
+                });
             }
             imageTags.src = "/static/images/add_tag.png"
+
 
 
         }
@@ -462,3 +489,6 @@ for (let dt of datesAndTimes) {
     // вказуємо час повідомлення
     dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
 }
+
+
+

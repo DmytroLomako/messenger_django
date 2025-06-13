@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
-from publications.models import User_Post
+from publications.models import User_Post, Images
 from django.views.generic import CreateView
 from publications.forms import CreatePostForm
 from django.urls import reverse_lazy
 from authorization.models import UserProfile
 from django.contrib.auth.models import User
 from chats.models import ChatMessage
+
 # Create your views here.
 
 class MainView(CreateView):
@@ -18,13 +19,18 @@ class MainView(CreateView):
     def form_valid(self, form):
         form.instance.user = self.request.user
         post = form.save()
+        files = self.request.FILES.getlist('images')    
+
+
+        for file in files:
+            Images.objects.create(post=post, image=file)
         post.save()
         return super().form_valid(form)
     
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_posts'] = User_Post.objects.all()
+        context['all_posts'] = reversed(User_Post.objects.all())
         print(context['all_posts'], "\n\n\n\n\n\n\n\n\n\n")
         context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
 
@@ -34,7 +40,7 @@ class MainView(CreateView):
 
         for message in messeges:
 
-            if user_object not in message.views.all() and user_object in message.chat_group.users.all():
+            if user_object not in message.views.all() and user_object in message.chat_group.users.all() and user_object != message.author:
                 not_viewed_messeges.append(message)
         context["not_viewed_messeges"] = not_viewed_messeges
 

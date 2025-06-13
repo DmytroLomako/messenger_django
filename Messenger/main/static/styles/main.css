@@ -203,6 +203,13 @@ main .requests {
     overflow-x: hidden;
 }
 
+.input-div-text {
+    display: flex;
+    gap: 4px;
+    width: 450px;
+    flex-wrap: wrap;
+}
+
 main .requests .blockName {
     color: #543C52;
     display: flex;

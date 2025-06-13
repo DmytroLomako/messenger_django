@@ -52,10 +52,12 @@ ul {
 main {
     width: 100vw;
     height: 100vh;
-    padding-left: 13.39vw;
-    padding-top: 10.49vh;
+    padding-left: 26.39vw;
     background-color: #E9E5EE;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-bottom: 60px;
 }
 
 form {
@@ -77,8 +79,7 @@ form {
     border-radius: 20px;
     gap: 1.89vw;
     z-index: 100;
-    padding-bottom: 3.78vh;
-    margin-top: 5.65185vh;
+    padding-bottom: 8.78vh;
 }
 
 .greatings {
@@ -147,6 +148,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
 
 header img {
@@ -158,6 +160,6 @@ header img {
     width: 35.70vw;
     height: 27.66vw;
     position: absolute;
-    left: 40.26vw;
+    left: 47.26vw;
     top: 26.02vh;
 }

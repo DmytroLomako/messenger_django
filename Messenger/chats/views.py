@@ -71,7 +71,7 @@ class ChatsView(CreateView):
 
         for message in messeges:
 
-            if user_object not in message.views.all() and user_object in message.chat_group.users.all():
+            if user_object not in message.views.all() and user_object in message.chat_group.users.all() and user_object != message.author:
                 not_viewed_messeges.append(message)
         context["not_viewed_messeges"] = not_viewed_messeges
   

@@ -444,8 +444,15 @@ main .postArea .sendDiv .addEmojiBtn {
 }
 
 .imageTags {
-    width: 1.20vw;
+    width: 1.05vw;
     height: 2.31vh;
+}
+
+.input-div-text {
+    display: flex;
+    gap: 4px;
+    width: 450px;
+    flex-wrap: wrap;
 }
 
 .image {
