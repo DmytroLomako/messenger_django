@@ -1,0 +1,373 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Main Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/main.css' %}">
+<link rel="stylesheet" href="{% static 'styles/friend_info.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'js/main.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab tab-now"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'settings' user.pk %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+
+<main>
+    <div class="userInfo">
+        <div class="miniProfile">
+            <div class="avatarNames">
+                {% if friend.profile.photo and friend.profile.photo.url != None %}
+                    <img src="{{ friend.profile.photo.url }}" class="avatar">
+                {% endif %}
+
+                <div class="names">
+                    <p class="nickname">{{ friend.first_name }} {{friend.last_name}}</p>
+                    <p class="username">@{{ friend.username }}</p>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="posts">
+                    <p class="count">566</p>
+                    <p class="name">Дописи</p>
+                </div>
+
+                <div class="readers">
+                    <p class="count">12.1K</p>
+                    <p class="name">Читачі</p>
+                </div>
+
+                <div class="friends">
+                    <p class="count">222</p>
+                    <p class="name">Друзі</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="requests">
+            <div class="blockName">
+                <p class="name"><img src="{% static 'images/friends_gray.png' %}">Запити</p>
+                <a href="" class="showAll">Дивитись всі</a>
+            </div>
+            <div class="users">
+                <div class="user">
+                    <img src="{% static 'images/avatar2.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Yehor Aung</p>
+                        <p class="subscribers">4.3k Підписників</p>
+                    </div>
+                </div>
+
+                <div class="user">
+                    <img src="{% static 'images/avatar3.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Ann Ann</p>
+                        <p class="subscribers">1.6k Підписників</p>
+                    </div>
+                </div>
+
+                <div class="user">
+                    <img src="{% static 'images/avatar4.png' %}">
+                    <div class="nameSubscribers">
+                        <p class="name">Yeugen Jenua</p>
+                        <p class="subscribers">10.3k Підписників</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="messages">
+            <div class="blockName">
+                <p class="name"><img src="{% static 'images/messages.png' %}">Повідомлення</p>
+                <a href="" class="showAll">Дивитись всі</a>
+            </div>
+            <div class="users">
+                <div class="user mona">
+                    <img src="{% static 'images/avatar5.png' %}">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">Mona Lisa</p>
+                            <p class="time">09:41</p>
+                        </div>
+                        <p class="message">Привіт! Як справи?</p>
+                    </div>
+                </div>
+                <div class="user ann">
+                    <img src="{% static 'images/avatar6.png' %}">
+                    <div class="nameSubscribers ann">
+                        <div class="nameTime">
+                            <p class="name">Ann Ti</p>
+                            <p class="time">25.04.2025</p>
+                        </div>
+                        <p class="message">Привіт!</p>
+                    </div>
+                </div>
+                <div class="user">
+                    <img src="{% static 'images/avatar7.png' %}">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">Ness Ty</p>
+                            <p class="time">25.04.2025</p>
+                        </div>
+                        <p class="message">Привіт!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="PostPostInput">
+        {% for post in friend.user_post_set.all %}
+        <div class="post" id="post{{post.id}}" value="{{post.id}}">
+            <div class="postHeader">
+                <img src="{{ post.user.profile.photo.url }}" class="avatar">
+                <p class="text">{{ post.user.username }}</p>
+                <div class="paintingDiv">
+                    <img src="{{post.user.profile.sign.url}}" class="painting">
+                </div>
+            </div>
+
+            <div class="postMain">
+                <p class="text">
+                    {{ post.title }}<br>
+                    {{ post.text }}
+                </p>
+                <p class="hashtags">
+                    {% for tag in post.tags.all %}
+                    {{ tag.name }}
+                    {% endfor %}
+                </p>
+                <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
+
+                <div class="images">
+                    {% for img in post.images_set.all %}
+                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="postFooter">
+                <div class="likesViews">
+                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
+                        id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
+                            class="likesImg" id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                        Вподобань</p>
+                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                        Переглядів</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="background-blur">
+            <form method="post" class="publication-creation" enctype="multipart/form-data">
+                <input class="hidden" name="create" value="post">
+                {% csrf_token %}
+                <button id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Створення публікації</p>
+
+                {% for field in form %}
+
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn"></button>
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="field">{{ field }}</div>
+                    <div class="divAddTags">
+
+                        <div class="beforeBtton">
+
+                        </div>
+
+                        <label for="add-tag-btn" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+
+                    </div>
+                </div>
+
+
+
+                {% elif field.name == "images" %}
+                <div class="for-images">
+
+                </div>
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                    </div>
+                    <input type="file" accept="image/png, image/jpeg" name="images" class="image-input"
+                        id="image-input-id" multiple>
+                    <div class="divSubmit">
+                        <label for="image-input-id" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+
+                {% else %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+
+            </form>
+
+        </div>
+
+        <div class="background-blur-redact">
+
+            <form method="post" class="publication-redact" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="hidden" class="postPkInput" name="post_id" value="">
+                <button id="cancel-bg-blur-redact">x</button>
+                <p class="NameTitle">Редагування публікації</p>
+
+                {% for field in form %}
+
+                {% if field.name == "tags" %}
+                <div class="showTagsBtn">
+                    <button type="button" name="add-tag" id="add-tag-btn-redact"></button>
+                    <div class="hidden">
+                        <input name="tags-list" class="tags-list">
+                        {{field.label_tag}}
+                    </div>
+                    <div id="tagsHiddenRedact">{{ field }}</div>
+                    <div class="divAddTags">
+
+                        <div class="beforeBttonRedact">
+
+                        </div>
+
+                        <label for="add-tag-btn-redact" class="image-input-label">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                        </label>
+                    </div>
+                </div>
+
+
+
+                {% elif field.name == "images" %}
+                <div class="for-images-redact">
+
+                </div>
+                <div class="post-div">
+                    <div class="hidden">
+                        {{field.label_tag}}
+                        <input type="file" accept="image/png, image/jpeg" name="images" class="image-input-redact"
+                            id="image-input-id" multiple>
+                    </div>
+                    <div class="divSubmit">
+                        <label for="image-input-id" class="image-input-label">
+                            <img src="{% static 'images/add_image.png' %}" class="image">
+                        </label>
+
+                        <button type="submit" class="sendBtnModal">Публікація</button>
+                    </div>
+                </div>
+
+                {% elif field.name == "title" %}
+                <div class="input-div">
+                    <div class="label">Назва публікації</div>
+                    <div class="field"><input class="title" name="title" type="text"
+                            placeholder="Напишить назву публікації"></div>
+                </div>
+
+                {% elif field.name == "subject" %}
+                <div class="input-div">
+                    <div class="label">Тема публікації</div>
+                    <div class="field"><input class="subject" type="text" name="subject"
+                            placeholder="Напишить тему публікації"></div>
+                </div>
+
+                {% elif field.name == "text" %}
+                <div class="input-div">
+                    <div class="field"><textarea type="text" name="text" class="textField"
+                            placeholder="Напишить текст публікації"></textarea></div>
+                </div>
+                {% elif field.name == "article_link" %}
+                <div class="input-div">
+                    <label class="label">Посилання</label>
+                    <div class="field"><input class="link" name="link" type="text"
+                            placeholder="Додайте посилання до публікації">
+                    </div>
+                </div>
+
+
+                {% endif %}
+                {% endfor %}
+                <a href="{% url 'create_tag' %}">Створити тег</a>
+
+            </form>
+
+        </div>
+
+
+        {% if not user.last_name %}
+        <div class="bgBlur2">
+            <form action="{% url 'add_info' %}" method="post" class="add_info_form">
+                {% csrf_token %}
+                <p class="title">Додай деталі про себе</p>
+                <div class="inputs">
+                    <div class="inputBlock">
+                        <label for="name" class="label">Ім’я</label>
+                        <input required type="text" name="name" class="input" id="name" placeholder="Введіть Ваше ім’я">
+                    </div>
+                    <div class="inputBlock">
+                        <label for="name" class="label">Призвіще</label>
+                        <input required type="text" name="last_name" class="input" id="last_name"
+                            placeholder="Введіть Ваше призвіще">
+                    </div>
+                    <div class="inputBlock">
+                        <label for="name" class="label">Ім’я користувача</label>
+                        <input required type="text" name="username" class="input" id="username" placeholder="@">
+                        <p class="chooseVariant">Або оберіть:&nbsp
+                            <a style="color: #22C55E;" id="anotherVariant">Запропоновані варіанти відповідно до Ім’я та
+                                Прізвища</a>
+                        </p>
+                    </div>
+
+                    <div class="button-shell">
+                        <button type="submit" class="submit">
+                            Продовжити
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        {% endif %}
+{% endblock %}

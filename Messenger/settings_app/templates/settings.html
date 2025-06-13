@@ -43,8 +43,8 @@
     <main>
         <div class="main-div">
             <div class="menu-options">
-                <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
-                <a class="menu-urls" id="Alboms" href="">Альбоми</a>
+                <a class="menu-urls" href="{% url 'settings' request.user.id %}"><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
+                <a class="menu-urls" id="Alboms" href="{% url 'albums' %}">Альбоми</a>
             </div>
             <div class="options-div">
                 <div class="card-profile-div">
@@ -75,11 +75,6 @@
                             <p>@{{user.username}}</p>
                         </div>
                     </form>
-                    <!-- <img src="{% static 'images/avatar13.png' %}" alt="">
-                        <div class="nickname-name">
-                            <p class="nickname-text">Lina Li</p>
-                            <p>@thelili</p>
-                        </div> -->
                 </div>
                 <div class="personal-information-div">
                     <form method="post">

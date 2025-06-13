@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'settings_app/css/settings.css' %}">
+<link rel="stylesheet" href="{% static 'settings_app/css/albums.css' %}">
+<script src="{% static 'settings_app/js/settings.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'main' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'settings' request.user.id %}" class="settings tab tab-now"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+
+
+<main>
+
+    <main>
+        <div class="main-div">
+            <div class="menu-options">
+                <a class="menu-urls" id="Alboms" href="{% url 'settings' request.user.id %}">Особиста інформація</a>
+                <a class="menu-urls" href="{% url 'albums' %}"><u id="MainText" title="Подчеркнутый текст">Альбоми</u></a>
+            </div>
+            <div class="options-div">
+                <div class="card-profile-div">
+                    <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data"
+                        class="avatar-and-textdiv">
+                        <div class="card-profile-header">
+                            <p>Мої фото</p>
+                            <button class="edit-information-btn-header"><img class="editImg"
+                                    src="{% static 'images/add_image2.png' %}" alt="">Додати фото</button>
+                        </div>
+                        {% csrf_token %}
+                        <div class="user-photo">
+                            <img src="{% static 'images/image.png' %}" alt="">
+                        </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</main>
+{% endblock %}

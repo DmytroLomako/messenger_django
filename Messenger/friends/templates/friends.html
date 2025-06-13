@@ -53,7 +53,7 @@
                 </div>
                 <div class="requests-friends-div">
                     {% for request in requests %}
-                        <div class="friend-profile">
+                        <a class="friend-profile" href="{% url 'friend_view' friend.id %}">
                             <div class="avatar-nickname-div">
                                 {% if request.profile.photo.url != None %}
                                     <img class="avatar-images" src="{{ request.profile.photo.url }}" alt="">
@@ -69,7 +69,7 @@
                                 <button class="accept-button" value="{% url 'accept_friend' request.id %}">Підтвердити</button>
                                 <button class="delete-button" value="">Видалити</button>
                             </div>
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="recommendations-friends-div">
                     {% for friend in recomended_friends %}
-                        <div class="friend-profile">
+                        <a class="friend-profile" href="{% url 'friend_view' friend.id %}">
                             <div class="avatar-nickname-div">
                                 {% if friend.profile.photo.url != None %}
                                     <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
@@ -96,7 +96,7 @@
                                 <button class="add-button" name="add" value="{% url 'request_friend' friend.id %}">Додати</button>
                                 <button class="delete-button" name="delete" value="{{friend.id}}">Видалити</button>
                             </div>
-                        </div>
+                        </a>
                     {% endfor %}
 
                 </div>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="all-friends-div">
                     {% for friend in friends %}
-                        <div class="friend-profile">
+                        <a class="friend-profile" href="{% url 'friend_view' friend.id %}">
                             <div class="avatar-nickname-div">
                                 {% if friend.profile.photo.url != None %}
                                     <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
@@ -124,7 +124,7 @@
                                 <button class="message-button">Повідомлення</button>
                                 <button class="delete-button" value="{% url 'delete_friend' friend.id %}">Видалити</button>
                             </div>
-                        </div>
+                        </a>
                     {% endfor %}
                 </div>
             </div>
