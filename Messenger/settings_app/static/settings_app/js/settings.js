@@ -9,6 +9,20 @@ const editBtnMain = document.querySelector(".edit-information-btn-main")
 const editBtnSign = document.querySelector(".edit-information-btn-sign")
 const forSignImage = document.querySelector(".signImage")
 const signInput = document.querySelector("#signInput")
+const nameAndSurname = document.querySelector(".name-and-surname-text")
+const signText = document.querySelector(".sign-text")
+const allSignDiv = document.querySelector(".signature-options-div")
+const signOnlyDiv = document.querySelector(".signature-only-div")
+const editSignBtn = document.querySelector(".edit-sign-btn")
+const signatureImgDiv = document.querySelector(".signature-img-div")
+const paintSign = document.querySelector(".paint-sign")
+const paintSignGetContext = paintSign.getContext("2d")
+const colorPicker = document.querySelector(".color-picker")
+
+let drawing = false;
+let currentColor = '#070A1C';
+    paintSignGetContext.strokeStyle = currentColor;
+
 
 if (passwordField) {
     const wrapper = document.createElement('div');
@@ -98,11 +112,79 @@ editBtnSign.addEventListener("click", () => {
         signInput.type = "file"
         editBtnSign.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
         editBtnSign.type = "button"
+        nameAndSurname.style.opacity = "100%"
+        signText.style.opacity = "100%"
+        allSignDiv.style.height = "49vw"
+        signOnlyDiv.style.height = "50vw"
+        editSignBtn.style.display = "flex"
+        signatureImgDiv.style.border = "1px solid #81818D"
+        signatureImgDiv.style.borderStyle = "dotted"
     } else {
         const signInput = document.querySelector("#signInput")
-        signInput.type = "file"
-        editBtnSign.type = "submit"
+        const paintSign = document.querySelector(".paint-sign")
+        const paintSignSave = paintSign.toDataURL('images/png'); 
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;     
+        paintSign.toBlob(function(blob){
+
+            var formData = new FormData();
+            formData.append('sign', blob, 'signature.png');
+            formData.append('csrfmiddlewaretoken', csrf_token);
+    
+            console.log('Размер файла:', blob.size);
+            $.ajax({
+                url: '/settings/save_sign',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(){
+                    window.location.reload()
+                }
+            });
+        })
+        
     }
+})
+
+editSignBtn.addEventListener("click", (event) => {
+    event.preventDefault()
+    editSignBtn.style.display = "none"
+    forSignImage.style.display = "none"
+    signatureImgDiv.style.width = "21vw"
+    signatureImgDiv.style.height = "25vh"
+    paintSign.style.display = "flex"
+    colorPicker.style.display = "flex"
+
+    paintSign.addEventListener('mousedown', startDraw);
+    paintSign.addEventListener('mousemove', draw);
+    paintSign.addEventListener('mouseup', stopDraw);
+    paintSign.addEventListener('mouseleave', stopDraw);
+
+    const colors = document.querySelectorAll('.color');
+    colors.forEach(color => {
+      color.addEventListener('click', () => {
+        colors.forEach(c => c.classList.remove('active'));
+        color.classList.add('active');
+        currentColor = color.getAttribute('data-color');
+        paintSignGetContext.strokeStyle = currentColor;
+    })});
+
+    function startDraw(e) {
+        drawing = true;
+        paintSignGetContext.beginPath();
+        paintSignGetContext.moveTo(e.offsetX, e.offsetY);
+      }
+    
+      function draw(e) {
+        if (!drawing) return;
+        paintSignGetContext.lineTo(e.offsetX, e.offsetY);
+        paintSignGetContext.stroke();
+      }
+    
+      function stopDraw() {
+        drawing = false;
+        paintSignGetContext.closePath();
+      }
 })
 
 signInput.addEventListener("change", () => {

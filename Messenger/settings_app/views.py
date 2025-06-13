@@ -5,7 +5,9 @@ from django.contrib.auth.models import User
 from .forms import UserUpdateForm
 from django.views.generic import ListView
 from authorization.models import UserProfile
+from django.contrib import messages
 
+from django.http import JsonResponse
 
 # Create your views here.
 
@@ -49,19 +51,17 @@ def save_user_photo(request):
                 profile.photo = photo
                 profile.save()
             return redirect('settings', pk=request.user.pk)
-        
 def save_user_sign(request):
-    if request.method == 'POST':
-        if request.user.is_authenticated:
-            profile, created = UserProfile.objects.get_or_create(user=request.user)
-            sign = request.FILES.get('sign')
-            print(sign)
-            if sign:
-                print(2)
-                profile.sign = sign
-                profile.save()
-            return redirect('settings', pk=request.user.pk)
+    if request.method == 'POST' and 'sign' in request.FILES:
+        file = request.FILES['sign']
+        # Сохраняем файл    
+        profile, created = UserProfile.objects.get_or_create(user=request.user)
 
+        profile.sign = file
+        profile.save()
+        print(file)
+        return JsonResponse({'status': 'success'})
+    return JsonResponse({'error': 'Invalid request'}, status=400)
 def save_username(request, username):
     if request.method == "POST":
         if request.user.is_authenticated:

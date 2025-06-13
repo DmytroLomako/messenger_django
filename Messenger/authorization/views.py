@@ -93,6 +93,8 @@ class CustomLoginView(FormView):
             return super().form_valid(form)
         else:
             form.add_error(None, "Невірна пошта або пароль")
+            print(email)
+            print(password)
             return self.form_invalid(form)
     
 
