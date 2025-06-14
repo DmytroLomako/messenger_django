@@ -616,7 +616,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 main .postPostInput .post .postHeader .paintingDiv .painting {
     width: 11.55vw;
     height: 5.14vh;
-    margin-left: -100px;
+    margin-left: -5.208vw;
 }
 
 main .postArea .post {
@@ -797,7 +797,7 @@ input {
 
 .publication-creation {
     width: 40.68vw;
-    height: 700px;
+    height: 73.452vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
