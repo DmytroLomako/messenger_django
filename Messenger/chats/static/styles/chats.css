@@ -149,7 +149,7 @@ main {
     height: 3.89vh;
     border-radius: 0.52vw;
     border: 1px solid #CDCED2;
-    padding-left: 16px;
+    padding-left: 0.833vw;
 }
 
 .all-contacts {
@@ -190,7 +190,7 @@ main {
     border: 1px solid #CDCED2;
     margin-left: 0.47vw;
     background-color: white;
-    padding-top: 16px;
+    padding-top: 1.679vh;
 }
 
 .headerGroup {

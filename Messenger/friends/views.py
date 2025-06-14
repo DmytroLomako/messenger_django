@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from authorization.models import UserProfile
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, JsonResponse
+from publications.models import User_Post
 
 class FriendsView(TemplateView):
     template_name = "friends.html"
@@ -194,5 +195,8 @@ class FriendView(TemplateView):
 
         friend = User.objects.get(id = self.kwargs['friend_pk'])
         context["friend"] = friend
+
+        friend_posts = reversed(User_Post.objects.filter(user = friend).all())
+        context["friend_posts"] = friend_posts
         
         return context

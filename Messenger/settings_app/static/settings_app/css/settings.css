@@ -229,9 +229,18 @@ main {
     gap: 0.926vh;
 }
 
+.avatarDiv label img {
+    width: 3.255vw;
+    height: 6.558vh;
+}
+
+.username {
+    font-size: 1.259vh;
+}
+
 .nickname-text {
     font-weight: 700;
-    font-size: 1.25vw;
+    font-size: 2.518vh;
 }
 
 .personal-information-div {
@@ -497,7 +506,7 @@ button {
     font-size: 0.729vw;
 }
 
-.edit-sign-btn{
+.edit-sign-btn {
     display: none;
     justify-content: center;
     align-items: center;
@@ -511,13 +520,13 @@ button {
     font-size: 0.729vw;
 }
 
-.paint-sign{
+.paint-sign {
     display: none;
     width: 21vw;
     height: 25vh;
 }
 
-.color-picker{
+.color-picker {
     display: none;
     gap: 10px;
     width: 100px;
@@ -530,11 +539,11 @@ button {
     border-radius: 50%;
     cursor: pointer;
     background-color: #543C52;
-  }
+}
 
-  .color.active {
+.color.active {
     background-color: #070A1C;
-  }
+}
 
 .edit-information-btn-sign img {
     width: 1.042vw;

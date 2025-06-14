@@ -616,6 +616,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 main .postPostInput .post .postHeader .paintingDiv .painting {
     width: 11.55vw;
     height: 5.14vh;
+    margin-left: -100px;
 }
 
 main .postArea .post {

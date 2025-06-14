@@ -21,7 +21,8 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab tab-now"><img src="{% static 'images/friends.png' %}">Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab tab-now"><img
+                    src="{% static 'images/friends.png' %}">Друзі</a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -43,7 +44,7 @@
         <div class="miniProfile">
             <div class="avatarNames">
                 {% if friend.profile.photo and friend.profile.photo.url != None %}
-                    <img src="{{ friend.profile.photo.url }}" class="avatar">
+                <img src="{{ friend.profile.photo.url }}" class="avatar">
                 {% endif %}
 
                 <div class="names">
@@ -142,7 +143,7 @@
     </div>
 
     <div class="PostPostInput">
-        {% for post in friend.user_post_set.all %}
+        {% for post in friend_posts %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
                 <img src="{{ post.user.profile.photo.url }}" class="avatar">
@@ -370,4 +371,4 @@
             </form>
         </div>
         {% endif %}
-{% endblock %}
+        {% endblock %}
