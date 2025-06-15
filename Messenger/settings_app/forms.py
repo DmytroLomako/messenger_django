@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from authorization.models import UserProfile
+from authorization.models import Profile
 
 
 class UserUpdateForm(forms.ModelForm):
@@ -42,15 +42,15 @@ class UserUpdateForm(forms.ModelForm):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
             try:
-                self.fields['birthday'].initial = self.instance.profile.birthday
+                self.fields['birthday'].initial = self.instance.profile.date_of_birth
 
-            except UserProfile.DoesNotExist:
+            except Profile.DoesNotExist:
                 pass
                 
     def save(self, commit=True):
         user = super().save(commit=commit)
         if commit:
-            profile, created = UserProfile.objects.get_or_create(user=user)
-            profile.birthday = self.cleaned_data.get('birthday')        
+            profile, created = Profile.objects.get_or_create(user=user)
+            profile.date_of_birth = self.cleaned_data.get('birthday')        
             profile.save()
         return user

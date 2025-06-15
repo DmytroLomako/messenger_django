@@ -1,11 +1,11 @@
 from django.views.generic import CreateView, TemplateView, FormView
 from .models import ChatGroup
-from authorization.models import UserProfile
+from authorization.models import Profile
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .forms import MessageForm
 from .models import ChatMessage
-from publications.models import Images
+from publications.models import Image
 import os
 from django.conf import settings
 
@@ -54,7 +54,7 @@ class ChatsView(CreateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        user_profile_now = UserProfile.objects.get(id = self.request.user.id)
+        user_profile_now = Profile.objects.get(id = self.request.user.id)
         print(user_profile_now.friends)
 
         user_object = User.objects.get(username = self.request.user)
@@ -160,7 +160,7 @@ class ChatView(FormView):
         context = super().get_context_data(**kwargs)
         # Отримуємо pk групи з kwargs (Тобто з дінамічного url адрессу)
         chat_group_pk = self.kwargs['group_pk']
-        user_profile_now = UserProfile.objects.get(id = self.request.user.id)
+        user_profile_now = Profile.objects.get(id = self.request.user.id)
         # Додаємо у контекст групу
         context['group'] = group
         # Додаємо у контекст усі повідомлення групи

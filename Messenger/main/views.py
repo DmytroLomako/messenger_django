@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
-from publications.models import User_Post, Images
+from publications.models import Post, Image, Tag
 from django.views.generic import CreateView
 from publications.forms import CreatePostForm
 from django.urls import reverse_lazy
-from authorization.models import UserProfile
+from authorization.models import Profile, Avatar
 from django.contrib.auth.models import User
 from chats.models import ChatMessage
 
@@ -23,16 +23,20 @@ class MainView(CreateView):
 
 
         for file in files:
-            Images.objects.create(post=post, image=file)
+            Image.objects.create(post=post, image=file)
         post.save()
         return super().form_valid(form)
     
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['all_posts'] = reversed(User_Post.objects.all())
+        context['all_posts'] = reversed(Post.objects.all())
         print(context['all_posts'], "\n\n\n\n\n\n\n\n\n\n")
-        context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
+        try:
+            context['user_image'] = Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image
+            print(Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image)
+        except:
+            context['user_image'] = None
 
         user_object = User.objects.get(username = self.request.user)
         messeges = ChatMessage.objects.all()
@@ -48,6 +52,10 @@ class MainView(CreateView):
     
     def dispatch(self, request, *args, **kwargs):
         print(request.user)
+        if len(Tag.objects.all()) == 0:
+            standart_tags_list = ["#відпочинок", "#натхнення", "#життя", "#природа", "#читання", "#спокій", "#гармонія", "#музика", "#фільми", "#подорожі"]
+            for tag in standart_tags_list:
+                Tag.objects.create(name = tag)
         if request.user.email:
             return super().dispatch(request, *args, **kwargs)
         else:

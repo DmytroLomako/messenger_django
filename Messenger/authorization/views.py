@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.views import View
 from .forms import *
-from .models import VerificationCode, UserProfile
+from .models import VerificationCode, Profile
 
 
 class RegisterView(CreateView):
@@ -19,9 +19,10 @@ class RegisterView(CreateView):
     
     def form_valid(self, form):
         user = form.save()
-        user.username = ""
+        print(user)
+        user.username = form.cleaned_data.get('email')
         verification_code = VerificationCode.generate_code()
-        VerificationCode.objects.create(user=user, code=verification_code)
+        VerificationCode.objects.create(username=f"{user.email}", code=verification_code)
         
         mail_subject = 'Activate your account'
         message = render_to_string('authorization/email/account_activation_email.html', {
@@ -58,12 +59,12 @@ class VerifyCodeView(View):
         try:
             user = User.objects.get(pk=user_id)
             
-            verification = VerificationCode.objects.get(user=user)
+            verification = VerificationCode.objects.get(username=f"{user.email}")
             
             if verification.code == code and verification.is_valid():
                 user.is_active = True
                 user.save()
-                user_profile = UserProfile.objects.create(user_id = user_id)
+                user_profile = Profile.objects.create(user_id = user_id)
                 user_profile.save()
                 verification.delete()
                 

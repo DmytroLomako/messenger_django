@@ -15,6 +15,17 @@ addButtons.forEach(function (addButton) {
     });
 });
 
+
+
+let AvatarNicknameDiv = document.querySelectorAll(".avatar-nickname-div")
+
+AvatarNicknameDiv.forEach(element => {
+    element.addEventListener("click", () => {
+        window.location.href = `/friends/friend_view/${element.value}`
+    })
+});
+
+
 let acceptButtons = document.querySelectorAll('.accept-button');
 let allFriendsDiv = document.querySelector('.all-friends-div');
 acceptButtons.forEach(function (acceptButton) {
@@ -24,7 +35,8 @@ acceptButtons.forEach(function (acceptButton) {
             url: `${acceptButton.getAttribute("value")}`,
             type: 'POST',
             data: {
-                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                "friendship_id": document.querySelector(".friendship_id").getAttribute("id")
             },
             success: function (response) {
                 console.log(allFriendsDiv, allFriendsDiv.querySelectorAll('.friend-profile'), allFriendsDiv.querySelectorAll('.friend-profile') < 6)

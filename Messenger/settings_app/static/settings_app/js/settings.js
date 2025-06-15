@@ -21,7 +21,7 @@ const colorPicker = document.querySelector(".color-picker")
 
 let drawing = false;
 let currentColor = '#070A1C';
-    paintSignGetContext.strokeStyle = currentColor;
+paintSignGetContext.strokeStyle = currentColor;
 
 
 if (passwordField) {
@@ -122,14 +122,14 @@ editBtnSign.addEventListener("click", () => {
     } else {
         const signInput = document.querySelector("#signInput")
         const paintSign = document.querySelector(".paint-sign")
-        const paintSignSave = paintSign.toDataURL('images/png'); 
-        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;     
-        paintSign.toBlob(function(blob){
+        const paintSignSave = paintSign.toDataURL('images/png');
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        paintSign.toBlob(function (blob) {
 
             var formData = new FormData();
             formData.append('sign', blob, 'signature.png');
             formData.append('csrfmiddlewaretoken', csrf_token);
-    
+
             console.log('Размер файла:', blob.size);
             $.ajax({
                 url: '/settings/save_sign',
@@ -137,12 +137,12 @@ editBtnSign.addEventListener("click", () => {
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(){
+                success: function () {
                     window.location.reload()
                 }
             });
         })
-        
+
     }
 })
 
@@ -162,29 +162,30 @@ editSignBtn.addEventListener("click", (event) => {
 
     const colors = document.querySelectorAll('.color');
     colors.forEach(color => {
-      color.addEventListener('click', () => {
-        colors.forEach(c => c.classList.remove('active'));
-        color.classList.add('active');
-        currentColor = color.getAttribute('data-color');
-        paintSignGetContext.strokeStyle = currentColor;
-    })});
+        color.addEventListener('click', () => {
+            colors.forEach(c => c.classList.remove('active'));
+            color.classList.add('active');
+            currentColor = color.getAttribute('data-color');
+            paintSignGetContext.strokeStyle = currentColor;
+        })
+    });
 
     function startDraw(e) {
         drawing = true;
         paintSignGetContext.beginPath();
         paintSignGetContext.moveTo(e.offsetX, e.offsetY);
-      }
-    
-      function draw(e) {
+    }
+
+    function draw(e) {
         if (!drawing) return;
         paintSignGetContext.lineTo(e.offsetX, e.offsetY);
         paintSignGetContext.stroke();
-      }
-    
-      function stopDraw() {
+    }
+
+    function stopDraw() {
         drawing = false;
         paintSignGetContext.closePath();
-      }
+    }
 })
 
 signInput.addEventListener("change", () => {

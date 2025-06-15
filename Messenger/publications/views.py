@@ -1,12 +1,12 @@
 from django.views.generic import CreateView
-from .models import User_Post, Images
+from .models import Post, Image
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from .forms import CreatePostForm
 from django.http import JsonResponse
 from django.core import serializers
-from authorization.models import UserProfile
-from create_tag.models import Tag
+from authorization.models import Profile, Avatar
+from publications.models import Tag
 import json
 
 
@@ -16,8 +16,10 @@ class MyPublicationsView(CreateView):
     success_url = reverse_lazy('my_publications')
     
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author =  Profile.objects.get(user = self.request.user)
         post = form.save()
+
+        print(post)
 
         # if len(form.images) >= 6:
         #     return redirect(reverse_lazy("my_publications"))
@@ -26,15 +28,20 @@ class MyPublicationsView(CreateView):
 
 
         for file in files:
-            Images.objects.create(post=post, image=file)
+            Image.objects.create(post=post, image=file)
         post.save()
         print(post)
         return super().form_valid(form)
         
+    def form_invalid(self, form):
+        post = form
+
+        print(post)
+        return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
         if request.POST.get("create") == None:    
-            post_now = User_Post.objects.get(id = int(request.POST.get("post_id")))
+            post_now = Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
             post_now.subject = request.POST.get("subject")
             post_now.text = request.POST.get("text")
@@ -44,15 +51,19 @@ class MyPublicationsView(CreateView):
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
-                    Images.objects.create(post=post_now, image=file)
+                    Image.objects.create(post=post_now, image=file)
             post_now.save()
         return super().post(request, *args, **kwargs)
 
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  
-        context['all_posts'] = reversed(User_Post.objects.all())
-        context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
+        context['all_posts'] = reversed(Post.objects.all())
+        try:
+            context['user_image'] = Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image
+            print(Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image)
+        except:
+            context['user_image'] = None
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -64,7 +75,7 @@ class MyPublicationsView(CreateView):
 def delete(request, post_pk):
     try:
         if request.method == "POST":
-            object = User_Post.objects.get(id=post_pk)
+            object = Post.objects.get(id=post_pk)
             object.delete()
         print(post_pk, "ewgbmobbfenr")
         return JsonResponse({'status': 'success'})
@@ -77,7 +88,7 @@ def delete(request, post_pk):
 def likes(request, post_pk):
     try:
         if request.method == 'POST':
-            post = User_Post.objects.get(id=post_pk)
+            post = Post.objects.get(id=post_pk)
             if request.user not in post.likes.all():
                 post.likes.add(request.user)
             else:
@@ -88,8 +99,8 @@ def likes(request, post_pk):
 
 def redact_data(request, post_pk):
     if request.method == 'POST':
-        post = [User_Post.objects.get(id = post_pk)]
-        images = Images.objects.filter(post = post[0])
+        post = [Post.objects.get(id = post_pk)]
+        images = Image.objects.filter(post = post[0])
         for image in images:
             post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)

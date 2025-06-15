@@ -44,7 +44,8 @@
     <main>
         <div class="main-div">
             <div class="menu-options">
-                <a class="menu-urls" href="{% url 'settings' request.user.id %}"><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
+                <a class="menu-urls" href="{% url 'settings' request.user.id %}"><u id="MainText"
+                        title="Подчеркнутый текст">Особиста інформація</u></a>
                 <a class="menu-urls" id="Alboms" href="{% url 'albums' %}">Альбоми</a>
             </div>
             <div class="options-div">
@@ -58,16 +59,17 @@
                         </div>
                         {% csrf_token %}
                         <p class="title hidden">Оберіть або завантажте фото профілю</p>
-                        {% if request.user.profile.photo %}
+                        <p>{{ request.user.profile.Avatar}}</p>
+                        {% if user_image %}
                         <div class="avatarDiv">
                             <label for="imageInput">
-                                <img src="{{ request.user.profile.photo.url }}" alt="">
+                                <img src="{{ user_image.url }}" alt="">
                             </label>
                         </div>
                         {% else %}
                         <div class="avatarDiv">
                             <label for="imageInput">
-                                <img src="{% static 'images/avatar.png' %}" alt="">
+                                <img src="{% static 'images/standart_user_image.png' %}" alt="">
                             </label>
                         </div>
                         {% endif %}
@@ -138,13 +140,15 @@
                                 <p class="sign-text">Мій електронний підпис</p>
                             </div>
                             <label for="" class="signature-img-div">
-                                <img src="{{user.profile.sign.url}}" class="signImage">
+                                {% if user.profile.signature %}
+                                <img src="{{user.profile.signature.url}}" class="signImage">
+                                {% endif %}
                                 <canvas class="paint-sign"></canvas>
                             </label>
                             <div class="color-picker">
                                 <div class="color active" data-color="#070A1C"></div>
                                 <div class="color" data-color="#543C52"></div>
-                              </div>
+                            </div>
                             <input type="button" id="signInput" class="hidden" name="sign">
                             <button class="edit-sign-btn">Редагувати підпис</button>
                         </div>

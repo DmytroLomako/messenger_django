@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'authorization',
     "main",
-    "create_tag",
     "publications",
     "settings_app",
     "friends",

@@ -43,6 +43,8 @@
             <div class="avatarNames">
                 {% if user_image.url != None %}
                 <img src="{{ user_image.url }}" class="avatar">
+                {% else %}
+                <img src="{% static 'images/standart_user_image.png' %}" class="avatar">
                 {% endif %}
 
                 <div class="names">
@@ -153,13 +155,13 @@
 
         </div>
         {% for post in all_posts %}
-        {% if post.user == user %}
+        {% if post.author.user == user %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
-                <img src="{{post.user.profile.photo.url}}" class="avatar">
-                <p class="text">{{ post.user.username }}</p>
+                <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
+                <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{{user.profile.sign.url}}" class="painting">
+                    <img src="{{user.profile.signature.url}}" class="painting">
                 </div>
                 <div class="dotsDiv">
                     <form method="post">
@@ -298,11 +300,7 @@
                     </div>
                 </div>
 
-                {% elif field.name == "text" %}
-                <div class="field"><textarea type="text" name="text" class="textField"
-                        placeholder="Напишить текст публікації"></textarea></div>
-                <div class="input-div input-div-text">
-                </div>
+
 
                 {% else %}
                 <div class="input-div">

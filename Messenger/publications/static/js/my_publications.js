@@ -128,7 +128,7 @@ if (buttonSend) {
                         pElement.classList.add("hashTagText")
                         pElement.setAttribute("value", parseInt(element.getAttribute("value")) - 1)
                         pElement.textContent = element.querySelector(".hashTagText").textContent
-                        textArea = document.querySelector(".input-div-text")
+                        textArea = document.querySelectorAll(".field")[1]
                         textArea.appendChild(pElement)
                     } else {
                         allOptions[parseInt(element.getAttribute("value")) - 1].removeAttribute('selected')

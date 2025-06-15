@@ -43,6 +43,8 @@
             <div class="avatarNames">
                 {% if user_image.url != None %}
                 <img src="{{ user_image.url }}" class="avatar">
+                {% else %}
+                <img src="{% static 'images/standart_user_image.png' %}" class="avatar">
                 {% endif %}
 
                 <div class="names">
@@ -189,10 +191,10 @@
         {% for post in all_posts %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
-                <img src="{{ post.user.profile.photo.url }}" class="avatar">
-                <p class="text">{{ post.user.username }}</p>
+                <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
+                <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{{post.user.profile.sign.url}}" class="painting">
+                    <img src="{{post.author.signature.url}}" class="painting">
                 </div>
             </div>
 
