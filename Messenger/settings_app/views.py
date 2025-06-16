@@ -6,7 +6,7 @@ from .forms import UserUpdateForm
 from django.views.generic import ListView
 from authorization.models import UserProfile
 from django.contrib import messages
-
+from .models import *
 from django.http import JsonResponse
 
 # Create your views here.
@@ -77,3 +77,43 @@ class AlbumsView(ListView):
     model = User
     template_name = "albums.html"
     context_object_name = "albums"
+    
+    def get_context_data(self, **kwargs):
+        all_tags = Tag.objects.all()
+        context = super().get_context_data(**kwargs)
+        context['all_tags'] = all_tags
+        print(not self.request.user.profile.album_set.all())
+        return context
+
+def save_album(request):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            user = request.user.profile
+            name = request.POST.get('name')
+            topic = request.POST.get('theme').replace('"', '')
+            topic = Tag.objects.get(name=topic)
+            date = request.POST.get('year')
+            Album.objects.create(author=user, name=name, topic=topic)
+            return redirect('albums')
+        
+def save_album_photo(request, album_id):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            album = Album.objects.get(id=album_id)
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            if album.author == profile:
+                album_images = request.FILES.getlist('album_images')
+                if album_images:
+                    for image in album_images:
+                        album.images.create(file=image, filename=image.name)
+                return JsonResponse({'status': 'success'})
+    return redirect('albums')
+
+def delete_album(request, album_id):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            album = Album.objects.get(id=album_id)
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            if album.author == profile:
+                album.delete()
+        return redirect('albums')
