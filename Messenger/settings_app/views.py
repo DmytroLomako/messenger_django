@@ -117,3 +117,14 @@ def delete_album(request, album_id):
             if album.author == profile:
                 album.delete()
         return redirect('albums')
+    
+def delete_album_photo(request, album_id, image_id):
+    if request.method == "POST":
+        if request.user.is_authenticated:
+            album = Album.objects.get(id=album_id)
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
+            if album.author == profile:
+                image = album.images.get(id=image_id)
+                image.delete()
+            return JsonResponse({'status': 'success'})
+        return redirect('albums')

@@ -21,11 +21,14 @@ let addAlbumImage = document.querySelector('.add-album-image')
 addAlbumImage.addEventListener('click', () => {
     albumImagesInput.click()
 })
-albumImagesInput.addEventListener('change', () => {
+albumImagesInput.addEventListener('change', function() {
     let albumImagesDiv = document.querySelector('.album-images')
     for (let count = 0; count < albumImagesInput.files.length; count++) {
         let file = albumImagesInput.files[count]
         let divImage = document.createElement("div")
+        let deleteBtn = document.createElement("img")
+        deleteBtn.src = "/static/images/delete.png"
+        deleteBtn.classList.add("deleteBtn")
         divImage.classList.add("divImageDelete")
         let createImage = document.createElement("img")
         divImage.id = count
@@ -33,6 +36,7 @@ albumImagesInput.addEventListener('change', () => {
         if (file) {
             createImage.setAttribute('src', URL.createObjectURL(file));
             divImage.appendChild(createImage)
+            divImage.appendChild(deleteBtn)
             albumImagesDiv.insertBefore(divImage, addAlbumImage)
         }
     }
@@ -48,7 +52,27 @@ albumImagesInput.addEventListener('change', () => {
         processData: false,
         contentType: false,
         success: function (response) {
-            console.log(response)
+            location.reload();
         }
     })
 })
+
+function updateDeleteButtons() {
+    deleteBtns = document.querySelectorAll('.deleteBtn')
+    deleteBtns.forEach((element) => {
+        element.addEventListener('click', () => {
+            $.ajax({
+                url: element.getAttribute('url'),
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            })
+            element.parentElement.remove()
+        })
+    })
+}
+updateDeleteButtons()

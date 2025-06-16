@@ -8,4 +8,5 @@ urlpatterns = [
     path('save_album', save_album, name='save_album'),
     path('save_album_photo/<int:album_id>', save_album_photo, name='save_album_photo'),
     path('delete_album/<int:album_id>', delete_album, name='delete_album'),
+    path('delete_photo/<int:album_id>/<int:image_id>', delete_album_photo, name='delete_photo'),
 ]

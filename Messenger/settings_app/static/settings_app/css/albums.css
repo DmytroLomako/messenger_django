@@ -21,6 +21,7 @@
 .divImageDelete{
     display: flex;
     align-items: center;
+    position: relative;
 }
 .user-photo img, .add-album-image, .divImageDelete img{
     width: 10.9vw;
@@ -208,4 +209,14 @@ hr{
     border: 0;
     height: 0.135vh;
     background-color: #CDCED2;
+}
+.divImageDelete .deleteBtn{
+    width: 2.38vw;
+    position: absolute;
+    right: 0.68vw;
+    bottom: 1.35vh;
+}
+.divImageDelete .deleteBtn:hover{
+    cursor: pointer;
+    filter: brightness(0.9);
 }

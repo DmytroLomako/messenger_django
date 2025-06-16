@@ -86,10 +86,11 @@
                             </div>
                             <hr>
                             <p>Фотографії</p>
-                            <div class="album-images">
+                            <div class="album-images" id="{{ album.id }}">
                                 {% for image in album.images.all %}
                                     <div class="divImageDelete">
                                         <img src="/media/{{ image.file }}" alt="">
+                                        <img src="{% static 'images/delete.png' %}" url="{% url 'delete_photo' album.id image.id %}" class="deleteBtn" alt="">
                                     </div>
                                 {% endfor %}
                                 <div class="add-album-image">
