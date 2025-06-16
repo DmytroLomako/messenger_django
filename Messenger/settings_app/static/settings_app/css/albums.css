@@ -168,6 +168,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 .album-header-actions{
     display: flex;
@@ -186,6 +187,8 @@
 }
 .actions img{
     width: 1.225vw;
+    position: relative;
+    z-index: 1;
 }
 .album-info{
     display: flex;
@@ -207,7 +210,7 @@
 }
 hr{
     border: 0;
-    height: 0.135vh;
+    min-height: 0.135vh;
     background-color: #CDCED2;
 }
 .divImageDelete .deleteBtn{
@@ -219,4 +222,30 @@ hr{
 .divImageDelete .deleteBtn:hover{
     cursor: pointer;
     filter: brightness(0.9);
+}
+.album-actions{
+    width: 15.3vw;
+    height: 17.3vh;
+    background-color: #E9E5EE;
+    position: absolute;
+    right: -0.833vw;
+    top: -1.481vh;
+    border-radius: 0.521vw;
+    padding: 6vh 0.833vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+}
+.album-actions button{
+    display: flex;
+    align-items: center;
+    gap: 0.633vw;
+    border: none;
+    background: none;
+}
+.album-actions button img{
+    width: 1.02vw;
+}
+.album-actions button p{
+    font-size: 0.82vw;
 }

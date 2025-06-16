@@ -6,12 +6,15 @@ let cross = document.querySelector('.cross-button')
 if (createAlbumButton) {
     createAlbumButton.addEventListener('click', () => {
         cover.style.display = 'flex'
-        body.style.overflow = 'hidden'
+        document.body.style.overflow = 'hidden'
     })
 }
 function removeCover() {
     cover.style.display = 'none'
-    body.style.overflow = 'auto'
+    document.body.style.overflow = 'auto'
+    if (cover.querySelector('.edit-input')){
+        cover.querySelector('.edit-input').remove()
+    }
 }
 cancel.addEventListener('click', removeCover)
 cross.addEventListener('click', removeCover)
@@ -76,3 +79,13 @@ function updateDeleteButtons() {
     })
 }
 updateDeleteButtons()
+
+let actions = document.querySelector('.actions');
+let albumActions = document.querySelector('.album-actions');
+actions.addEventListener('click', () => {
+    if (albumActions.style.display == 'flex') {
+        albumActions.style.display = 'none'
+    } else {
+        albumActions.style.display = 'flex'
+    }
+})

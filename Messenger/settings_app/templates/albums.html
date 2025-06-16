@@ -74,9 +74,28 @@
                                 <p>{{ album.name }}</p>
                                 <div class="album-header-actions">
                                     <button class="hide"><img src="{% static 'images/show.png' %}" alt=""></button>
+                                    <button class="actions"><img src="{% static 'images/dots_menu.png' %}" alt=""></button>
+                                </div>
+                                <div class="album-actions" style="display: none;">
+                                    <button>
+                                        <img src="{% static 'images/eye.png' %}" alt="">
+                                        <p>Цей альбом бачите тільки ви</p>
+                                    </button>
+                                    <form method="post">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="album_id" value="{{ album.id }}">
+                                        <button>
+                                            <img src="{% static 'images/edit.png' %}" alt="">
+                                            <p>Редагувати альбом</p>
+                                        </button>
+                                    </form>
+                                    <hr>
                                     <form action="{% url 'delete_album' album.id %}" method="post">
                                         {% csrf_token %}
-                                        <button class="actions"><img src="{% static 'images/dots_menu.png' %}" alt=""></button>
+                                        <button>
+                                            <img src="{% static 'images/deletePost.png' %}" alt="">
+                                            <p>Видалити альбом</p>
+                                        </button>
                                     </form>
                                 </div>
                             </div>
@@ -105,8 +124,11 @@
         </div>
     </main>
 </main>
-<div class="cover" style="display: none;">
+<div class="cover" {% if not album %} style="display: none;" {% endif %}> 
     <form class="create-album-div" method="post" action="{% url 'save_album' %}">
+        {% if album %}
+            <input type="hidden" name="edit" class="edit-input" value="{{ album.id }}">
+        {% endif %}
         {% csrf_token %}
         <div class="cross-div">
             <button type="button" class="cross-button"><img src="{% static 'images/cancel.png' %}" alt=""></button>
@@ -114,16 +136,22 @@
         <h1>Створити альбом</h1>
         <div class="form-data-div">
             <label for="albumName" style="margin-top: 0;">Назва альбому</label>
-            <input type="text" id="albumName" name="name" required>
+            <input type="text" id="albumName" name="name" required {% if album %} value="{{ album.name }}" {% endif %}>
             <label for="albumTheme">Тема альбому</label>
             <select name="theme" required id="albumTheme">
-                <option value="" disabled selected></option>
-                {% for tag in all_tags %}
-                    <option type="text">"{{tag}}"</option>
-                {% endfor %}
+                {% if album %}
+                    {% for tag in all_tags %}
+                        <option type="text" {% if tag == album.topic %} selected {% endif %}>"{{tag}}"</option>
+                    {% endfor %}
+                {% else %}
+                    <option value="" disabled selected></option>
+                    {% for tag in all_tags %}
+                        <option type="text">"{{tag}}"</option>
+                    {% endfor %}
+                {% endif %}
             </select>
             <label for="albumYear">Рік альбому</label>
-            <input type="number" max="2025" id="albumYear" name="year" required>
+            <input type="number" max="2025" id="albumYear" name="year" required {% if album %} value="{{ album.created_at|date:'Y' }}" {% endif %}>
         </div>
         <div class="create-album-options-div">
             <button type="button" class="cancel-button">Скасувати</button>

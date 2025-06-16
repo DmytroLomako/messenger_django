@@ -78,6 +78,16 @@ class AlbumsView(ListView):
     template_name = "albums.html"
     context_object_name = "albums"
     
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print(request.POST, request.POST.get('album_id'))
+            self.object_list = self.get_queryset()
+            album = Album.objects.get(id=int(request.POST.get('album_id')))
+            if album:
+                context = self.get_context_data(**kwargs)
+                context['album'] = album
+                return self.render_to_response(context)
+    
     def get_context_data(self, **kwargs):
         all_tags = Tag.objects.all()
         context = super().get_context_data(**kwargs)
@@ -93,7 +103,14 @@ def save_album(request):
             topic = request.POST.get('theme').replace('"', '')
             topic = Tag.objects.get(name=topic)
             date = request.POST.get('year')
-            Album.objects.create(author=user, name=name, topic=topic)
+            if request.POST.get('edit'):
+                album = Album.objects.get(id=request.POST.get('edit'))
+                album.name = name
+                album.topic = topic
+                album.save()
+                return redirect('albums')
+            else:
+                Album.objects.create(author=user, name=name, topic=topic)
             return redirect('albums')
         
 def save_album_photo(request, album_id):
