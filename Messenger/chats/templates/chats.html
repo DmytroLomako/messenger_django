@@ -54,12 +54,21 @@
                     {% endfor %}
                 </select>
                 {% for friend in friends %}
-                <div class="profile" id="{{friend.profile.id}}">
-                    <img class="avatarImage" src="{{friend.profile.photo.url}}" alt="">
+                {% if friend.profile2 == request.user.profile %}
+                <div class="profile" id="{{friend.profile1.id}}">
+                    <img class="avatarImage" src="{{friend.profile1.avatar_set.last.image.url}}" alt="">
                     <div class="profile-text-div">
-                        <p>{{friend.first_name}} {{friend.last_name}}</p>
+                        <p>{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}</p>
                     </div>
                 </div>
+                {% else %}
+                <div class="profile" id="{{friend.profile2.id}}">
+                    <img class="avatarImage" src="{{friend.profile2.avatar_set.last.image.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}</p>
+                    </div>
+                </div>
+                {% endif %}
                 {% endfor %}
                 <!-- <div class="profile">
                     <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
@@ -137,11 +146,11 @@
             <div class="profiles-all-div">
                 {% for message in not_viewed_messeges %}
                 <div class="profles">
-                    <img class="avatar" src="{{message.author.profile.photo.url}}" alt="">
+                    <img class="avatar" src="{{message.author.avatar_set.last.image.url}}" alt="">
                     <div class="profiles-text">
                         <div class="header-time-prfl-text">
-                            <p>{{message.author.first_name}} {{message.author.last_name}}</p>
-                            <p class="time-text">{{message.date_time}}</p>
+                            <p>{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
+                            <p class="time-text">{{message.sent_at}}</p>
                         </div>
                         <p>{{message.content}}</p>
                     </div>
@@ -159,11 +168,11 @@
             </div>
             <div class="groups-all-div">
 
-                {% for group in user.group.all %}
-                {% if not group.personal_chat %}
+                {% for group in groups %}
+                {% if not group.is_personal_chat %}
                 <div class="profiles-div">
                     <div class="profles">
-                        <img class="avatarImage" src="{{group.avatar_group.url}}" alt="">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
                         <div class="profiles-text" id="{{group.id}}">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>
@@ -263,11 +272,12 @@
                 <input type="text" placeholder="Пошук" class="input_find" id="">
                 <p class="choosed-num">Вибрано: 3</p>
                 <div class="list-of-friends">
-                    {% for friend in user.profile.friends.all %}
+                    {% for friend in friends %}
                     <div class="userChoose">
-                        <img src="{{friend.profile.photo.url}}" class="avatar">
-                        <p class="nameLastName">{{friend.profile.user.first_name}} {{friend.profile.user.last_name}}</p>
-                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile.pk}}">
+                        <img src="{{friend.profile1.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile1.pk}}">
                     </div>
                     {% endfor %}
                 </div>

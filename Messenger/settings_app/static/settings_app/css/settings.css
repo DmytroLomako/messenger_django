@@ -189,7 +189,6 @@ main {
     display: flex;
     flex-direction: column;
     width: 48.151vw;
-    height: 24.352vh;
     gap: 1.481vh;
     border: 0.052vw solid #CDCED2;
     border-radius: 0.521vw;
@@ -210,8 +209,8 @@ main {
     flex-direction: column;
     align-items: center;
     width: 46.484vw;
-    height: 100%;
     gap: 2.222vh;
+    padding-bottom: 16px;
 }
 
 .avatar-and-textdiv img {

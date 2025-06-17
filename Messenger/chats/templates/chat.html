@@ -49,12 +49,21 @@
             <input class="search" type="text" placeholder="Пошук">
             <div class="all-contacts">
                 {% for friend in friends %}
-                <div class="profile">
-                    <img class="avatarImage" src="{{friend.profile.photo.url}}" alt="">
+                {% if friend.profile2 == request.user.profile %}
+                <div class="profile" id="{{friend.profile1.id}}">
+                    <img class="avatarImage" src="{{friend.profile1.avatar_set.last.image.url}}" alt="">
                     <div class="profile-text-div">
-                        <p>{{friend.first_name}} {{friend.last_name}}</p>
+                        <p>{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}</p>
                     </div>
                 </div>
+                {% else %}
+                <div class="profile" id="{{friend.profile2.id}}">
+                    <img class="avatarImage" src="{{friend.profile2.avatar_set.last.image.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}</p>
+                    </div>
+                </div>
+                {% endif %}
                 {% endfor %}
                 <!-- <div class="profile">
                     <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
@@ -119,7 +128,7 @@
                 <label for="backBtn">
                     <img src="{% static 'images/back.png' %}" class="backImg">
                 </label>
-                <img src="{{group.avatar_group.url}}" class="avatarGroup">
+                <img src="{{group.avatar.url}}" class="avatarGroup">
 
                 <div class="nameAndMembers">
                     <p class="groupName">{{group.name}}</p>
@@ -131,24 +140,25 @@
         </div>
         <div class="mainGroup">
             {% for message in chat_messages %}
-            {% if message.author == user %}
+            {% if message.author == profile_now %}
             <div class="messageFromMe">
                 <div class="nonAvatarFromMe">
                     <div class="usernameAndTextcontent">
                         <p class="messageContent">{{message.content}}</p>
                     </div>
-                    <p class="datetime" id="datetimeFromMe">{{message.date_time|date:'c'}}</p>
+                    <p class="datetime" id="datetimeFromMe">{{message.sent_at|date:'c'}}</p>
                 </div>
             </div>
             {% else %}
             <div class="message">
-                <img src="{{message.author.profile.photo.url}}" class="avatarMessage">
+                <img src="{{message.author.avatar_set.last.image.url}}" class="avatarMessage">
                 <div class="nonAvatar">
                     <div class="usernameAndTextcontent">
-                        <p class="authorUsename">{{message.author.first_name}} {{message.author.last_name}}</p>
+                        <p class="authorUsename">{{message.author.user.first_name}} {{message.author.user.last_name}}
+                        </p>
                         <p class="messageContent">{{message.content}}</p>
                     </div>
-                    <p class="datetime">{{message.date_time|date:'c'}}</p>
+                    <p class="datetime">{{message.sent_at|date:'c'}}</p>
                 </div>
             </div>
             {% endif %}

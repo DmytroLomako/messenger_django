@@ -846,6 +846,13 @@ input {
     height: 13.22vh;
 }
 
+.hashTagTextDiv {
+    display: flex;
+    gap: 4px;
+    max-width: 35.96vw;
+    flex-wrap: wrap;
+}
+
 .hashtagText {
     font-size: 0.73vw;
     color: #543C52;

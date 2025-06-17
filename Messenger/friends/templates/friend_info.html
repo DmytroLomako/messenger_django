@@ -149,7 +149,9 @@
                 <img src="{{ friend.avatar_set.last.image.url }}" class="avatar">
                 <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
+                    {% if user.profile.signature == None %}
                     <img src="{{post.author.signature.url}}" class="painting">
+                    {% endif %}
                 </div>
             </div>
 
@@ -176,9 +178,10 @@
                 <div class="likesViews">
                     <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
                         id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
-                            class="likesImg" id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                            class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
                         Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">
+                        {{post.likes.all|length}}
                         Переглядів</p>
                 </div>
             </div>

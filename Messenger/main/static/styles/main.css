@@ -295,6 +295,13 @@ main .messages {
     flex-direction: column;
     padding-top: 1.89vh;
     gap: 2.52vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.hashTagTextDiv {
+    display: flex;
+    gap: 4px;
 }
 
 main .messages .blockName {

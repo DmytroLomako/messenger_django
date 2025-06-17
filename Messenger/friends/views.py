@@ -42,7 +42,7 @@ class FriendsView(TemplateView):
         for profile in recomended:
             print(profile.id)
             print(Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2"))
-            if profile != Profile.objects.get(user = user) and (profile.id,) not in Friendship.objects.filter(profile2 = Profile.objects.get(user = user)).values_list("profile1")and (profile.id,) not in Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2") and (profile.id,) not in all_not_accepted_get_requests.values_list("profile1"):
+            if profile != Profile.objects.get(user = user) and (profile.id,) not in Friendship.objects.filter(profile2 = Profile.objects.get(user = user)).values_list("profile1") and (profile.id,) not in Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2") and (profile.id,) not in all_not_accepted_get_requests.values_list("profile1"):
                 final_recomended.append(profile)
 
         context['recomended_friends'] = final_recomended
@@ -53,6 +53,7 @@ class FriendsView(TemplateView):
         # requests = []
         # all_requests = []
         # recomended_friends = []
+
         # for friend_profile in user_object.friends.all():
         #     all_friends.append(friend_profile.user)
         #     if len(friends) < 6:
@@ -200,23 +201,15 @@ def accept_friend(request, pk):
     # request.user.requests.set(all_requests)
     # profile_now.save()
 
-    return JsonResponse({"status": "ok"})
 
 def delete_friend(request, pk):
-    user = User.objects.get(id = pk)
-    profile_now = Profile.objects.get(user_id = request.user.pk)
-    profile_user = Profile.objects.get(user_id = user.pk)
-    all_friends = list(profile_now.friends.all())
-    if user in all_friends:
-        all_friends.remove(user)
-        profile_now.friends.set(all_friends)
-        profile_now.save()
-    else:
-        all_friends = list(profile_user.friends.all())
-        all_friends.remove(request.user)
-        profile_user.friends.set(all_friends)
-        profile_user.save()
-
+    print(pk)
+    profile_now = Profile.objects.get(id = request.user.pk)
+    profile_user = Profile.objects.get(id = pk)
+    try:
+       Friendship.objects.get(profile1 =  profile_now, profile2 = profile_user, accepted = True).delete()
+    except:
+        Friendship.objects.get(profile1 =  profile_user, profile2 = profile_now, accepted = True).delete()
     return JsonResponse({"status": "ok"})
 
 class FriendView(TemplateView):

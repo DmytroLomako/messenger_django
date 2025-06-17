@@ -103,45 +103,73 @@ allTags.forEach((element) => {
 if (buttonSend) {
     buttonSend.addEventListener('click', function () {
         if (input.value) {
-            bgBlur.style.display = 'flex';
-            let contentInput = bgBlur.querySelector('textarea');
-            let allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option");
-            contentInput.textContent = input.value;
+            bgBlur.style.display = 'flex'
+            let contentInput = bgBlur.querySelector('textarea')
+            let allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option")
+            contentInput.textContent = input.value
 
             document.querySelectorAll(".divAddTags .beforeBtton .hashTag").forEach(element => {
                 element.addEventListener("click", () => {
                     if (!allOptions[parseInt(element.getAttribute("value")) - 1].getAttribute('selected')) {
-                        allOptions[parseInt(element.getAttribute("value")) - 1].setAttribute('selected', true);
+
+                        allOptions[parseInt(element.getAttribute("value")) - 1].setAttribute('selected', true)
+
+                        let hashtagsConteiner = document.querySelector(".hashTagTextDiv")
+
+
+                        if (hashtagsConteiner == null) {
+                            let hashtagsConteinerElement = document.createElement("div")
+                            hashtagsConteinerElement.classList.add("hashTagTextDiv")
+                            document.querySelectorAll(".field")[1].appendChild(hashtagsConteinerElement)
+                        }
+
+                        hashtagsConteiner = document.querySelector(".hashTagTextDiv")
+
                         let pElement = document.createElement("p");
                         pElement.classList.add("hashTagText");
+                        pElement.setAttribute("value", parseInt(element.getAttribute("value")) - 1);
                         pElement.textContent = element.querySelector(".hashTagText").textContent;
-                        let textArea = document.querySelector(".input-div-text");
-                        textArea.appendChild(pElement);
+
+                        // const textArea = document.querySelector(".input-div-text") || document.querySelectorAll(".field")[1];
+                        hashtagsConteiner.appendChild(pElement);
+                    } else {
+                        allOptions[parseInt(element.getAttribute("value")) - 1].removeAttribute('selected')
+
+                        document.querySelectorAll(".field .hashTagText").forEach(element2 => {
+                            console.log(element2.getAttribute("value"))
+                            console.log(`125412t31t ${element.getAttribute("value") - 1}`)
+                            if (element2.getAttribute("value") == element.getAttribute("value") - 1) {
+                                element2.remove()
+                            }
+                        });
                     }
-                });
+                })
             });
         }
-    });
+    })
 }
-
-// Обработчик закрытия модального окна
 cancelBgBlur.addEventListener('click', function () {
-    bgBlur.style.display = 'none';
-});
+    bgBlur.style.display = 'none'
+})
 
-// Обработчик добавления тега
+
+
+
 if (addTag) {
     addTag.addEventListener("click", () => {
         inputAddTag.style.display = inputAddTag.style.display === "block" ? "none" : "block";
-        if (imageTags.src.split("/")[imageTags.src.split("/").length - 1] == 'add_tag.png') {
-            imageTags.src = "/static/images/submit.png";
-            inputAddTag.value = "";
+
+        if (imageTags.src.split("/")[imageTags.src.split("/").length - 1] == `add_tag.png`) {
+            imageTags.src = "/static/images/submit.png"
+            inputAddTag.value = ""
         } else {
             let finalHashTag = inputAddTag.value;
-            if (!inputAddTag.value.includes("#")) {
-                finalHashTag = `#${inputAddTag.value}`;
+            if (!finalHashTag.includes("#")) {
+                finalHashTag = `#${finalHashTag}`;
             }
+
             if (finalHashTag != "#") {
+
                 let hashTagElement = document.createElement("div");
                 let hashTagText = document.createElement("p");
                 hashTagElement.classList.add("hashTag");
@@ -149,18 +177,20 @@ if (addTag) {
 
                 let option = document.createElement("option");
                 let allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option");
-                let valueOption = parseInt(allOptions[allOptions.length - 1].value) + 1;
-                if (document.querySelectorAll("#field #id_tags option").length - 1 == 0) {
-                    valueOption = 0;
-                }
+
+
+                let valueOption = allOptions.length > 0 ?
+                    parseInt(allOptions[allOptions.length - 1].value) + 1 : 0;
+
                 hashTagElement.setAttribute("value", valueOption);
                 hashTagText.textContent = finalHashTag;
                 option.textContent = finalHashTag;
-                listTags.push(finalHashTag);
                 option.value = valueOption;
+
                 selectTags.appendChild(option);
                 hashTagElement.appendChild(hashTagText);
-                divAddTags.appendChild(hashTagElement);
+                divAddTags.appendChild(hashTagElement, imageTags);
+
 
                 $.ajax({
                     url: document.querySelector(".urlToCreateTag").value,
@@ -171,22 +201,46 @@ if (addTag) {
                         'page-to-return': "publications"
                     },
                     success: function (response) {
-                        console.log(response);
+                        console.log(response)
                     }
                 });
 
-                allOptions = document.querySelectorAll(".showTagsBtn #field #id_tags option");
-                document.querySelectorAll(".divAddTags .beforeBtton .hashTag").forEach(element => {
-                    element.addEventListener("click", () => {
-                        if (!allOptions[parseInt(element.getAttribute("value")) - 1].getAttribute('selected')) {
-                            allOptions[parseInt(element.getAttribute("value")) - 1].setAttribute('selected', true);
-                            let pElement = document.createElement("p");
-                            pElement.classList.add("hashTagText");
-                            pElement.textContent = element.querySelector(".hashTagText").textContent;
-                            let textArea = document.querySelector(".input-div-text");
-                            textArea.appendChild(pElement);
+
+                hashTagElement.addEventListener("click", function () {
+                    const optionIndex = parseInt(this.getAttribute("value"));
+                    const option = document.querySelector(`.showTagsBtn #field #id_tags option[value="${optionIndex}"]`);
+
+                    if (!option.hasAttribute('selected')) {
+                        option.setAttribute('selected', true);
+                        let hashtagsConteiner = document.querySelector(".hashTagTextDiv")
+
+
+                        if (hashtagsConteiner == null) {
+                            let hashtagsConteinerElement = document.createElement("div")
+                            hashtagsConteinerElement.classList.add("hashTagTextDiv")
+                            document.querySelectorAll(".field")[1].appendChild(hashtagsConteinerElement)
                         }
-                    });
+
+                        hashtagsConteiner = document.querySelector(".hashTagTextDiv")
+
+                        let pElement = document.createElement("p");
+                        pElement.classList.add("hashTagText");
+                        pElement.setAttribute("value", optionIndex);
+                        pElement.textContent = this.querySelector(".hashTagText").textContent;
+
+                        // const textArea = document.querySelector(".input-div-text") || document.querySelectorAll(".field")[1];
+                        hashtagsConteiner.appendChild(pElement);
+                    } else {
+                        option.removeAttribute('selected');
+                        const selector = optionIndex <= 9 ?
+                            ".input-div-text .hashTagText" : ".field .hashTagText";
+
+                        document.querySelectorAll(selector).forEach(element2 => {
+                            if (parseInt(element2.getAttribute("value")) === optionIndex) {
+                                element2.remove();
+                            }
+                        });
+                    }
                 });
             }
             imageTags.src = "/static/images/add_tag.png";
@@ -196,3 +250,40 @@ if (addTag) {
 
 // Остальные обработчики...
 // [Здесь должны быть остальные обработчики событий, которые были в оригинальном коде]
+
+
+let likeButtons = document.querySelectorAll('.like-button')
+likeButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+        if (!button.classList.contains("liked")) {
+            document.querySelector(`#like${button.id}`).src = "/static/images/liked.png"
+        } else {
+            document.querySelector(`#like${button.id}`).src = "/static/images/likes.png"
+        }
+        let likeCount = button.querySelector('b')
+        let isLiked = button.classList.contains('liked')
+        if (isLiked) {
+            likeCount.textContent = parseInt(likeCount.textContent) - 1
+            button.classList.remove('liked')
+        } else {
+            likeCount.textContent = parseInt(likeCount.textContent) + 1
+            button.classList.add('liked')
+        }
+        $.ajax({
+            url: `${button.getAttribute("value")}`,
+            type: 'POST',
+            data: {
+                'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            },
+            success: function (response) {
+                console.log(response)
+            }
+        })
+    })
+})
+
+
+document.querySelectorAll(".liked img").forEach(element => {
+    element.src = "/static/images/liked.png"
+});
+

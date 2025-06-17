@@ -27,8 +27,15 @@ class MyPublicationsView(CreateView):
         files = self.request.FILES.getlist('images')    
 
 
+        post_images = []
         for file in files:
-            Image.objects.create(post=post, image=file)
+            image = Image.objects.create(filename = str(file).split("/")[-1], file=file)
+            image.save()
+
+            post_images.append(image)
+
+        post.images.set(post_images)
+
         post.save()
         print(post)
         return super().form_valid(form)
@@ -43,11 +50,10 @@ class MyPublicationsView(CreateView):
         if request.POST.get("create") == None:    
             post_now = Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
-            post_now.subject = request.POST.get("subject")
-            post_now.text = request.POST.get("text")
-            post_now.article_link = request.POST.get("link")
+            post_now.content = request.POST.get("text")
+            # post_now.article_link = request.POST.get("link")
             post_now.tags.set(request.POST.get("tags-list").split(","))
-            post_now.images_set.all().delete()
+            post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
@@ -64,6 +70,8 @@ class MyPublicationsView(CreateView):
             print(Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image)
         except:
             context['user_image'] = None
+
+        context["profile_now"] = Profile.objects.get(user = self.request.user)
         return context
 
     def dispatch(self, request, *args, **kwargs):
@@ -88,11 +96,12 @@ def delete(request, post_pk):
 def likes(request, post_pk):
     try:
         if request.method == 'POST':
+            profile_now = Profile.objects.get(user = request.user)
             post = Post.objects.get(id=post_pk)
-            if request.user not in post.likes.all():
-                post.likes.add(request.user)
+            if profile_now not in post.likes.all():
+                post.likes.add(profile_now)
             else:
-                post.likes.remove(request.user)
+                post.likes.remove(profile_now)
             return JsonResponse({'status': 'success'})
     except:
         return JsonResponse({'status': 'error'})

@@ -3,6 +3,7 @@ import json
 from .forms import MessageForm
 from channels.db import database_sync_to_async
 from .models import ChatGroup, ChatMessage
+from authorization.models import Profile
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -36,11 +37,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "first_name": first_name,
                 "last_name": last_name,
                 "user_avatar": user_image,
-                "date_time": saved_message.date_time
+                "date_time": saved_message.sent_at
             }
         )
 
-    async def send_message_to_chat(self, event):
+    async def send_message_to_chat(self, event):    
         text_data_dict = json.loads(event["text_data"])
         first_name = event["first_name"]
         last_name = event["last_name"]
@@ -58,11 +59,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def get_user_profile(self, user):
-        return user.profile.photo.url
+        return Profile.objects.get(user = user).avatar_set.last().image.url
 
     @database_sync_to_async
     def save_message(self, message):
-        author = self.scope['user']
+        author = Profile.objects.get(user = self.scope['user'])
         group = ChatGroup.objects.get(pk=self.group_name)
         return ChatMessage.objects.create(
             author=author, 

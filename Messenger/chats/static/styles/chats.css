@@ -241,8 +241,9 @@ main {
     height: 576px;
     width: 532px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     overflow-y: auto;
+    overflow-x: hidden;
     margin-bottom: 24px;
     gap: 10px;
 }

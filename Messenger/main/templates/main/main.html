@@ -76,11 +76,11 @@
                 <a href="{% url 'friends' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
-                {% for request in user.requests.all %}
+                {% for request in requests %}
                 <div class="user">
-                    <img src="{{ request.user.profile.photo.url }}">
+                    <img src="{{ request.profile1.avatar_set.last.image.url }}">
                     <div class="nameSubscribers">
-                        <p class="name">{{request.user.first_name}} {{request.user.last_name}}</p>
+                        <p class="name">{{request.profile1.user.first_name}} {{request.profile1.user.last_name}}</p>
                         <p class="subscribers">100k Підписників</p>
                     </div>
                 </div>
@@ -130,11 +130,11 @@
                 </div> -->
 
                 <div class="user mona">
-                    <img src="{{message.author.profile.photo.url}}" class="avatar">
+                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatar">
                     <div class="nameSubscribers">
                         <div class="nameTime">
-                            <p class="name">{{message.author.first_name}} {{message.author.last_name}}</p>
-                            <p class="time">{{message.date_time}}</p>
+                            <p class="name">{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
+                            <p class="time">{{message.sent_at}}</p>
                         </div>
                         <p class="message">{{message.content}}</p>
                     </div>
@@ -194,7 +194,9 @@
                 <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
                 <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
+                    {% if user.profile.signature == None %}
                     <img src="{{post.author.signature.url}}" class="painting">
+                    {% endif %}
                 </div>
             </div>
 
@@ -211,17 +213,17 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    {% for img in post.images_set.all %}
-                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% for img in post.images.all %}
+                    <img src="{{ img.file.url }}" class="postImage1">
                     {% endfor %}
                 </div>
             </div>
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
+                    <p class="likes like-button {% if profile_now in post.likes.all %}liked{% endif %}"
                         id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
-                            class="likesImg" id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                            class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
                         Вподобань</p>
                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
                         Переглядів</p>
@@ -312,11 +314,8 @@
                         <button type="submit" class="sendBtnModal">Публікація</button>
                     </div>
                 </div>
-                {% elif field.name == "text" %}
-                <div class="field"><textarea type="text" name="text" class="textField"
-                        placeholder="Напишить текст публікації"></textarea></div>
-                <div class="input-div input-div-text">
-                </div>
+
+
 
                 {% else %}
                 <div class="input-div">
@@ -325,7 +324,6 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-
 
             </form>
 

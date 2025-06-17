@@ -161,7 +161,9 @@
                 <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
                 <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{{user.profile.signature.url}}" class="painting">
+                    {% if user.profile.signature == None %}
+                    <img src="{{post.author.signature.url}}" class="painting">
+                    {% endif %}
                 </div>
                 <div class="dotsDiv">
                     <form method="post">
@@ -196,20 +198,20 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    {% for img in post.images_set.all %}
-                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% for img in post.images.all %}
+                    <img src="{{ img.file.url }}" class="postImage1">
                     {% endfor %}
                 </div>
             </div>
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
-                        id="{{ post.id   }}" value="{% url 'likes' post.pk %}"><img
-                            src="{% static 'images/likes.png' %}" class="likesImg"
-                            id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                    <p class="likes like-button {% if profile_now in post.likes.all %}liked{% endif %}"
+                        id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
+                            class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
                         Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                    <p class="likes"><img src="{% static 'images/views.png' %}"
+                            class="likesImg">{{post.views.all|length}}
                         Переглядів</p>
                 </div>
             </div>
@@ -372,27 +374,13 @@
                             placeholder="Напишить назву публікації"></div>
                 </div>
 
-                {% elif field.name == "subject" %}
+
+
+                {% else %}
                 <div class="input-div">
-                    <div class="label">Тема публікації</div>
-                    <div class="field"><input class="subject" type="text" name="subject"
-                            placeholder="Напишить тему публікації"></div>
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
                 </div>
-
-                {% elif field.name == "text" %}
-                <div class="input-div input-div-text-redact">
-                    <div class="field"><textarea type="text" name="text" class="textField"
-                            placeholder="Напишить текст публікації"></textarea></div>
-                </div>
-                {% elif field.name == "article_link" %}
-                <div class="input-div">
-                    <label class="label">Посилання</label>
-                    <div class="field"><input class="link" name="link" type="text"
-                            placeholder="Додайте посилання до публікації">
-                    </div>
-                </div>
-
-
                 {% endif %}
                 {% endfor %}
 

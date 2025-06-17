@@ -4,16 +4,16 @@ from authorization.models import Profile
 
 
 class UserUpdateForm(forms.ModelForm):
-    new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'readonly': True, "class": "input"}),  
-        required=False,
-        label="Пароль"
-    )
-    
     birthday = forms.DateField(
         widget=forms.DateInput(attrs={'type': 'date', 'class': 'date-field', "readonly": True, "class": "input"}),
         required=False,
         label="Дата народження"
+    )
+    
+    new_password = forms.CharField(
+        widget=forms.PasswordInput(attrs={'readonly': True, "class": "input"}),  
+        required=False,
+        label="Пароль"
     )
 
     first_name = forms.CharField(

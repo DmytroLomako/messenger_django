@@ -60,7 +60,6 @@ editBtnHeader.addEventListener("click", () => {
         imageInput.type = "file"
         editBtnHeader.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
         editBtnHeader.type = "button"
-        headerDivEdit.style.height = "325px"
         labelUsername.style.display = "flex"
         username.style.display = "flex"
         usernameP.style.display = "none"

@@ -61,6 +61,7 @@ socket.addEventListener("message", function (event) {
         dt.textContent = `${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}`
     }
     scrollToBottom(messages)
+    window.location.reload()
 })
 
 scrollToBottom(messages)
