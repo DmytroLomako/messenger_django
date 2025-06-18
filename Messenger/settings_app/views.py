@@ -8,7 +8,10 @@ from authorization.models import Profile, Avatar
 from django.contrib import messages
 from .models import *
 from django.http import JsonResponse
-
+from django.contrib.auth.hashers import make_password
+from authorization.models import VerificationCode
+from django.template.loader import render_to_string
+from django.core.mail import EmailMessage
 # Create your views here.
 
 
@@ -31,6 +34,8 @@ class UserUpdateView(UpdateView):
         return redirect(self.get_success_url())
     
     def dispatch(self, request, pk,*args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("register")
         print(request.user)
         if request.user.username:
             if request.user.id == pk:
@@ -89,6 +94,16 @@ class AlbumsView(ListView):
     template_name = "albums.html"
     context_object_name = "albums"
     
+    def post(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            print(request.POST, request.POST.get('album_id'))
+            self.object_list = self.get_queryset()
+            album = Album.objects.get(id=int(request.POST.get('album_id')))
+            if album:
+                context = self.get_context_data(**kwargs)
+                context['album'] = album
+                return self.render_to_response(context)
+    
     def get_context_data(self, **kwargs):
         all_tags = Tag.objects.all()
         context = super().get_context_data(**kwargs)
@@ -104,7 +119,14 @@ def save_album(request):
             topic = request.POST.get('theme').replace('"', '')
             topic = Tag.objects.get(name=topic)
             date = request.POST.get('year')
-            Album.objects.create(author=user, name=name, topic=topic)
+            if request.POST.get('edit'):
+                album = Album.objects.get(id=request.POST.get('edit'))
+                album.name = name
+                album.topic = topic
+                album.save()
+                return redirect('albums')
+            else:
+                Album.objects.create(author=user, name=name, topic=topic)
             return redirect('albums')
         
 def save_album_photo(request, album_id):
@@ -139,3 +161,61 @@ def delete_album_photo(request, album_id, image_id):
                 image.delete()
             return JsonResponse({'status': 'success'})
         return redirect('albums')
+    
+
+def save_password(request):
+    if request.method == "POST" and request.POST.get("password1") != "":
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+        print(password1)
+        print(password2)
+        print(request.POST)
+        if password1 == password2:
+            user = User.objects.get(id = request.user.id)
+            user.password = make_password(password1)
+            user.save()
+        return redirect('settings', pk=request.user.pk)
+    else:
+        return redirect("settings", pk=request.user.pk)
+
+
+def save_email_password_verify(request):
+    code = f"{request.POST.get('verification_code1')}{request.POST.get('verification_code2')}{request.POST.get('verification_code3')}{request.POST.get('verification_code4')}{request.POST.get('verification_code5')}{request.POST.get('verification_code6')}"
+
+    user = User.objects.get(pk=request.user.id)
+            
+    verification = VerificationCode.objects.get(username=f"{user.email}")
+    
+    if verification.code == code and verification.is_valid():
+        user.is_active = True
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+        print(password1)
+        print(password2)
+        print(request.POST)
+        user = User.objects.get(id = request.user.id)
+        user.password = make_password(password1)
+        user.save()
+        verification.delete()
+        
+        if 'verification_user_id' in request.session:
+            del request.session['verification_user_id']
+
+    return redirect("settings", request.user.pk)
+
+
+def send_email_password_verify(request):
+    verification_code = VerificationCode.generate_code()
+    VerificationCode.objects.create(username=f"{request.user.email}", code=verification_code)
+    
+    mail_subject = 'Підтвердіть зміненя паролю'
+    message = render_to_string('authorization/email/account_activation_email.html', {
+        'user': request.user,
+        'code': verification_code,
+    })
+    to_email = request.user.email
+    email = EmailMessage(
+        mail_subject, message, to=[to_email]
+    )
+    email.send()
+    return redirect("settings", request.user.pk)

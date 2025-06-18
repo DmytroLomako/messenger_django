@@ -1,43 +1,54 @@
-.edit-information-btn-header{
+.edit-information-btn-header {
     width: 7vw;
 }
-.avatar-and-textdiv img{
+
+.avatar-and-textdiv img {
     border-radius: 0;
 }
-.avatar-and-textdiv{
+
+.avatar-and-textdiv {
     align-items: flex-start;
 }
-.options-div{
+
+.options-div {
     background: none;
     gap: 1.2vh;
 }
-.user-photo{
+
+.user-photo {
     display: flex;
     width: 48.151vw;
     flex-wrap: wrap;
     gap: 0.833vw;
     padding: 0 0.833vw;
 }
-.divImageDelete{
+
+.divImageDelete {
     display: flex;
     align-items: center;
     position: relative;
 }
-.user-photo img, .add-album-image, .divImageDelete img{
+
+.user-photo img,
+.add-album-image,
+.divImageDelete img {
     width: 10.9vw;
     height: 21.6vh;
     border-radius: 0.521vw;
 }
-.divImageDelete img{
+
+.divImageDelete img {
     height: auto;
     max-height: 21.6vh;
 }
-.card-profile-div{
+
+.card-profile-div {
     background-color: white;
     height: auto;
     padding-bottom: 1.481vh;
 }
-.no-albums-div{
+
+.no-albums-div {
     width: 48.151vw;
     border: 0.052vw solid #CDCED2;
     padding: 1.481vh 0.833vw;
@@ -47,7 +58,8 @@
     border-radius: 0.521vw;
     background-color: white;
 }
-.no-albums-div button{
+
+.no-albums-div button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -60,11 +72,13 @@
     color: #543C52;
     font-size: 0.729vw;
 }
-.no-albums-div button img{
+
+.no-albums-div button img {
     width: 1.042vw;
     height: 1.852vh;
 }
-.cover{
+
+.cover {
     position: fixed;
     top: 0;
     left: 0;
@@ -75,7 +89,8 @@
     justify-content: center;
     align-items: center;
 }
-.create-album-div{
+
+.create-album-div {
     width: 29.25vw;
     height: 59.5vh;
     border-radius: 1.36vw;
@@ -84,35 +99,43 @@
     flex-direction: column;
     background-color: white;
 }
-.cross-div{
+
+.cross-div {
     width: 100%;
     display: flex;
     justify-content: flex-end;
 }
-.cross-div button{
+
+.cross-div button {
     background: none;
     border: none;
 }
-.cross-div button img{
+
+.cross-div button img {
     width: 1.36vw;
 }
-.create-album-div h1{
+
+.create-album-div h1 {
     font-size: 2.31vw;
     font-weight: 500;
 }
-.form-data-div{
+
+.form-data-div {
     width: 100%;
     padding: 1.63vw 0;
     display: flex;
     flex-direction: column;
 }
-.form-data-div label{
+
+.form-data-div label {
     font-size: 1.225vw;
     font-weight: 400;
     margin-top: 2.16vh;
     margin-bottom: 0.81vh;
 }
-.form-data-div input, .form-data-div select{
+
+.form-data-div input,
+.form-data-div select {
     width: 100%;
     height: 5.68vh;
     font-size: 1.09vw;
@@ -123,20 +146,25 @@
     border: 0.068vw solid #CDCED2;
     padding: 0 1.09vw;
 }
-.form-data-div input:focus, .form-data-div select:focus{
+
+.form-data-div input:focus,
+.form-data-div select:focus {
     outline: none;
     border-color: #81818D;
 }
-#albumYear::-webkit-inner-spin-button{
+
+#albumYear::-webkit-inner-spin-button {
     -webkit-appearance: none;
 }
-.create-album-options-div{
+
+.create-album-options-div {
     width: 100%;
     display: flex;
     justify-content: flex-end;
     gap: 0.68vw;
 }
-.create-album-options-div button{
+
+.create-album-options-div button {
     padding: 1.35vh 1.09vw;
     border-radius: 1234px;
     font-size: 0.95vw;
@@ -144,16 +172,19 @@
     font-weight: 500;
     border: none;
 }
-.create-album-options-div .cancel-button{
+
+.create-album-options-div .cancel-button {
     border: 0.068vw solid #543C52;
     color: #543C52;
     background-color: white;
 }
-.save-button{
+
+.save-button {
     background-color: #543C52;
     color: white;
 }
-.album{
+
+.album {
     width: 48.151vw;
     padding: 1.481vh 0.833vw;
     background-color: white;
@@ -163,60 +194,106 @@
     flex-direction: column;
     gap: 1.481vh;
 }
-.album-header{
+
+.album-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
-.album-header-actions{
+
+.album-header-actions {
     display: flex;
     gap: 1.2vw;
 }
-.album-header-actions button{
+
+.album-header-actions button {
     border: none;
     background: none;
 }
-.album-header-actions form{
+
+.album-header-actions form {
     display: flex;
     align-items: center;
 }
-.hide img{
+
+.hide img {
     width: 2.245vw;
 }
-.actions img{
+
+.actions img {
     width: 1.225vw;
+    position: relative;
+    z-index: 1;
 }
-.album-info{
+
+.album-info {
     display: flex;
     gap: 0.833vw;
 }
-.add-album-image{
+
+.add-album-image {
     border: 0.068vw dashed #81818D;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.add-album-image img{
+
+.add-album-image img {
     width: 2.04vw;
 }
-.album-images{
+
+.album-images {
     display: flex;
     flex-wrap: wrap;
     gap: 0.833vw;
 }
-hr{
+
+hr {
     border: 0;
-    height: 0.135vh;
+    min-height: 0.135vh;
     background-color: #CDCED2;
 }
-.divImageDelete .deleteBtn{
+
+.divImageDelete .deleteBtn {
     width: 2.38vw;
     position: absolute;
     right: 0.68vw;
     bottom: 1.35vh;
 }
-.divImageDelete .deleteBtn:hover{
+
+.divImageDelete .deleteBtn:hover {
     cursor: pointer;
     filter: brightness(0.9);
+}
+
+.album-actions {
+    width: 15.3vw;
+    height: 17.3vh;
+    background-color: #E9E5EE;
+    position: absolute;
+    right: -0.833vw;
+    top: -1.481vh;
+    border-radius: 0.521vw;
+    padding: 6vh 0.833vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+}
+
+.album-actions button {
+    display: flex;
+    align-items: center;
+    gap: 0.633vw;
+    border: none;
+    background: none;
+}
+
+.album-actions button img {
+    width: 1.02vw;
+}
+
+.album-actions button p {
+    font-size: 0.82vw;
 }

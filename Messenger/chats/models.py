@@ -19,8 +19,7 @@ class ChatMessage(models.Model):
     author = models.ForeignKey(Profile, on_delete=models.CASCADE)
     chat_group = models.ForeignKey(ChatGroup, on_delete=models.CASCADE)
     sent_at = models.DateTimeField(auto_now_add=True)
-    views = models.ManyToManyField(Profile, related_name='viewed_messages') 
-    attached_image = models.ImageField(upload_to="image/messages", blank= True, null= True)
+    attached_image = models.ImageField(upload_to="images/messages", blank= True, null= True)
 
     def __str__(self):
         return f'Повідомлення від {self.author}. Відправлено {self.sent_at}'

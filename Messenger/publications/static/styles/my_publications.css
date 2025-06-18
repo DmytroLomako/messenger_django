@@ -578,7 +578,7 @@ main .postPostInput .post .postHeader .paintingDiv {
     top: 0;
 }
 
-.minilogo {
+backgr .minilogo {
     width: 1.05vw;
     height: 1.05vw;
 }
@@ -834,6 +834,10 @@ input {
 
 .publication-creation input {
     border: 1px solid #CDCED2;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .publication-creation textarea {

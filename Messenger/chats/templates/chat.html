@@ -128,8 +128,15 @@
                 <label for="backBtn">
                     <img src="{% static 'images/back.png' %}" class="backImg">
                 </label>
+                {% if group.is_personal_chat %}
+                {% if group.members.profile.first == user.profile %}
+                <img src="{{group.members.last.avatar_set.last.image.url}}" class="avatarGroup">
+                {% else %}
+                <img src="{{group.members.first.avatar_set.last.image.url}}" class="avatarGroup">
+                {% endif %}
+                {% else %}
                 <img src="{{group.avatar.url}}" class="avatarGroup">
-
+                {% endif %}
                 <div class="nameAndMembers">
                     <p class="groupName">{{group.name}}</p>
                     <p class="membersCount">{{len_members}} учасники, 1 в мережі</p>
@@ -137,13 +144,35 @@
                 <button class="hidden" id="backBtn" value="{{group.id}}"></button>
 
             </div>
+            {% if is_admin_group and not group.is_personal_chat %}
+            <div class="dotsDiv">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <button type="button"><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    <button class="edit" type="button" id="{{group.id}}"><img class="minilogo"
+                            src="{% static 'images/edit.png' %}" alt="">Редагувати
+                        Групу
+                    </button>
+                    <hr>
+                    <button type="button" class="delete" name="delete" id="{{group.id}}">
+                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                        Видлалити групу
+                    </button>
+                </form>
+            </div>
+            {% endif %}
         </div>
         <div class="mainGroup">
             {% for message in chat_messages %}
             {% if message.author == profile_now %}
+
             <div class="messageFromMe">
                 <div class="nonAvatarFromMe">
                     <div class="usernameAndTextcontent">
+                        {% if message.attached_image %}
+                        <img src="{{ message.attached_image.url }}" class="messageImage">
+                        {% endif %}
                         <p class="messageContent">{{message.content}}</p>
                     </div>
                     <p class="datetime" id="datetimeFromMe">{{message.sent_at|date:'c'}}</p>
@@ -156,8 +185,13 @@
                     <div class="usernameAndTextcontent">
                         <p class="authorUsename">{{message.author.user.first_name}} {{message.author.user.last_name}}
                         </p>
+                        {% if message.attached_image %}
+                        <img src="{{ message.attached_image.url }}" class="messageImage">
+                        {% endif %}
                         <p class="messageContent">{{message.content}}</p>
+
                     </div>
+
                     <p class="datetime">{{message.sent_at|date:'c'}}</p>
                 </div>
             </div>
@@ -168,7 +202,21 @@
         <div class="bottomGroup">
             <form method="post" class="messageForm">
                 {% csrf_token %}
-                <input type="text" name="messageInput" id="id_message" class="input" placeholder="Повідомлення">
+                <div class="inputAndImages">
+                    <input type="text" name="messageInput" id="id_message" class="input" placeholder="Повідомлення">
+                    <div class="imagesMessageDiv"></div>
+                </div>
+                <input id="sendImg2" type="file" class="sendImg2 hidden"></input>
+
+                <label for="sendImg2">
+                    <img src="{% static 'images/add_image.png' %}" class="sendImgImage">
+                </label>
+
+                <button class="sendEmoji"></button>
+
+                <label for="sendEmoji">
+                    <img src="{% static 'images/add_emoji.png' %}" class="sendEmojiImage">
+                </label>
 
                 <button class="submit" id="sendMessage"><img src="{% static 'images/send.png' %}" class="sendImg"
                         value="{{group.id}}"></button>
@@ -187,12 +235,12 @@
             </div>
             <div class="profiles-all-div">
                 {% for message in not_viewed_messeges %}
-                <div class="profles">
-                    <img class="avatar" src="{{message.author.profile.photo.url}}" alt="">
+                <div class="profles" id="{{message.group.id}}">
+                    <img class="avatar" src="{{message.author.avatar_set.last.image.url}}" alt="">
                     <div class="profiles-text">
                         <div class="header-time-prfl-text">
-                            <p>{{message.author.first_name}} {{message.author.last_name}}</p>
-                            <p class="time-text">{{message.date_time}}</p>
+                            <p>{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
+                            <p class="time-text datetime">{{message.sent_at|date:'c'}}</p>
                         </div>
                         <p>{{message.content}}</p>
                     </div>
@@ -210,101 +258,34 @@
             </div>
             <div class="groups-all-div">
 
-                {% for group in user.group.all %}
-                {% if not group.personal_chat %}
+                {% for group in groups %}
+                {% if not group.is_personal_chat %}
                 <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{{group.avatar_group.url}}" alt="">
+                    <div class="profles" id="{{message.group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
                         <div class="profiles-text" id="{{group.id}}">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>
-                                <p class="time-text">09.41</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
                             </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
                     </div>
                 </div>
                 {% endif %}
                 {% endfor %}
-                <!-- <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
 
+
+
     <div class="background-blur">
 
         <form method="post" enctype="multipart/form-data" id="create_group">
+            <input type="hidden" class="list_of_members" id="" value="{{list_of_members}}">
             <input type="hidden" class="group_id" value="{{group_id}}">
+            <input type="hidden" name="formType" value="create" class="formType">
             <input type="hidden" class="choosedUsers" name="choosedUsers">
             <div class="group-create">
                 {% csrf_token %}
@@ -314,12 +295,22 @@
                 <input type="text" placeholder="Пошук" class="input_find" id="">
                 <p class="choosed-num">Вибрано: 3</p>
                 <div class="list-of-friends">
-                    {% for friend in user.profile.friends.all %}
+                    {% for friend in friends %}
+                    {% if friend.profile1 == request.user.profile %}
                     <div class="userChoose">
-                        <img src="{{friend.profile.photo.url}}" class="avatar">
-                        <p class="nameLastName">{{friend.profile.user.first_name}} {{friend.profile.user.last_name}}</p>
-                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile.pk}}">
+                        <img src="{{friend.profile2.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile2.pk}}">
                     </div>
+                    {% else %}
+                    <div class="userChoose">
+                        <img src="{{friend.profile1.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile1.pk}}">
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 <div class="btns">

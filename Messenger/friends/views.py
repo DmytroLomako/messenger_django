@@ -3,6 +3,7 @@ from authorization.models import Profile, Friendship
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, JsonResponse
 from publications.models import Post
+from django.shortcuts import redirect
 
 class FriendsView(TemplateView):
     template_name = "friends.html"
@@ -77,6 +78,11 @@ class FriendsView(TemplateView):
         #             break
         # context['recomended_friends'] = recomended_friends
         return context
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("register")
+        return super().dispatch(request, *args, **kwargs)
     
 class RequestsView(TemplateView):
     template_name = "requests.html"
@@ -174,9 +180,8 @@ class AllFriendsView(TemplateView):
         return context
     
 def request_friend(request, pk):
-    print(User.objects.get(id = pk))
-    if Friendship.objects.get_or_create(profile1 = Profile.objects.get(user = request.user), profile2 = Profile.objects.get(user= User.objects.get(id = pk))) == None and Friendship.objects.get_or_create(profile1 =Profile.objects.get(user= User.objects.get(id = pk)), profile2 =  Profile.objects.get(user = request.user)) == None:
-        new_friendship = Friendship.objects.create(profile1 = Profile.objects.get(user = request.user), profile2 = Profile.objects.get(user= User.objects.get(id = pk)))
+    if Friendship.objects.get_or_create(profile1 = Profile.objects.get(user = request.user), profile2 = Profile.objects.get(id = pk)) == None and Friendship.objects.get_or_create(profile1 =Profile.objects.get(user= User.objects.get(id = pk)), profile2 =  Profile.objects.get(user = request.user)) == None:
+        new_friendship = Friendship.objects.create(profile1 = Profile.objects.get(user = request.user), profile2 = Profile.objects.get(id = pk))
         new_friendship.save()
 
     return JsonResponse({"status": "ok"})

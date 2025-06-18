@@ -248,6 +248,19 @@ if (addTag) {
     });
 }
 
+const datesAndTimes = document.querySelectorAll('.datetime')
+// Перебираємо отримані HTML-елементи з датами та часом
+for (let dt of datesAndTimes) {
+    // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
+    let dateAndTime = new Date(dt.textContent)
+    let dateAndTimeLocal = dateAndTime.toLocaleString()
+    if (dateAndTimeLocal != "Invalid Date") {
+        console.log(dateAndTimeLocal)
+        dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
+    }
+}
+
+
 // Остальные обработчики...
 // [Здесь должны быть остальные обработчики событий, которые были в оригинальном коде]
 

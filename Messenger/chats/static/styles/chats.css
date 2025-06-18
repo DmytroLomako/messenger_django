@@ -166,6 +166,54 @@ main {
     width: 16.61vw;
     height: 4.26vh;
     gap: 1.48vh;
+    cursor: pointer;
+}
+
+.profiles-text .text-content {
+    font-size: 14px;
+    color: #81818D;
+}
+
+.sendImg2 {
+    display: none;
+}
+
+.sendEmoji {
+    display: none;
+}
+
+.inputAndImages {
+    overflow-y: auto;
+    gap: 16px;
+    overflow-x: hidden;
+    max-height: 300px;
+}
+
+.imagesMessageDiv {
+    display: flex;
+    gap: 16px;
+}
+
+.messageImage {
+    width: 150px;
+    height: 200px;
+}
+
+.imagesMessageDiv img {
+    width: 150px;
+    height: 300px;
+}
+
+.sendImgImage {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.sendEmojiImage {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
 }
 
 .profile-text-div {
@@ -199,6 +247,7 @@ main {
 
     display: flex;
     border-bottom: 1px solid #CDCED2;
+    position: relative;
 }
 
 .headerStart {
@@ -208,6 +257,56 @@ main {
     width: 366px;
     height: 48px;
     gap: 16px;
+
+}
+
+.dotsDiv {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    border-radius: 0.26vw;
+}
+
+.dotsDiv .dots {
+    height: 2.10vh;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.minilogo {
+    width: 1.05vw;
+    height: 1.05vw;
+}
+
+.edit {
+    width: 100%;
+    height: 3.15vh;
+    display: flex;
+    align-items: center;
+    gap: 0.26vw;
+    display: none;
+}
+
+.delete {
+    width: 100%;
+    height: 3.15vh;
+    display: flex;
+    align-items: center;
+    gap: 0.26vw;
+    display: none;
+}
+
+.dotsDiv {
+    height: 2.10vh;
+    background-color: white;
+    padding-left: 0.26vw;
+}
+
+.dotsDiv button {
+    border: 0;
+    background-color: white;
+    cursor: pointer;
 }
 
 .backImg {
@@ -218,6 +317,7 @@ main {
 .avatarGroup {
     width: 46px;
     height: 46px;
+    border-radius: 1234px;
 }
 
 .nameAndMembers {
@@ -236,6 +336,9 @@ main {
     font-size: 14px;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
 
 .mainGroup {
     height: 576px;
@@ -327,8 +430,6 @@ main {
     border-radius: 0.52vw;
     background-color: white;
     gap: 2.22vh;
-    overflow-y: auto;
-    overflow-x: hidden;
 
 }
 
@@ -366,7 +467,8 @@ main {
     width: 18.28vw;
     height: 28.70vh;
     gap: 8px;
-    margin-left: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .profiles-div {
@@ -385,6 +487,7 @@ main {
     width: 16.46vw;
     height: 4.26vh;
     gap: 0.63vw;
+
 }
 
 .profiles-text {
@@ -393,6 +496,7 @@ main {
     width: 13.44vw;
     height: 4.07vh;
     gap: 0.37vh;
+    cursor: pointer;
 }
 
 .profiles-text p {
@@ -431,7 +535,8 @@ main {
     gap: 5px;
     width: 18.28vw;
     height: 34.44vh;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .tab-now {

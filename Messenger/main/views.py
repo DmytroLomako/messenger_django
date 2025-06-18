@@ -52,16 +52,8 @@ class MainView(CreateView):
         except:
             context['user_image'] = None
 
-        user_object = User.objects.get(username = self.request.user)
-        user_profile_now = Profile.objects.get(user_id = self.request.user.id)
-        messeges = ChatMessage.objects.all()
-        not_viewed_messeges = []
-
-        for message in messeges:
-
-            if user_profile_now not in message.views.all() and user_profile_now in message.chat_group.members.all() and user_profile_now != message.author:
-                not_viewed_messeges.append(message)
-        context["not_viewed_messeges"] = not_viewed_messeges
+        user_object = User.objects.get(username = self.request.user)                                                                                                                             
+        user_profile_now = Profile.objects.get(user_id = self.request.user.id)  
         context["profile_now"] = Profile.objects.get(user = self.request.user)
 
         all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
@@ -72,6 +64,8 @@ class MainView(CreateView):
     
     def dispatch(self, request, *args, **kwargs):
         print(request.user)
+        if not request.user.is_authenticated:
+            return redirect("register")
         if len(Tag.objects.all()) == 0:
             standart_tags_list = ["#відпочинок", "#натхнення", "#життя", "#природа", "#читання", "#спокій", "#гармонія", "#музика", "#фільми", "#подорожі"]
             for tag in standart_tags_list:

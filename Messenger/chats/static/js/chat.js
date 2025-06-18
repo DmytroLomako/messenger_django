@@ -15,7 +15,7 @@ let goToBack = document.querySelector(".skipBtn-2-step")
 
 let createGroupForm = document.querySelector("#create_group")
 
-let groupList = document.querySelectorAll(".profiles-text")
+let groupList = document.querySelectorAll(".profles")
 
 
 
@@ -117,11 +117,14 @@ profilesList.forEach(element => {
 });
 
 
-const datesAndTimes = document.querySelectorAll('.time-text')
+const datesAndTimes = document.querySelectorAll('.datetime')
 // Перебираємо отримані HTML-елементи з датами та часом
 for (let dt of datesAndTimes) {
     // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
-    let dateAndTime = dt.textContent
-
-    dt.textContent = `${dateAndTime.split(",")[2].split(":")[0]}:${dateAndTime.split(",")[2].split(":")[1]}`
+    let dateAndTime = new Date(dt.textContent)
+    let dateAndTimeLocal = dateAndTime.toLocaleString()
+    if (dateAndTimeLocal != "Invalid Date") {
+        console.log(dateAndTimeLocal)
+        dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
+    }
 }

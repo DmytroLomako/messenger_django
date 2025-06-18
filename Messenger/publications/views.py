@@ -75,6 +75,8 @@ class MyPublicationsView(CreateView):
         return context
 
     def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("register")
         if request.user.email:
             return super().dispatch(request, *args, **kwargs)
         else:

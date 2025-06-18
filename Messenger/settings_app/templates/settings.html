@@ -98,7 +98,7 @@
                     </form>
                 </div>
                 <div class="personal-information-div">
-                    <form method="post">
+                    <form method="post" class="personal-information-form">
                         <div class="personal-information-header">
                             <p>Особиста інформація</p>
                             <button class="edit-information-btn-main redact"><img class="editImg"
@@ -113,8 +113,31 @@
                                 <p>{{field.label}}</p>
                                 <div class="name-input-div">{{field}}</div>
                             </div>
+                            {% elif field.name == "password" %}
+                            <p></p>
                             {% endif %}
                             {% endfor %}
+                        </div>
+                    </form>
+                    <form method="post" class="password-form" action="{% url 'save_password' %}">
+                        <div class="personal-information-header">
+                            <p>Пароль</p>
+                            <button class="edit-password-btn-main redact" type="button"><img class="editImg"
+                                    src="{% static 'images/edit2.png' %}" alt="">Редагувати пароль</button>
+                        </div>
+                        <div class="all-inputs-div">
+                            {% csrf_token %}
+                            <div class="input-div">
+                                <p class="password-text-name">Пароль</p>
+                                <div class="password-div">
+                                    <input type="password" class="password1" placeholder="" name="password1"><img src=""
+                                        alt="">
+                                </div>
+                                <p class="password-text-name-form">Підтвердження пароля</p>
+                                <div class="password-div-1">
+
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -157,5 +180,39 @@
             </div>
         </div>
     </main>
+
+    <div class="background-blur">
+        <div class="publication-creation">
+            <button type="button" id="cancel-bg-blur">x</button>
+            <p class="title">Підтвердження для зміни паролю</p>
+            <p class="guide">
+                Ми надіслали 6-значний код на вашу пошту (you@example.com). Введіть його нижче, щоб підтвердити акаунт
+            </p>
+            <form method="post" action="{% url 'save_email_password_verify' %}">
+                <input type="text" name="password1" class="password1-hide hidden">
+                <input type="text" name="password2" class="password2-hide hidden">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="verification_code">Код підтвердження:</label>
+
+                    <div class="inputBlocks">
+                        <input type="text" name="verification_code1" id="verification_code1" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code2" id="verification_code2" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code3" id="verification_code3" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code4" id="verification_code4" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code5" id="verification_code5" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code6" id="verification_code6" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                    </div>
+                </div>
+                <button type="submit" class="submit">Підтвердити</button>
+            </form>
+        </div>
+    </div>
 </main>
 {% endblock %}

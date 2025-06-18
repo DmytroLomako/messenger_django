@@ -10,11 +10,6 @@ class UserUpdateForm(forms.ModelForm):
         label="Дата народження"
     )
     
-    new_password = forms.CharField(
-        widget=forms.PasswordInput(attrs={'readonly': True, "class": "input"}),  
-        required=False,
-        label="Пароль"
-    )
 
     first_name = forms.CharField(
         widget=forms.TextInput(attrs={'readonly': True, "class": "input"}),  
