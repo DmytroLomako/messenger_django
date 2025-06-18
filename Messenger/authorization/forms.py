@@ -30,10 +30,11 @@ class RegistrationForm(UserCreationForm):
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
         user.email = self.cleaned_data['email']
-        
 
 
         user.is_active = False 
+        print(user.username, user.email)
+        print(2)
         if commit:
             user.save()
         return user
