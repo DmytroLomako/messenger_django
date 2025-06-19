@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="readers">
-                    <p class="count">12.1K</p>
+                    <p class="count">{{readers}}</p>
                     <p class="name">Читачі</p>
                 </div>
 
@@ -94,17 +94,21 @@
                 <a href="{% url 'chats' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
-                {% for message in not_viewed_messeges %}
-                <div class="user mona">
-                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatar">
-                    <div class="nameSubscribers">
-                        <div class="nameTime">
-                            <p class="name">{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
-                            <p class="time datetime">{{message.sent_at|date:'c'}}</p>
+                {% for group in groups %}
+                {% if not group.is_personal_chat %}
+                <div class="profiles-div">
+                    <div class="profles" id="{{group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        <div class="profiles-text">
+                            <div class="header-time-prfl-text">
+                                <p>{{group.name}}</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
+                            </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
-                        <p class="message">{{message.content}}</p>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
                 <!-- <div class="user mona">
                     <img src="{% static 'images/avatar5.png' %}">
@@ -191,7 +195,8 @@
                         id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
                             class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
                         Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">
+                        {{post.views.all|length }}
                         Переглядів</p>
                 </div>
             </div>

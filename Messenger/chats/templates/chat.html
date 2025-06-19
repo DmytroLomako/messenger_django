@@ -128,15 +128,7 @@
                 <label for="backBtn">
                     <img src="{% static 'images/back.png' %}" class="backImg">
                 </label>
-                {% if group.is_personal_chat %}
-                {% if group.members.profile.first == user.profile %}
-                <img src="{{group.members.last.avatar_set.last.image.url}}" class="avatarGroup">
-                {% else %}
-                <img src="{{group.members.first.avatar_set.last.image.url}}" class="avatarGroup">
-                {% endif %}
-                {% else %}
                 <img src="{{group.avatar.url}}" class="avatarGroup">
-                {% endif %}
                 <div class="nameAndMembers">
                     <p class="groupName">{{group.name}}</p>
                     <p class="membersCount">{{len_members}} учасники, 1 в мережі</p>
@@ -234,17 +226,21 @@
                 <a class="see-all" href="">Дивитись всі</a>
             </div>
             <div class="profiles-all-div">
-                {% for message in not_viewed_messeges %}
-                <div class="profles" id="{{message.group.id}}">
-                    <img class="avatar" src="{{message.author.avatar_set.last.image.url}}" alt="">
-                    <div class="profiles-text">
-                        <div class="header-time-prfl-text">
-                            <p>{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
-                            <p class="time-text datetime">{{message.sent_at|date:'c'}}</p>
+                {% for group in groups %}
+                {% if group.is_personal_chat %}
+                <div class="profiles-div">
+                    <div class="profles" id="{{group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        <div class="profiles-text">
+                            <div class="header-time-prfl-text">
+                                <p>{{group.name}}</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
+                            </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
-                        <p>{{message.content}}</p>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>

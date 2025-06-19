@@ -71,6 +71,16 @@ class MyPublicationsView(CreateView):
         except:
             context['user_image'] = None
 
+        views_count = 0
+
+        user_profile_now = Profile.objects.get(user = self.request.user)
+        all_user_posts = Post.objects.filter(author = user_profile_now)
+        for post in all_user_posts:
+            views_count += len(post.views.all())
+        context["readers"] = views_count
+
+        context["all_readers"] = user_profile_now.post_set.all()
+
         context["profile_now"] = Profile.objects.get(user = self.request.user)
         return context
 
@@ -126,3 +136,13 @@ def save_tag(request):
         post.save()
         if request.POST.get("page-to-return")  == "publications":
             return redirect("my_publications")
+        
+
+
+def view_post(request, post_pk):
+    post = Post.objects.get(id = post_pk)
+    post.views.add(Profile.objects.get(user= request.user))
+
+    post.save()
+
+    return JsonResponse({"status": "success"})

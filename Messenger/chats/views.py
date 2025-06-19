@@ -113,7 +113,8 @@ def create_chat(request, user_pk):
         group_personal_chat = ChatGroup.objects.create(
             name=f'{current_user}-{user_to_connect}',
             is_personal_chat=True,
-            admin = current_user
+            admin = current_user,
+            avatar = user_to_connect.avatar_set.last().image
         )
         group_personal_chat.members.set([current_user,user_to_connect])
         group_personal_chat.save()
@@ -139,16 +140,7 @@ class ChatView(FormView):
         chat_group_pk = self.kwargs['group_pk']
         # Отримуємо об'єкт групи за її pk.
         chat_group = ChatGroup.objects.get(pk=chat_group_pk)
-        # Якщо користувач є у списку учасників групи
         if user in chat_group.members.all():
-            # Отримпуємо усі повідомлення, що знаходяться у цій групі
-            all_messages = ChatMessage.objects.filter(chat_group = chat_group)
-            # Перебараємо усі повідомлення
-            for message in all_messages:
-                # Додаємо корисстувача у поле views за зв'язком ManyToMany
-                message.views.add(user)
-                # Збрегіаємо зв'язок з користувачем у БД
-                message.save()
             return super().dispatch(request, *args, **kwargs)
         return redirect("chats")
     
@@ -177,7 +169,7 @@ class ChatView(FormView):
             group.members.set(final_list_add)
 
             group.save()
-            return super().post(request, *args, **kwargs)
+        return super().post(request, *args, **kwargs)
 
     def get_context_data(self, **kwargs):
         '''

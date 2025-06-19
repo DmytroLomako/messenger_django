@@ -110,6 +110,33 @@ allTags.forEach((element) => {
         finalAllTags.push(element.trim())
     }
 })
+function isPostInViewport(post) {
+    const rect = post.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.bottom <= window.innerHeight
+    );
+}
+
+
+document.querySelector(".PostPostInput").addEventListener("scroll", () => {
+    document.querySelectorAll(".PostPostInput .post").forEach(post => {
+        if (!post.dataset.viewed && isPostInViewport(post)) {
+            post.dataset.viewed = 'true';
+            $.ajax({
+                url: `/publications/view_post/${post.getAttribute("value")}/`,
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            });
+        }
+    });
+})
+
 
 if (buttonSend) {
     buttonSend.addEventListener('click', function () {

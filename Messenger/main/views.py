@@ -60,6 +60,16 @@ class MainView(CreateView):
 
         context["requests"] = all_not_accepted_get_requests
 
+        all_user_posts = Post.objects.filter(author = user_profile_now)
+
+        views_count = 0
+
+        for post in all_user_posts:
+            views_count += len(post.views.all())
+        context["readers"] = views_count
+
+        context["all_readers"] = user_profile_now.post_set.all()
+
         return context
     
     def dispatch(self, request, *args, **kwargs):
