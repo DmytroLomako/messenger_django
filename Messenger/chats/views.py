@@ -36,8 +36,8 @@ class ChatsView(CreateView):
             file = request.FILES.get('avatar_group')
             print(file)
 
-
-            group.avatar = file
+            if file:
+                group.avatar = file
 
             group.members.set(final_list_add)
 

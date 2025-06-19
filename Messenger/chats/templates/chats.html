@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="{% static 'styles/chats.css' %}">
 <script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
 <script src="{% static 'js/chat.js' %}" defer></script>
+<script src="{% static 'js/all_chats.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
@@ -204,7 +205,7 @@
                 <button type="button" id="cancel-bg-blur">x</button>
                 <p class="NameTitle">Нова група</p>
                 <input type="text" placeholder="Пошук" class="input_find" id="">
-                <p class="choosed-num">Вибрано: 3</p>
+                <p class="choosed-num">Вибрано: 0</p>
                 <div class="list-of-friends">
                     {% for friend in friends %}
                     {% if friend.profile1 == request.user.profile %}
@@ -268,6 +269,7 @@
                     </div>
                 </div>
 
+                <p class="nameLabel">Учасники</p>
                 <div class="group-members">
 
                 </div>
