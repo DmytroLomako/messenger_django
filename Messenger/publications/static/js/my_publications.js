@@ -58,10 +58,7 @@ function updateDeleteButtons() {
     let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
     deleteBtnsArray.forEach(element => {
         element.addEventListener("click", () => {
-            console.log(Number(element.id.split("delete")[1]))
-            console.log(listFilesRedact)
             delete listFilesRedact[Number(element.id.split("delete")[1])]
-            console.log(listFilesRedact)
             delete listFiles[Number(element.id.split("delete")[1])];
             document.getElementById(Number(element.id.split("delete")[1])).remove()
         })
@@ -69,8 +66,7 @@ function updateDeleteButtons() {
 }
 
 function displayImage(input, div, filesList) {
-    div.innerHTML = ''
-    filesList.length = 0
+    let len = filesList.length
     for (let count = 0; count < input.files.length; count++) {
         let file = input.files[count]
         let divImage = document.createElement("div")
@@ -79,8 +75,8 @@ function displayImage(input, div, filesList) {
         let deleteBtn = document.createElement("img")
         deleteBtn.src = "/static/images/delete.png"
         deleteBtn.classList.add("deleteBtn")
-        deleteBtn.id = "delete" + count
-        divImage.id = count
+        deleteBtn.id = "delete" + (count + len)
+        divImage.id = (count + len)
         filesList.push(input.files[count])
         createImage.id = "imageForPost"
         if (file) {
@@ -91,6 +87,7 @@ function displayImage(input, div, filesList) {
         }
     }
     updateDeleteButtons();
+    console.log(listFiles)
 }
 
 
@@ -382,7 +379,7 @@ editBtns.forEach(element => {
                 let post = JSON.parse(response)[0]["fields"]
                 document.querySelector(".title").value = post["title"]
                 // document.querySelector(".subject").value = post["subject"]
-                // document.querySelector(".textField").textContent = post["text"]
+                document.querySelector("#id_content").innerHTML = post["content"]
                 // document.querySelector(".link").value = post["article_link"]
 
                 let tagsFromPost = post["tags"]
@@ -410,31 +407,40 @@ editBtns.forEach(element => {
                 console.log(JSON.parse(response), JSON.parse(response).slice(1))
                 let images = JSON.parse(response).slice(1);
                 listFiles = [];
-                images.forEach((element, index) => {
+                listFilesRedact = [];
+                
+                const fetchPromises = images.map(async (element, index) => {
                     const existingImageUrl = element.fields.file;
                     if (existingImageUrl) {
-                        fetch(`/media/${existingImageUrl}`)
-                            .then(response => response.blob())
-                            .then(blob => {
-                                const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
-                                listFilesRedact.push(file);
-                            });
-                        let divImage = document.createElement("div")
-                        divImage.classList.add("divImageDelete")
-                        let createImage = document.createElement("img")
-                        let deleteBtn = document.createElement("img")
-                        deleteBtn.src = "/static/images/delete.png"
-                        deleteBtn.classList.add("deleteBtn")
-                        deleteBtn.id = "delete" + index
-                        divImage.id = index
-                        createImage.id = "imageForPost"
-                        createImage.src = `/media/${existingImageUrl}`;
-                        divImage.appendChild(createImage)
-                        divImage.appendChild(deleteBtn)
-                        imagesDivRedact.appendChild(divImage)
+                        const response = await fetch(`/media/${existingImageUrl}`);
+                        const blob = await response.blob();
+                        const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
+                        return { file, existingImageUrl, index };
                     }
-                })
-                updateDeleteButtons();
+                    return null;
+                });
+                
+                Promise.all(fetchPromises).then(results => {
+                    results.forEach(result => {
+                        if (result) {
+                            listFilesRedact.push(result.file);
+                            let divImage = document.createElement("div")
+                            divImage.classList.add("divImageDelete")
+                            let createImage = document.createElement("img")
+                            let deleteBtn = document.createElement("img")
+                            deleteBtn.src = "/static/images/delete.png"
+                            deleteBtn.classList.add("deleteBtn")
+                            deleteBtn.id = "delete" + result.index
+                            divImage.id = result.index
+                            createImage.id = "imageForPost"
+                            createImage.src = `/media/${result.existingImageUrl}`;
+                            divImage.appendChild(createImage)
+                            divImage.appendChild(deleteBtn)
+                            imagesDivRedact.appendChild(divImage)
+                        }
+                    });
+                    updateDeleteButtons();
+                });
 
                 selectRedact.forEach((option) => {
                     if (option.selected) {
@@ -487,6 +493,8 @@ tagsHiddenRedact.addEventListener("change", (event) => {
 
 cancelBgBlurRedact.addEventListener('click', () => {
     blurRedact.style.display = 'none'
+    listFilesRedact = []
+    imagesDivRedact.innerHTML = ''
 })
 let sendBtnModal = document.querySelector(".sendBtnModal")
 
@@ -498,6 +506,7 @@ formCratePost.addEventListener("submit", function (event) {
         }
     });
     imageInput.files = dataTransfer.files;
+    console.log(imageInput.files.length)
 })
 document.querySelector('.publication-redact').addEventListener('submit', (event) => {
     const dataTransferRedact = new DataTransfer();
