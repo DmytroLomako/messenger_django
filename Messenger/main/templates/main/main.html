@@ -20,7 +20,7 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -94,6 +94,7 @@
                 <a href="{% url 'chats' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
+<<<<<<< HEAD
                 {% for group in groups %}
                 {% if not group.is_personal_chat %}
                 <div class="profiles-div">
@@ -106,6 +107,17 @@
                             </div>
                             <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
+=======
+                {% for message in not_viewed_messeges %}
+                <div class="user mona">
+                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatar">
+                    <div class="nameSubscribers">
+                        <div class="nameTime">
+                            <p class="name">{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
+                            <p class="time datetime">{{message.sent_at|date:'c'}}</p>
+                        </div>
+                        <p class="message">{{message.content}}</p>
+>>>>>>> origin/mbarilo
                     </div>
                 </div>
                 {% endif %}

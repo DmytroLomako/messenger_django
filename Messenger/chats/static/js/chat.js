@@ -16,6 +16,8 @@ let goToBack = document.querySelector(".skipBtn-2-step")
 let createGroupForm = document.querySelector("#create_group")
 
 let groupList = document.querySelectorAll(".profles")
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
 
 
 
@@ -127,4 +129,10 @@ for (let dt of datesAndTimes) {
         console.log(dateAndTimeLocal)
         dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
     }
+}
+
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
 }

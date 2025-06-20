@@ -22,6 +22,8 @@ let postPkInput = document.querySelector(".postPkInput")
 let imageTags = document.querySelector(".imageTags")
 let inputAddTag = document.querySelector(".inputAddTag")
 let tagsList = document.querySelector(".tags-list")
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
 
 
 let imagesPost = document.querySelector(".postImage1")
@@ -184,6 +186,8 @@ cancelBgBlur.addEventListener('click', function () {
 })
 
 
+
+
 if (addTag) {
     addTag.addEventListener("click", () => {
         inputAddTag.style.display = inputAddTag.style.display === "block" ? "none" : "block";
@@ -238,7 +242,6 @@ if (addTag) {
                 hashTagElement.addEventListener("click", function () {
                     const optionIndex = parseInt(this.getAttribute("value"));
                     const option = document.querySelector(`.showTagsBtn #field #id_tags option[value="${optionIndex}"]`);
-
 
                     if (!option.hasAttribute('selected')) {
                         option.setAttribute('selected', true);
@@ -656,6 +659,8 @@ document.querySelectorAll(".liked img").forEach(element => {
     element.src = "/static/images/liked.png"
 });
 
-
-
-
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
+}

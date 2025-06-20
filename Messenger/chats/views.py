@@ -39,6 +39,8 @@ class ChatsView(CreateView):
             if file:
                 group.avatar = file
 
+            group.avatar = file
+
             group.members.set(final_list_add)
 
             group.save()
@@ -63,6 +65,9 @@ class ChatsView(CreateView):
         list_personal_chats = ChatGroup.objects.filter(is_personal_chat = True)
 
   
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
 
         context["friends"] = final_friends_list
         

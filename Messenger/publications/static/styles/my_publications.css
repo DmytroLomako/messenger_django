@@ -593,7 +593,7 @@ main .postPostInput .post .postHeader .paintingDiv {
     top: 0;
 }
 
-.minilogo {
+backgr .minilogo {
     width: 1.05vw;
     height: 1.05vw;
 }
@@ -1088,4 +1088,28 @@ input {
     background-color: white;
     border: 1px solid #81818D;
     order: 999999;
+}
+
+.requests-messeges {
+    width: 16px;
+    height: 16px;
+    background-color: #F43F5E;
+    border-radius: 1234px;
+    position: absolute;
+    right: 46px;
+    top: -4px;
+    border: 2px solid white;
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.requests-messeges p {
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.chats {
+    position: relative;
 }

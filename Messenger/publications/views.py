@@ -5,7 +5,7 @@ from django.shortcuts import redirect, render
 from .forms import CreatePostForm
 from django.http import JsonResponse
 from django.core import serializers
-from authorization.models import Profile, Avatar
+from authorization.models import Profile, Avatar, Friendship
 from publications.models import Tag
 import json
 
@@ -26,7 +26,11 @@ class MyPublicationsView(CreateView):
 
         files = self.request.FILES.getlist('images')    
 
+<<<<<<< HEAD
         print(self.request.FILES)
+=======
+
+>>>>>>> origin/mbarilo
         post_images = []
         for file in files:
             image = Image.objects.create(filename = str(file).split("/")[-1], file=file)
@@ -50,6 +54,7 @@ class MyPublicationsView(CreateView):
         if request.POST.get("create") == None:    
             post_now = Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
+<<<<<<< HEAD
             post_now.content = request.POST.get("content")
             # post_now.article_link = request.POST.get("link")
             final_list_tags = []
@@ -59,12 +64,21 @@ class MyPublicationsView(CreateView):
                     final_list_tags.append(int(element))
             print(final_list_tags)
             post_now.tags.set(final_list_tags)
+=======
+            post_now.content = request.POST.get("text")
+            # post_now.article_link = request.POST.get("link")
+            post_now.tags.set(request.POST.get("tags-list").split(","))
+>>>>>>> origin/mbarilo
             post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
+<<<<<<< HEAD
                     img = Image.objects.create(filename=file.name, file=file)
                     post_now.images.add(img)
+=======
+                    Image.objects.create(post=post_now, image=file)
+>>>>>>> origin/mbarilo
             post_now.save()
         return super().post(request, *args, **kwargs)
 
@@ -78,6 +92,7 @@ class MyPublicationsView(CreateView):
         except:
             context['user_image'] = None
 
+<<<<<<< HEAD
         views_count = 0
 
         user_profile_now = Profile.objects.get(user = self.request.user)
@@ -87,9 +102,15 @@ class MyPublicationsView(CreateView):
         context["readers"] = views_count
 
         context["all_readers"] = user_profile_now.post_set.all()
+=======
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
+>>>>>>> origin/mbarilo
 
         context["profile_now"] = Profile.objects.get(user = self.request.user)
         return context
+    
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -128,7 +149,11 @@ def likes(request, post_pk):
 def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [Post.objects.get(id = post_pk)]
+<<<<<<< HEAD
         images = post[0].images.all()
+=======
+        images = Image.objects.filter(post = post[0])
+>>>>>>> origin/mbarilo
         for image in images:
             post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)

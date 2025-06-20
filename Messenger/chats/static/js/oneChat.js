@@ -60,6 +60,7 @@ for (let dt of datesAndTimes) {
     let dateAndTime = new Date(dt.textContent)
     let dateAndTimeLocal = dateAndTime.toLocaleString()
     if (dateAndTimeLocal != "Invalid Date") {
+        console.log(dateAndTimeLocal)
         dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
     }
 }
@@ -338,3 +339,11 @@ editBtns.addEventListener("click", () => {
     document.querySelector(".NameTitle").textContent = "Редагування групи"
 })
 
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
+
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
+}

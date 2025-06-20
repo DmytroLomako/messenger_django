@@ -688,7 +688,8 @@ main .addedCheckbox {
     cursor: pointer;
 }
 
-.nameLastName, .nameLastNameChosen {
+.nameLastName,
+.nameLastNameChosen {
     width: 280px;
     font-size: 16px;
 }
@@ -858,28 +859,54 @@ main .addedCheckbox {
     word-wrap: break-word;
 }
 
-.group-members{
+.group-members {
     display: flex;
     flex-direction: column;
     gap: 10px;
     width: 402px;
 }
 
-.userChosen{
+.userChosen {
     display: flex;
     align-items: center;
     width: 100%;
     gap: 12px;
 }
 
-.deleteMemberButtonDiv{
+.deleteMemberButtonDiv {
     display: flex;
     justify-content: flex-end;
 }
 
-.deleteMemberButton{
+.deleteMemberButton {
     width: 20px;
 }
-.deleteMemberButton:hover{
+
+.deleteMemberButton:hover {
     cursor: pointer;
+
+}
+
+.requests-friends {
+    width: 16px;
+    height: 16px;
+    background-color: #F43F5E;
+    border-radius: 1234px;
+    position: absolute;
+    right: 55px;
+    top: -2px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.requests-friends p {
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.friends {
+    position: relative;
 }

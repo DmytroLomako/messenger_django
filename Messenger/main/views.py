@@ -59,6 +59,7 @@ class MainView(CreateView):
         all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
 
         context["requests"] = all_not_accepted_get_requests
+<<<<<<< HEAD
 
         all_user_posts = Post.objects.filter(author = user_profile_now)
 
@@ -69,6 +70,8 @@ class MainView(CreateView):
         context["readers"] = views_count
 
         context["all_readers"] = user_profile_now.post_set.all()
+=======
+>>>>>>> origin/mbarilo
 
         return context
     

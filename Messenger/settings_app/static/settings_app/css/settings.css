@@ -727,4 +727,31 @@ ul {
 
 .invisible {
     opacity: 0;
+<<<<<<< HEAD
+=======
+}
+
+.requests-friends{
+    width: 16px;
+    height: 16px;
+    background-color: #F43F5E;
+    border-radius: 1234px;
+    position: absolute;
+    right: 55px;
+    top: -2px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.requests-friends p{
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.friends{
+    position: relative;
+>>>>>>> origin/mbarilo
 }

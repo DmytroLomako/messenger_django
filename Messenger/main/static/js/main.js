@@ -29,6 +29,8 @@ const tagsHiddenRedact = document.getElementById("tagsHiddenRedact");
 const tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select");
 const imagesPost = document.querySelector(".postImage1");
 const formCratePost = document.querySelector(".publication-creation");
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
 
 let listFiles = [];
 let listFilesRedact = [];
@@ -309,6 +311,12 @@ function isPostInViewport(post) {
         rect.top >= 0 &&
         rect.bottom <= window.innerHeight
     );
+
+}
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
 }
 
 

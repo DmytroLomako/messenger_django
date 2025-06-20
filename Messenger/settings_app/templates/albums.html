@@ -21,7 +21,11 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
+<<<<<<< HEAD
             <a href="{% url 'main' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+=======
+                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+>>>>>>> origin/mbarilo
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -63,8 +67,18 @@
                         </div>
                     </form>
                 </div>
+<<<<<<< HEAD
                 {% if request.user.profile.album_set.all %}
                 
+=======
+                {% if not request.user.profile.album_set.all %}
+                <div class="no-albums-div">
+                    <p>Немає ще жодного альбому</p>
+                    <button type="button" class="create-album-button"><img src="{% static 'images/add.png' %}"
+                            alt="">Створити альбом</button>
+                </div>
+                {% else %}
+>>>>>>> origin/mbarilo
                 {% for album in request.user.profile.album_set.all %}
                 <div class="album">
                     <div class="album-header">
@@ -117,6 +131,7 @@
                     <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*"
                         type="file" style="display: none;" name="" id="" multiple>
                 </div>
+<<<<<<< HEAD
 
         <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*" type="file"
             style="display: none;" name="" id="" multiple>
@@ -128,6 +143,18 @@
             </button>
         </div>
         </div>
+=======
+            </div>
+
+            <hr>
+
+        </div>
+        <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*" type="file"
+            style="display: none;" name="" id="" multiple>
+        </div>
+        {% endfor %}
+        {% endif %}
+>>>>>>> origin/mbarilo
         </div>
         </div>
     </main>
