@@ -63,13 +63,8 @@
                         </div>
                     </form>
                 </div>
-                {% if not request.user.profile.album_set.all %}
-                <div class="no-albums-div">
-                    <p>Немає ще жодного альбому</p>
-                    <button type="button" class="create-album-button"><img src="{% static 'images/add.png' %}"
-                            alt="">Створити альбом</button>
-                </div>
-                {% else %}
+                {% if request.user.profile.album_set.all %}
+                
                 {% for album in request.user.profile.album_set.all %}
                 <div class="album">
                     <div class="album-header">
@@ -122,16 +117,17 @@
                     <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*"
                         type="file" style="display: none;" name="" id="" multiple>
                 </div>
-            </div>
 
-            <hr>
-
-        </div>
         <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*" type="file"
             style="display: none;" name="" id="" multiple>
+            {% endfor %}
+            {% endif %}
+        <div class="no-albums-div">
+            <p>Немає ще жодного альбому</p>
+            <button type="button" class="create-album-button"><img src="{% static 'images/add.png' %}" alt="">Створити альбом
+            </button>
         </div>
-        {% endfor %}
-        {% endif %}
+        </div>
         </div>
         </div>
     </main>

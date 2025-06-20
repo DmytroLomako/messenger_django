@@ -688,7 +688,7 @@ main .addedCheckbox {
     cursor: pointer;
 }
 
-.nameLastName {
+.nameLastName, .nameLastNameChosen {
     width: 280px;
     font-size: 16px;
 }
@@ -856,4 +856,30 @@ main .addedCheckbox {
     color: #070A1C;
     max-width: 150px;
     word-wrap: break-word;
+}
+
+.group-members{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 402px;
+}
+
+.userChosen{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 12px;
+}
+
+.deleteMemberButtonDiv{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.deleteMemberButton{
+    width: 20px;
+}
+.deleteMemberButton:hover{
+    cursor: pointer;
 }
