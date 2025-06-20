@@ -1,28 +1,48 @@
 from django.db import models
 from django.contrib.auth.models import User
-from authorization.models import UserProfile
-from create_tag.models import Tag
+from authorization.models import Profile
 
 
 # Create your models here.
-class User_Post(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name= "posts")
-    title = models.CharField(max_length=200, unique=True)
-    subject = models.CharField(max_length=200)
-    tags = models.ManyToManyField(Tag)
-    text = models.TextField()
-    article_link = models.URLField(blank=True, null=True)
-    views = models.ManyToManyField(User, related_name='viewed_posts', blank=True)
-    likes = models.ManyToManyField(User, related_name='liked_posts', blank=True)
+class Post(models.Model):
+    title = models.CharField(max_length=255)
+    content = models.TextField(max_length=4096)
+    author = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    images = models.ManyToManyField("Image", blank=True, related_name= "posts_authored")
+    views = models.ManyToManyField(Profile, related_name='posts_viewed', blank=True)
+    likes = models.ManyToManyField(Profile, related_name='posts_liked', blank=True)
+    tags = models.ManyToManyField("Tag", blank=True)
+
+    def __str__(self):
+        return self.title
     
-    def count_views(self):
-        return self.views.count()
+    # def count_views(self):
+    #     return self.views.count()
     
-    def count_likes(self):
-        return self.likes.count()
+    # def count_likes(self):
+    #     return self.likes.count()
     
 
 
-class Images(models.Model):
-    post = models.ForeignKey(User_Post, on_delete= models.CASCADE)
-    image = models.ImageField(upload_to= "images/", null= True)
+class Image(models.Model):
+    filename = models.CharField(max_length=150)
+    file = models.ImageField(upload_to= "images/posts", null= True)
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.filename
+    
+
+class Tag(models.Model):
+    name = models.CharField(max_length= 50, unique=True)
+
+    def __str__(self):
+        return self.name
+    
+
+class Link(models.Model):
+    url = models.URLField(max_length= 200)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'Посилання для поста "{self.post}"'

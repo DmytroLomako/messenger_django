@@ -189,10 +189,13 @@ main {
     display: flex;
     flex-direction: column;
     width: 48.151vw;
-    height: 24.352vh;
     gap: 1.481vh;
     border: 0.052vw solid #CDCED2;
     border-radius: 0.521vw;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 .card-profile-header {
@@ -210,8 +213,8 @@ main {
     flex-direction: column;
     align-items: center;
     width: 46.484vw;
-    height: 100%;
     gap: 2.222vh;
+    padding-bottom: 16px;
 }
 
 .avatar-and-textdiv img {
@@ -229,19 +232,78 @@ main {
     gap: 0.926vh;
 }
 
+.avatarDiv label img {
+    width: 3.255vw;
+    height: 6.558vh;
+}
+
+.username {
+    font-size: 1.259vh;
+}
+
 .nickname-text {
     font-weight: 700;
-    font-size: 1.25vw;
+    font-size: 2.518vh;
 }
 
 .personal-information-div {
     display: flex;
     flex-direction: column;
     width: 48.151vw;
-    height: 45.37vh;
+    height: 50.37vh;
     gap: 1.481vh;
     border: 0.052vw solid #CDCED2;
     border-radius: 0.521vw;
+}
+
+.password-form {
+    margin-top: -70px;
+}
+
+.password-div {
+    width: 17.865vw;
+    height: 3.889vh;
+}
+
+.password-div input {
+    width: 17.865vw;
+    height: 3.889vh;
+    border-radius: 0.521vw;
+    border: 0.052vw solid #81818D;
+    padding-left: 0.833vw;
+    gap: 0.926vh;
+}
+
+.password-div-1 {
+    width: 17.865vw;
+    height: 3.889vh;
+}
+
+.password-div-1 input {
+    width: 17.865vw;
+    height: 3.889vh;
+    border-radius: 0.521vw;
+    border: 0.052vw solid #81818D;
+    padding-left: 0.833vw;
+    gap: 0.926vh;
+}
+
+.password-text-name-form {
+    display: none;
+}
+
+.edit-password-btn-main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 173px;
+    height: 3.704vh;
+    border-radius: 98.958vw;
+    gap: 0.926vh;
+    background-color: #FFFFFF;
+    border: 0.052vw solid #543C52;
+    color: #543C52;
+    font-size: 0.729vw;
 }
 
 .personal-information-header {
@@ -497,7 +559,7 @@ button {
     font-size: 0.729vw;
 }
 
-.edit-sign-btn{
+.edit-sign-btn {
     display: none;
     justify-content: center;
     align-items: center;
@@ -511,13 +573,13 @@ button {
     font-size: 0.729vw;
 }
 
-.paint-sign{
+.paint-sign {
     display: none;
     width: 21vw;
     height: 25vh;
 }
 
-.color-picker{
+.color-picker {
     display: none;
     gap: 10px;
     width: 100px;
@@ -530,11 +592,11 @@ button {
     border-radius: 50%;
     cursor: pointer;
     background-color: #543C52;
-  }
+}
 
-  .color.active {
+.color.active {
     background-color: #070A1C;
-  }
+}
 
 .edit-information-btn-sign img {
     width: 1.042vw;
@@ -549,4 +611,143 @@ button {
 #id_birthday {
     border: 0.052vw solid #543C52;
     font-size: 0.729vw;
+}
+
+.guide {
+    text-align: center;
+}
+
+.background-blur {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(1px);
+    justify-content: center;
+    align-items: center;
+}
+
+#cancel-bg-blur {
+    width: 100%;
+    height: 2.62vh;
+    text-align: end;
+    background-color: white;
+    border: 0;
+    font-size: 0.84vw;
+    cursor: pointer;
+    margin-top: -16px;
+}
+
+
+
+input {
+    margin-top: 6px;
+    width: 50px;
+    height: 45px;
+    border: 1px solid #CDCED2;
+    border-radius: 10px;
+    padding-left: 16px;
+}
+
+.inputBlocks {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+span {
+    display: none;
+}
+
+ul {
+    display: none;
+}
+
+.publication-creation {
+    width: 25.56vw;
+    background-color: white;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 4.62vh;
+    box-sizing: border-box;
+
+    border-radius: 20px;
+    gap: 1.89vw;
+    z-index: 100;
+    padding-bottom: 8.78vh;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.submit {
+    width: 400px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #543C52;
+    border-radius: 1234px;
+
+    color: white;
+    border: 0;
+}
+
+.publication-creation form {
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.title {
+    font-size: 24px;
+    color: #070A1C;
+}
+
+.guide {
+    width: 400px;
+    height: 54px;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.invisible {
+    opacity: 0;
+}
+
+.requests-friends{
+    width: 16px;
+    height: 16px;
+    background-color: #F43F5E;
+    border-radius: 1234px;
+    position: absolute;
+    right: 55px;
+    top: -2px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.requests-friends p{
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
+}
+
+.friends{
+    position: relative;
 }

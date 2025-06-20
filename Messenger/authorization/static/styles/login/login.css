@@ -52,7 +52,7 @@ ul {
 main {
     width: 100vw;
     height: 100vh;
-    padding-left: 13.39vw;
+    padding-left: 26.39vw;
     background-color: #E9E5EE;
     box-sizing: border-box;
     display: flex;
@@ -160,6 +160,6 @@ header img {
     width: 35.70vw;
     height: 27.66vw;
     position: absolute;
-    left: 40.26vw;
+    left: 47.26vw;
     top: 26.02vh;
 }

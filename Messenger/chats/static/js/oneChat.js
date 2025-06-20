@@ -10,23 +10,10 @@ let messages = document.querySelector(".mainGroup")
 
 
 function scrollToBottom(element) {
-    element.scrollTo(0, element.scrollHeight);
+    element.scrollTo(0, element.scrollHeight)
 }
 
-form.addEventListener("submit", (event) => {
-    // Запобігаємо надсилання форми на сервер та перезавантаження сторінки
-    event.preventDefault()
-    // Отримуємо текст повідомлення, який написав користувач
-    let message = document.getElementById("id_message").value
-    if (message != "") {
 
-        // Надсилаємо повідомлення через websocket на сервер, щоб повідомлення прийшло іншим користувачам та переробляємо об'єкт у json рядок
-        socket.send(JSON.stringify({ "message": message }))
-        console.log("gbewoirnjmuonrjb")
-        // Видаляємо усі дані, вказані у формі
-        form.reset()
-    }
-})
 
 backBtn.addEventListener("click", () => {
     window.location.href = "/chats/"
@@ -61,6 +48,7 @@ socket.addEventListener("message", function (event) {
         dt.textContent = `${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}`
     }
     scrollToBottom(messages)
+    window.location.reload()
 })
 
 scrollToBottom(messages)
@@ -70,10 +58,11 @@ const datesAndTimes = document.querySelectorAll('.datetime')
 for (let dt of datesAndTimes) {
     // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
     let dateAndTime = new Date(dt.textContent)
-    // переробляємо час у локальний час користувача
     let dateAndTimeLocal = dateAndTime.toLocaleString()
-    // вказуємо час повідомлення
-    dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
+    if (dateAndTimeLocal != "Invalid Date") {
+        console.log(dateAndTimeLocal)
+        dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
+    }
 }
 
 
@@ -102,7 +91,7 @@ groupList.forEach(element => {
     element.addEventListener("click", () => {
         window.location.href = `/chats/chat/${element.id}`
     })
-});
+})
 
 goToBack.addEventListener("click", () => {
     groupCreateFirst.style.display = "flex"
@@ -118,7 +107,7 @@ cancelBgBlur.forEach(element => {
     element.addEventListener("click", () => {
         backgroundBlur.style.display = "none"
     })
-});
+})
 
 skipBtn.addEventListener("click", () => {
     groupCreateFirst.style.display = "none"
@@ -139,18 +128,67 @@ function displayImage(input, div, filesList) {
     createImage.classList.add("GroupAvatar")
     createImage.id = "imageForPost"
     if (file) {
-        createImage.setAttribute('src', URL.createObjectURL(file));
+        createImage.setAttribute('src', URL.createObjectURL(file))
+        div.appendChild(createImage)
+    }
+
+}
+function displayImageAbsolute(input, div, filesList) {
+    div.innerHTML = ''
+    let file = filesList[0]
+    let createImage = document.createElement("img")
+    createImage.classList.add("MessageImage")
+    createImage.id = "MessageImage"
+    if (file) {
+        createImage.setAttribute('src', URL.createObjectURL(file))
         div.appendChild(createImage)
     }
 
 }
 
 
+
 imageInput.addEventListener('change', function (event) {
-    displayImage(imageInput, imagesDiv, imageInput.files);
-});
+    displayImage(imageInput, imagesDiv, imageInput.files)
+})
 
+document.querySelector(".sendImg2").addEventListener("change", () => {
+    displayImageAbsolute(document.querySelector(".sendImg2"), document.querySelector(".imagesMessageDiv"), document.querySelector(".sendImg2").files)
+})
 
+async function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onload = () => resolve(reader.result)
+        reader.onerror = (error) => reject(error)
+        reader.readAsDataURL(file)
+    })
+}
+
+form.addEventListener("submit", async (event) => {
+    event.preventDefault()
+    const message = document.getElementById("id_message").value.trim()
+
+    if (!message) return
+
+    let imageData = null
+    const fileInput = document.querySelector(".sendImg2")
+    if (fileInput.files.length > 0) {
+        try {
+            imageData = await fileToBase64(fileInput.files[0])
+        } catch (error) {
+            console.error("File conversion error:", error)
+            alert("Ошибка при обработке файла")
+            return
+        }
+    }
+    socket.send(JSON.stringify({
+        message: message,
+        images: imageData
+    }))
+
+    form.reset()
+})
 
 let addedCheckbox = document.querySelectorAll(".addedCheckbox")
 let arrayOfUsers = ""
@@ -165,7 +203,7 @@ create_group.addEventListener("submit", (event) => {
         if (element.checked) {
             choosedUsers.value += `${element.value}_`
         }
-    });
+    })
 
     let input_find = document.querySelector(".input_find").value
 
@@ -190,7 +228,75 @@ profilesList.forEach(element => {
     element.addEventListener("click", () => {
         console.log(element.id)
 
-        window.location.href = `create_chat/${element.id}/`
+        window.location.href = `/chats/create_chat/${element.id}/`
     })
 
-});
+})
+
+
+
+let dotsMenu = document.querySelector(".dotsDiv")
+let editBtns = document.querySelector(".edit")
+let deleteBtns = document.querySelector(".delete")
+dotsMenu.addEventListener("click", () => {
+    if (dotsMenu.style.width == "200px") {
+        dotsMenu.style.width = "0"
+        dotsMenu.style.height = "30px"
+        editBtns.style.display = "none"
+        deleteBtns.style.display = "none"
+    } else {
+        dotsMenu.style.width = "200px"
+        dotsMenu.style.height = "75px"
+        dotsMenu.style.backgroundColor = "white"
+        editBtns.style.display = "flex"
+        deleteBtns.style.display = "flex"
+    }
+})
+
+deleteBtns.addEventListener("click", () => {
+    window.location.href = `/chats/delete_group/${deleteBtns.id}`
+})
+
+async function addFileToInput(filePath, inputElement) {
+    try {
+        let response = await fetch(filePath)
+        let blob = await response.blob()
+        let file = new File([blob], 'filename.txt', { type: blob.type })
+
+        let dataTransfer = new DataTransfer()
+        dataTransfer.items.add(file)
+        inputElement.files = dataTransfer.files
+    } catch (error) {
+        console.error('Error adding file to input:', error)
+    }
+}
+
+
+editBtns.addEventListener("click", () => {
+    backgroundBlur.style.display = "flex"
+    document.querySelector(".formType").setAttribute("value", "redact")
+    document.querySelectorAll(".addedCheckbox").forEach(element => {
+        let string_of_members = document.querySelector(".list_of_members").getAttribute("value")
+        let listOfMembers = string_of_members.split("_")
+        listOfMembers.pop()
+        console.log(listOfMembers, element.value)
+        if (listOfMembers.includes(element.value)) {
+            element.setAttribute("checked", true)
+        }
+    })
+    document.querySelector("#nameInput").setAttribute("value", document.querySelector(".groupName").textContent)
+    document.querySelector(".GroupAvatar").setAttribute("src", document.querySelector(".avatarGroup").src)
+    let inputFile = document.querySelector("#inputAvatarGroup")
+    addFileToInput(document.querySelector(".avatarGroup").src, inputFile)
+    document.querySelector(".NameTitle").textContent = "Редагування групи"
+    document.querySelector(".NameTitle").textContent = "Редагування групи"
+})
+
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
+
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
+}

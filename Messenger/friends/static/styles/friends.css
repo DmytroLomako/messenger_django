@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+a {
+    text-decoration: none;
+}
+
 @font-face {
     font-family: MainFont;
     src: url("/media/fonts/font.ttf");
@@ -180,13 +184,13 @@ main {
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     background-color: white;
+    padding-bottom: 16px;
 }
 
 .recommendations-friends-div {
     display: flex;
     flex-wrap: wrap;
     width: 45.99vw;
-    height: 49.44vh;
     gap: 0.74vh;
     margin-left: 1.04vw;
     margin-top: 1.48vh;
@@ -196,17 +200,16 @@ main {
     display: flex;
     flex-direction: column;
     width: 48.07vw;
-    height: 55.56vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     background-color: white;
+    padding-bottom: 16px;
 }
 
 .all-friends-div {
     display: flex;
     flex-wrap: wrap;
     width: 45.99vw;
-    height: 49.44vh;
     gap: 0.74vh;
     margin-left: 1.04vw;
     margin-top: 1.48vh;

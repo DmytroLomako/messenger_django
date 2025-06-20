@@ -21,7 +21,7 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -44,8 +44,9 @@
     <main>
         <div class="main-div">
             <div class="menu-options">
-                <a class="menu-urls" href=""><u id="MainText" title="Подчеркнутый текст">Особиста інформація</u></a>
-                <a class="menu-urls" id="Alboms" href="">Альбоми</a>
+                <a class="menu-urls" href="{% url 'settings' request.user.id %}"><u id="MainText"
+                        title="Подчеркнутый текст">Особиста інформація</u></a>
+                <a class="menu-urls" id="Alboms" href="{% url 'albums' %}">Альбоми</a>
             </div>
             <div class="options-div">
                 <div class="card-profile-div headerDiv">
@@ -58,16 +59,17 @@
                         </div>
                         {% csrf_token %}
                         <p class="title hidden">Оберіть або завантажте фото профілю</p>
-                        {% if request.user.profile.photo %}
+                        <p>{{ request.user.profile.Avatar}}</p>
+                        {% if user_image %}
                         <div class="avatarDiv">
                             <label for="imageInput">
-                                <img src="{{ request.user.profile.photo.url }}" alt="">
+                                <img src="{{ user_image.url }}" alt="">
                             </label>
                         </div>
                         {% else %}
                         <div class="avatarDiv">
                             <label for="imageInput">
-                                <img src="{% static 'images/avatar.png' %}" alt="">
+                                <img src="{% static 'images/standart_user_image.png' %}" alt="">
                             </label>
                         </div>
                         {% endif %}
@@ -94,14 +96,9 @@
                             <input type="text" class="input" id="inputUsername" value="{{user.username}}">
                         </div>
                     </form>
-                    <!-- <img src="{% static 'images/avatar13.png' %}" alt="">
-                        <div class="nickname-name">
-                            <p class="nickname-text">Lina Li</p>
-                            <p>@thelili</p>
-                        </div> -->
                 </div>
                 <div class="personal-information-div">
-                    <form method="post">
+                    <form method="post" class="personal-information-form">
                         <div class="personal-information-header">
                             <p>Особиста інформація</p>
                             <button class="edit-information-btn-main redact"><img class="editImg"
@@ -116,8 +113,31 @@
                                 <p>{{field.label}}</p>
                                 <div class="name-input-div">{{field}}</div>
                             </div>
+                            {% elif field.name == "password" %}
+                            <p></p>
                             {% endif %}
                             {% endfor %}
+                        </div>
+                    </form>
+                    <form method="post" class="password-form" action="{% url 'save_password' %}">
+                        <div class="personal-information-header">
+                            <p>Пароль</p>
+                            <button class="edit-password-btn-main redact" type="button"><img class="editImg"
+                                    src="{% static 'images/edit2.png' %}" alt="">Редагувати пароль</button>
+                        </div>
+                        <div class="all-inputs-div">
+                            {% csrf_token %}
+                            <div class="input-div">
+                                <p class="password-text-name">Пароль</p>
+                                <div class="password-div">
+                                    <input type="password" class="password1" placeholder="" name="password1"><img src=""
+                                        alt="">
+                                </div>
+                                <p class="password-text-name-form">Підтвердження пароля</p>
+                                <div class="password-div-1">
+
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -143,13 +163,15 @@
                                 <p class="sign-text">Мій електронний підпис</p>
                             </div>
                             <label for="" class="signature-img-div">
-                                <img src="{{user.profile.sign.url}}" class="signImage">
+                                {% if user.profile.signature %}
+                                <img src="{{user.profile.signature.url}}" class="signImage">
+                                {% endif %}
                                 <canvas class="paint-sign"></canvas>
                             </label>
                             <div class="color-picker">
                                 <div class="color active" data-color="#070A1C"></div>
                                 <div class="color" data-color="#543C52"></div>
-                              </div>
+                            </div>
                             <input type="button" id="signInput" class="hidden" name="sign">
                             <button class="edit-sign-btn">Редагувати підпис</button>
                         </div>
@@ -158,5 +180,39 @@
             </div>
         </div>
     </main>
+
+    <div class="background-blur">
+        <div class="publication-creation">
+            <button type="button" id="cancel-bg-blur">x</button>
+            <p class="title">Підтвердження для зміни паролю</p>
+            <p class="guide">
+                Ми надіслали 6-значний код на вашу пошту (you@example.com). Введіть його нижче, щоб підтвердити акаунт
+            </p>
+            <form method="post" action="{% url 'save_email_password_verify' %}">
+                <input type="text" name="password1" class="password1-hide hidden">
+                <input type="text" name="password2" class="password2-hide hidden">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="verification_code">Код підтвердження:</label>
+
+                    <div class="inputBlocks">
+                        <input type="text" name="verification_code1" id="verification_code1" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code2" id="verification_code2" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code3" id="verification_code3" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code4" id="verification_code4" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code5" id="verification_code5" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                        <input type="text" name="verification_code6" id="verification_code6" maxlength="1" required
+                            pattern="[0-9]" class="input-verify">
+                    </div>
+                </div>
+                <button type="submit" class="submit">Підтвердити</button>
+            </form>
+        </div>
+    </div>
 </main>
 {% endblock %}

@@ -89,6 +89,10 @@ header a {
     text-decoration: none;
 }
 
+.friends{
+    position: relative;
+}
+
 main {
     padding-left: 4.20vw;
     display: flex;
@@ -203,6 +207,13 @@ main .requests {
     overflow-x: hidden;
 }
 
+.input-div-text {
+    display: flex;
+    gap: 4px;
+    width: 450px;
+    flex-wrap: wrap;
+}
+
 main .requests .blockName {
     color: #543C52;
     display: flex;
@@ -233,11 +244,12 @@ main .requests .blockName .name img {
 }
 
 main .requests .users {
-    width: 16.75vw;
     height: 17.84vh;
     display: flex;
     flex-direction: column;
     gap: 1.68vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 main .requests .users .user {
@@ -253,6 +265,7 @@ main .requests .users .user .nameSubscribers {
     display: flex;
     flex-direction: column;
     gap: 0.42vh;
+
 }
 
 main .requests .users .user .nameSubscribers .name {
@@ -276,6 +289,10 @@ main .requests .users .user img {
     height: 4.83vh;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 main .messages {
     background-color: white;
     border: 1px solid #CDCED2;
@@ -290,6 +307,11 @@ main .messages {
     gap: 2.52vh;
 }
 
+.hashTagTextDiv {
+    display: flex;
+    gap: 4px;
+}
+
 main .messages .blockName {
     color: #543C52;
     display: flex;
@@ -298,6 +320,7 @@ main .messages .blockName {
     height: 2.41vh;
     width: 16.75vw;
     margin-left: 0.84vw;
+
 }
 
 main .messages .blockName .showAll {
@@ -321,10 +344,11 @@ main .messages .blockName .name img {
 }
 
 main .messages .users {
-    width: 16.75vw;
     height: 17.84vh;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 main .messages .users .user {
@@ -609,6 +633,7 @@ main .postPostInput .post .postHeader .paintingDiv {
 main .postPostInput .post .postHeader .paintingDiv .painting {
     width: 11.55vw;
     height: 5.14vh;
+    margin-left: -5.208vw;
 }
 
 main .postArea .post {
@@ -789,6 +814,7 @@ input {
 
 .publication-creation {
     width: 40.68vw;
+    height: 73.452vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
@@ -1053,4 +1079,24 @@ input {
     background-color: white;
     border: 1px solid #81818D;
     order: 999999;
+}
+
+.requests-friends{
+    width: 16px;
+    height: 16px;
+    background-color: #F43F5E;
+    border-radius: 1234px;
+    position: absolute;
+    right: 55px;
+    top: -2px;
+    border: 2px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.requests-friends p{
+    font-size: 12px;
+    color: #FFFFFF;
+    font-weight: 400;
 }

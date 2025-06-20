@@ -3,6 +3,9 @@ import json
 from .forms import MessageForm
 from channels.db import database_sync_to_async
 from .models import ChatGroup, ChatMessage
+from authorization.models import Profile
+import base64
+from django.core.files.base import ContentFile
 
 class ChatConsumer(AsyncWebsocketConsumer):
 
@@ -20,13 +23,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         print(text_data)
         text_data_json = json.loads(text_data)
         message = text_data_json['message']
+        image = text_data_json["images"]
         
         # Получаем данные пользователя асинхронно
         first_name = self.scope["user"].first_name
         last_name = self.scope["user"].last_name
         user_image = await self.get_user_profile(self.scope["user"])
         
-        saved_message = await self.save_message(message=message)
+        saved_message = await self.save_message(message=message, image = image)
         
         await self.channel_layer.group_send(
             self.group_name,
@@ -36,11 +40,11 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "first_name": first_name,
                 "last_name": last_name,
                 "user_avatar": user_image,
-                "date_time": saved_message.date_time
+                "date_time": saved_message.sent_at
             }
         )
 
-    async def send_message_to_chat(self, event):
+    async def send_message_to_chat(self, event):    
         text_data_dict = json.loads(event["text_data"])
         first_name = event["first_name"]
         last_name = event["last_name"]
@@ -58,14 +62,41 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
     @database_sync_to_async
     def get_user_profile(self, user):
-        return user.profile.photo.url
+        return Profile.objects.get(user = user).avatar_set.last().image.url
+
+
 
     @database_sync_to_async
-    def save_message(self, message):
-        author = self.scope['user']
+    def save_message(self, message, image):
+        author = Profile.objects.get(user=self.scope['user'])
         group = ChatGroup.objects.get(pk=self.group_name)
-        return ChatMessage.objects.create(
-            author=author, 
-            content=message, 
-            chat_group=group
-        )
+        if not image or not isinstance(image, str):
+            return ChatMessage.objects.create(
+                author=author,
+                content=message,
+                chat_group=group
+            )
+
+        try:
+
+            header, data = image.split(';base64,')
+
+            file_extension = header.split('/')[-1]  
+            
+            decoded_data = base64.b64decode(data)
+            
+            file_name = f"msg_{group.pk}_{author.user.username}.{file_extension}"
+            file = ContentFile(decoded_data, name=file_name)
+            
+            return ChatMessage.objects.create(
+                author=author,
+                content=message,
+                chat_group=group,
+                attached_image=file
+            )
+        except:
+            return ChatMessage.objects.create(
+                author=author,
+                content=message,
+                chat_group=group
+            )

@@ -20,9 +20,9 @@
             <a href="{% url 'my_publications' %}" class="publications tab  tab-now"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
 
-            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}"><div class="requests-messeges"><p class="count-messeges">{{requests|length}}</p></div>Чати</a>
 
             <a href="{% url 'settings' user.pk %}" class="settings tab"><img
                     src="{% static 'images/settings.png' %}">Налаштування</a>
@@ -43,6 +43,8 @@
             <div class="avatarNames">
                 {% if user_image.url != None %}
                 <img src="{{ user_image.url }}" class="avatar">
+                {% else %}
+                <img src="{% static 'images/standart_user_image.png' %}" class="avatar">
                 {% endif %}
 
                 <div class="names">
@@ -153,13 +155,15 @@
 
         </div>
         {% for post in all_posts %}
-        {% if post.user == user %}
+        {% if post.author.user == user %}
         <div class="post" id="post{{post.id}}" value="{{post.id}}">
             <div class="postHeader">
-                <img src="{{post.user.profile.photo.url}}" class="avatar">
-                <p class="text">{{ post.user.username }}</p>
+                <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
+                <p class="text">{{ post.author.user.username }}</p>
                 <div class="paintingDiv">
-                    <img src="{{user.profile.sign.url}}" class="painting">
+                    {% if user.profile.signature == None %}
+                    <img src="{{post.author.signature.url}}" class="painting">
+                    {% endif %}
                 </div>
                 <div class="dotsDiv">
                     <form method="post">
@@ -194,20 +198,20 @@
                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
 
                 <div class="images">
-                    {% for img in post.images_set.all %}
-                    <img src="{{ img.image.url }}" class="postImage1">
+                    {% for img in post.images.all %}
+                    <img src="{{ img.file.url }}" class="postImage1">
                     {% endfor %}
                 </div>
             </div>
 
             <div class="postFooter">
                 <div class="likesViews">
-                    <p class="likes like-button {% if request.user in post.likes.all %}liked{% endif %}"
-                        id="{{ post.id   }}" value="{% url 'likes' post.pk %}"><img
-                            src="{% static 'images/likes.png' %}" class="likesImg"
-                            id="like{{post.id}}"><b>{{post.count_likes}}</b>
+                    <p class="likes like-button {% if profile_now in post.likes.all %}liked{% endif %}"
+                        id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
+                            class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
                         Вподобань</p>
-                    <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">{{ post.count_views }}
+                    <p class="likes"><img src="{% static 'images/views.png' %}"
+                            class="likesImg">{{post.views.all|length}}
                         Переглядів</p>
                 </div>
             </div>
@@ -299,6 +303,7 @@
                 </div>
 
 
+
                 {% else %}
                 <div class="input-div">
                     <div class="label">{{ field.label_tag }}</div>
@@ -306,7 +311,6 @@
                 </div>
                 {% endif %}
                 {% endfor %}
-                <a href="{% url 'create_tag' %}">Створити тег</a>
 
             </form>
 
@@ -370,27 +374,13 @@
                             placeholder="Напишить назву публікації"></div>
                 </div>
 
-                {% elif field.name == "subject" %}
-                <div class="input-div">
-                    <div class="label">Тема публікації</div>
-                    <div class="field"><input class="subject" type="text" name="subject"
-                            placeholder="Напишить тему публікації"></div>
-                </div>
-
-                {% elif field.name == "text" %}
-                <div class="input-div">
-                    <div class="field"><textarea type="text" name="text" class="textField"
-                            placeholder="Напишить текст публікації"></textarea></div>
-                </div>
-                {% elif field.name == "article_link" %}
-                <div class="input-div">
-                    <label class="label">Посилання</label>
-                    <div class="field"><input class="link" name="link" type="text"
-                            placeholder="Додайте посилання до публікації">
-                    </div>
-                </div>
 
 
+                {% else %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div class="field">{{ field }}</div>
+                </div>
                 {% endif %}
                 {% endfor %}
 

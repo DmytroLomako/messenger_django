@@ -21,7 +21,7 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}">Друзі</a>
+                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
 
             <a href="{% url 'chats' %}" class="chats tab tab-now"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -54,12 +54,21 @@
                     {% endfor %}
                 </select>
                 {% for friend in friends %}
-                <div class="profile" id="{{friend.profile.id}}">
-                    <img class="avatarImage" src="{{friend.profile.photo.url}}" alt="">
+                {% if friend.profile2 == request.user.profile %}
+                <div class="profile" id="{{friend.profile1.id}}">
+                    <img class="avatarImage" src="{{friend.profile1.avatar_set.last.image.url}}" alt="">
                     <div class="profile-text-div">
-                        <p>{{friend.first_name}} {{friend.last_name}}</p>
+                        <p>{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}</p>
                     </div>
                 </div>
+                {% else %}
+                <div class="profile" id="{{friend.profile2.id}}">
+                    <img class="avatarImage" src="{{friend.profile2.avatar_set.last.image.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}</p>
+                    </div>
+                </div>
+                {% endif %}
                 {% endfor %}
                 <!-- <div class="profile">
                     <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
@@ -135,17 +144,21 @@
                 <a class="see-all" href="">Дивитись всі</a>
             </div>
             <div class="profiles-all-div">
-                {% for message in not_viewed_messeges %}
-                <div class="profles">
-                    <img class="avatar" src="{{message.author.profile.photo.url}}" alt="">
-                    <div class="profiles-text">
-                        <div class="header-time-prfl-text">
-                            <p>{{message.author.first_name}} {{message.author.last_name}}</p>
-                            <p class="time-text">{{message.date_time}}</p>
+                {% for group in groups %}
+                {% if group.is_personal_chat %}
+                <div class="profiles-div">
+                    <div class="profles" id="{{group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        <div class="profiles-text">
+                            <div class="header-time-prfl-text">
+                                <p>{{group.name}}</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
+                            </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
-                        <p>{{message.content}}</p>
                     </div>
                 </div>
+                {% endif %}
                 {% endfor %}
             </div>
         </div>
@@ -159,93 +172,22 @@
             </div>
             <div class="groups-all-div">
 
-                {% for group in user.group.all %}
-                {% if not group.personal_chat %}
+                {% for group in groups %}
+                {% if not group.is_personal_chat %}
                 <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{{group.avatar_group.url}}" alt="">
-                        <div class="profiles-text" id="{{group.id}}">
+                    <div class="profles" id="{{group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        <div class="profiles-text">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>
-                                <p class="time-text">09.41</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
                             </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
                     </div>
                 </div>
                 {% endif %}
                 {% endfor %}
-                <!-- <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="profiles-div">
-                    <div class="profles">
-                        <img class="avatarImage" src="{% static 'images/newGroup.png' %}" alt="">
-                        <div class="profiles-text">
-                            <div class="header-time-prfl-text">
-                                <p>New Group</p>
-                                <p class="time-text">09.41</p>
-                            </div>
-                            <p>Привіт!</p>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -254,6 +196,7 @@
 
         <form method="post" enctype="multipart/form-data" id="create_group">
             <input type="hidden" class="group_id" value="{{group_id}}">
+            <input type="hidden" name="formType" value="create">
             <input type="hidden" class="choosedUsers" name="choosedUsers">
             <div class="group-create">
                 {% csrf_token %}
@@ -263,12 +206,22 @@
                 <input type="text" placeholder="Пошук" class="input_find" id="">
                 <p class="choosed-num">Вибрано: 3</p>
                 <div class="list-of-friends">
-                    {% for friend in user.profile.friends.all %}
+                    {% for friend in friends %}
+                    {% if friend.profile1 == request.user.profile %}
                     <div class="userChoose">
-                        <img src="{{friend.profile.photo.url}}" class="avatar">
-                        <p class="nameLastName">{{friend.profile.user.first_name}} {{friend.profile.user.last_name}}</p>
-                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile.pk}}">
+                        <img src="{{friend.profile2.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile2.pk}}">
                     </div>
+                    {% else %}
+                    <div class="userChoose">
+                        <img src="{{friend.profile1.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile1.pk}}">
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 <div class="btns">

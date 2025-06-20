@@ -12,6 +12,7 @@
 
 body {
     background-color: rgba(233, 229, 238, 1);
+    overflow: hidden;
 }
 
 header {
@@ -71,10 +72,12 @@ ul {
 main {
     width: 100vw;
     height: 100vh;
-    padding-left: 255px;
-    padding-top: 236px;
+    padding-left: 26.39vw;
     background-color: #E9E5EE;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-bottom: 60px;
 }
 
 form {
@@ -84,19 +87,21 @@ form {
 }
 
 .formDiv {
-    width: 488px;
-    height: 444px;
+    width: 25.56vw;
     background-color: white;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 44px;
+    padding-top: 4.62vh;
     box-sizing: border-box;
 
     border-radius: 20px;
-    gap: 36px;
+    gap: 1.89vw;
+    z-index: 100;
+    padding-bottom: 8.78vh;
 }
+
 
 .greatings {
     font-size: 24px;
@@ -160,4 +165,12 @@ a {
     width: 400px;
     height: 54px;
     text-align: center;
+}
+
+.laptop-img {
+    width: 35.70vw;
+    height: 27.66vw;
+    position: absolute;
+    left: 47.26vw;
+    top: 26.02vh;
 }

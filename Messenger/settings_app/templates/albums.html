@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'settings_app/css/settings.css' %}">
+<link rel="stylesheet" href="{% static 'settings_app/css/albums.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'settings_app/js/albums.js' %}" defer></script>
+{% endblock %}
+
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+
+            <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'settings' request.user.id %}" class="settings tab tab-now"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+
+
+<main>
+
+    <main>
+        <div class="main-div">
+            <div class="menu-options">
+                <a class="menu-urls" id="Alboms" href="{% url 'settings' request.user.id %}">Особиста інформація</a>
+                <a class="menu-urls" href="{% url 'albums' %}"><u id="MainText"
+                        title="Подчеркнутый текст">Альбоми</u></a>
+            </div>
+            <div class="options-div">
+                <div class="card-profile-div">
+                    <form action="{% url 'save_photo' %}" method="post" enctype="multipart/form-data"
+                        class="avatar-and-textdiv">
+                        <div class="card-profile-header">
+                            <p>Мої фото</p>
+                            <button class="edit-information-btn-header"><img class="editImg"
+                                    src="{% static 'images/add_image2.png' %}" alt="">Додати фото</button>
+                        </div>
+                        {% csrf_token %}
+                        <div class="user-photo">
+                            <img src="{{ request.user.profile.avatar_set.last.image.url }}" alt="">
+                        </div>
+                    </form>
+                </div>
+                {% if not request.user.profile.album_set.all %}
+                <div class="no-albums-div">
+                    <p>Немає ще жодного альбому</p>
+                    <button type="button" class="create-album-button"><img src="{% static 'images/add.png' %}"
+                            alt="">Створити альбом</button>
+                </div>
+                {% else %}
+                {% for album in request.user.profile.album_set.all %}
+                <div class="album">
+                    <div class="album-header">
+                        <p>{{ album.name }}</p>
+                        <div class="album-header-actions">
+                            <button class="hide"><img src="{% static 'images/show.png' %}" alt=""></button>
+                            <button class="actions"><img src="{% static 'images/dots_menu.png' %}" alt=""></button>
+                        </div>
+                        <div class="album-actions" style="display: none;">
+                            <button>
+                                <img src="{% static 'images/eye.png' %}" alt="">
+                                <p>Цей альбом бачите тільки ви</p>
+                            </button>
+                            <form method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="album_id" value="{{ album.id }}">
+                                <button>
+                                    <img src="{% static 'images/edit.png' %}" alt="">
+                                    <p>Редагувати альбом</p>
+                                </button>
+                            </form>
+                            <hr>
+                            <form action="{% url 'delete_album' album.id %}" method="post">
+                                {% csrf_token %}
+                                <button>
+                                    <img src="{% static 'images/deletePost.png' %}" alt="">
+                                    <p>Видалити альбом</p>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="album-info">
+                        <p>{{ album.topic }}</p>
+                        <p style="color: #81818D;">{{ album.created_at }}</p>
+                    </div>
+                    <hr>
+                    <p>Фотографії</p>
+                    <div class="album-images" id="{{ album.id }}">
+                        {% for image in album.images.all %}
+                        <div class="divImageDelete">
+                            <img src="/media/{{ image.file }}" alt="">
+                            <img src="{% static 'images/delete.png' %}" url="{% url 'delete_photo' album.id image.id %}"
+                                class="deleteBtn" alt="">
+                        </div>
+                        {% endfor %}
+                        <div class="add-album-image">
+                            <img src="{% static 'images/add_album.png' %}" alt="">
+                        </div>
+                    </div>
+                    <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*"
+                        type="file" style="display: none;" name="" id="" multiple>
+                </div>
+            </div>
+
+            <hr>
+
+        </div>
+        <input url="{% url 'save_album_photo' album.id %}" class="album-images-input" accept="image/*" type="file"
+            style="display: none;" name="" id="" multiple>
+        </div>
+        {% endfor %}
+        {% endif %}
+        </div>
+        </div>
+    </main>
+</main>
+<div class="cover" {% if not album %} style="display: none;" {% endif %}>
+    <form class="create-album-div" method="post" action="{% url 'save_album' %}">
+        {% if album %}
+        <input type="hidden" name="edit" class="edit-input" value="{{ album.id }}">
+        {% endif %}
+        {% csrf_token %}
+        <div class="cross-div">
+            <button type="button" class="cross-button"><img src="{% static 'images/cancel.png' %}" alt=""></button>
+        </div>
+        <h1>Створити альбом</h1>
+        <div class="form-data-div">
+            <label for="albumName" style="margin-top: 0;">Назва альбому</label>
+            <input type="text" id="albumName" name="name" required {% if album %} value="{{ album.name }}" {% endif %}>
+            <label for="albumTheme">Тема альбому</label>
+            <select name="theme" required id="albumTheme">
+                {% if album %}
+                {% for tag in all_tags %}
+                {% if tag == album.topic %}
+                <option value="{{ tag }}" selected>{{ tag }}</option>
+                {% else %}
+                <option value="{{ tag }}">{{ tag }}</option>
+                {% endif %}
+                {% endfor %}
+                {% else %}
+                <option value="" disabled selected></option>
+                {% for tag in all_tags %}
+                <option type="text">"{{tag}}"</option>
+                {% endfor %}
+                {% endif %}
+            </select>
+            <label for="albumYear">Рік альбому</label>
+            <input type="number" max="2025" id="albumYear" name="year" required {% if album %}
+                value="{{ album.created_at|date:'Y' }}" {% endif %}>
+        </div>
+        <div class="create-album-options-div">
+            <button type="button" class="cancel-button">Скасувати</button>
+            <button class="save-button">Зберегти</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

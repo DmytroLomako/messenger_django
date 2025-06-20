@@ -20,7 +20,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from main.views import MainView
-from create_tag.views import CreateTagView
 from settings_app.views import UserUpdateView
 from chats.views import ChatsView
 from settings_app.views import save_username
@@ -30,7 +29,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('authorization/', include("authorization.urls")),
     path('', MainView.as_view(), name= "main"),
-    path("create_tag/", CreateTagView.as_view(), name= "create_tag"),
     path("friends/", include("friends.urls")),
     path("publications/", include("publications.urls")),
     path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),

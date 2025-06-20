@@ -18,10 +18,12 @@ const signatureImgDiv = document.querySelector(".signature-img-div")
 const paintSign = document.querySelector(".paint-sign")
 const paintSignGetContext = paintSign.getContext("2d")
 const colorPicker = document.querySelector(".color-picker")
+const countRequestsFriends = document.querySelector(".count-requests-friends");
+const requestFriendsDiv = document.querySelector(".requests-friends")
 
 let drawing = false;
 let currentColor = '#070A1C';
-    paintSignGetContext.strokeStyle = currentColor;
+paintSignGetContext.strokeStyle = currentColor;
 
 
 if (passwordField) {
@@ -60,7 +62,6 @@ editBtnHeader.addEventListener("click", () => {
         imageInput.type = "file"
         editBtnHeader.innerHTML = "<img class = 'editImg' src = '/static/images/check_mark.png'>Підтердити"
         editBtnHeader.type = "button"
-        headerDivEdit.style.height = "325px"
         labelUsername.style.display = "flex"
         username.style.display = "flex"
         usernameP.style.display = "none"
@@ -122,14 +123,14 @@ editBtnSign.addEventListener("click", () => {
     } else {
         const signInput = document.querySelector("#signInput")
         const paintSign = document.querySelector(".paint-sign")
-        const paintSignSave = paintSign.toDataURL('images/png'); 
-        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;     
-        paintSign.toBlob(function(blob){
+        const paintSignSave = paintSign.toDataURL('images/png');
+        const csrf_token = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        paintSign.toBlob(function (blob) {
 
             var formData = new FormData();
             formData.append('sign', blob, 'signature.png');
             formData.append('csrfmiddlewaretoken', csrf_token);
-    
+
             console.log('Размер файла:', blob.size);
             $.ajax({
                 url: '/settings/save_sign',
@@ -137,19 +138,21 @@ editBtnSign.addEventListener("click", () => {
                 data: formData,
                 processData: false,
                 contentType: false,
-                success: function(){
+                success: function () {
                     window.location.reload()
                 }
             });
         })
-        
+
     }
 })
 
 editSignBtn.addEventListener("click", (event) => {
     event.preventDefault()
     editSignBtn.style.display = "none"
-    forSignImage.style.display = "none"
+    if (forSignImage.style.display != null) {
+        forSignImage.style.display = "none"
+    }
     signatureImgDiv.style.width = "21vw"
     signatureImgDiv.style.height = "25vh"
     paintSign.style.display = "flex"
@@ -162,29 +165,30 @@ editSignBtn.addEventListener("click", (event) => {
 
     const colors = document.querySelectorAll('.color');
     colors.forEach(color => {
-      color.addEventListener('click', () => {
-        colors.forEach(c => c.classList.remove('active'));
-        color.classList.add('active');
-        currentColor = color.getAttribute('data-color');
-        paintSignGetContext.strokeStyle = currentColor;
-    })});
+        color.addEventListener('click', () => {
+            colors.forEach(c => c.classList.remove('active'));
+            color.classList.add('active');
+            currentColor = color.getAttribute('data-color');
+            paintSignGetContext.strokeStyle = currentColor;
+        })
+    });
 
     function startDraw(e) {
         drawing = true;
         paintSignGetContext.beginPath();
         paintSignGetContext.moveTo(e.offsetX, e.offsetY);
-      }
-    
-      function draw(e) {
+    }
+
+    function draw(e) {
         if (!drawing) return;
         paintSignGetContext.lineTo(e.offsetX, e.offsetY);
         paintSignGetContext.stroke();
-      }
-    
-      function stopDraw() {
+    }
+
+    function stopDraw() {
         drawing = false;
         paintSignGetContext.closePath();
-      }
+    }
 })
 
 signInput.addEventListener("change", () => {
@@ -193,3 +197,79 @@ signInput.addEventListener("change", () => {
         forSignImage.setAttribute('src', URL.createObjectURL(file));
     }
 })
+
+let bgBlur = document.querySelector('.background-blur')
+
+
+const btnPassword = document.querySelector(".edit-password-btn-main")
+const personalForm = document.querySelector(".personal-information-form")
+const passwordForm = document.querySelector(".password-form")
+const personalInformDiv = document.querySelector(".personal-information-div")
+const passwordDiv1 = document.querySelector(".password-div-1")
+const passwordText = document.querySelector(".password-text-name")
+const passwordTextForm = document.querySelector(".password-text-name-form")
+const checkBoxImg = document.querySelector(".checkbox-img")
+const checkBoxImg2 = document.querySelector(".checkbox-img-2")
+
+btnPassword.addEventListener("click", (event) => {
+    let password2 = document.querySelector(".password2")
+    if (passwordTextForm.style.display == "flex") {
+        if (document.querySelector(".password1").value != "") {
+            $.ajax({
+                url: `/settings/send_email_password_verify`,
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                },
+                success: function (response) {
+                    console.log(response)
+                }
+            })
+            document.querySelector(".password1-hide").value = document.querySelector(".password1").value
+            document.querySelector(".password2-hide").value = document.querySelector(".password2").value
+            bgBlur.style.display = "flex"
+        } else {
+            window.location.reload()
+        }
+    } else {
+
+        // btnPassword.innerHTML = "<button class='edit-password-btn-main redact' type='submit'><img class='editImg' src='/static/images/edit2.png' %}' alt='' type='button'>Змінити пароль</button>"
+        passwordDiv1.innerHTML += "<input type='password' name='password2' class = 'password2' placeholder=''><img src='' alt=''></img>"
+        passwordText.innerHTML = "<p class='password-text-name'>Новий пароль</p>"
+    }
+    personalForm.style.display = "none"
+    personalInformDiv.style.border = "1px solid #543C52"
+    passwordTextForm.style.display = "flex"
+    btnPassword.style.backgroundColor = "#E9E5EE"
+    passwordForm.style.marginTop = "0"
+
+})
+
+let cancelBgBlur = document.getElementById('cancel-bg-blur')
+cancelBgBlur.addEventListener('click', function () {
+    bgBlur.style.display = 'none'
+    window.location.reload()
+})
+
+const Inputs = document.querySelectorAll(".input-verify")
+
+console.log(Inputs)
+
+Inputs.forEach((input, index) => {
+    input.addEventListener('input', () => {
+        if (input.value.length === 1 && index < Inputs.length - 1) {
+            Inputs[index + 1].focus()
+        }
+    })
+    input.addEventListener('keydown', (event) => {
+        if (event.key === "Backspace" && input.value === "" && index > 0) {
+            Inputs[index - 1].focus()
+        }
+    })
+})
+
+if (countRequestsFriends.textContent == 0) {
+    requestFriendsDiv.style.display = "none"
+} else {
+    requestFriendsDiv.style.display = "flex"
+}

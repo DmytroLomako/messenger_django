@@ -1,0 +1,16 @@
+main .postPostInput .post {
+    margin-top: 0;
+    margin-bottom: 1.46vh;
+}
+
+.postPostInput {
+    width: 48.45vw;
+}
+
+.requests {
+    opacity: 0;
+}
+
+.messages {
+    opacity: 0;
+}

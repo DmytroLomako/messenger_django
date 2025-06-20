@@ -1,12 +1,12 @@
 from django.views.generic import CreateView
-from .models import User_Post, Images
+from .models import Post, Image
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from .forms import CreatePostForm
 from django.http import JsonResponse
 from django.core import serializers
-from authorization.models import UserProfile
-from create_tag.models import Tag
+from authorization.models import Profile, Avatar, Friendship
+from publications.models import Tag
 import json
 
 
@@ -16,8 +16,10 @@ class MyPublicationsView(CreateView):
     success_url = reverse_lazy('my_publications')
     
     def form_valid(self, form):
-        form.instance.user = self.request.user
+        form.instance.author =  Profile.objects.get(user = self.request.user)
         post = form.save()
+
+        print(post)
 
         # if len(form.images) >= 6:
         #     return redirect(reverse_lazy("my_publications"))
@@ -25,37 +27,61 @@ class MyPublicationsView(CreateView):
         files = self.request.FILES.getlist('images')    
 
 
+        post_images = []
         for file in files:
-            Images.objects.create(post=post, image=file)
+            image = Image.objects.create(filename = str(file).split("/")[-1], file=file)
+            image.save()
+
+            post_images.append(image)
+
+        post.images.set(post_images)
+
         post.save()
         print(post)
         return super().form_valid(form)
         
+    def form_invalid(self, form):
+        post = form
+
+        print(post)
+        return super().form_invalid(form)
 
     def post(self, request, *args, **kwargs):
         if request.POST.get("create") == None:    
-            post_now = User_Post.objects.get(id = int(request.POST.get("post_id")))
+            post_now = Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
-            post_now.subject = request.POST.get("subject")
-            post_now.text = request.POST.get("text")
-            post_now.article_link = request.POST.get("link")
+            post_now.content = request.POST.get("text")
+            # post_now.article_link = request.POST.get("link")
             post_now.tags.set(request.POST.get("tags-list").split(","))
-            post_now.images_set.all().delete()
+            post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
-                    Images.objects.create(post=post_now, image=file)
+                    Image.objects.create(post=post_now, image=file)
             post_now.save()
         return super().post(request, *args, **kwargs)
 
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  
-        context['all_posts'] = User_Post.objects.all()
-        context['user_image'] = UserProfile.objects.get(user_id = (self.request.user.id)).photo
+        context['all_posts'] = reversed(Post.objects.all())
+        try:
+            context['user_image'] = Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image
+            print(Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image)
+        except:
+            context['user_image'] = None
+
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
+
+        context["profile_now"] = Profile.objects.get(user = self.request.user)
         return context
+    
 
     def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return redirect("register")
         if request.user.email:
             return super().dispatch(request, *args, **kwargs)
         else:
@@ -64,7 +90,7 @@ class MyPublicationsView(CreateView):
 def delete(request, post_pk):
     try:
         if request.method == "POST":
-            object = User_Post.objects.get(id=post_pk)
+            object = Post.objects.get(id=post_pk)
             object.delete()
         print(post_pk, "ewgbmobbfenr")
         return JsonResponse({'status': 'success'})
@@ -77,19 +103,20 @@ def delete(request, post_pk):
 def likes(request, post_pk):
     try:
         if request.method == 'POST':
-            post = User_Post.objects.get(id=post_pk)
-            if request.user not in post.likes.all():
-                post.likes.add(request.user)
+            profile_now = Profile.objects.get(user = request.user)
+            post = Post.objects.get(id=post_pk)
+            if profile_now not in post.likes.all():
+                post.likes.add(profile_now)
             else:
-                post.likes.remove(request.user)
+                post.likes.remove(profile_now)
             return JsonResponse({'status': 'success'})
     except:
         return JsonResponse({'status': 'error'})
 
 def redact_data(request, post_pk):
     if request.method == 'POST':
-        post = [User_Post.objects.get(id = post_pk)]
-        images = Images.objects.filter(post = post[0])
+        post = [Post.objects.get(id = post_pk)]
+        images = Image.objects.filter(post = post[0])
         for image in images:
             post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)
