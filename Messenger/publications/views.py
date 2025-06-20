@@ -26,7 +26,7 @@ class MyPublicationsView(CreateView):
 
         files = self.request.FILES.getlist('images')    
 
-
+        print(self.request.FILES)
         post_images = []
         for file in files:
             image = Image.objects.create(filename = str(file).split("/")[-1], file=file)

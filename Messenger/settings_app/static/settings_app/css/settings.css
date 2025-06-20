@@ -98,10 +98,14 @@ header a {
 main {
     display: flex;
     padding-top: 6vh;
+    justify-content: center;
 }
 
 .main-div {
     display: flex;
+    padding-left: 4.20vw;
+    justify-content: center;
+    gap: 0.31vw;
 }
 
 .divPhoto {
@@ -141,10 +145,8 @@ main {
 .menu-options {
     display: flex;
     flex-direction: column;
-    width: 13.229vw;
+    width: 18.43vw;
     height: 14.074vh;
-    margin-left: 4.167vw;
-    margin-right: -2.865vw;
     gap: 1.481vh;
 }
 
@@ -165,7 +167,6 @@ main {
     flex-direction: column;
     width: 48.151vw;
     gap: 0.741vh;
-    margin-left: 22.682vw;
     background-color: white;
 }
 
