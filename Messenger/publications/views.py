@@ -52,7 +52,13 @@ class MyPublicationsView(CreateView):
             post_now.title = request.POST.get("title")
             post_now.content = request.POST.get("content")
             # post_now.article_link = request.POST.get("link")
-            # post_now.tags.set(request.POST.get("tags-list").split(","))
+            final_list_tags = []
+            for element in request.POST.get("tags-list").split("_"):
+                print(element)
+                if element != '':
+                    final_list_tags.append(int(element))
+            print(final_list_tags)
+            post_now.tags.set(final_list_tags)
             post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')

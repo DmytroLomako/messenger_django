@@ -188,7 +188,7 @@
             <div class="postMain">
                 <p class="text">
                     {{ post.title }}<br>
-                    {{ post.text }}
+                    {{ post.content }}
                 </p>
                 <p class="hashtags">
                     {% for tag in post.tags.all %}
@@ -341,7 +341,7 @@
                         </div>
 
                         <label for="add-tag-btn-redact" class="image-input-label">
-                            <img src="{% static 'images/add_tag.png' %}" class="imageTags">
+                            <img src="{% static 'images/add_tag.png' %}" class="imageTagsRedact">
                         </label>
                     </div>
                 </div>

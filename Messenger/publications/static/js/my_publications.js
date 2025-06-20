@@ -9,7 +9,6 @@ let tagsField = document.getElementById("field")
 let selectTags = document.getElementById("id_tags")
 let selectTagsAll = document.querySelector("#id_tags option")
 let divAddTags = document.querySelector(".beforeBtton")
-let divAddTagsRedact = document.querySelector(".beforeBttonRedact")
 let imagesDiv = document.querySelector(".for-images")
 let imageInput = document.querySelector('.image-input')
 let imagesDivRedact = document.querySelector(".for-images-redact")
@@ -22,11 +21,8 @@ let cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact")
 let postPkInput = document.querySelector(".postPkInput")
 let imageTags = document.querySelector(".imageTags")
 let inputAddTag = document.querySelector(".inputAddTag")
+let tagsList = document.querySelector(".tags-list")
 
-let selectRedact = document.querySelectorAll("#tagsHiddenRedact select option")
-let addTagBtnRedact = document.getElementById("add-tag-btn-redact")
-let tagsHiddenRedact = document.getElementById("tagsHiddenRedact")
-let tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select")
 
 let imagesPost = document.querySelector(".postImage1")
 
@@ -191,8 +187,6 @@ cancelBgBlur.addEventListener('click', function () {
 })
 
 
-
-
 if (addTag) {
     addTag.addEventListener("click", () => {
         inputAddTag.style.display = inputAddTag.style.display === "block" ? "none" : "block";
@@ -248,15 +242,17 @@ if (addTag) {
                     const optionIndex = parseInt(this.getAttribute("value"));
                     const option = document.querySelector(`.showTagsBtn #field #id_tags option[value="${optionIndex}"]`);
 
+
                     if (!option.hasAttribute('selected')) {
                         option.setAttribute('selected', true);
                         let hashtagsConteiner = document.querySelector(".hashTagTextDiv")
 
 
+
                         if (hashtagsConteiner == null) {
                             let hashtagsConteinerElement = document.createElement("div")
                             hashtagsConteinerElement.classList.add("hashTagTextDiv")
-                            document.querySelectorAll(".field")[1].appendChild(hashtagsConteinerElement)
+                            document.querySelectorAll(".field")[4].appendChild(hashtagsConteinerElement)
                         }
 
                         hashtagsConteiner = document.querySelector(".hashTagTextDiv")
@@ -285,6 +281,8 @@ if (addTag) {
         }
     });
 }
+
+
 
 
 
@@ -374,29 +372,14 @@ deleteBtns.forEach((button) => {
 
 editBtns.forEach(element => {
     element.addEventListener("click", () => {
-        imagesDiv.innerHTML = ''
-        listFiles = []
-        for (let count = 0; count < imageInput.files.length; count++) {
-            let file = imageInput.files[count]
-            let divImage = document.createElement("div")
-            divImage.classList.add("divImageDelete")
-            let createImage = document.createElement("img")
-            let deleteBtn = document.createElement("img")
-            deleteBtn.src = "/static/images/delete.png"
-            deleteBtn.classList.add("deleteBtn")
-            deleteBtn.id = "delete" + count
-            divImage.id = count
-            listFiles.push(imageInput.files[count])
-            createImage.id = "imageForPost"
-            if (file) {
-                createImage.setAttribute('src', URL.createObjectURL(file));
-                divImage.appendChild(createImage)
-                divImage.appendChild(deleteBtn)
-                imagesDiv.appendChild(divImage)
-            }
-        }
-        blurRedact.style.display = "flex"
-        postPkInput.value = element.id
+        imagesDivRedact.innerHTML = '';
+        listFilesRedact = [];
+        divAddTagsRedact.innerHTML = '';
+        document.querySelector("#tagsHiddenRedact select").innerHTML = '';
+
+        blurRedact.style.display = "flex";
+        postPkInput.value = element.id;
+
         $.ajax({
             url: `/publications/redact/${element.id}/`,
             type: 'POST',
@@ -405,111 +388,214 @@ editBtns.forEach(element => {
                 'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
             },
             success: function (response) {
-                console.log(JSON.parse(response))
-                let post = JSON.parse(response)[0]["fields"]
-                document.querySelector(".title").value = post["title"]
-                // document.querySelector(".subject").value = post["subject"]
-                // document.querySelector(".textField").textContent = post["text"]
-                // document.querySelector(".link").value = post["article_link"]
+                let data = JSON.parse(response);
+                let post = data[0].fields;
 
-                let tagsFromPost = post["tags"]
-                // alert(tagsFromPost)
+                // Заполняем основные поля
+                document.querySelector(".publication-redact .title").value = post.title;
+                document.querySelector(".publication-redact textarea[name='content']").value = post.content
 
-                tagsFromPost.forEach(element => {
-                    if (selectRedact[element - 1]) {
-                        selectRedact[element - 1].selected = true;
-                    }
-                })
 
-                let selectedTags = []
-                selectRedact.forEach(element => {
-                    if (element.selected == true) {
-                        selectedTags.push(element)
+                let tagsFromPost = post.tags || [];
+                let allTagsOptions = document.querySelectorAll("#id_tags option");
+                allTagsOptions.forEach(option => {
+                    let newOption = option.cloneNode(true);
+                    selectTagsRedact.appendChild(newOption);
+
+
+                    if (tagsFromPost.includes(parseInt(option.value))) {
+                        newOption.selected = true;
+                        console.log(option.value)
+
+                        tagsList.value += `${option.value}_`
+
+                        let hashTagElement = document.createElement("div");
+                        let hashTagText = document.createElement("p");
+                        hashTagElement.classList.add("hashTag");
+                        hashTagText.classList.add("hashTagText");
+                        hashTagElement.setAttribute("value", option.value);
+                        hashTagText.textContent = option.text;
+                        hashTagElement.appendChild(hashTagText);
+                        divAddTagsRedact.appendChild(hashTagElement);
+                        hashTagElement.addEventListener("click", function () {
+                            const optionIndex = parseInt(this.getAttribute("value"));
+                            const option = document.querySelector(`#tagsHiddenRedact select option[value="${optionIndex}"]`);
+
+                            if (!option.hasAttribute('selected')) {
+                                option.setAttribute('selected', true);
+                                let hashtagsConteiner = document.querySelector(".publication-redact .hashTagTextDiv");
+
+                                if (!hashtagsConteiner) {
+                                    hashtagsConteiner = document.createElement("div");
+                                    hashtagsConteiner.classList.add("hashTagTextDiv");
+                                    document.querySelector(".publication-redact .field").appendChild(hashtagsConteiner);
+                                }
+
+                                let pElement = document.createElement("p");
+                                pElement.classList.add("hashTagText");
+                                pElement.setAttribute("value", optionIndex);
+                                pElement.textContent = this.querySelector(".hashTagText").textContent;
+                                hashtagsConteiner.appendChild(pElement);
+                            } else {
+                                option.removeAttribute('selected');
+                                document.querySelectorAll(".publication-redact .hashTagTextDiv .hashTagText").forEach(el => {
+                                    if (parseInt(el.getAttribute("value")) === optionIndex) {
+                                        el.remove();
+                                    }
+                                });
+                            }
+                        });
                     }
                 });
 
-                let list_tags = []
-                selectedTags.forEach(element => {
-                    list_tags.push(element.value)
-                });
-
-                document.querySelector(".tags-list").value = `${list_tags}`
-                console.log(JSON.parse(response), JSON.parse(response).slice(1))
-                let images = JSON.parse(response).slice(1);
-                listFiles = [];
-                images.forEach((element, index) => {
-                    const existingImageUrl = element.fields.file;
-                    if (existingImageUrl) {
-                        fetch(`/media/${existingImageUrl}`)
+                // Обработка изображений
+                let images = data.slice(1);
+                images.forEach((imgData, index) => {
+                    const imgUrl = imgData.fields.file;
+                    if (imgUrl) {
+                        fetch(`/media/${imgUrl}`)
                             .then(response => response.blob())
                             .then(blob => {
-                                const file = new File([blob], existingImageUrl.split('/').pop(), { type: blob.type });
+                                const file = new File([blob], imgUrl.split('/').pop(), { type: blob.type });
                                 listFilesRedact.push(file);
+
+                                let divImage = document.createElement("div");
+                                divImage.classList.add("divImageDelete");
+                                let createImage = document.createElement("img");
+                                let deleteBtn = document.createElement("img");
+                                deleteBtn.src = "/static/images/delete.png";
+                                deleteBtn.classList.add("deleteBtn");
+                                deleteBtn.id = "delete" + index;
+                                divImage.id = index;
+                                createImage.id = "imageForPost";
+                                createImage.src = `/media/${imgUrl}`;
+                                divImage.appendChild(createImage);
+                                divImage.appendChild(deleteBtn);
+                                imagesDivRedact.appendChild(divImage);
                             });
-                        let divImage = document.createElement("div")
-                        divImage.classList.add("divImageDelete")
-                        let createImage = document.createElement("img")
-                        let deleteBtn = document.createElement("img")
-                        deleteBtn.src = "/static/images/delete.png"
-                        deleteBtn.classList.add("deleteBtn")
-                        deleteBtn.id = "delete" + index
-                        divImage.id = index
-                        createImage.id = "imageForPost"
-                        createImage.src = `/media/${existingImageUrl}`;
-                        divImage.appendChild(createImage)
-                        divImage.appendChild(deleteBtn)
-                        imagesDivRedact.appendChild(divImage)
                     }
-                })
+                });
+
                 updateDeleteButtons();
-
-                selectRedact.forEach((option) => {
-                    if (option.selected) {
-                        let hashTagElement = document.createElement("div")
-                        let hashTagText = document.createElement("p")
-                        hashTagElement.classList.add("hashTag")
-                        hashTagText.classList.add("hashTagText")
-                        hashTagText.textContent = finalAllTags[option.value - 1]
-                        hashTagElement.appendChild(hashTagText)
-                        divAddTagsRedact.appendChild(hashTagElement)
-                    }
-                })
-
-
             }
-        })
-    })
-})
+        });
+    });
+});
 
 
-tagsHiddenRedact.addEventListener("change", (event) => {
-    divAddTagsRedact.textContent = ''
-    let selectedTags = []
-    selectRedact.forEach(element => {
-        if (element.selected == true) {
-            selectedTags.push(element)
+
+const addTagRedact = document.getElementById("add-tag-btn-redact");
+const inputAddTagRedact = document.querySelector(".inputAddTagRedact");
+const imageTagsRedact = document.querySelector(".imageTagsRedact");
+const divAddTagsRedact = document.querySelector(".beforeBttonRedact");
+const selectTagsRedact = document.querySelector("#tagsHiddenRedact select");
+const optionTagsRedact = document.querySelectorAll("#tagsHiddenRedact select option");
+if (addTagRedact) {
+    addTagRedact.addEventListener("click", () => {
+
+        const addTagRedact = document.getElementById("add-tag-btn-redact");
+        const inputAddTagRedact = document.querySelector(".inputAddTagRedact");
+        const imageTagsRedact = document.querySelector(".imageTagsRedact");
+        const divAddTagsRedact = document.querySelector(".beforeBttonRedact");
+        const selectTagsRedact = document.querySelector("#tagsHiddenRedact select");
+        const optionTagsRedact = document.querySelectorAll("#tagsHiddenRedact select option");
+        // Создаем input для тегов, если его нет
+        if (!inputAddTagRedact) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.placeholder = "#";
+            input.classList.add("inputAddTagRedact");
+            divAddTagsRedact.appendChild(input);
+            input.style.display = "block";
+        } else {
+            inputAddTagRedact.style.display = inputAddTagRedact.style.display === "block" ? "none" : "block";
+        }
+
+        if (imageTagsRedact.src.split("/").pop() === "add_tag.png") {
+            imageTagsRedact.src = "/static/images/submit.png";
+            if (inputAddTagRedact) inputAddTagRedact.value = "";
+        } else {
+            let finalHashTag = inputAddTagRedact.value;
+            if (!finalHashTag.includes("#")) {
+                finalHashTag = `#${finalHashTag}`;
+            }
+
+            if (finalHashTag !== "#") {
+                let hashTagElement = document.createElement("div");
+                let hashTagText = document.createElement("p");
+                hashTagElement.classList.add("hashTag");
+                hashTagText.classList.add("hashTagText");
+
+                let option = document.createElement("option");
+                let allOptions = document.querySelectorAll("#tagsHiddenRedact select option");
+
+                let valueOption = allOptions.length > 0 ?
+                    parseInt(allOptions[allOptions.length - 1].value) + 1 : 0;
+
+                hashTagElement.setAttribute("value", valueOption);
+                hashTagText.textContent = finalHashTag;
+                option.textContent = finalHashTag;
+                option.value = valueOption;
+
+                selectTagsRedact.appendChild(option);
+                hashTagElement.appendChild(hashTagText);
+
+                // Просто добавляем тег в контейнер (как в оригинальном коде)
+                divAddTagsRedact.appendChild(hashTagElement);
+
+                $.ajax({
+                    url: document.querySelector(".urlToCreateTag").value,
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'list_tags': finalHashTag,
+                        'page-to-return': "publications"
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+                hashTagElement.addEventListener("click", function () {
+                    const optionIndex = parseInt(this.getAttribute("value"));
+                    const option = document.querySelector(`#tagsHiddenRedact select option[value="${optionIndex}"]`);
+
+                    if (!option.hasAttribute('selected')) {
+                        option.setAttribute('selected', true);
+                        tagsList.value += `${option.value}_`
+                        let hashtagsConteiner = document.querySelector(".publication-redact .hashTagTextDiv");
+
+                        if (!hashtagsConteiner) {
+                            let hashtagsConteinerElement = document.createElement("div");
+                            hashtagsConteinerElement.classList.add("hashTagTextDiv");
+                            document.querySelectorAll(".publication-redact .field")[1].appendChild(hashtagsConteinerElement);
+                            hashtagsConteiner = hashtagsConteinerElement;
+                        }
+
+                        let pElement = document.createElement("p");
+                        pElement.classList.add("hashTagText");
+                        pElement.setAttribute("value", optionIndex);
+                        pElement.textContent = this.querySelector(".hashTagText").textContent;
+
+                        hashtagsConteiner.appendChild(pElement);
+                    } else {
+                        option.removeAttribute('selected');
+                        document.querySelectorAll(".publication-redact .hashTagTextDiv .hashTagText").forEach(element2 => {
+                            if (parseInt(element2.getAttribute("value")) === optionIndex) {
+                                element2.remove();
+                            }
+                        });
+                    }
+                });
+            }
+
+
+            imageTagsRedact.src = "/static/images/add_tag.png";
+            if (inputAddTagRedact) inputAddTagRedact.style.display = "none";
         }
     });
+}
 
-    let list_tags = []
-    selectedTags.forEach(element => {
-        list_tags.push(element.value)
-    });
-    document.querySelector(".tags-list").value = `${list_tags}`
-    tagsHiddenRedact.querySelectorAll('option').forEach((option) => {
-        if (option.selected) {
-            let hashTagElement = document.createElement("div")
-            let hashTagText = document.createElement("p")
-            hashTagElement.classList.add("hashTag")
-            hashTagText.classList.add("hashTagText")
-            hashTagText.textContent = finalAllTags[option.value - 1]
-            hashTagElement.appendChild(hashTagText)
-            divAddTagsRedact.appendChild(hashTagElement)
-        }
-
-    })
-
-})
 
 
 cancelBgBlurRedact.addEventListener('click', () => {
@@ -539,4 +625,7 @@ document.querySelector('.publication-redact').addEventListener('submit', (event)
 document.querySelectorAll(".liked img").forEach(element => {
     element.src = "/static/images/liked.png"
 });
+
+
+
 

@@ -448,6 +448,11 @@ main .postArea .sendDiv .addEmojiBtn {
     height: 2.31vh;
 }
 
+.imageTagsRedact {
+    width: 1.05vw;
+    height: 2.31vh;
+}
+
 .input-div-text {
     display: flex;
     gap: 4px;
@@ -473,6 +478,16 @@ main .postArea .sendDiv .addEmojiBtn {
 }
 
 #add-tag-btn {
+    opacity: 0;
+    position: absolute;
+    cursor: pointer;
+    right: 66.93vw;
+    width: 1.04vw;
+    height: 1.85vh;
+}
+
+
+#add-tag-btn-redact {
     opacity: 0;
     position: absolute;
     cursor: pointer;
