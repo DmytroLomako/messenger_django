@@ -50,14 +50,15 @@ class MyPublicationsView(CreateView):
         if request.POST.get("create") == None:    
             post_now = Post.objects.get(id = int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
-            post_now.content = request.POST.get("text")
+            post_now.content = request.POST.get("content")
             # post_now.article_link = request.POST.get("link")
-            post_now.tags.set(request.POST.get("tags-list").split(","))
+            # post_now.tags.set(request.POST.get("tags-list").split(","))
             post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
-                    Image.objects.create(post=post_now, image=file)
+                    img = Image.objects.create(filename=file.name, file=file)
+                    post_now.images.add(img)
             post_now.save()
         return super().post(request, *args, **kwargs)
 
@@ -121,7 +122,7 @@ def likes(request, post_pk):
 def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [Post.objects.get(id = post_pk)]
-        images = Image.objects.filter(post = post[0])
+        images = post[0].images.all()
         for image in images:
             post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)

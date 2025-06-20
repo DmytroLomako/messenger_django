@@ -158,8 +158,10 @@
         <div class="mainGroup">
             {% for message in chat_messages %}
             {% if message.author == profile_now %}
-
-            <div class="messageFromMe">
+            <div class="messagesDateWrapperDiv">
+                <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+            </div>
+            <div class="messageFromMe message" id="message{{message.id}}" value="{{message.sent_at}}">
                 <div class="nonAvatarFromMe">
                     <div class="usernameAndTextcontent">
                         {% if message.attached_image %}
@@ -171,7 +173,10 @@
                 </div>
             </div>
             {% else %}
-            <div class="message">
+            <div class="messagesDateWrapperDiv">
+                <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+            </div>
+            <div class="message" id="message{{message.id}}" value="{{message.sent_at}}">
                 <img src="{{message.author.avatar_set.last.image.url}}" class="avatarMessage">
                 <div class="nonAvatar">
                     <div class="usernameAndTextcontent">

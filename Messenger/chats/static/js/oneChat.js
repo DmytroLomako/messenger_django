@@ -60,7 +60,6 @@ for (let dt of datesAndTimes) {
     let dateAndTime = new Date(dt.textContent)
     let dateAndTimeLocal = dateAndTime.toLocaleString()
     if (dateAndTimeLocal != "Invalid Date") {
-        console.log(dateAndTimeLocal)
         dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
     }
 }
@@ -235,6 +234,53 @@ profilesList.forEach(element => {
 
 
 
+let allMessageDates = []
+
+let messageDates = document.querySelectorAll(".message")
+
+messageDates.forEach(element => {
+    allMessageDates.push(element.getAttribute("value"))
+});
+
+let listOfMonths = ["січеня", "лютого", "березня", "квітня", "травня", "червня", "липня", "серпня", "вересня", "жовтня", "листопада", "грудня"]
+
+let count = 0
+console.log("wpmhnwoler")
+allMessageDates.forEach(element => {
+    // if (allMessageDates[count].value.split(", ")[0].split(" ")[1] > allMessageDates[count + 1].value.split(", ")[0].split(" ")[1] && ) {
+
+    // }
+
+    try {
+        console.log(allMessageDates[count].split(",")[0].split(" ")[1] < allMessageDates[count - 1].split(",")[0].split(" ")[1])
+
+        if (allMessageDates[count].split(", ")[0].split(" ")[1] < allMessageDates[count - 1].split(", ")[0].split(" ")[1]) {
+            document.querySelector(`#date${messageDates[count - 1].id.split("message")[1]}`).classList.remove("hidden")
+
+            let dateAndTime = new Date(document.querySelector(`#date${messageDates[count - 1].id.split("message")[1]}`).textContent)
+            let dateAndTimeLocal = dateAndTime.toLocaleString()
+            if (dateAndTimeLocal != "Invalid Date") {
+                document.querySelector(`#date${messageDates[count - 1].id.split("message")[1]}`).textContent = `${parseInt(dateAndTimeLocal.split(".")[0])} ${listOfMonths[parseInt(dateAndTimeLocal.split(".")[1] - 1)]} ${parseInt(dateAndTimeLocal.split(",")[0].split(".")[2])}`
+            }
+        }
+    } catch {
+        console.log("error")
+    }
+
+
+
+
+    count++
+});
+
+
+document.querySelectorAll(".profiles-all-div .profiles-div .profles").forEach(element => {
+    element.addEventListener("click", () => {
+        window.location.href = `/chats/chat/${element.id}/`
+    })
+})
+
+
 let dotsMenu = document.querySelector(".dotsDiv")
 let editBtns = document.querySelector(".edit")
 let deleteBtns = document.querySelector(".delete")
@@ -291,3 +337,4 @@ editBtns.addEventListener("click", () => {
     document.querySelector(".NameTitle").textContent = "Редагування групи"
     document.querySelector(".NameTitle").textContent = "Редагування групи"
 })
+

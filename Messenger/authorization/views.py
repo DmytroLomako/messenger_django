@@ -58,7 +58,9 @@ class VerifyCodeView(View):
         
         try:
             user = User.objects.get(pk=user_id)
-            
+            v = VerificationCode.objects.all()
+            for o in v:
+                print(o.username)
             verification = VerificationCode.objects.get(username=f"{user.email}")
             
             if verification.code == code and verification.is_valid():

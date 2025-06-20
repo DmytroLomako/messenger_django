@@ -408,12 +408,12 @@ editBtns.forEach(element => {
                 console.log(JSON.parse(response))
                 let post = JSON.parse(response)[0]["fields"]
                 document.querySelector(".title").value = post["title"]
-                document.querySelector(".subject").value = post["subject"]
-                document.querySelector(".textField").textContent = post["text"]
-                document.querySelector(".link").value = post["article_link"]
+                // document.querySelector(".subject").value = post["subject"]
+                // document.querySelector(".textField").textContent = post["text"]
+                // document.querySelector(".link").value = post["article_link"]
 
                 let tagsFromPost = post["tags"]
-                alert(tagsFromPost)
+                // alert(tagsFromPost)
 
                 tagsFromPost.forEach(element => {
                     if (selectRedact[element - 1]) {
@@ -434,11 +434,11 @@ editBtns.forEach(element => {
                 });
 
                 document.querySelector(".tags-list").value = `${list_tags}`
-
+                console.log(JSON.parse(response), JSON.parse(response).slice(1))
                 let images = JSON.parse(response).slice(1);
                 listFiles = [];
                 images.forEach((element, index) => {
-                    const existingImageUrl = element.fields.image;
+                    const existingImageUrl = element.fields.file;
                     if (existingImageUrl) {
                         fetch(`/media/${existingImageUrl}`)
                             .then(response => response.blob())

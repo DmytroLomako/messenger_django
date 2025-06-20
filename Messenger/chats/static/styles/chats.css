@@ -461,6 +461,26 @@ main {
     text-decoration: none;
 }
 
+.messagesDateWrapper {
+    text-align: center;
+    height: 26px;
+    background-color: #E9E5EE;
+    color: #81818D;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    border-radius: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+
+.messagesDateWrapperDiv {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
 .profiles-all-div {
     display: flex;
     flex-direction: column;
@@ -488,6 +508,14 @@ main {
     height: 4.26vh;
     gap: 0.63vw;
 
+}
+
+.proflesPersonal {
+    display: flex;
+    align-items: center;
+    width: 16.46vw;
+    height: 4.26vh;
+    gap: 0.63vw;
 }
 
 .profiles-text {

@@ -235,12 +235,10 @@ btnPassword.addEventListener("click", (event) => {
         passwordDiv1.innerHTML += "<input type='password' name='password2' class = 'password2' placeholder=''><img src='' alt=''></img>"
         passwordText.innerHTML = "<p class='password-text-name'>Новий пароль</p>"
     }
-    personalForm.style.display = "none"
     personalInformDiv.style.border = "1px solid #543C52"
     passwordTextForm.style.display = "flex"
     btnPassword.style.backgroundColor = "#E9E5EE"
-    passwordForm.style.marginTop = "0"
-
+    personalInformDiv.style.height = "565px"
 })
 
 let cancelBgBlur = document.getElementById('cancel-bg-blur')
