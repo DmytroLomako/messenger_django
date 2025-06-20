@@ -391,7 +391,6 @@ editBtns.forEach(element => {
                 let data = JSON.parse(response);
                 let post = data[0].fields;
 
-                // Заполняем основные поля
                 document.querySelector(".publication-redact .title").value = post.title;
                 document.querySelector(".publication-redact textarea[name='content']").value = post.content
 
@@ -448,7 +447,6 @@ editBtns.forEach(element => {
                     }
                 });
 
-                // Обработка изображений
                 let images = data.slice(1);
                 images.forEach((imgData, index) => {
                     const imgUrl = imgData.fields.file;
@@ -499,7 +497,7 @@ if (addTagRedact) {
         const divAddTagsRedact = document.querySelector(".beforeBttonRedact");
         const selectTagsRedact = document.querySelector("#tagsHiddenRedact select");
         const optionTagsRedact = document.querySelectorAll("#tagsHiddenRedact select option");
-        // Создаем input для тегов, если его нет
+
         if (!inputAddTagRedact) {
             const input = document.createElement("input");
             input.type = "text";
@@ -540,7 +538,6 @@ if (addTagRedact) {
                 selectTagsRedact.appendChild(option);
                 hashTagElement.appendChild(hashTagText);
 
-                // Просто добавляем тег в контейнер (как в оригинальном коде)
                 divAddTagsRedact.appendChild(hashTagElement);
 
                 $.ajax({
