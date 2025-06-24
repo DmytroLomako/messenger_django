@@ -29,12 +29,13 @@ const tagsHiddenRedact = document.getElementById("tagsHiddenRedact");
 const tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select");
 const imagesPost = document.querySelector(".postImage1");
 const formCratePost = document.querySelector(".publication-creation");
-const countRequestsFriends = document.querySelector(".count-requests-friends");
-const requestFriendsDiv = document.querySelector(".requests-friends")
 
 let listFiles = [];
 let listFilesRedact = [];
 let listTags = ["#Відпочинок", "#Натхнення", "#Життя", "#Природа", "#Читання", "#Спокій", "#Гармонія", "#Музика", "#Фільми", "#Подорожі"];
+if (document.querySelector(".friends-tracker").textContent == "0") {
+    document.querySelector(".friends-tracker").style.display = "none"
+}
 
 // Обработчики для меню с троеточием
 for (let count = 0; count < dotsMenu.length; count++) {
@@ -52,6 +53,15 @@ for (let count = 0; count < dotsMenu.length; count++) {
             deleteBtns[count].style.display = "flex";
         }
     });
+}
+
+if (document.querySelector(".user") == null) {
+    document.querySelectorAll(".users")[0].style.height = "0"
+    console.log(document.querySelectorAll(".users"))
+}
+
+if (document.querySelector(".profiles-div") == null) {
+    document.querySelectorAll(".users")[1].style.height = "0"
 }
 
 // Обработчик загрузки изображений
@@ -311,12 +321,6 @@ function isPostInViewport(post) {
         rect.top >= 0 &&
         rect.bottom <= window.innerHeight
     );
-
-}
-if (countRequestsFriends.textContent == 0) {
-    requestFriendsDiv.style.display = "none"
-} else {
-    requestFriendsDiv.style.display = "flex"
 }
 
 

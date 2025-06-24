@@ -237,19 +237,10 @@ btnPassword.addEventListener("click", (event) => {
         passwordDiv1.innerHTML += "<input type='password' name='password2' class = 'password2' placeholder=''><img src='' alt=''></img>"
         passwordText.innerHTML = "<p class='password-text-name'>Новий пароль</p>"
     }
-<<<<<<< HEAD
     personalInformDiv.style.border = "1px solid #543C52"
     passwordTextForm.style.display = "flex"
     btnPassword.style.backgroundColor = "#E9E5EE"
     personalInformDiv.style.height = "565px"
-=======
-    personalForm.style.display = "none"
-    personalInformDiv.style.border = "1px solid #543C52"
-    passwordTextForm.style.display = "flex"
-    btnPassword.style.backgroundColor = "#E9E5EE"
-    passwordForm.style.marginTop = "0"
-
->>>>>>> origin/mbarilo
 })
 
 let cancelBgBlur = document.getElementById('cancel-bg-blur')
@@ -273,9 +264,6 @@ Inputs.forEach((input, index) => {
             Inputs[index - 1].focus()
         }
     })
-<<<<<<< HEAD
-})
-=======
 })
 
 if (countRequestsFriends.textContent == 0) {
@@ -283,4 +271,3 @@ if (countRequestsFriends.textContent == 0) {
 } else {
     requestFriendsDiv.style.display = "flex"
 }
->>>>>>> origin/mbarilo

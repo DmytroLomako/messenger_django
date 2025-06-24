@@ -12,12 +12,16 @@ let messages = document.querySelector(".mainGroup")
 function scrollToBottom(element) {
     element.scrollTo(0, element.scrollHeight)
 }
+document.querySelector(`.chat${window.location.href.split("/")[window.location.href.split("/").length - 2]}`).style.backgroundColor = "#E9E5EE"
 
 
 
 backBtn.addEventListener("click", () => {
     window.location.href = "/chats/"
 })
+if (document.querySelector(".friends-tracker").textContent == "0") {
+    document.querySelector(".friends-tracker").style.display = "none"
+}
 
 socket.addEventListener("message", function (event) {
     const messageObject = JSON.parse(event.data)
@@ -48,7 +52,7 @@ socket.addEventListener("message", function (event) {
         dt.textContent = `${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}`
     }
     scrollToBottom(messages)
-    window.location.reload()
+    // window.location.reload()
 })
 
 scrollToBottom(messages)
@@ -60,7 +64,6 @@ for (let dt of datesAndTimes) {
     let dateAndTime = new Date(dt.textContent)
     let dateAndTimeLocal = dateAndTime.toLocaleString()
     if (dateAndTimeLocal != "Invalid Date") {
-        console.log(dateAndTimeLocal)
         dt.textContent = `${dateAndTimeLocal.split(",")[1].split(":")[0]}:${dateAndTimeLocal.split(",")[1].split(":")[1]}`
     }
 }
@@ -133,19 +136,47 @@ function displayImage(input, div, filesList) {
     }
 
 }
+
+let listFiles = []
+let listFilesRedact = []
+
+function updateDeleteButtons() {
+    let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
+    deleteBtnsArray.forEach(element => {
+        element.addEventListener("click", () => {
+            listFiles = []
+            document.querySelector(".divImageDelete").remove()
+            document.querySelector(".inputAndImages").style.backgroundColor = "#FFFFFF"
+        })
+    });
+}
+
 function displayImageAbsolute(input, div, filesList) {
     div.innerHTML = ''
-    let file = filesList[0]
+    let len = filesList.length
+
+    let file = input.files[0]
+    let divImage = document.createElement("div")
+    divImage.classList.add("divImageDelete")
     let createImage = document.createElement("img")
     createImage.classList.add("MessageImage")
     createImage.id = "MessageImage"
+    let deleteBtn = document.createElement("img")
+    deleteBtn.src = "/static/images/delete.png"
+    deleteBtn.classList.add("deleteBtn")
+    deleteBtn.id = "delete" + (0 + len)
+    divImage.id = (0 + len)
+    filesList = input.files[0]
+    createImage.id = "imageForPost"
     if (file) {
-        createImage.setAttribute('src', URL.createObjectURL(file))
-        div.appendChild(createImage)
+        createImage.setAttribute('src', URL.createObjectURL(file));
+        divImage.appendChild(createImage)
+        divImage.appendChild(deleteBtn)
+        div.appendChild(divImage)
     }
-
+    updateDeleteButtons();
+    console.log(listFiles)
 }
-
 
 
 imageInput.addEventListener('change', function (event) {
@@ -153,7 +184,8 @@ imageInput.addEventListener('change', function (event) {
 })
 
 document.querySelector(".sendImg2").addEventListener("change", () => {
-    displayImageAbsolute(document.querySelector(".sendImg2"), document.querySelector(".imagesMessageDiv"), document.querySelector(".sendImg2").files)
+    document.querySelector(".inputAndImages").style.backgroundColor = "#E9E5EE"
+    displayImageAbsolute(document.querySelector(".sendImg2"), document.querySelector(".imagesMessageDiv"), listFiles)
 })
 
 async function fileToBase64(file) {
@@ -166,19 +198,23 @@ async function fileToBase64(file) {
 }
 
 form.addEventListener("submit", async (event) => {
+
+    const fileInput = document.querySelector(".sendImg2")
+    let dt = new DataTransfer();
+    listFiles.forEach(f => dt.items.add(f));
+    fileInput.files = dt.files;
+
     event.preventDefault()
     const message = document.getElementById("id_message").value.trim()
 
     if (!message) return
 
     let imageData = null
-    const fileInput = document.querySelector(".sendImg2")
     if (fileInput.files.length > 0) {
         try {
             imageData = await fileToBase64(fileInput.files[0])
         } catch (error) {
             console.error("File conversion error:", error)
-            alert("Ошибка при обработке файла")
             return
         }
     }
@@ -339,11 +375,3 @@ editBtns.addEventListener("click", () => {
     document.querySelector(".NameTitle").textContent = "Редагування групи"
 })
 
-const countRequestsFriends = document.querySelector(".count-requests-friends");
-const requestFriendsDiv = document.querySelector(".requests-friends")
-
-if (countRequestsFriends.textContent == 0) {
-    requestFriendsDiv.style.display = "none"
-} else {
-    requestFriendsDiv.style.display = "flex"
-}

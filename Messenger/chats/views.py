@@ -39,8 +39,6 @@ class ChatsView(CreateView):
             if file:
                 group.avatar = file
 
-            group.avatar = file
-
             group.members.set(final_list_add)
 
             group.save()
@@ -65,9 +63,6 @@ class ChatsView(CreateView):
         list_personal_chats = ChatGroup.objects.filter(is_personal_chat = True)
 
   
-        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
-
-        context["requests"] = all_not_accepted_get_requests
 
         context["friends"] = final_friends_list
         
@@ -193,17 +188,20 @@ class ChatView(FormView):
         
         group = ChatGroup.objects.get(id = self.kwargs["group_pk"])
         members_count = len(group.members.all())
-        # Отримуємо об'єкт контексту з батьківського класу FormView 
-        # Отримуємо pk групи з kwargs (Тобто з дінамічного url адрессу)
+
         chat_group_pk = self.kwargs['group_pk']
-        # Додаємо у контекст групу
+
         context['group'] = group
         context["groups"] = ChatGroup.objects.filter(members = Profile.objects.get(user = self.request.user))
-        # Додаємо у контекст усі повідомлення групи
         context['len_members'] =  members_count
         context['chat_messages'] =  reversed(ChatMessage.objects.filter(chat_group_id = chat_group_pk))
         context["friends"] = final_friends_list
         context["profile_now"] = user_profile_now
+
+        user = self.request.user
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
         if ChatGroup.objects.get(id = self.kwargs["group_pk"]).admin == user_profile_now:
             context["is_admin_group"] = True
         else:
@@ -215,6 +213,7 @@ class ChatView(FormView):
             string_of_members += f"{member.id}_"
 
         context["list_of_members"] = string_of_members
+
         # повертаємо контекст зі змінами
         return context
     

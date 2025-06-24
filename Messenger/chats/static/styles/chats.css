@@ -24,6 +24,32 @@ body {
     overflow-y: hidden;
 }
 
+.bottomGroup {
+    display: flex;
+    align-items: end;
+    padding-bottom: 16px;
+}
+
+.imagesMessageDiv .deleteBtn {
+    width: 2.10vw;
+    height: 4.20vh;
+    position: absolute;
+    right: 3.52vw;
+    top: 1.05vh;
+}
+
+.divImageDelete {
+    position: relative;
+    width: 11.44vw;
+}
+
+.for-images,
+.for-images-redact {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
 header {
     height: 7vh;
     width: 100vw;
@@ -32,7 +58,7 @@ header {
     align-items: center;
     justify-content: center;
     gap: 16vw;
-    margin-bottom: 3vh;
+    margin-bottom: 3.5vh;
     padding-left: 3.65vw;
 }
 
@@ -98,7 +124,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 18.28vw;
-    height: 77.22vh;
+    height: 85.22vh;
     gap: 0.74vh;
     margin-left: 4.17vw;
 }
@@ -122,7 +148,7 @@ main {
     flex-direction: column;
     align-items: center;
     width: 18.27vw;
-    height: 75.09vh;
+    height: 80.69vh;
     gap: 2.22vh;
     background-color: white;
     border-radius: 0.52vw;
@@ -170,7 +196,7 @@ main {
 }
 
 .profiles-text .text-content {
-    font-size: 14px;
+    font-size: 0.73vw;
     color: #81818D;
 }
 
@@ -184,35 +210,43 @@ main {
 
 .inputAndImages {
     overflow-y: auto;
-    gap: 16px;
     overflow-x: hidden;
-    max-height: 300px;
+    display: flex;
+    flex-direction: column-reverse;
+    border-radius: 10px;
 }
 
 .imagesMessageDiv {
     display: flex;
-    gap: 16px;
+    gap: 0.83vw;
+    padding-left: 8px;
+    padding-top: 8px;
+
 }
 
 .messageImage {
-    width: 150px;
-    height: 200px;
+    width: 7.81vw;
+    height: 10.42vh;
 }
 
 .imagesMessageDiv img {
-    width: 150px;
-    height: 300px;
+    width: 7.81vw;
+    height: 15.63vh;
+    margin-bottom: 8px;
 }
 
 .sendImgImage {
-    width: 40px;
-    height: 40px;
+    width: 2.08vw;
     cursor: pointer;
 }
 
+.messageForm {
+    display: flex;
+    align-items: end;
+}
+
 .sendEmojiImage {
-    width: 40px;
-    height: 40px;
+    width: 2.08vw;
     cursor: pointer;
 }
 
@@ -233,7 +267,7 @@ main {
     justify-content: start;
     flex-direction: column;
     width: 29.38vw;
-    height: 77.13vh;
+    height: 85.13vh;
     border-radius: 0.52vw;
     border: 1px solid #CDCED2;
     margin-left: 0.47vw;
@@ -242,28 +276,26 @@ main {
 }
 
 .headerGroup {
-    width: 532px;
-    height: 58px;
-
+    width: 27.71vw;
+    height: 6.04vh;
     display: flex;
     border-bottom: 1px solid #CDCED2;
     position: relative;
+    padding-bottom: 16px;
 }
 
 .headerStart {
     display: flex;
     align-items: center;
-
-    width: 366px;
-    height: 48px;
-    gap: 16px;
-
+    width: 19.06vw;
+    height: 5vh;
+    gap: 0.83vw;
 }
 
 .dotsDiv {
     position: absolute;
-    top: 12px;
-    right: 20px;
+    top: 1.25vh;
+    right: 1.04vw;
     border-radius: 0.26vw;
 }
 
@@ -310,30 +342,30 @@ main {
 }
 
 .backImg {
-    width: 20px;
-    height: 20px;
+    width: 1.5vw;
+    height: 2.5vh;
 }
 
 .avatarGroup {
-    width: 46px;
-    height: 46px;
+    width: 2.40vw;
+    height: 4.79vh;
     border-radius: 1234px;
 }
 
 .nameAndMembers {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.52vh;
 }
 
 .groupName {
     color: #070A1C;
-    font-size: 24px;
+    font-size: 1.25vw;
 }
 
 .membersCount {
     color: #81818D;
-    font-size: 14px;
+    font-size: 0.73vw;
 }
 
 ::-webkit-scrollbar {
@@ -341,57 +373,51 @@ main {
 }
 
 .mainGroup {
-    height: 576px;
-    width: 532px;
+    height: 100%;
+    width: 27.71vw;
     display: flex;
     flex-direction: column-reverse;
     overflow-y: auto;
     overflow-x: hidden;
-    margin-bottom: 24px;
-    gap: 10px;
+    margin-bottom: 2.5vh;
+    gap: 16px
 }
-
-
 
 .message {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.21vw;
 }
 
 .nonAvatar {
-    padding: 10px 23px 10px 10px;
-
+    padding: 1.04vh 1.20vw 1.04vh 0.52vw;
     display: flex;
     align-items: end;
-    border-radius: 6px;
+    border-radius: 0.31vw;
     background-color: white;
     border: 1px solid #E9E5EE;
-    padding-left: 10px;
-    gap: 10px;
-    max-width: 200px;
-
+    padding-left: 0.52vw;
+    gap: 0.52vw;
+    max-width: 10.42vw;
 }
 
 .backImg {
     cursor: pointer;
 }
 
-
-
 .bottomGroup form {
     display: flex;
-    width: 532px;
+    width: 27.71vw;
     justify-content: space-between;
 }
 
 .input {
-    width: 356px;
-    height: 42px;
-    padding-left: 16px;
+    width: 18.54vw;
+    height: 4.38vh;
+    padding-left: 0.83vw;
     color: #81818D;
     border: 1px solid #CDCED2;
-    border-radius: 10px;
+    border-radius: 0.52vw;
 }
 
 .start-new-messages {
@@ -416,7 +442,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 18.23vw;
-    height: 77.22vh;
+    height: 85.22vh;
     gap: 0.74vh;
     margin-left: 0.25vw;
 }
@@ -425,12 +451,11 @@ main {
     display: flex;
     flex-direction: column;
     width: 18.28vw;
-    height: 36.02vh;
+    height: 40.02vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     background-color: white;
     gap: 2.22vh;
-
 }
 
 .message-header {
@@ -463,16 +488,16 @@ main {
 
 .messagesDateWrapper {
     text-align: center;
-    height: 26px;
+    height: 2.71vh;
     background-color: #E9E5EE;
     color: #81818D;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    border-radius: 4px;
-    padding-left: 6px;
-    padding-right: 6px;
+    font-size: 0.83vw;
+    border-radius: 0.21vw;
+    padding-left: 0.31vw;
+    padding-right: 0.31vw;
 }
 
 .messagesDateWrapperDiv {
@@ -486,7 +511,7 @@ main {
     flex-direction: column;
     width: 18.28vw;
     height: 28.70vh;
-    gap: 8px;
+    gap: 0.42vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
@@ -498,7 +523,6 @@ main {
     width: 18.12vw;
     height: 5.74vh;
     gap: 1.48vh;
-
 }
 
 .profles {
@@ -506,8 +530,7 @@ main {
     align-items: center;
     width: 16.46vw;
     height: 4.26vh;
-    gap: 0.63vw;
-
+    gap: 0.33vw;
 }
 
 .proflesPersonal {
@@ -515,7 +538,7 @@ main {
     align-items: center;
     width: 16.46vw;
     height: 4.26vh;
-    gap: 0.63vw;
+    gap: 0.33vw;
 }
 
 .profiles-text {
@@ -523,7 +546,7 @@ main {
     flex-direction: column;
     width: 13.44vw;
     height: 4.07vh;
-    gap: 0.37vh;
+    gap: 0.19vh;
     cursor: pointer;
 }
 
@@ -550,7 +573,7 @@ main {
     display: flex;
     flex-direction: column;
     width: 18.28vw;
-    height: 40.46vh;
+    height: 44.36vh;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     background-color: white;
@@ -560,7 +583,7 @@ main {
 .groups-all-div {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 0.26vh;
     width: 18.28vw;
     height: 34.44vh;
     overflow-y: auto;
@@ -587,8 +610,6 @@ main {
     height: 1.85vh;
 }
 
-
-
 .background-blur {
     width: 100%;
     height: 100%;
@@ -603,14 +624,14 @@ main {
 }
 
 .group-create {
-    width: 490px;
-    height: 777px;
+    width: 25.52vw;
+    height: 80.94vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
     padding: 0.45vh 0.75vw 4.62vh 2.31vw;
     flex-direction: column;
-    gap: 24px;
+    gap: 2.5vh;
     align-items: center;
 }
 
@@ -625,35 +646,35 @@ main {
 }
 
 .NameTitle {
-    font-size: 34px;
+    font-size: 1.77vw;
 }
 
 .input_find {
-    width: 402px;
-    height: 42px;
-    border-radius: 10px;
+    width: 20.94vw;
+    height: 4.38vh;
+    border-radius: 0.52vw;
     border: 1px solid #CDCED2;
     color: #81818D;
-    font-size: 16px;
+    font-size: 0.83vw;
     background-image: url('http://i50.tinypic.com/20keohf.jpg');
     background-repeat: no-repeat;
     background-position: left top;
-    padding-left: 15px;
+    padding-left: 0.78vw;
 }
 
 .choosed-num {
     color: #81818D;
-    width: 402px;
+    width: 20.94vw;
 }
 
 .list-of-friends {
-    height: 432px;
+    height: 45vh;
     overflow-y: scroll;
 }
 
 .list-of-friends {
-    height: 432px;
-    width: 402px;
+    height: 45vh;
+    width: 20.94vw;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
@@ -663,24 +684,23 @@ main {
 .userChoose {
     display: flex;
     align-items: center;
-    gap: 12px;
-    width: 402px;
-    height: 62px;
-    margin-left: 16px;
+    gap: 0.63vw;
+    width: 20.94vw;
+    height: 6.46vh;
+    margin-left: 0.83vw;
 }
 
 .letter {
-    font-size: 12px;
-    margin-bottom: 8px;
-    margin-top: 8px;
+    font-size: 0.63vw;
+    margin-bottom: 0.42vh;
+    margin-top: 0.42vh;
 }
 
 .avatar {
-    width: 46px;
-    height: 46px;
-
-    margin-top: 13px;
-    margin-bottom: 13px;
+    width: 2.40vw;
+    height: 4.79vh;
+    margin-top: 1.35vh;
+    margin-bottom: 1.35vh;
     border-radius: 1234px;
 }
 
@@ -690,26 +710,24 @@ main .addedCheckbox {
 
 .nameLastName,
 .nameLastNameChosen {
-    width: 280px;
-    font-size: 16px;
+    width: 14.58vw;
+    font-size: 0.83vw;
 }
 
 .btn {
-    height: 40px;
+    height: 4.17vh;
     border-radius: 1234px;
-
-
 }
 
 .btns {
-    gap: 16px;
-    width: 402px;
+    gap: 0.83vw;
+    width: 20.94vw;
     display: flex;
     justify-content: end;
 }
 
 .btns button {
-    padding: 0 16px 0 16px;
+    padding: 0 0.83vw 0 0.83vw;
     color: white;
     border: 1px solid #543C52;
 }
@@ -728,116 +746,143 @@ main .addedCheckbox {
 }
 
 .nameLabel {
-    font-size: 16px;
-    width: 402px;
+    font-size: 0.83vw;
+    width: 20.94vw;
 }
 
 .nameInputBlock {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.31vh;
 }
 
 .GroupAvatar {
-    width: 46px;
-    height: 46px;
+    width: 2.40vw;
+    height: 4.79vh;
     border-radius: 1234px;
 }
 
 .small_logo {
-    width: 20px;
-    height: 20px;
+    width: 1.04vw;
 }
 
 .GroupAvatarChoose {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
+    gap: 2.5vh;
 }
 
 .divPhoto {
     display: flex;
-    gap: 24px;
+    gap: 1.25vw;
 }
-
 
 .choosePhoto {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.42vw;
 }
 
 .addPhoto {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0.42vw;
 }
 
 .hidden {
     display: none;
 }
 
-
-
 #sendMessage {
-    width: 40px;
-    height: 40px;
+    width: 2.08vw;
+    height: 4.08vh;
     background-color: #543C52;
     border: 0;
     border-radius: 1234px;
     cursor: pointer;
 }
 
-.sendImg {
+.tab {
+    position: relative;
+}
+
+.friends-tracker {
     width: 20px;
     height: 20px;
+    background-color: #F43F5E;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    border: 2px solid white;
+    position: absolute;
+    top: -7px;
+    left: 15px;
+}
+
+.friends-tracker {
+    width: 20px;
+    height: 20px;
+    background-color: #F43F5E;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    border: 2px solid white;
+    position: absolute;
+    top: -7px;
+    left: 15px;
+}
+
+.sendImg {
+    width: 1.04vw;
 }
 
 .avatarMessage {
-    width: 46px;
-    height: 46px;
-
+    width: 2.40vw;
+    height: 4.79vh;
     border-radius: 1234px;
 }
 
 .message {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 0.21vw;
 }
-
-
 
 .usernameAndTextcontent {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 0.21vw;
 }
 
 .datetime {
     color: #81818D;
-    font-size: 10px;
-    width: 30px;
+    font-size: 0.52vw;
+    width: 1.56vw;
 }
 
 #datetimeFromMe {
     color: #81818D;
-    font-size: 10px;
-    width: 30px;
+    font-size: 0.52vw;
+    width: 1.56vw;
 }
 
 .nonAvatarFromMe {
-    padding: 10px 23px 10px 10px;
-
+    padding: 1.04vh 1.20vw 1.04vh 0.52vw;
     display: flex;
     align-items: end;
-    border-radius: 6px;
+    border-radius: 0.31vw;
     background-color: #CDCED2;
     border: 1px solid #CDCED2;
-    padding-left: 10px;
-    gap: 10px;
-    max-width: 300px;
+    padding-left: 0.52vw;
+    gap: 0.52vw;
+    max-width: 15.63vw;
 }
 
 .messageFromMe {
@@ -846,31 +891,30 @@ main .addedCheckbox {
     width: 100%;
 }
 
-
 .authorUsename {
-    font-size: 10px;
+    font-size: 0.52vw;
     color: #543C52;
 }
 
 .messageContent {
-    font-size: 14px;
+    font-size: 0.73vw;
     color: #070A1C;
-    max-width: 150px;
+    max-width: 7.81vw;
     word-wrap: break-word;
 }
 
 .group-members {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    width: 402px;
+    gap: 0.52vh;
+    width: 20.94vw;
 }
 
 .userChosen {
     display: flex;
     align-items: center;
     width: 100%;
-    gap: 12px;
+    gap: 0.63vw;
 }
 
 .deleteMemberButtonDiv {
@@ -879,34 +923,9 @@ main .addedCheckbox {
 }
 
 .deleteMemberButton {
-    width: 20px;
+    width: 1.04vw;
 }
 
 .deleteMemberButton:hover {
     cursor: pointer;
-
-}
-
-.requests-friends {
-    width: 16px;
-    height: 16px;
-    background-color: #F43F5E;
-    border-radius: 1234px;
-    position: absolute;
-    right: 55px;
-    top: -2px;
-    border: 2px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.requests-friends p {
-    font-size: 12px;
-    color: #FFFFFF;
-    font-weight: 400;
-}
-
-.friends {
-    position: relative;
 }

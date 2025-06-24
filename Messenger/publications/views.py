@@ -17,31 +17,29 @@ class MyPublicationsView(CreateView):
     
     def form_valid(self, form):
         form.instance.author =  Profile.objects.get(user = self.request.user)
-        post = form.save()
+        if self.request.POST.get("create"):
+            print(self.request.POST.get("create"))
+            post = form.save()
 
-        print(post)
+            print(post)
 
-        # if len(form.images) >= 6:
-        #     return redirect(reverse_lazy("my_publications"))
+            # if len(form.images) >= 6:
+            #     return redirect(reverse_lazy("my_publications"))
 
-        files = self.request.FILES.getlist('images')    
+            files = self.request.FILES.getlist('images')    
 
-<<<<<<< HEAD
-        print(self.request.FILES)
-=======
+            print(self.request.FILES)
+            post_images = []
+            for file in files:
+                image = Image.objects.create(filename = str(file).split("/")[-1], file=file)
+                image.save()
 
->>>>>>> origin/mbarilo
-        post_images = []
-        for file in files:
-            image = Image.objects.create(filename = str(file).split("/")[-1], file=file)
-            image.save()
+                post_images.append(image)
 
-            post_images.append(image)
+            post.images.set(post_images)
 
-        post.images.set(post_images)
-
-        post.save()
-        print(post)
+            post.save()
+            print(post)
         return super().form_valid(form)
         
     def form_invalid(self, form):
@@ -50,11 +48,12 @@ class MyPublicationsView(CreateView):
         print(post)
         return super().form_invalid(form)
 
+
     def post(self, request, *args, **kwargs):
-        if request.POST.get("create") == None:    
-            post_now = Post.objects.get(id = int(request.POST.get("post_id")))
+        if request.POST.get("create") == None:
+            # Редактирование
+            post_now = Post.objects.get(id=int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
-<<<<<<< HEAD
             post_now.content = request.POST.get("content")
             # post_now.article_link = request.POST.get("link")
             final_list_tags = []
@@ -64,24 +63,17 @@ class MyPublicationsView(CreateView):
                     final_list_tags.append(int(element))
             print(final_list_tags)
             post_now.tags.set(final_list_tags)
-=======
-            post_now.content = request.POST.get("text")
-            # post_now.article_link = request.POST.get("link")
-            post_now.tags.set(request.POST.get("tags-list").split(","))
->>>>>>> origin/mbarilo
             post_now.images.all().delete()
             if request.FILES:
                 files = request.FILES.getlist('images')
                 for file in files:
-<<<<<<< HEAD
                     img = Image.objects.create(filename=file.name, file=file)
                     post_now.images.add(img)
-=======
-                    Image.objects.create(post=post_now, image=file)
->>>>>>> origin/mbarilo
             post_now.save()
-        return super().post(request, *args, **kwargs)
-
+            return redirect(self.success_url)  # Не вызываем super().post()
+        else:
+            # Создание (вызов родительского метода)
+            return super().post(request, *args, **kwargs)
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)  
@@ -92,8 +84,12 @@ class MyPublicationsView(CreateView):
         except:
             context['user_image'] = None
 
-<<<<<<< HEAD
         views_count = 0
+
+        user = self.request.user
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
 
         user_profile_now = Profile.objects.get(user = self.request.user)
         all_user_posts = Post.objects.filter(author = user_profile_now)
@@ -102,15 +98,9 @@ class MyPublicationsView(CreateView):
         context["readers"] = views_count
 
         context["all_readers"] = user_profile_now.post_set.all()
-=======
-        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
-
-        context["requests"] = all_not_accepted_get_requests
->>>>>>> origin/mbarilo
 
         context["profile_now"] = Profile.objects.get(user = self.request.user)
         return context
-    
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
@@ -149,11 +139,7 @@ def likes(request, post_pk):
 def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [Post.objects.get(id = post_pk)]
-<<<<<<< HEAD
         images = post[0].images.all()
-=======
-        images = Image.objects.filter(post = post[0])
->>>>>>> origin/mbarilo
         for image in images:
             post.append(image)
         return JsonResponse(serializers.serialize("json", post), safe=False)
@@ -178,3 +164,8 @@ def view_post(request, post_pk):
     post.save()
 
     return JsonResponse({"status": "success"})
+
+
+def get_all_tags(request):
+    tags = Tag.objects.all().values('id', 'name')
+    return JsonResponse(list(tags), safe=False)

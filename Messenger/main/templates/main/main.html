@@ -20,7 +20,9 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab">
+                <p class="friends-tracker">{{requests|length}}</p><img src="{% static 'images/friends.png' %}">Друзі
+            </a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -54,7 +56,7 @@
             </div>
             <div class="stats">
                 <div class="posts">
-                    <p class="count">{{ request.user.posts.all | length }}</p>
+                    <p class="count">{{ request.user.profile.post_set.all|length }}</p>
                     <p class="name">Дописи</p>
                 </div>
 
@@ -64,7 +66,9 @@
                 </div>
 
                 <div class="friends">
-                    <p class="count">{{user.friends.all | length}}</p>
+                    <p class="count">
+                        {{request.user.profile.friendship_sent_request.all.count|add:request.user.profile.friendship_accepted_request.all.count}}
+                    </p>
                     <p class="name">Друзі</p>
                 </div>
             </div>
@@ -81,7 +85,9 @@
                     <img src="{{ request.profile1.avatar_set.last.image.url }}">
                     <div class="nameSubscribers">
                         <p class="name">{{request.profile1.user.first_name}} {{request.profile1.user.last_name}}</p>
-                        <p class="subscribers">100k Підписників</p>
+                        <p class="subscribers">
+                            {{request.profile1.friendship_sent_request.all.count|add:request.profile1.friendship_accepted_request.all.count}}
+                            Підписників</p>
                     </div>
                 </div>
                 {% endfor %}
@@ -94,9 +100,8 @@
                 <a href="{% url 'chats' %}" class="showAll">Дивитись всі</a>
             </div>
             <div class="users">
-<<<<<<< HEAD
                 {% for group in groups %}
-                {% if not group.is_personal_chat %}
+                {% if group.is_personal_chat %}
                 <div class="profiles-div">
                     <div class="profles" id="{{group.id}}">
                         <img class="avatarImage" src="{{group.avatar.url}}" alt="">
@@ -107,17 +112,6 @@
                             </div>
                             <p class="text-content">{{group.chatmessage_set.last.content}}</p>
                         </div>
-=======
-                {% for message in not_viewed_messeges %}
-                <div class="user mona">
-                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatar">
-                    <div class="nameSubscribers">
-                        <div class="nameTime">
-                            <p class="name">{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
-                            <p class="time datetime">{{message.sent_at|date:'c'}}</p>
-                        </div>
-                        <p class="message">{{message.content}}</p>
->>>>>>> origin/mbarilo
                     </div>
                 </div>
                 {% endif %}

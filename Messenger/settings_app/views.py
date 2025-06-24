@@ -4,11 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
 from .forms import UserUpdateForm
 from django.views.generic import ListView
-<<<<<<< HEAD
-from authorization.models import Profile, Avatar
-=======
 from authorization.models import Profile, Avatar, Friendship
->>>>>>> origin/mbarilo
 from django.contrib import messages
 from .models import *
 from django.http import JsonResponse
@@ -57,13 +53,6 @@ class UserUpdateView(UpdateView):
         except:
             context['user_image'] = None
         
-<<<<<<< HEAD
-=======
-        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
-
-        context["requests"] = all_not_accepted_get_requests
-
->>>>>>> origin/mbarilo
         return  context
 
 def save_user_photo(request):

@@ -430,6 +430,8 @@ main .postArea .sendDiv .addEmojiBtn {
 .divAddTags {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
+
     gap: 0.52vw;
     width: 100%;
 }
@@ -512,6 +514,27 @@ main .postArea .sendDiv .addEmojiBtn {
     padding-right: 0.84vw;
 }
 
+
+.tab {
+    position: relative;
+}
+
+.friends-tracker {
+    width: 20px;
+    height: 20px;
+    background-color: #F43F5E;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    border: 2px solid white;
+    position: absolute;
+    top: -7px;
+    left: 15px;
+}
+
 .sendBtnModal {
     height: 4.20vh;
     width: 6.77vw;
@@ -535,6 +558,10 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 main .PostPostInput {
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+    height: 92.12vh;
 }
 
 main .postPostInput .post {
@@ -593,7 +620,7 @@ main .postPostInput .post .postHeader .paintingDiv {
     top: 0;
 }
 
-backgr .minilogo {
+.minilogo {
     width: 1.05vw;
     height: 1.05vw;
 }
@@ -1088,28 +1115,4 @@ input {
     background-color: white;
     border: 1px solid #81818D;
     order: 999999;
-}
-
-.requests-messeges {
-    width: 16px;
-    height: 16px;
-    background-color: #F43F5E;
-    border-radius: 1234px;
-    position: absolute;
-    right: 46px;
-    top: -4px;
-    border: 2px solid white;
-    display: none;
-    align-items: center;
-    justify-content: center;
-}
-
-.requests-messeges p {
-    font-size: 12px;
-    color: #FFFFFF;
-    font-weight: 400;
-}
-
-.chats {
-    position: relative;
 }

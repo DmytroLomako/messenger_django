@@ -6,5 +6,4 @@ from .models import VerificationCode, Profile
 
 # Register your models here.
 admin.site.register([Profile, Friendship, Avatar, VerificationCode])
-admin.site.register(VerificationCode)
-admin.site.register(Profile)
+

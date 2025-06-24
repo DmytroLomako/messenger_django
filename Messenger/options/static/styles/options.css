@@ -91,11 +91,11 @@ header a {
     text-decoration: none;
 }
 
-.main-div{
+.main-div {
     display: flex;
 }
 
-.menu-options{
+.menu-options {
     display: flex;
     flex-direction: column;
     width: 254px;
@@ -104,19 +104,19 @@ header a {
     gap: 16px;
 }
 
-.menu-urls{
+.menu-urls {
     text-decoration: none;
 }
 
-#MainText{
+#MainText {
     font-weight: 700;
 }
 
-#Alboms{
+#Alboms {
     color: #81818D;
 }
 
-.options-div{
+.options-div {
     display: flex;
     flex-direction: column;
     width: 924.5px;
@@ -126,7 +126,7 @@ header a {
     background-color: white
 }
 
-.card-profile-div{
+.card-profile-div {
     display: flex;
     flex-direction: column;
     width: 924.5px;
@@ -136,7 +136,7 @@ header a {
     border-radius: 10px;
 }
 
-.card-profile-header{
+.card-profile-header {
     display: flex;
     justify-content: space-between;
     width: 892.5px;
@@ -146,7 +146,7 @@ header a {
     margin-top: 16px;
 }
 
-.avatar-and-textdiv{
+.avatar-and-textdiv {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -155,12 +155,12 @@ header a {
     gap: 24px;
 }
 
-.avatar-and-textdiv img{
+.avatar-and-textdiv img {
     width: 96px;
     height: 96px;
 }
 
-.nickname-name{
+.nickname-name {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -169,12 +169,12 @@ header a {
     gap: 10px;
 }
 
-.nickname-text{
+.nickname-text {
     font-weight: 700;
     font-size: 24px;
 }
 
-.personal-information-div{
+.personal-information-div {
     display: flex;
     flex-direction: column;
     width: 924.5px;
@@ -184,7 +184,7 @@ header a {
     border-radius: 10px;
 }
 
-.personal-information-header{
+.personal-information-header {
     display: flex;
     justify-content: space-between;
     width: 892.5px;
@@ -194,7 +194,7 @@ header a {
     margin-top: 16px;
 }
 
-.all-inputs-div{
+.all-inputs-div {
     display: flex;
     flex-direction: column;
     width: 343px;
@@ -203,7 +203,7 @@ header a {
     margin-left: 14px;
 }
 
-.input-div{
+.input-div {
     display: flex;
     flex-direction: column;
     width: 343px;
@@ -211,13 +211,13 @@ header a {
     gap: 10px;
 }
 
-.input-div p{
+.input-div p {
     color: #81818D;
     font-weight: 400;
     font-size: 16px;
 }
 
-.name-input-div{
+.name-input-div {
     display: flex;
     align-items: center;
     width: 343px;
@@ -225,7 +225,7 @@ header a {
     gap: 10px;
 }
 
-.name-input-div input{
+.name-input-div input {
     width: 313px;
     height: 42px;
     border-radius: 10px;
@@ -234,17 +234,17 @@ header a {
     gap: 10px;
 }
 
-.name-input-div img{
+.name-input-div img {
     width: 20px;
     height: 20px;
 }
 
-.password-div{
+.password-div {
     width: 343px;
     height: 42px;
 }
 
-.password-div input{
+.password-div input {
     width: 343px;
     height: 42px;
     border-radius: 10px;
@@ -254,7 +254,7 @@ header a {
     background: url('images/notviewOption.png');
 }
 
-.signature-options-div{
+.signature-options-div {
     display: flex;
     flex-direction: column;
     width: 924.5px;
@@ -264,7 +264,7 @@ header a {
     border-radius: 10px;
 }
 
-.name-and-signature-div{
+.name-and-signature-div {
     display: flex;
     flex-direction: column;
     width: 638px;
@@ -273,7 +273,7 @@ header a {
     margin-left: 16px;
 }
 
-.name-and-surname{
+.name-and-surname {
     display: flex;
     flex-direction: column;
     width: 638px;
@@ -281,51 +281,51 @@ header a {
     gap: 16px;
 }
 
-.name-and-surname-header{
+.name-and-surname-header {
     display: flex;
     width: 160px;
     height: 20px;
     gap: 8px;
 }
 
-.name-and-surname-header p{
+.name-and-surname-header p {
     opacity: 50%;
     color: #543C52;
 }
 
-.name-and-surname-header img{
+.name-and-surname-header img {
     width: 20px;
     height: 20px;
     opacity: 50%;
 }
 
-.signature-only-div{
+.signature-only-div {
     display: flex;
     flex-direction: column;
     width: 220px;
     height: 101px;
-    gap: 16px;cd
+    gap: 16px;
 }
 
-.signature-only-div-header{
+.signature-only-div-header {
     display: flex;
     width: 210px;
     height: 20px;
     gap: 8px;
 }
 
-.signature-only-div-header p{
+.signature-only-div-header p {
     opacity: 50%;
     color: #543C52;
 }
 
-.signature-only-div-header img{
+.signature-only-div-header img {
     width: 20px;
     height: 20px;
     opacity: 50%;
 }
 
-.signature-img-div{
+.signature-img-div {
     display: flex;
     align-items: center;
     width: 220px;
@@ -333,7 +333,7 @@ header a {
     justify-content: center;
 }
 
-.signature-options-header{
+.signature-options-header {
     display: flex;
     justify-content: space-between;
     width: 892.5px;
@@ -343,7 +343,7 @@ header a {
     margin-top: 16px;
 }
 
-.edit-information-btn{
+.edit-information-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -357,7 +357,7 @@ header a {
     font-size: 14px;
 }
 
-.edit-information-btn img{
+.edit-information-btn img {
     width: 20px;
     height: 20px;
 }

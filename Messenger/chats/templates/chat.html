@@ -22,7 +22,9 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-            <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab">
+                <p class="friends-tracker">{{requests|length}}</p><img src="{% static 'images/friends.png' %}">Друзі
+            </a>
 
             <a href="{% url 'chats' %}" class="chats tab tab-now"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -129,19 +131,7 @@
                 <label for="backBtn">
                     <img src="{% static 'images/back.png' %}" class="backImg">
                 </label>
-<<<<<<< HEAD
                 <img src="{{group.avatar.url}}" class="avatarGroup">
-=======
-                {% if group.is_personal_chat %}
-                {% if group.members.profile.first == user.profile %}
-                <img src="{{group.members.last.avatar_set.last.image.url}}" class="avatarGroup">
-                {% else %}
-                <img src="{{group.members.first.avatar_set.last.image.url}}" class="avatarGroup">
-                {% endif %}
-                {% else %}
-                <img src="{{group.avatar.url}}" class="avatarGroup">
-                {% endif %}
->>>>>>> origin/mbarilo
                 <div class="nameAndMembers">
                     <p class="groupName">{{group.name}}</p>
                     <p class="membersCount">{{len_members}} учасники, 1 в мережі</p>
@@ -171,47 +161,43 @@
         <div class="mainGroup">
             {% for message in chat_messages %}
             {% if message.author == profile_now %}
-<<<<<<< HEAD
-            <div class="messagesDateWrapperDiv">
-                <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
-            </div>
-            <div class="messageFromMe message" id="message{{message.id}}" value="{{message.sent_at}}">
-=======
-
-            <div class="messageFromMe">
->>>>>>> origin/mbarilo
-                <div class="nonAvatarFromMe">
-                    <div class="usernameAndTextcontent">
-                        {% if message.attached_image %}
-                        <img src="{{ message.attached_image.url }}" class="messageImage">
-                        {% endif %}
-                        <p class="messageContent">{{message.content}}</p>
+            <div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+                </div>
+                <div class="messageFromMe message" id="message{{message.id}}" value="{{message.sent_at}}">
+                    <div class="nonAvatarFromMe">
+                        <div class="usernameAndTextcontent">
+                            {% if message.attached_image %}
+                            <img src="{{ message.attached_image.url }}" class="messageImage">
+                            {% endif %}
+                            <p class="messageContent">{{message.content}}</p>
+                        </div>
+                        <p class="datetime" id="datetimeFromMe">{{message.sent_at|date:'c'}}</p>
                     </div>
-                    <p class="datetime" id="datetimeFromMe">{{message.sent_at|date:'c'}}</p>
                 </div>
             </div>
             {% else %}
-<<<<<<< HEAD
-            <div class="messagesDateWrapperDiv">
-                <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
-            </div>
-            <div class="message" id="message{{message.id}}" value="{{message.sent_at}}">
-=======
-            <div class="message">
->>>>>>> origin/mbarilo
-                <img src="{{message.author.avatar_set.last.image.url}}" class="avatarMessage">
-                <div class="nonAvatar">
-                    <div class="usernameAndTextcontent">
-                        <p class="authorUsename">{{message.author.user.first_name}} {{message.author.user.last_name}}
-                        </p>
-                        {% if message.attached_image %}
-                        <img src="{{ message.attached_image.url }}" class="messageImage">
-                        {% endif %}
-                        <p class="messageContent">{{message.content}}</p>
+            <div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+                </div>
+                <div class="message" id="message{{message.id}}" value="{{message.sent_at}}">
+                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatarMessage">
+                    <div class="nonAvatar">
+                        <div class="usernameAndTextcontent">
+                            <p class="authorUsename">{{message.author.user.first_name}}
+                                {{message.author.user.last_name}}
+                            </p>
+                            {% if message.attached_image %}
+                            <img src="{{ message.attached_image.url }}" class="messageImage">
+                            {% endif %}
+                            <p class="messageContent">{{message.content}}</p>
 
+                        </div>
+
+                        <p class="datetime">{{message.sent_at|date:'c'}}</p>
                     </div>
-
-                    <p class="datetime">{{message.sent_at|date:'c'}}</p>
                 </div>
             </div>
             {% endif %}
@@ -253,10 +239,9 @@
                 <a class="see-all" href="">Дивитись всі</a>
             </div>
             <div class="profiles-all-div">
-<<<<<<< HEAD
                 {% for group in groups %}
                 {% if group.is_personal_chat %}
-                <div class="profiles-div">
+                <div class="profiles-div chat{{group.id}}">
                     <div class="profles" id="{{group.id}}">
                         <img class="avatarImage" src="{{group.avatar.url}}" alt="">
                         <div class="profiles-text">
@@ -265,15 +250,6 @@
                                 <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
                             </div>
                             <p class="text-content">{{group.chatmessage_set.last.content}}</p>
-=======
-                {% for message in not_viewed_messeges %}
-                <div class="profles" id="{{message.group.id}}">
-                    <img class="avatar" src="{{message.author.avatar_set.last.image.url}}" alt="">
-                    <div class="profiles-text">
-                        <div class="header-time-prfl-text">
-                            <p>{{message.author.user.first_name}} {{message.author.user.last_name}}</p>
-                            <p class="time-text datetime">{{message.sent_at|date:'c'}}</p>
->>>>>>> origin/mbarilo
                         </div>
                     </div>
                 </div>
@@ -293,7 +269,7 @@
 
                 {% for group in groups %}
                 {% if not group.is_personal_chat %}
-                <div class="profiles-div">
+                <div class="profiles-div chat{{group.id}}">
                     <div class="profles" id="{{message.group.id}}">
                         <img class="avatarImage" src="{{group.avatar.url}}" alt="">
                         <div class="profiles-text" id="{{group.id}}">

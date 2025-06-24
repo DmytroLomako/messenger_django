@@ -7,7 +7,7 @@ from publications.forms import CreatePostForm
 from django.urls import reverse_lazy
 from authorization.models import Profile, Avatar, Friendship
 from django.contrib.auth.models import User
-from chats.models import ChatMessage
+from chats.models import ChatMessage, ChatGroup
 
 # Create your views here.
 
@@ -59,19 +59,18 @@ class MainView(CreateView):
         all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
 
         context["requests"] = all_not_accepted_get_requests
-<<<<<<< HEAD
 
         all_user_posts = Post.objects.filter(author = user_profile_now)
 
         views_count = 0
+
+        context["groups"] = ChatGroup.objects.filter(members = user_profile_now)
 
         for post in all_user_posts:
             views_count += len(post.views.all())
         context["readers"] = views_count
 
         context["all_readers"] = user_profile_now.post_set.all()
-=======
->>>>>>> origin/mbarilo
 
         return context
     

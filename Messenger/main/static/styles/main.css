@@ -89,10 +89,6 @@ header a {
     text-decoration: none;
 }
 
-.friends{
-    position: relative;
-}
-
 main {
     padding-left: 4.20vw;
     display: flex;
@@ -195,7 +191,7 @@ main .requests {
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     width: 18.43vw;
-    height: 26.13vh;
+    max-height: 26.13vh;
     display: flex;
     margin-top: 0.84vh;
     box-sizing: border-box;
@@ -293,12 +289,35 @@ main .requests .users .user img {
     display: none;
 }
 
+
+
+.tab {
+    position: relative;
+}
+
+.friends-tracker {
+    width: 20px;
+    height: 20px;
+    background-color: #F43F5E;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    border: 2px solid white;
+    position: absolute;
+    top: -7px;
+    left: 15px;
+}
+
+
 main .messages {
     background-color: white;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     width: 18.43vw;
-    height: 26.13vh;
+    max-height: 26.13vh;
     display: flex;
     margin-top: 0.84vh;
     box-sizing: border-box;
@@ -321,6 +340,14 @@ main .messages .blockName {
     width: 16.75vw;
     margin-left: 0.84vw;
 
+}
+
+main .PostPostInput {
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 16px;
+    height: 92.12vh;
 }
 
 main .messages .blockName .showAll {
@@ -347,6 +374,7 @@ main .messages .users {
     height: 17.84vh;
     display: flex;
     flex-direction: column;
+    gap: 1.68vh;
     overflow-y: scroll;
     overflow-x: hidden;
 }
@@ -535,8 +563,73 @@ main .postArea .sendDiv .sendBtn #smallImage {
     height: 2.10vh;
 }
 
-main .PostPostInput {
-    overflow-y: scroll;
+.profiles-all-div {
+    display: flex;
+    flex-direction: column;
+    width: 18.28vw;
+    height: 28.70vh;
+    gap: 0.42vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.profiles-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.12vw;
+    height: 5.74vh;
+    gap: 1.48vh;
+}
+
+.profles {
+    display: flex;
+    align-items: center;
+    width: 16.46vw;
+    height: 4.26vh;
+    gap: 0.33vw;
+}
+
+.proflesPersonal {
+    display: flex;
+    align-items: center;
+    width: 16.46vw;
+    height: 4.26vh;
+    gap: 0.33vw;
+}
+
+.profiles-text {
+    display: flex;
+    flex-direction: column;
+    width: 13.44vw;
+    height: 4.07vh;
+    gap: 0.19vh;
+    cursor: pointer;
+}
+
+.profiles-text p {
+    font-size: 0.73vw;
+    font-weight: 400;
+}
+
+.header-time-prfl-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 13.44vw;
+    height: 1.67vh;
+}
+
+.time-text {
+    font-weight: 400;
+    font-size: 0.63vw;
+    color: #81818D;
+}
+
+.avatarImage {
+    width: 2.45vw;
+    height: 4.26vh;
+    border-radius: 1234px;
 }
 
 main .postPostInput .post {
@@ -548,6 +641,23 @@ main .postPostInput .post {
     border-radius: 0.52vw;
     padding-left: 2.10vh;
     margin-bottom: 0.79vh;
+}
+
+.profiles-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18.12vw;
+    height: 5.74vh;
+    gap: 1.48vh;
+}
+
+.profles {
+    display: flex;
+    align-items: center;
+    width: 16.46vw;
+    height: 4.26vh;
+    gap: 0.33vw;
 }
 
 main .postPostInput .post .postHeader {
@@ -756,11 +866,7 @@ main .responses .response .mainResponse {
     flex-direction: column;
 }
 
-.PostPostInput {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    height: 94.12vh;
-}
+
 
 .likesImg {
     height: 2.10vh;
@@ -1079,24 +1185,4 @@ input {
     background-color: white;
     border: 1px solid #81818D;
     order: 999999;
-}
-
-.requests-friends{
-    width: 16px;
-    height: 16px;
-    background-color: #F43F5E;
-    border-radius: 1234px;
-    position: absolute;
-    right: 55px;
-    top: -2px;
-    border: 2px solid white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.requests-friends p{
-    font-size: 12px;
-    color: #FFFFFF;
-    font-weight: 400;
 }
