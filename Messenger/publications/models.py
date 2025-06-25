@@ -12,6 +12,7 @@ class Post(models.Model):
     views = models.ManyToManyField(Profile, related_name='posts_viewed', blank=True)
     likes = models.ManyToManyField(Profile, related_name='posts_liked', blank=True)
     tags = models.ManyToManyField("Tag", blank=True)
+    topic = models.CharField(max_length=255)
 
     def __str__(self):
         return self.title

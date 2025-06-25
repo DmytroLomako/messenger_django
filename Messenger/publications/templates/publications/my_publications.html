@@ -11,6 +11,7 @@
 {% endblock %}
 
 {% block content %}
+<input type="hidden" id="cancelLinkInput" value="{% static 'images/cancel_link.png' %}">
 <header>
     <img src="{% static 'images/logo.png' %}" class="logo">
     <div class="tabsExit">
@@ -306,7 +307,11 @@
                     </div>
                 </div>
 
-
+                {% elif field.name == 'links' %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div style="display: flex; align-items: center;" class="field">{{ field }} <img src="{% static 'images/add_tag.png' %}" class="imageLinks"></div>
+                </div>
 
                 {% else %}
                 <div class="input-div">
@@ -378,7 +383,11 @@
                             placeholder="Напишить назву публікації"></div>
                 </div>
 
-
+                {% elif field.name == 'links' %}
+                <div class="input-div">
+                    <div class="label">{{ field.label_tag }}</div>
+                    <div style="display: flex; align-items: center;" class="field">{{ field }}</div>
+                </div>
 
                 {% else %}
                 <div class="input-div">

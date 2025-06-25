@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post
+from .models import Post, Link
 
 
 class MultipleFileInput(forms.ClearableFileInput):
@@ -19,18 +19,25 @@ class MultipleFileField(forms.ImageField):
         return result
 
 class CreatePostForm(forms.ModelForm):
+    links = forms.CharField(required=True, widget=forms.TextInput(attrs={"placeholder": "Напишіть посилання до публікації"}))
     
     class Meta():
         model = Post
-        fields = ['title', 'tags', 'content']   
+        fields = ['title', 'topic', 'tags', 'content']   
 
     def __init__(self, *args, **kwargs):
         super(CreatePostForm, self).__init__(*args, **kwargs)
         self.fields['title'].label = "Назва публікації"
         self.fields["content"].label =""
+        self.fields["links"].label = "Посилання"
+        self.fields["topic"].label = "Тема публікації"
 
-
-        self.fields["title"].widget = forms.TextInput(attrs={"placeholder": "Напишить назву публікації"})
-        self.fields["content"].widget = forms.Textarea(attrs={"placeholder": "Напишить текст до публікації"})
+        self.fields["title"].widget = forms.TextInput(attrs={"placeholder": "Напишіть назву публікації"})
+        self.fields["content"].widget = forms.Textarea(attrs={"placeholder": "Напишіть текст до публікації"})
+        self.fields["topic"].widget = forms.TextInput(attrs={"placeholder": "Напишіть тему публікації"})
         
     images = MultipleFileField(required=False)
+    
+    def save(self, commit=True):
+        post = super().save(commit=commit)
+        return post

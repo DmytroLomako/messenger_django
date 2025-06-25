@@ -450,6 +450,11 @@ main .postArea .sendDiv .addEmojiBtn {
     height: 2.31vh;
 }
 
+.imageLinks, .cancelLink{
+    width: 1.35vw;
+    margin-left: 0.45vw;
+}
+
 .imageTagsRedact {
     width: 1.05vw;
     height: 2.31vh;
@@ -851,6 +856,7 @@ input {
 
 .publication-redact {
     width: 40.68vw;
+    height: 73.452vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
