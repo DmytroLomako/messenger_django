@@ -9,7 +9,7 @@ class ChatGroup(models.Model):
     members = models.ManyToManyField(Profile, blank=True)
     is_personal_chat = models.BooleanField(default = False)
     admin = models.ForeignKey(Profile, on_delete= models.CASCADE, related_name= "administered_group")
-    avatar = models.ImageField(upload_to= "groups_avatars/", default= "groups_avatars/default.png")
+    avatar = models.ImageField(upload_to= "images/group_avatars", default= "groups_avatars/default.png")
 
     def __str__(self):
         return f'Група '

@@ -116,7 +116,7 @@ main .miniProfile {
 }
 
 main .miniProfile img {
-    width: 5.04vw;
+    width: 10.07vh;
     height: 10.07vh;
 }
 
@@ -311,7 +311,6 @@ main .requests .users .user img {
     left: 15px;
 }
 
-
 main .messages {
     background-color: white;
     border: 1px solid #CDCED2;
@@ -340,6 +339,10 @@ main .messages .blockName {
     width: 16.75vw;
     margin-left: 0.84vw;
 
+}
+
+.images img {
+    border-radius: 10px;
 }
 
 main .PostPostInput {
@@ -628,7 +631,7 @@ main .postArea .sendDiv .sendBtn #smallImage {
 
 .avatarImage {
     width: 2.45vw;
-    height: 4.26vh;
+    height: 2.45vw;
     border-radius: 1234px;
 }
 

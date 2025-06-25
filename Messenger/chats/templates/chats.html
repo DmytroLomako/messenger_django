@@ -22,7 +22,9 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab">
+                <p class="friends-tracker">{{requests|length}}</p><img src="{% static 'images/friends.png' %}">Друзі
+            </a>
 
             <a href="{% url 'chats' %}" class="chats tab tab-now"><img src="{% static 'images/chat.png' %}">Чати</a>
 
@@ -149,7 +151,15 @@
                 {% if group.is_personal_chat %}
                 <div class="profiles-div">
                     <div class="profles" id="{{group.id}}">
+                        {% if group.avatar.url == user.profile.avatar_set.last.image.url %}
+                        {% if group.members.last.avatar_set.last.url == user.profile.avatar_set.last.image.url %}
                         <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% else %}
+                        <img class="avatarImage" src="{{group.members.last.avatar_set.last.image.url}}" alt="">
+                        {% endif %}
+                        {% else %}
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% endif %}
                         <div class="profiles-text">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>

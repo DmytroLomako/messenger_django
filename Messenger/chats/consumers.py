@@ -40,7 +40,8 @@ class ChatConsumer(AsyncWebsocketConsumer):
                 "first_name": first_name,
                 "last_name": last_name,
                 "user_avatar": user_image,
-                "date_time": saved_message.sent_at
+                "date_time": saved_message.sent_at,
+                "atteched_image": image
             }
         )
 
@@ -53,6 +54,9 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_dict['last_name'] = last_name
         text_data_dict['user_avatar'] = user_avatar  
         text_data_dict["date_time"] = event["date_time"].isoformat()
+        print(event["atteched_image"])
+        text_data_dict["atteched_image"] = event["atteched_image"]
+        
 
         form = MessageForm(text_data_dict)
         if form.is_valid():

@@ -48,35 +48,6 @@ class FriendsView(TemplateView):
 
         context['recomended_friends'] = final_recomended
 
-        # user_object = User.objects.get(username = self.request.user)
-        # friends = []
-        # all_friends = []
-        # requests = []
-        # all_requests = []
-        # recomended_friends = []
-
-        # for friend_profile in user_object.friends.all():
-        #     all_friends.append(friend_profile.user)
-        #     if len(friends) < 6:
-        #         friends.append(friend_profile.user)
-        # for user in user_object.profile.friends.all():
-        #     all_friends.append(user)
-        #     if len(requests) < 6:
-        #         friends.append(user)
-        # context["friends"] = friends
-        # for user in user_object.requests.all():
-        #     all_requests.append(user.user)
-        #     if len(requests) < 6:
-        #         requests.append(user.user)
-        # context["requests"] = requests
-        # user_requests = list(user_object.profile.requests.all())
-        # print(context["requests"])
-        # for user in all_users:
-        #     if user != user_object and user not in all_friends and user not in all_requests and user not in user_requests:
-        #         recomended_friends.append(user)
-        #         if len(recomended_friends) == 6:
-        #             break
-        # context['recomended_friends'] = recomended_friends
         return context
     
     def dispatch(self, request, *args, **kwargs):
@@ -118,8 +89,34 @@ class RequestsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        user_object = User.objects.get(username = self.request.user)
-        context["requests"] = user_object.profile.requests.all()
+        all_accepted = []
+
+        user = self.request.user
+        
+        all_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = True)
+        all_accepted_sent_requests = Friendship.objects.filter(profile1 = Profile.objects.get(user = user), accepted = True)
+        for request in all_accepted_get_requests:
+            all_accepted.append(request)
+        for request in all_accepted_sent_requests:
+            all_accepted.append(request)
+
+        context["friends"] = all_accepted
+
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
+
+        recomended = Profile.objects.all()
+
+        final_recomended = []
+
+        for profile in recomended:
+            print(profile.id)
+            print(Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2"))
+            if profile != Profile.objects.get(user = user) and (profile.id,) not in Friendship.objects.filter(profile2 = Profile.objects.get(user = user)).values_list("profile1") and (profile.id,) not in Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2") and (profile.id,) not in all_not_accepted_get_requests.values_list("profile1"):
+                final_recomended.append(profile)
+
+        context['recomended_friends'] = final_recomended
 
         return context
 
@@ -129,35 +126,36 @@ class RecomendationsView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
-        all_users = list(User.objects.all())
-        user_object = User.objects.get(username = self.request.user)
-        friends = []
-        all_friends = []
-        requests = []
-        all_requests = []
-        recomended_friends = []
-        for friend_profile in user_object.friends.all():
-            all_friends.append(friend_profile.user)
-            if len(friends) < 6:
-                friends.append(friend_profile.user)
-        for user in user_object.profile.friends.all():
-            all_friends.append(user)
-            if len(requests) < 6:
-                friends.append(user)
-        context["friends"] = friends
-        for user in user_object.requests.all():
-            all_requests.append(user.user)
-            if len(requests) < 6:
-                requests.append(user.user)
-        context["requests"] = requests
-        user_requests = list(user_object.profile.requests.all())
-        print(context["requests"])
-        for user in all_users:
-            if user != user_object and user not in all_friends and user not in all_requests and user not in user_requests:
-                recomended_friends.append(user)
-                if len(recomended_friends) == 6:
-                    break
-        context['recomended_friends'] = recomended_friends
+        all_accepted = []
+
+        user = self.request.user
+        
+        all_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = True)
+        all_accepted_sent_requests = Friendship.objects.filter(profile1 = Profile.objects.get(user = user), accepted = True)
+        for request in all_accepted_get_requests:
+            all_accepted.append(request)
+        for request in all_accepted_sent_requests:
+            all_accepted.append(request)
+
+        context["friends"] = all_accepted
+
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
+
+        recomended = Profile.objects.all()
+
+        final_recomended = []
+
+        for profile in recomended:
+            print(profile.id)
+            print(Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2"))
+            if profile != Profile.objects.get(user = user) and (profile.id,) not in Friendship.objects.filter(profile2 = Profile.objects.get(user = user)).values_list("profile1") and (profile.id,) not in Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2") and (profile.id,) not in all_not_accepted_get_requests.values_list("profile1"):
+                final_recomended.append(profile)
+
+        context['recomended_friends'] = final_recomended
+
+        return context
 
         return context
     
@@ -166,17 +164,36 @@ class AllFriendsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-
-        user_object = User.objects.get(username = self.request.user)
-        friends = []
-        for friend in user_object.friends.all():
-            friends.append(friend.user)
-        for friend in user_object.profile.friends.all():
-            friends.append(friend)
-
-
         
-        context["friends"] = friends
+        all_accepted = []
+
+        user = self.request.user
+        
+        all_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = True)
+        all_accepted_sent_requests = Friendship.objects.filter(profile1 = Profile.objects.get(user = user), accepted = True)
+        for request in all_accepted_get_requests:
+            all_accepted.append(request)
+        for request in all_accepted_sent_requests:
+            all_accepted.append(request)
+
+        context["friends"] = all_accepted
+
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
+
+        recomended = Profile.objects.all()
+
+        final_recomended = []
+
+        for profile in recomended:
+            print(profile.id)
+            print(Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2"))
+            if profile != Profile.objects.get(user = user) and (profile.id,) not in Friendship.objects.filter(profile2 = Profile.objects.get(user = user)).values_list("profile1") and (profile.id,) not in Friendship.objects.filter(profile1 = Profile.objects.get(user = user)).values_list("profile2") and (profile.id,) not in all_not_accepted_get_requests.values_list("profile1"):
+                final_recomended.append(profile)
+
+        context['recomended_friends'] = final_recomended
+
         return context
     
 def request_friend(request, pk):
@@ -225,6 +242,11 @@ class FriendView(TemplateView):
         print(Profile.objects.get(id = int(self.kwargs['friend_pk'])))
         friend = Profile.objects.get(id = int(self.kwargs['friend_pk']))
         context["friend"] = friend
+        all_user_posts = Post.objects.filter(author = Profile.objects.get(user = self.request.user))
+        views_count = 0
+        for post in all_user_posts:
+            views_count += len(post.views.all())
+        context["readers"] = views_count
 
         friend_posts = reversed(Post.objects.filter(author = friend).all())
         context["friend_posts"] = friend_posts

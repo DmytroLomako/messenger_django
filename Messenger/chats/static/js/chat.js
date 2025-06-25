@@ -16,7 +16,7 @@ let goToBack = document.querySelector(".skipBtn-2-step")
 let createGroupForm = document.querySelector("#create_group")
 
 let groupList = document.querySelectorAll(".profles")
-const countRequestsFriends = document.querySelector(".count-requests-friends");
+const countRequestsFriends = document.querySelector(".friends-tracker");
 const requestFriendsDiv = document.querySelector(".requests-friends")
 
 
@@ -132,7 +132,8 @@ for (let dt of datesAndTimes) {
 }
 
 if (countRequestsFriends.textContent == 0) {
-    requestFriendsDiv.style.display = "none"
+    countRequestsFriends.style.display = "none"
 } else {
-    requestFriendsDiv.style.display = "flex"
+    countRequestsFriends.style.display = "flex"
 }
+

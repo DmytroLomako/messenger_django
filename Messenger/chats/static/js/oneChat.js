@@ -26,12 +26,70 @@ if (document.querySelector(".friends-tracker").textContent == "0") {
 socket.addEventListener("message", function (event) {
     const messageObject = JSON.parse(event.data)
     const messageElem = document.createElement("div")
-    messageElem.classList = "message"
+    messageElem.classList = "fullMessage"
     let dateTime = new Date(messageObject['date_time'])
     let dateTimeLocal = dateTime.toLocaleString()
+    if (messageObject["first_name"] == document.querySelector(".authorId").id) {
 
-    messageElem.innerHTML = `<div class="message">
-                <img src="${messageObject["user_avatar"]}" class="avatarMessage">
+        if (messageObject["atteched_image"]) {
+            messageElem.innerHTML = `<div class="fullMessage">
+            <div class="messagesDateWrapperDiv">
+            <p id="date{{message.id}}" class="hidden messagesDateWrapper">${dateTimeLocal}</p>
+            </div>
+            <div class="messageFromMe message" id="message{{message.id}}" value="${dateTimeLocal}">
+            <div class="nonAvatarFromMe">
+            <div class="usernameAndTextcontent">
+            
+            <img src="${messageObject["atteched_image"]}" class="messageImage">
+            
+            <p class="messageContent">${messageObject["message"]}</p>
+            </div>
+            <p class="datetime" id="datetimeFromMe">${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}</p>
+            </div>
+            </div>
+            </div>`
+        } else {
+            messageElem.innerHTML = `<div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">${dateTimeLocal}</p>
+                </div>
+                <div class="messageFromMe message" id="message{{message.id}}" value="${dateTimeLocal}">
+                    <div class="nonAvatarFromMe">
+                        <div class="usernameAndTextcontent">
+                     
+                          
+                            <p class="messageContent">${messageObject["message"]}</p>
+                        </div>
+                        <p class="datetime" id="datetimeFromMe">${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}</p>
+                    </div>
+                </div>
+            </div>`
+        }
+    } else {
+
+        if (messageObject["atteched_image"]) {
+            messageElem.innerHTML = `<div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">${dateTime}/p>
+                </div>
+                <div class="message" id="message{{message.id}}" value="{{message.sent_at}}">
+                    <img src="${messageObject["user_avatar"]}" class="avatarMessage">
+                    <div class="nonAvatar">
+                        <div class="usernameAndTextcontent">
+                            <p class="authorUsename">${messageObject["first_name"]} ${messageObject["last_name"]}
+                            </p>
+                            <img src="${messageObject["atteched_image"]}" class="messageImage">
+                            <p class="messageContent">${messageObject["message"]}</p>
+
+                        </div>
+
+                        <p class="datetime">${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}</p>
+                    </div>
+                </div>
+            </div>`
+        } else {
+            messageElem.innerHTML = `<div class="message">
+            <img src="${messageObject["user_avatar"]}" class="avatarMessage">
                 <div class="nonAvatar">
                     <div class = "usernameAndTextcontent">
                         <p class="authorUsename">${messageObject["first_name"]} ${messageObject["last_name"]}</p>
@@ -40,19 +98,23 @@ socket.addEventListener("message", function (event) {
                     <p class="datetime">${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}</p >
                 </div >
             </div > `
-    messages.append(messageElem)
-    const datesAndTimes = document.querySelectorAll('.datetime')
-    // Перебираємо отримані HTML-елементи з датами та часом
-    for (let dt of datesAndTimes) {
-        // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
-        let dateAndTime = new Date(dt.textContent)
-        // переробляємо час у локальний час користувача
-        let dateAndTimeLocal = dateAndTime.toLocaleString()
-        // вказуємо час повідомлення
-        dt.textContent = `${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}`
+        }
+
     }
+    messages.insertBefore(messageElem, document.querySelectorAll(".fullMessage")[0])
+    const datesAndTimes = document.querySelectorAll('.datetime')[document.querySelectorAll('.datetime').length - 1]
+    // Перебираємо отримані HTML-елементи з датами та часом
+
+    // Створюємо новий об'єкт класу "Date" з даними дати у фоматі iso
+    let dateAndTime = new Date(datesAndTimes.textContent)
+    // переробляємо час у локальний час користувача
+    let dateAndTimeLocal = dateAndTime.toLocaleString()
+    // вказуємо час повідомлення
+    datesAndTimes.textContent = `${dateTimeLocal.split(",")[1].split(":")[0]}:${dateTimeLocal.split(",")[1].split(":")[1]}`
+
     scrollToBottom(messages)
     // window.location.reload()
+
 })
 
 scrollToBottom(messages)
@@ -141,14 +203,13 @@ let listFiles = []
 let listFilesRedact = []
 
 function updateDeleteButtons() {
-    let deleteBtnsArray = document.querySelectorAll(".deleteBtn")
-    deleteBtnsArray.forEach(element => {
-        element.addEventListener("click", () => {
-            listFiles = []
-            document.querySelector(".divImageDelete").remove()
-            document.querySelector(".inputAndImages").style.backgroundColor = "#FFFFFF"
-        })
-    });
+    let deleteBtnsArray = document.querySelector(".deleteBtn")
+    deleteBtnsArray.addEventListener("click", () => {
+        listFiles = []
+        document.querySelector(".divImageDelete").remove()
+        document.querySelector(".inputAndImages").style.backgroundColor = "#FFFFFF"
+    })
+
 }
 
 function displayImageAbsolute(input, div, filesList) {
@@ -168,6 +229,7 @@ function displayImageAbsolute(input, div, filesList) {
     divImage.id = (0 + len)
     filesList = input.files[0]
     createImage.id = "imageForPost"
+    listFiles = input.files[0]
     if (file) {
         createImage.setAttribute('src', URL.createObjectURL(file));
         divImage.appendChild(createImage)
@@ -198,19 +260,40 @@ async function fileToBase64(file) {
 }
 
 form.addEventListener("submit", async (event) => {
-
-    const fileInput = document.querySelector(".sendImg2")
-    let dt = new DataTransfer();
-    listFiles.forEach(f => dt.items.add(f));
-    fileInput.files = dt.files;
-
     event.preventDefault()
+    const fileInput = document.querySelector(".sendImg2")
+    try {
+        let dt = new DataTransfer();
+        Array(listFiles).forEach(f => dt.items.add(f));
+        fileInput.files = dt.files;
+    } catch {
+
+        listFiles = []
+        let dt = new DataTransfer();
+        fileInput.files = dt.files
+    }
+
+
+
+
+
+
+
+
     const message = document.getElementById("id_message").value.trim()
 
     if (!message) return
 
     let imageData = null
     if (fileInput.files.length > 0) {
+
+        try {
+            document.querySelector(".divImageDelete").remove()
+            document.querySelector(".inputAndImages").style.backgroundColor = "#FFFFFF"
+        }
+        catch {
+            console.log("")
+        }
         try {
             imageData = await fileToBase64(fileInput.files[0])
         } catch (error) {
@@ -218,6 +301,7 @@ form.addEventListener("submit", async (event) => {
             return
         }
     }
+
     socket.send(JSON.stringify({
         message: message,
         images: imageData
@@ -234,27 +318,6 @@ let group_id = document.querySelector(".group_id").value
 
 let choosedUsers = document.querySelector(".choosedUsers")
 
-create_group.addEventListener("submit", (event) => {
-    addedCheckbox.forEach(element => {
-        if (element.checked) {
-            choosedUsers.value += `${element.value}_`
-        }
-    })
-
-    let input_find = document.querySelector(".input_find").value
-
-    $.ajax({
-        url: `add/${arrayOfUsers}/${group_id}`,
-        type: 'POST',
-        data: {
-            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-            "group_name": input_find
-        },
-        success: function (response) {
-            console.log(response)
-        }
-    })
-})
 
 let profilesList = document.querySelectorAll(".profile")
 
@@ -375,3 +438,25 @@ editBtns.addEventListener("click", () => {
     document.querySelector(".NameTitle").textContent = "Редагування групи"
 })
 
+
+create_group.addEventListener("submit", (event) => {
+    addedCheckbox.forEach(element => {
+        if (element.checked) {
+            choosedUsers.value += `${element.value}_`
+        }
+    })
+
+    let input_find = document.querySelector(".input_find").value
+
+    $.ajax({
+        url: `add/${arrayOfUsers}/${group_id}`,
+        type: 'POST',
+        data: {
+            'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+            "group_name": input_find
+        },
+        success: function (response) {
+            console.log(response)
+        }
+    })
+})

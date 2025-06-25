@@ -41,7 +41,8 @@
     <div class="main-div">
         <div class="menu-friends">
             <a class="menu-urls" id="Friends" href="{% url 'friends' %}">Головна</a>
-            <a class="menu-urls" id="Requests" href="{% url 'requests' %}"><u id="MainText" title="Подчеркнутый текст">Запити</u></a>
+            <a class="menu-urls" id="Requests" href="{% url 'requests' %}"><u id="MainText"
+                    title="Подчеркнутый текст">Запити</u></a>
             <a class="menu-urls" id="Recomendations" href="{% url 'recomendations' %}">Рекомендації</a>
             <a class="menu-urls" id="AllFriends" href="{% url 'all_friends' %}">Всі друзі</a>
         </div>
@@ -53,23 +54,26 @@
                 </div>
                 <div class="requests-friends-div">
                     {% for request in requests %}
-                        <div class="friend-profile">
-                            <div class="avatar-nickname-div">
-                                {% if request.profile.photo.url != None %}
-                                    <img class="avatar-images" src="{{ request.profile.photo.url }}" alt="">
-                                {% else %}
-                                    <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
-                                {% endif %}
-                                <div class="nickname-name">
-                                    <p class="nickname-text">{{ request.first_name }} {{ request.last_name }}</p>
-                                    <p>@{{ request.username }}</p>
-                                </div>
-                            </div>
-                            <div class="buttons-div-requests">
-                                <button class="accept-button">Підтвердити</button>
-                                <button class="delete-button">Видалити</button>
+                    <div class="friend-profile">
+                        <input type="hidden" id="{{request.id}}" class="friendship_id">
+                        <div class="avatar-nickname-div">
+                            {% if request.profile1.avatar_set.last.image != None %}
+                            <img class="avatar-images" src="{{ request.profile1.avatar_set.last.image.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                            {% endif %}
+                            <div class="nickname-name">
+                                <p class="nickname-text">{{ request.profile1.user.first_name }}
+                                    {{request.profile1.user.last_name }}</p>
+                                <p>@{{ request.profile1.user.username }}</p>
                             </div>
                         </div>
+                        <div class="buttons-div-requests">
+                            <button class="accept-button"
+                                value="{% url 'accept_friend' request.id %}">Підтвердити</button>
+                            <button class="delete-button" value="">Видалити</button>
+                        </div>
+                    </div>
                     {% endfor %}
                 </div>
             </div>

@@ -82,7 +82,7 @@
             <div class="users">
                 {% for request in requests %}
                 <div class="user">
-                    <img src="{{ request.profile1.avatar_set.last.image.url }}">
+                    <img src="{{ request.profile1.avatar_set.last.image.url }}" class="avatar">
                     <div class="nameSubscribers">
                         <p class="name">{{request.profile1.user.first_name}} {{request.profile1.user.last_name}}</p>
                         <p class="subscribers">
@@ -190,7 +190,7 @@
 
                 <div class="images">
                     {% for img in post.images.all %}
-                    <img src="{{ img.file.url }}" class="postImage1">
+                    <img src="{{ img.file.url }}">
                     {% endfor %}
                 </div>
             </div>

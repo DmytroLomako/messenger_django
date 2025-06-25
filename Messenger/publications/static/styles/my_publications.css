@@ -588,7 +588,7 @@ main .postPostInput .post .postHeader {
 }
 
 main .postPostInput .post .postHeader .avatar {
-    width: 2.41vw;
+    width: 4.83vh;
     height: 4.83vh;
 }
 
@@ -695,6 +695,13 @@ main .postMain .images {
     gap: 0.84vw;
     margin-top: 1.68vh;
 }
+
+main .postMain .images img {
+    border-radius: 10px;
+}
+
+
+
 
 main .postMain .images .postImage1 {
     width: 22.73vw;
@@ -851,6 +858,7 @@ input {
 
 .publication-redact {
     width: 40.68vw;
+    max-height: 73.452vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;

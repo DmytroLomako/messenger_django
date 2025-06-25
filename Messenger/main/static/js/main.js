@@ -55,6 +55,26 @@ for (let count = 0; count < dotsMenu.length; count++) {
     });
 }
 
+let countImagesPost = 0
+let postsArray = document.querySelectorAll('.post')
+postsArray.forEach(element => {
+    let imagesPosts = document.querySelectorAll(`#post${element.getAttribute("value")} .postMain .images img`)
+    imagesPosts.forEach(element => {
+        if (countImagesPost < 3) {
+            element.classList.add("postImage3")
+        } else if (countImagesPost >= 2 && countImagesPost < 5) {
+            element.classList.add("postImage1")
+        } else if (countImagesPost >= 5 && countImagesPost < 8) {
+            element.classList.add("postImage3")
+        } else if (countImagesPost >= 8) {
+            countImagesPost = 0
+        }
+        countImagesPost++
+    })
+    countImagesPost = 0
+})
+
+
 if (document.querySelector(".user") == null) {
     document.querySelectorAll(".users")[0].style.height = "0"
     console.log(document.querySelectorAll(".users"))

@@ -480,89 +480,137 @@ editBtns.forEach((button) => {
     });
 });
 
+let countImagesPost = 0
+let postsArray = document.querySelectorAll('.post')
+postsArray.forEach(element => {
+    let imagesPosts = document.querySelectorAll(`#post${element.getAttribute("value")} .postMain .images img`)
+    imagesPosts.forEach(element => {
+        if (countImagesPost < 3) {
+            element.classList.add("postImage3")
+        } else if (countImagesPost >= 2 && countImagesPost < 5) {
+            element.classList.add("postImage1")
+        } else if (countImagesPost >= 5 && countImagesPost < 8) {
+            element.classList.add("postImage3")
+        } else if (countImagesPost >= 8) {
+            countImagesPost = 0
+        }
+        countImagesPost++
+    })
+    countImagesPost = 0
+})
+
+
 const addTagRedact = document.getElementById("add-tag-btn-redact");
 const inputAddTagRedact = document.querySelector(".inputAddTagRedact");
 const imageTagsRedact = document.querySelector(".imageTagsRedact");
 const divAddTagsRedact = document.querySelector(".beforeBttonRedact");
 const selectTagsRedact = document.querySelector("#tagsHiddenRedact select");
 const optionTagsRedact = document.querySelectorAll("#tagsHiddenRedact select option");
-addTagRedact.addEventListener("click", function () {
-    if (!inputAddTagRedact || inputAddTagRedact.style.display === "none") {
+if (addTagRedact) {
+    addTagRedact.addEventListener("click", () => {
+
+        const addTagRedact = document.getElementById("add-tag-btn-redact");
+        const inputAddTagRedact = document.querySelector(".inputAddTagRedact");
+        const imageTagsRedact = document.querySelector(".imageTagsRedact");
+        const divAddTagsRedact = document.querySelector(".beforeBttonRedact");
+        const selectTagsRedact = document.querySelector("#tagsHiddenRedact select");
+        const optionTagsRedact = document.querySelectorAll("#tagsHiddenRedact select option");
+        // Создаем input для тегов, если его нет
         if (!inputAddTagRedact) {
-            let input = document.createElement("input");
+            const input = document.createElement("input");
             input.type = "text";
             input.placeholder = "#";
             input.classList.add("inputAddTagRedact");
             divAddTagsRedact.appendChild(input);
+            input.style.display = "block";
         } else {
-            inputAddTagRedact.style.display = "block";
-        }
-        imageTagsRedact.src = "/static/images/submit.png";
-        if (inputAddTagRedact) inputAddTagRedact.value = "";
-    } else {
-        let text = inputAddTagRedact.value;
-        if (!text.includes("#")) text = "#" + text;
-
-        if (text !== "#") {
-            let tagDiv = document.createElement("div");
-            tagDiv.classList.add("hashTag");
-            let tagText = document.createElement("p");
-            tagText.classList.add("hashTagText");
-            tagText.textContent = text;
-
-            let options = document.querySelectorAll("#tagsHiddenRedact select option");
-            let val = options.length > 0 ? parseInt(options[options.length - 1].value) + 1 : 0;
-
-            let option = document.createElement("option");
-            option.value = val;
-            option.textContent = text;
-
-            tagDiv.setAttribute("value", val);
-            tagDiv.appendChild(tagText);
-            selectTagsRedact.appendChild(option);
-            divAddTagsRedact.appendChild(tagDiv);
-
-            $.ajax({
-                url: document.querySelector(".urlToCreateTag").value,
-                type: 'POST',
-                data: {
-                    'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                    'list_tags': text,
-                    'page-to-return': "publications"
-                },
-                success: function (response) {
-                    console.log(response);
-                }
-            });
-
-            tagDiv.addEventListener("click", function () {
-                let optionEl = selectTagsRedact.querySelector('option[value="' + val + '"]');
-                if (!optionEl.hasAttribute("selected")) {
-                    optionEl.setAttribute("selected", true);
-                    tagsList.value += val + "_";
-
-                    let container = document.querySelector(".publication-redact .hashTagTextDiv") || document.createElement("div");
-                    container.classList.add("hashTagTextDiv");
-                    document.querySelectorAll(".publication-redact .field")[4].appendChild(container);
-
-                    let p = document.createElement("p");
-                    p.classList.add("hashTagText");
-                    p.setAttribute("value", val);
-                    p.textContent = tagText.textContent;
-                    container.appendChild(p);
-                } else {
-                    optionEl.removeAttribute("selected");
-                    document.querySelectorAll(".publication-redact .hashTagTextDiv .hashTagText").forEach(el => {
-                        if (el.getAttribute("value") == val) el.remove();
-                    });
-                }
-            });
+            inputAddTagRedact.style.display = inputAddTagRedact.style.display === "block" ? "none" : "block";
         }
 
-        imageTagsRedact.src = "/static/images/add_tag.png";
-        inputAddTagRedact.style.display = "none";
-    }
-});
+        if (imageTagsRedact.src.split("/").pop() === "add_tag.png") {
+            imageTagsRedact.src = "/static/images/submit.png";
+            if (inputAddTagRedact) inputAddTagRedact.value = "";
+        } else {
+            let finalHashTag = inputAddTagRedact.value;
+            if (!finalHashTag.includes("#")) {
+                finalHashTag = `#${finalHashTag}`;
+            }
+
+            if (finalHashTag !== "#") {
+                let hashTagElement = document.createElement("div");
+                let hashTagText = document.createElement("p");
+                hashTagElement.classList.add("hashTag");
+                hashTagText.classList.add("hashTagText");
+
+                let option = document.createElement("option");
+                let allOptions = document.querySelectorAll("#tagsHiddenRedact select option");
+
+                let valueOption = allOptions.length > 0 ?
+                    parseInt(allOptions[allOptions.length - 1].value) + 1 : 0;
+
+                hashTagElement.setAttribute("value", valueOption);
+                hashTagText.textContent = finalHashTag;
+                option.textContent = finalHashTag;
+                option.value = valueOption;
+
+                selectTagsRedact.appendChild(option);
+                hashTagElement.appendChild(hashTagText);
+
+                // Просто добавляем тег в контейнер (как в оригинальном коде)
+                divAddTagsRedact.appendChild(hashTagElement);
+
+                $.ajax({
+                    url: document.querySelector(".urlToCreateTag").value,
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+                        'list_tags': finalHashTag,
+                        'page-to-return': "publications"
+                    },
+                    success: function (response) {
+                        console.log(response);
+                    }
+                });
+
+                hashTagElement.addEventListener("click", function () {
+                    const optionIndex = parseInt(this.getAttribute("value"));
+                    const option = document.querySelector(`#tagsHiddenRedact select option[value="${optionIndex}"]`);
+
+                    if (!option.hasAttribute('selected')) {
+                        option.setAttribute('selected', true);
+                        tagsList.value += `${option.value}_`
+                        let hashtagsConteiner = document.querySelector(".publication-redact .hashTagTextDiv");
+
+                        if (!hashtagsConteiner) {
+                            let hashtagsConteinerElement = document.createElement("div");
+                            hashtagsConteinerElement.classList.add("hashTagTextDiv");
+                            document.querySelectorAll(".publication-redact .field")[1].appendChild(hashtagsConteinerElement);
+                            hashtagsConteiner = hashtagsConteinerElement;
+                        }
+
+                        let pElement = document.createElement("p");
+                        pElement.classList.add("hashTagText");
+                        pElement.setAttribute("value", optionIndex);
+                        pElement.textContent = this.querySelector(".hashTagText").textContent;
+
+                        hashtagsConteiner.appendChild(pElement);
+                    } else {
+                        option.removeAttribute('selected');
+                        document.querySelectorAll(".publication-redact .hashTagTextDiv .hashTagText").forEach(element2 => {
+                            if (parseInt(element2.getAttribute("value")) === optionIndex) {
+                                element2.remove();
+                            }
+                        });
+                    }
+                });
+            }
+
+
+            imageTagsRedact.src = "/static/images/add_tag.png";
+            if (inputAddTagRedact) inputAddTagRedact.style.display = "none";
+        }
+    });
+}
 
 cancelBgBlurRedact.addEventListener("click", function () {
     blurRedact.style.display = "none";

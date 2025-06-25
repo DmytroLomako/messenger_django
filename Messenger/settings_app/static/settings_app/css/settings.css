@@ -334,6 +334,7 @@ main {
     gap: 0.926vh;
 }
 
+
 .input-div p {
     color: #81818D;
     font-weight: 400;
@@ -727,11 +728,9 @@ ul {
 
 .invisible {
     opacity: 0;
-<<<<<<< HEAD
-=======
 }
 
-.requests-friends{
+.requests-friends {
     width: 16px;
     height: 16px;
     background-color: #F43F5E;
@@ -745,13 +744,32 @@ ul {
     justify-content: center;
 }
 
-.requests-friends p{
+.requests-friends p {
     font-size: 12px;
     color: #FFFFFF;
     font-weight: 400;
 }
 
-.friends{
+.friends {
     position: relative;
->>>>>>> origin/mbarilo
+}
+
+.tab {
+    position: relative;
+}
+
+.friends-tracker {
+    width: 20px;
+    height: 20px;
+    background-color: #F43F5E;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 12px;
+    border: 2px solid white;
+    position: absolute;
+    top: -7px;
+    left: 15px;
 }

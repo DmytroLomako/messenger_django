@@ -54,27 +54,50 @@
                 </div>
                 <div class="all-friends-div">
                     {% for friend in friends %}
-                    <div class="friend-profile">
-                        <div class="avatar-nickname-div">
-                            {% if friend.profile.photo.url != None %}
-                            <img class="avatar-images" src="{{ friend.profile.photo.url }}" alt="">
+                    {% if friend.profile2.user.username == user.username %}
+                    <div class="friend-profile" href="{% url 'friend_view' friend.id %}">
+                        <div class="avatar-nickname-div" id="{{friend.profile1.id}}">
+                            {% if friend.profile2.avatar_set.last.image != None %}
+                            <img class="avatar-images" src="{{ friend.profile1.avatar_set.last.image.url }}" alt="">
                             {% else %}
                             <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
                             {% endif %}
                             <div class="nickname-name">
-                                <p class="nickname-text">{{ friend.first_name }} {{ friend.last_name }}</p>
-                                <p>@{{ friend.username }}</p>
+                                <p class="nickname-text">{{ friend.profile1.user.first_name }}
+                                    {{friend.profile1.user.last_name }}</p>
+                                <p>@{{ friend.profile1.user.username }}</p>
                             </div>
                         </div>
-                        <div class="buttons-div-all-friends">
-                            <button class="message-button" id="{{friend.profile.id}}">Повідомлення</button>
-                            <button class="delete-button">Видалити</button>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button" name="add"
+                                value="{% url 'request_friend' friend.id %}">Додати</button>
+                            <button class="delete-button" name="delete" value="{{friend.profile1.id}}">Видалити</button>
                         </div>
                     </div>
+                    {% else %}
+                    <div class="friend-profile" href="{% url 'friend_view' friend.id %}">
+                        <div class="avatar-nickname-div" id="{{friend.profile2.id}}">
+                            {% if friend.profile2.avatar_set.last.image != None %}
+                            <img class="avatar-images" src="{{ friend.profile2.avatar_set.last.image.url }}" alt="">
+                            {% else %}
+                            <img class="avatar-images" src="{% static 'images/standart_user_image.png' %}" alt="">
+                            {% endif %}
+                            <div class="nickname-name">
+                                <p class="nickname-text">{{ friend.profile2.user.first_name }}
+                                    {{friend.profile2.user.last_name }}</p>
+                                <p>@{{ friend.profile2.user.username }}</p>
+                            </div>
+                        </div>
+                        <div class="buttons-div-recommendations">
+                            <button class="add-button" name="add"
+                                value="{% url 'request_friend' friend.id %}">Додати</button>
+                            <button class="delete-button" name="delete" value="{{friend.profile2.id}}">Видалити</button>
+                        </div>
+                    </div>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
         </div>
-    </div>
 </main>
 {% endblock %}

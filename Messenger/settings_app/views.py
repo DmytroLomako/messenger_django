@@ -47,11 +47,16 @@ class UserUpdateView(UpdateView):
         
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        all_not_accepted_get_requests = Friendship.objects.filter(profile2 = Profile.objects.get(user = self.request.user), accepted = False)
+
+        context["requests"] = all_not_accepted_get_requests
         try:
             context['user_image'] = Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image
             print(Avatar.objects.filter(profile = Profile.objects.get(user = self.request.user)).last().image)
         except:
             context['user_image'] = None
+
+            
         
         return  context
 

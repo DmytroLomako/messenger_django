@@ -21,7 +21,9 @@
             <a href="{% url 'my_publications' %}" class="publications tab"><img
                     src="{% static 'images/publications.png' %}">Мої публікації</a>
 
-                    <a href="{% url 'friends' %}" class="friends tab"><img src="{% static 'images/friends.png' %}"><div class="requests-friends"><p class="count-requests-friends">{{requests|length}}</p></div>Друзі</a>
+            <a href="{% url 'friends' %}" class="friends tab">
+                <p class="friends-tracker">{{requests|length}}</p><img src="{% static 'images/friends.png' %}">Друзі
+            </a>
 
             <a href="{% url 'chats' %}" class="chats tab"><img src="{% static 'images/chat.png' %}">Чати</a>
 

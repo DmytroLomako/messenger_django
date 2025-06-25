@@ -95,3 +95,12 @@ actions.forEach((element, index) => {
         }
     })
 })
+
+const countRequestsFriends = document.querySelector(".friends-tracker");
+
+if (countRequestsFriends.textContent == 0) {
+    countRequestsFriends.style.display = "none"
+} else {
+    countRequestsFriends.style.display = "flex"
+}
+

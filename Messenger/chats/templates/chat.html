@@ -131,7 +131,15 @@
                 <label for="backBtn">
                     <img src="{% static 'images/back.png' %}" class="backImg">
                 </label>
-                <img src="{{group.avatar.url}}" class="avatarGroup">
+                {% if group.avatar.url == user.profile.avatar_set.last.image.url %}
+                {% if group.members.last.avatar_set.last.url == user.profile.avatar_set.last.image.url %}
+                <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                {% else %}
+                <img class="avatarImage" src="{{group.members.last.avatar_set.last.image.url}}" alt="">
+                {% endif %}
+                {% else %}
+                <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                {% endif %}
                 <div class="nameAndMembers">
                     <p class="groupName">{{group.name}}</p>
                     <p class="membersCount">{{len_members}} учасники, 1 в мережі</p>
@@ -207,6 +215,7 @@
         <div class="bottomGroup">
             <form method="post" class="messageForm">
                 {% csrf_token %}
+                <input type="hidden" class="authorId" id="{{user.first_name}}">
                 <div class="inputAndImages">
                     <input type="text" name="messageInput" id="id_message" class="input" placeholder="Повідомлення">
                     <div class="imagesMessageDiv"></div>
@@ -243,7 +252,15 @@
                 {% if group.is_personal_chat %}
                 <div class="profiles-div chat{{group.id}}">
                     <div class="profles" id="{{group.id}}">
+                        {% if group.avatar.url == user.profile.avatar_set.last.image.url %}
+                        {% if group.members.last.avatar_set.last.url == user.profile.avatar_set.last.image.url %}
                         <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% else %}
+                        <img class="avatarImage" src="{{group.members.last.avatar_set.last.image.url}}" alt="">
+                        {% endif %}
+                        {% else %}
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% endif %}
                         <div class="profiles-text">
                             <div class="header-time-prfl-text">
                                 <p>{{group.name}}</p>

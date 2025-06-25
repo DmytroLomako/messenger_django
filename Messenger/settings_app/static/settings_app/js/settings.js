@@ -18,7 +18,7 @@ const signatureImgDiv = document.querySelector(".signature-img-div")
 const paintSign = document.querySelector(".paint-sign")
 const paintSignGetContext = paintSign.getContext("2d")
 const colorPicker = document.querySelector(".color-picker")
-const countRequestsFriends = document.querySelector(".count-requests-friends");
+const countRequestsFriends = document.querySelector(".friends-tracker");
 const requestFriendsDiv = document.querySelector(".requests-friends")
 
 let drawing = false;
@@ -150,7 +150,7 @@ editBtnSign.addEventListener("click", () => {
 editSignBtn.addEventListener("click", (event) => {
     event.preventDefault()
     editSignBtn.style.display = "none"
-    if (forSignImage.style.display != null) {
+    if (forSignImage != null) {
         forSignImage.style.display = "none"
     }
     signatureImgDiv.style.width = "21vw"
@@ -267,7 +267,8 @@ Inputs.forEach((input, index) => {
 })
 
 if (countRequestsFriends.textContent == 0) {
-    requestFriendsDiv.style.display = "none"
+    countRequestsFriends.style.display = "none"
 } else {
-    requestFriendsDiv.style.display = "flex"
+    countRequestsFriends.style.display = "flex"
 }
+
