@@ -1186,3 +1186,8 @@ input {
     border: 1px solid #81818D;
     order: 999999;
 }
+
+.imageLinks, .cancelLink{
+    width: 1.35vw;
+    margin-left: 0.45vw;
+}

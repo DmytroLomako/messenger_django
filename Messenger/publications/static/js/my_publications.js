@@ -20,7 +20,7 @@ const blurRedact = document.querySelector(".background-blur-redact");
 const cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact");
 const postPkInput = document.querySelector(".postPkInput");
 const imageTags = document.querySelector(".imageTags");
-const imageLinks = document.querySelector('.imageLinks')
+const imageLinks = document.querySelector('.imageLinks');
 const inputAddTag = document.querySelector(".inputAddTag");
 const tagsList = document.querySelector(".tags-list");
 
