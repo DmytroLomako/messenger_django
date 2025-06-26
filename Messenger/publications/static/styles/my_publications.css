@@ -116,7 +116,7 @@ main .miniProfile {
 }
 
 main .miniProfile img {
-    width: 5.04vw;
+    width: 10.07vh;
     height: 10.07vh;
 }
 
@@ -450,6 +450,12 @@ main .postArea .sendDiv .addEmojiBtn {
     height: 2.31vh;
 }
 
+.imageLinks,
+.cancelLink {
+    width: 1.35vw;
+    margin-left: 0.45vw;
+}
+
 .imageTagsRedact {
     width: 1.05vw;
     height: 2.31vh;
@@ -762,6 +768,7 @@ main .responses .response {
 
 main .responses .response .headerResponse .avatarName img {
     height: 4.83vh;
+    width: 4.83vh;
 }
 
 main .responses .response .headerResponse .avatarName {
@@ -858,7 +865,7 @@ input {
 
 .publication-redact {
     width: 40.68vw;
-    max-height: 73.452vh;
+    height: 73.452vh;
     background-color: white;
     border-radius: 1.04vw;
     display: flex;
@@ -881,6 +888,7 @@ input {
     width: 35.96vw;
     height: 13.22vh;
 }
+
 
 .publication-creation input {
     border: 1px solid #CDCED2;

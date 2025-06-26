@@ -29,6 +29,7 @@ const tagsHiddenRedact = document.getElementById("tagsHiddenRedact");
 const tagsHiddenRedactSelect = document.getElementById("tagsHiddenRedact select");
 const imagesPost = document.querySelector(".postImage1");
 const formCratePost = document.querySelector(".publication-creation");
+const imageLinks = document.querySelector('.imageLinks')
 
 let listFiles = [];
 let listFilesRedact = [];
@@ -74,6 +75,45 @@ postsArray.forEach(element => {
     countImagesPost = 0
 })
 
+function addLink(linkImg) {
+    let linkDiv = linkImg.parentElement.parentElement;
+    let clonedLinkDiv = linkDiv.cloneNode(true);
+    if (clonedLinkDiv.querySelector('.label')) {
+        clonedLinkDiv.querySelector('.label').remove()
+    }
+    if (clonedLinkDiv.querySelector('.cancelLink')) {
+        clonedLinkDiv.querySelector('.cancelLink').remove()
+    }
+    console.log(clonedLinkDiv)
+    clonedLinkDiv.querySelector('#id_links').value = ''
+    clonedLinkDiv.querySelector('.imageLinks').addEventListener("click", () => addLink(clonedLinkDiv.querySelector('.imageLinks')))
+    linkDiv.parentElement.insertBefore(clonedLinkDiv, linkDiv.nextSibling);
+    let cancelLink = document.createElement('img')
+    cancelLink.src = document.getElementById('cancelLinkInput').value
+    cancelLink.classList.add('cancelLink')
+    clonedLinkDiv.querySelector('.field').appendChild(cancelLink)
+    cancelLink.addEventListener("click", () => deleteLink(cancelLink))
+    linkDiv.querySelector('.imageLinks').remove()
+}
+
+function deleteLink(link) {
+    let imageLinks = link.parentElement.querySelector('.imageLinks')
+    let linkDiv = link.parentElement.parentElement
+    if (imageLinks) {
+        let prevLinkDiv = linkDiv.previousElementSibling
+        if (prevLinkDiv.querySelector('.cancelLink')) {
+            prevLinkDiv.querySelector('.field').insertBefore(imageLinks, prevLinkDiv.querySelector('.cancelLink'))
+        } else {
+            prevLinkDiv.querySelector('.field').appendChild(imageLinks)
+        }
+        imageLinks.addEventListener("click", () => addLink(imageLinks))
+    }
+    linkDiv.remove()
+}
+
+if (imageLinks) {
+    imageLinks.addEventListener("click", () => addLink(imageLinks))
+}
 
 if (document.querySelector(".user") == null) {
     document.querySelectorAll(".users")[0].style.height = "0"
@@ -152,7 +192,7 @@ if (buttonSend) {
                         if (hashtagsConteiner == null) {
                             let hashtagsConteinerElement = document.createElement("div")
                             hashtagsConteinerElement.classList.add("hashTagTextDiv")
-                            document.querySelectorAll(".field")[1].appendChild(hashtagsConteinerElement)
+                            document.querySelectorAll(".field")[2].appendChild(hashtagsConteinerElement)
                         }
 
                         hashtagsConteiner = document.querySelector(".hashTagTextDiv")

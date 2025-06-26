@@ -677,7 +677,7 @@ main .postPostInput .post .postHeader {
 
 main .postPostInput .post .postHeader .avatar {
     width: 2.41vw;
-    height: 4.83vh;
+    height: 2.41vw;
 }
 
 .avatar {
@@ -1188,4 +1188,10 @@ input {
     background-color: white;
     border: 1px solid #81818D;
     order: 999999;
+}
+
+.imageLinks,
+.cancelLink {
+    width: 1.35vw;
+    margin-left: 0.45vw;
 }

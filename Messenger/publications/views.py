@@ -1,5 +1,5 @@
 from django.views.generic import CreateView
-from .models import Post, Image
+from .models import Post, Image, Link
 from django.urls import reverse_lazy
 from django.shortcuts import redirect, render
 from .forms import CreatePostForm
@@ -37,6 +37,10 @@ class MyPublicationsView(CreateView):
                 post_images.append(image)
 
             post.images.set(post_images)
+            
+            links = self.request.POST.getlist("links")
+            for link in links:
+                link = Link.objects.create(url=link, post=post)
 
             post.save()
             print(post)
@@ -55,7 +59,12 @@ class MyPublicationsView(CreateView):
             post_now = Post.objects.get(id=int(request.POST.get("post_id")))
             post_now.title = request.POST.get("title")
             post_now.content = request.POST.get("content")
-            # post_now.article_link = request.POST.get("link")
+            
+            links = request.POST.getlist("links")
+            Link.objects.filter(post = post_now).delete()
+            for link in links:
+                link = Link.objects.create(url=link, post=post_now)
+            
             final_list_tags = []
             for element in request.POST.get("tags-list").split("_"):
                 print(element)
@@ -139,10 +148,11 @@ def likes(request, post_pk):
 def redact_data(request, post_pk):
     if request.method == 'POST':
         post = [Post.objects.get(id = post_pk)]
+        links = list(post[0].link_set.all())
         images = post[0].images.all()
         for image in images:
             post.append(image)
-        return JsonResponse(serializers.serialize("json", post), safe=False)
+        return JsonResponse({'post': serializers.serialize("json", post), 'links': serializers.serialize("json", links)}, safe=False)
 
 
 def save_tag(request):

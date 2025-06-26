@@ -20,6 +20,7 @@ const blurRedact = document.querySelector(".background-blur-redact");
 const cancelBgBlurRedact = document.querySelector("#cancel-bg-blur-redact");
 const postPkInput = document.querySelector(".postPkInput");
 const imageTags = document.querySelector(".imageTags");
+const imageLinks = document.querySelector('.imageLinks');
 const inputAddTag = document.querySelector(".inputAddTag");
 const tagsList = document.querySelector(".tags-list");
 
@@ -47,6 +48,46 @@ for (let count = 0; count < dotsMenu.length; count++) {
             deleteBtns[count].style.display = "flex"
         }
     })
+}
+
+function addLink(linkImg) {
+    let linkDiv = linkImg.parentElement.parentElement;
+    let clonedLinkDiv = linkDiv.cloneNode(true);
+    if (clonedLinkDiv.querySelector('.label')) {
+        clonedLinkDiv.querySelector('.label').remove()
+    }
+    if (clonedLinkDiv.querySelector('.cancelLink')) {
+        clonedLinkDiv.querySelector('.cancelLink').remove()
+    }
+    console.log(clonedLinkDiv)
+    clonedLinkDiv.querySelector('#id_links').value = ''
+    clonedLinkDiv.querySelector('.imageLinks').addEventListener("click", () => addLink(clonedLinkDiv.querySelector('.imageLinks')))
+    linkDiv.parentElement.insertBefore(clonedLinkDiv, linkDiv.nextSibling);
+    let cancelLink = document.createElement('img')
+    cancelLink.src = document.getElementById('cancelLinkInput').value
+    cancelLink.classList.add('cancelLink')
+    clonedLinkDiv.querySelector('.field').appendChild(cancelLink)
+    cancelLink.addEventListener("click", () => deleteLink(cancelLink))
+    linkDiv.querySelector('.imageLinks').remove()
+}
+
+function deleteLink(link) {
+    let imageLinks = link.parentElement.querySelector('.imageLinks')
+    let linkDiv = link.parentElement.parentElement
+    if (imageLinks) {
+        let prevLinkDiv = linkDiv.previousElementSibling
+        if (prevLinkDiv.querySelector('.cancelLink')) {
+            prevLinkDiv.querySelector('.field').insertBefore(imageLinks, prevLinkDiv.querySelector('.cancelLink'))
+        } else {
+            prevLinkDiv.querySelector('.field').appendChild(imageLinks)
+        }
+        imageLinks.addEventListener("click", () => addLink(imageLinks))
+    }
+    linkDiv.remove()
+}
+
+if (imageLinks) {
+    imageLinks.addEventListener("click", () => addLink(imageLinks))
 }
 
 function updateDeleteButtons() {
@@ -150,7 +191,7 @@ if (buttonSend) {
                         if (hashtagsConteiner == null) {
                             let hashtagsConteinerElement = document.createElement("div")
                             hashtagsConteinerElement.classList.add("hashTagTextDiv")
-                            document.querySelectorAll(".field")[1].appendChild(hashtagsConteinerElement)
+                            document.querySelectorAll(".field")[2].appendChild(hashtagsConteinerElement)
                         }
 
                         hashtagsConteiner = document.querySelector(".hashTagTextDiv")
@@ -181,6 +222,8 @@ if (buttonSend) {
 cancelBgBlur.addEventListener('click', function () {
     bgBlur.style.display = 'none'
 })
+
+
 
 
 if (addTag) {
@@ -238,17 +281,15 @@ if (addTag) {
                     const optionIndex = parseInt(this.getAttribute("value"));
                     const option = document.querySelector(`.showTagsBtn #field #id_tags option[value="${optionIndex}"]`);
 
-
                     if (!option.hasAttribute('selected')) {
                         option.setAttribute('selected', true);
                         let hashtagsConteiner = document.querySelector(".hashTagTextDiv")
 
 
-
                         if (hashtagsConteiner == null) {
                             let hashtagsConteinerElement = document.createElement("div")
                             hashtagsConteinerElement.classList.add("hashTagTextDiv")
-                            document.querySelectorAll(".field")[4].appendChild(hashtagsConteinerElement)
+                            document.querySelectorAll(".field")[2].appendChild(hashtagsConteinerElement)
                         }
 
                         hashtagsConteiner = document.querySelector(".hashTagTextDiv")
@@ -258,7 +299,7 @@ if (addTag) {
                         pElement.setAttribute("value", optionIndex);
                         pElement.textContent = this.querySelector(".hashTagText").textContent;
 
-                        // const textArea = document.querySelector(".input-div-text") || document.querySelectorAll(".field")[1];
+                        // const textArea = document.querySelector(".input-div-text") || document.querySelectorAll(".field")[2];
                         hashtagsConteiner.appendChild(pElement);
                     } else {
                         option.removeAttribute('selected');
@@ -382,18 +423,43 @@ editBtns.forEach((button) => {
                 'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
             },
             success: function (response) {
-                let data = JSON.parse(response);
+                let data = JSON.parse(response.post);
+                let links = JSON.parse(response.links);
                 let post = data[0].fields;
 
                 document.querySelector(".publication-redact .title").value = post.title;
                 document.querySelector(".publication-redact textarea[name='content']").value = post.content;
+                document.querySelector(".publication-redact #id_topic").value = post.topic;
                 let tagsFromPost = post.tags || [];
                 let tagsList = document.querySelector(".tags-list");
                 tagsList.value = '';
 
+                let linkElement = document.querySelector('.publication-redact #id_links');
+                let linkDiv = linkElement.parentElement.parentElement;
+                links.forEach((link, index) => {
+                    let clonedLinkDiv = linkDiv.cloneNode(true)
+                    clonedLinkDiv.querySelector("input").value = link.fields.url
+                    if (index != 0) {
+                        if (links.length - 1 == index) {
+                            let imageLink = document.createElement('img')
+                            imageLink.src = document.querySelector('.imageLinks').src
+                            imageLink.classList.add('imageLinks')
+                            imageLink.addEventListener("click", () => addLink(imageLink))
+                            clonedLinkDiv.querySelector('.field').appendChild(imageLink)
+                        }
+                        let cancelLink = document.createElement('img')
+                        cancelLink.src = document.getElementById('cancelLinkInput').value
+                        cancelLink.classList.add('cancelLink')
+                        cancelLink.addEventListener("click", () => deleteLink(cancelLink))
+                        clonedLinkDiv.querySelector('.field').appendChild(cancelLink)
+                    }
+                    document.querySelector(".publication-redact").insertBefore(clonedLinkDiv, linkDiv)
+                })
+                linkDiv.remove();
+
                 let hashtagsContainer = document.createElement("div");
                 hashtagsContainer.classList.add("hashTagTextDiv");
-                document.querySelectorAll(".publication-redact .field")[1].appendChild(hashtagsContainer);
+                document.querySelectorAll(".publication-redact .field")[2].appendChild(hashtagsContainer);
 
                 let select = document.querySelector("#tagsHiddenRedact select");
 
