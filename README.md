@@ -34,8 +34,11 @@ https://www.figma.com/design/20TZphWNufeAQYOe7E1sze/%D0%A1%D0%BE%D1%86%D1%96%D0%
 # Installation and Setup
 *To install and run the project you will need:
 - Python 3.8.10 or higher (check your version with `python --version`)
+If it doesn't fit, you can restore it here<br>
+https://www.python.org/downloads/
 - Git 2.45.1 or higher (check your version with `git --version`)
-
+If it doesn't fit, you can restore it here<br>
+https://git-scm.com/downloads
 ## Steps
 1. Get the repository link
 
@@ -292,8 +295,11 @@ World-it messenger - це проект соціальна мережа, в як�
 # Інсталяція та налаштування
 *Щоб інсталювати та спробувати запустити проект вам будуть потрібні встановлені:
 - python 3.8.10 або вище (Перевірити вашу версію пайтону можна ввів команду в термінал <br>python --version)
+Якщо не підходить то встановити можна тут<br>
+https://www.python.org/downloads/
 - git 2.45.1 або вище (Перевірити вашу версію гіту можна ввів команду в термінал git --version)
-
+Якщо не підходить то встановити можна тут <br>
+https://git-scm.com/downloads
 ## Алгоритм дій
 1. Отримання посилання на репозиторій
 
