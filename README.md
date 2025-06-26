@@ -5,32 +5,50 @@
 English version
 </summary>
 <p></p>
-QR-code generator app is an app for generating QR codes with the ability to create both standard and desktop codes. It supports customization: changing colors, shapes, and the option to add a logo to the QR code. A convenient tool for creating unique QR codes for various purposes.
+<i>
+World-it messenger - is a social network project where you can customize your account, create posts, albums, chat, and create group chats.
 
 ---
 ### Information
 - [Installation and Setup](#installation-and-setup)
-- [Contributors](#contributors)
-- [Structure of the project and applications](#project-structure)
+<!-- toc-disable -->
+- [Project Participants](#project-participants)
+<!-- toc-disable -->
+- [Project and App Structure](#project-structure)
+<!-- toc-disable -->
 - [Technologies We Used](#technologies-we-used)
-- [QR Codes](#qr-codes)
+<!-- toc-disable -->
+<!-- toc-disable -->
+- [Responsibilities of Each App](#responsibilities-of-each-app)
+<!-- toc-disable -->
 - [Conclusion](#conclusion)
+<!-- toc-disable -->
+<!-- toc-disable -->
+- [Project Development Prospects](#project-development-prospects)
+<!-- toc-disable -->
 ---
 
-# Installation and Setup
+## Figma Design Link  
+https://www.figma.com/design/20TZphWNufeAQYOe7E1sze/%D0%A1%D0%BE%D1%86%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0-%D0%BC%D0%B5%D1%80%D0%B5%D0%B6%D0%B0-World-IT?node-id=6-26&t=6FcZEGOAfhm7mSQr-1jiX0W94etK-0
 
+# Installation and Setup
+*To install and run the project you will need:
+- Python 3.8.10 or higher (check your version with `python --version`)
+- Git 2.45.1 or higher (check your version with `git --version`)
+
+## Steps
 1. Get the repository link
 
     ![](readme/clone.png)
 
 2. Clone the repository
 ```sh
-git clone https://github.com/dimachep1408/QR-code_generator_app.git
-```
+git clone https://github.com/dimachep1408/messenger_django.git
+``` 
 
 3. Navigate to the project directory
 ```sh
-cd QR-code_generator_app
+cd messenger_django
 ```
 
 <details>
@@ -39,25 +57,36 @@ Windows
 </summary>
 <p></p>
 
-1. Create a virtual environment
+4. Create a virtual environment
 ```sh
 python -m venv venv
 ```
 
-1. Activate the virtual environment
+5. Activate the virtual environment
 ```sh
-.\venv\Scripts\activate
+.venv\Scripts\activate
 ```
 
-1. Install dependencies from the requirements.txt file
+6. Install dependencies from `requirements.txt`
 ```sh
 pip install -r requirements.txt
 ```
 
-1. Run the project
+7. Detect project migrations
+```sh
+python manage.py makemigrations
+```
+
+8. Apply migrations
+```sh
+python manage.py migrate
+```
+
+9. Run the project
 ```sh
 python manage.py runserver
 ```
+
 </details>
 
 <details>
@@ -66,79 +95,171 @@ MacOS
 </summary>
 <p></p>
 
-1. Create a virtual environment
+4. Create a virtual environment
 ```sh
 python3 -m venv venv
 ```
 
-1. Activate the virtual environment
+5. Activate the virtual environment
 ```sh
 source venv/bin/activate
 ```
 
-1. Install dependencies from the requirements.txt file
+6. Install dependencies from `requirements.txt`
 ```sh
 pip3 install -r requirements.txt
 ```
 
-1. Run the project
+7. Detect project migrations
+```sh
+python3 manage.py makemigrations
+```
+
+8. Apply migrations
+```sh
+python3 manage.py migrate
+```
+
+9. Run the project
 ```sh
 python3 manage.py runserver
 ```
 </details>
 <p></p>
 
-# Contributors
-1. [Dmytro Chepikov](https://github.com/dimachep1408)
-2. [Dmytro Lomako](https://github.com/DmytroLomako)
-3. [Misha Barylo](https://github.com/Mbarilo)
+---
+
+**Remote (on Railway):**
+   - Log in to your account at [Railway](https://railway.com)
+   - Click “Sign in”
+        ![](readme/guide1.png)
+   - Click “Continue with GitHub”
+        ![](readme/guide2.png)
+
+---
+
+# Project Participants
+1. [Dmytro Chepikov](https://github.com/dimachep1408) - team lead  
+2. [Dmytro Lomako](https://github.com/DmytroLomako)  
+3. [Misha Barylo](https://github.com/Mbarilo)  
 4. [Feliks Denga](https://github.com/Feliks2010)
 
 ---
 
-# Project structure
+# Project Structure
 
-![](media/readme/diagram.png)
+![](readme/diagram_files.png)
 
-# Application structure
+# App Structure
 
-![](media/readme/diagram2.png)
+![](readme/app_diagram.png)
 
 ---
 
 # Technologies We Used
 
-* Django – framework for backend and request processing.
-* qrcode – generation and customization of QR codes.
-* Pillow – working with images, saving QR codes.
-* os – file system management, saving images.
-* datetime – storing the creation time of the QR code.
+* **Django** – Backend framework, request handling, and server-side WebSocket logic  
+* **Pillow** – Image processing, saving avatars, post images, and message attachments  
+* **os** – Filesystem management for saving images  
+* **Daphne** – Required for async operations  
+* **Channels** – Group and private chat handling  
+* **WebSocket** – Sending and receiving messages on the server in real-time  
 
 ---
 
-# QR Codes
+# Responsibilities of Each App
 
-#### When generating a QR code, you can customize the following parameters:
+## `authorization`
+### This app includes three subpages:
+<b>• register</b> – <i>registration of users and adding them to the database  
+![](readme/register.png)
 
-* Data – link.
-* Color – you can change the background and foreground colors.
-* Logo – you can insert an image in the center of the QR code (e.g., a company logo).
-* Dots form – shape of the QR code dots.
-* Eye form – shape of the "eyes" (large squares in the corners of the QR code).
+<b>• login</b> – <i>user login system linking the device to the account in the database  
+![](readme/login.png)
 
-#### Desktop Subscription
-For convenience, a desktop version of the service with a subscription can be implemented, allowing the creation of special "desktop" QR codes that can store text, contact information, and more.
+<b>• verification</b> – <i>email verification. A code is sent to the user’s email and must be entered to activate the account  
+![](readme/verification.png)
 
----
+## `chats`
+### This app includes two subpages:
+
+<b>• chats</b> – <i>create group or personal chats and continue conversations  
+![](readme/chats.png)
+
+<b>• chat</b> – <i>real-time chatting with users, sending images, etc.  
+![](readme/chat.png)
+
+## `friends`
+### This app has five subpages related to the main `friends.html` page:
+
+<b>• friends</b> – General friends page showing requests, recommendations, and current friends  
+![](readme/friends.png)
+
+<b>• requests</b> – Shows only received friend requests  
+![](readme/requests.png)
+
+<b>• recommendations</b> – Shows users who can be added as friends  
+![](readme/recomend.png)
+
+<b>• all-friends</b> – Shows accepted friend requests  
+![](readme/all_friends.png)
+
+## `main`
+<b>• main</b> – Main page showing all posts from all users (from newest to oldest), with post views, likes, ability to create posts, and view chats  
+Post fields include:  
+• Title  
+• Tags  
+• Text  
+• Images  
+![](readme/create_post.png)
+
+<hr>
+
+## `publications`
+<b>• publications</b> – Shows all user's posts (newest to oldest), with ability to edit or create new posts  
+Post fields include:  
+• Title  
+• Tags  
+• Text  
+• Images  
+![](readme/create_post.png)  
+![](readme/redact_post.png)
+
+## `settings`
+### This app has two subpages:
+
+<b>• settings</b> – Settings page to update user info  
+![](readme/settings.png)
+
+<b>• albums</b> – Page with user's albums containing photos from trips or moments  
+![](readme/albums.png)  
+Album fields:  
+• Title  
+• Theme  
+• Year  
+![](readme/create_album.png)
+
+<hr>
+
+# Unique Project Features
+
+<b>• WebSocket</b> – Real-time messaging  
+<b>• Ajax</b> – Send requests to server without reloading the page  
+<b>• Channels</b> – Add users to a chat channel for real-time communication  
+<b>• Pillow</b> – Image processing (avatars, post images, message images)  
+<b>• Django tags</b> – Used to render server-side data on client (like posts, friends count, avatar, etc.)
 
 # Conclusion
+This messenger project helped us understand how to build a solid Django-based project (faster than Flask). We learned async communication in web apps, worked with complex DB structures, and got hands-on experience with WebSocket and Ajax.
 
-While working on the QR-Code Generator App, our team gained valuable experience in developing web applications with Django. We deepened our understanding of the framework’s structure, route configuration, form handling, and integration with external libraries for generating and customizing QR codes.
+The most difficult parts were configuring WebSocket & Channels, and implementing the friends system due to the many connections and logic. A lot of work was also done on the frontend – JavaScript, HTML, and CSS.
 
-One of the main challenges was implementing flexible design settings for QR codes—changing colors, shapes, and adding logos. This allowed us to better understand working with graphic formats and image optimization.
+Overall, this was a great experience and a strong addition to our GitHub profiles!
 
-Overall, the QR-Code Generator App became a great practical project for us, helping not only to reinforce our knowledge of Django but also to explore new approaches to working with graphics, integrating custom features, and improving the user experience.
-
+# Project Development Prospects
+- Add light/dark theme toggle  
+- Allow multiple images per message  
+- Add voice/video call functionality
 ---
 </details>
 <p></p>
@@ -156,19 +277,17 @@ World-it messenger - це проект соціальна мережа, в як�
 <!-- toc-disable -->
 - [Технології які ми використовували](#технології-які-ми-використовували)
 <!-- toc-disable -->
-- [QR-коди](#qr-коди)
 <!-- toc-disable -->
 - [За що відповідає кожен додаток](#за-що-відповідає-кожен-додаток)
 <!-- toc-disable -->
 - [Висновок](#висновок)
 <!-- toc-disable -->
-- [Проблематика](#проблематика)
 <!-- toc-disable -->
 - [Перспективи розвитку проекту](#перспективи-розвитку-проекту)
 <!-- toc-disable -->
 ---
 
-## Посилання на дизайн у Figma https://www.figma.com/design/bf3kkFSzNPwspbII8GaT3M/Untitled?node-id=0-1&node-type=canvas&t=ARWbS6jiX0W94etK-0
+## Посилання на дизайн у Figma https://www.figma.com/design/20TZphWNufeAQYOe7E1sze/%D0%A1%D0%BE%D1%86%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%B0-%D0%BC%D0%B5%D1%80%D0%B5%D0%B6%D0%B0-World-IT?node-id=6-26&t=6FcZEGOAfhm7mSQr-1jiX0W94etK-0
 
 # Інсталяція та налаштування
 *Щоб інсталювати та спробувати запустити проект вам будуть потрібні встановлені:
