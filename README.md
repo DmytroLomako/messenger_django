@@ -7,6 +7,7 @@ English version
 <p></p>
 <i>
 World-it messenger - is a social network project where you can customize your account, create posts, albums, chat, and create group chats.
+![](readme/main.png)
 
 ---
 ### Information
