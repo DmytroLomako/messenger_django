@@ -269,6 +269,7 @@ Overall, this was a great experience and a strong addition to our GitHub profile
 
 
 World-it messenger - це проект соціальна мережа, в якому можна налаштовувати аккаунт, створювати пости, альбоми, переписуватись та створювати группові чати
+![](readme/main.png)
 
 ---
 ### Інформація
