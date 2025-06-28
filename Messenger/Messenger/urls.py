@@ -21,22 +21,23 @@ from django.conf.urls.static import static
 
 from main.views import MainView
 from settings_app.views import UserUpdateView
-from chats.views import ChatsView
+from chat_app.views import ChatsView
 from settings_app.views import save_username
-
+from post_app.views import show_post
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('authorization/', include("authorization.urls")),
+    path('authorization/', include("user_app.urls")),
     path('', MainView.as_view(), name= "main"),
     path("friends/", include("friends.urls")),
-    path("publications/", include("publications.urls")),
+    path("publications/", include("post_app.urls")),
     path("settings/<int:pk>/", UserUpdateView.as_view(), name="settings"),
     path("settings/", include("settings_app.urls")),
     path("", include("main.urls")),
     path("chats/", ChatsView.as_view(), name= "chats"),
-    path("chats/", include("chats.urls")),
-    path("save_username/<str:username>/", save_username, name= "save_username")
+    path("chats/", include("chat_app.urls")),
+    path("save_username/<str:username>/", save_username, name= "save_username"),
+    path("show_post/<int:post_pk>/", show_post, name = "show_post")
 ]
 
 

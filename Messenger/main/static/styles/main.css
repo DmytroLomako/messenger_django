@@ -118,6 +118,7 @@ main .miniProfile {
 main .miniProfile img {
     width: 10.07vh;
     height: 10.07vh;
+    border-radius: 100%;
 }
 
 main .miniProfile .avatarNames {
@@ -126,7 +127,7 @@ main .miniProfile .avatarNames {
     display: flex;
     align-items: center;
     background-color: white;
-    flex-direction: column;
+    flex-direction: column-reverse;
     gap: 2.52vh;
 }
 

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from authorization.models import Profile
+from user_app.models import Profile
 
 
 class UserUpdateForm(forms.ModelForm):

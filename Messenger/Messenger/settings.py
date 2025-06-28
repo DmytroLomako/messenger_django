@@ -15,6 +15,7 @@ from django.urls import reverse_lazy
 from dotenv import load_dotenv
 import os
 import environ 
+from sshtunnel import SSHTunnelForwarder
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,14 +43,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'authorization',
+    'user_app',
     "main",
-    "publications",
+    "post_app",
     "settings_app",
     "friends",
     "options",
-    "chats"
-
+    "chat_app"
 ]
 
 # Шлях до об'єкту application, який обробляє асинхронні запити
@@ -74,6 +74,9 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+ENV_DIR = Path(__file__).resolve().parent.parent.parent 
+environ.Env.read_env(ENV_DIR / '.env')
+load_dotenv(ENV_DIR / '.env')
 
 ROOT_URLCONF = 'Messenger.urls'
 
@@ -96,13 +99,36 @@ TEMPLATES = [
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+username = os.getenv('DB_CONNECT_USERNAME')
+password = os.getenv('DB_CONNECT_PASSWORD')
+password_db = os.getenv("DB_PASSWORD")
+
+server = SSHTunnelForwarder(
+    ('ssh.pythonanywhere.com', 22),
+    ssh_username=f'{username}',
+    ssh_password=f'{password}',  # Рекомендуется использовать ключ
+    remote_bind_address=(f'{username}.mysql.pythonanywhere-services.com', 3306)
+)
+
+server.start()
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': f'{username}$default',
+        'USER': f'{username}',
+        'PASSWORD': f'{password_db}',
+        'HOST': f'/{username}/mysql/pythonanywhere-services.com',
+        'PORT': str(server.local_bind_port),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -153,10 +179,6 @@ MEDIA_ROOT = BASE_DIR / "media/"
 LOGIN_REDIRECT_URL = reverse_lazy("main")
 
 
-ENV_DIR = Path(__file__).resolve().parent.parent.parent 
-environ.Env.read_env(ENV_DIR / '.env')
-
-load_dotenv(ENV_DIR / '.env')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -166,5 +188,5 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD') # e-mail app password
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
-    'authorization.backends.LoginEmail', 
+    'user_app.backends.LoginEmail', 
 ]

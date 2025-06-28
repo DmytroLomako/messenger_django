@@ -38,6 +38,61 @@ if (document.querySelector(".friends-tracker").textContent == "0") {
     document.querySelector(".friends-tracker").style.display = "none"
 }
 
+
+$.ajax({
+    url: "/get_user_requests",
+    type: 'POST',
+    data: {
+        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+
+    },
+    success: function (response) {
+        // document.querySelector(".readers .count").textContent = response["views_count"]
+        JSON.parse(response["groups"]).forEach(element => {
+            let divGroup = document.createElement("div")
+            divGroup.classList.add("user")
+            divGroup.innerHTML = `<img src="${element.image}" class="avatar">
+                    <div class="nameSubscribers">
+                        <p class="name"></p>
+                        <p class="subscribers">
+                            {{request.profile1.friendship_sent_request.all.count|add:request.profile1.friendship_accepted_request.all.count}}
+                            Підписників</p>
+                    </div>`
+        });
+        console.log(response["views_count"])
+    }
+});
+
+$.ajax({
+    url: "/get_user_readers",
+    type: 'POST',
+    data: {
+        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+
+    },
+    success: function (response) {
+        document.querySelector(".readers .count").textContent = response["views_count"]
+        console.log(response["views_count"])
+    }
+});
+
+$.ajax({
+    url: "/get_user_photo",
+    type: 'POST',
+    data: {
+        'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value,
+
+    },
+    success: function (response) {
+        console.log(response)
+        let img = document.createElement("img")
+        img.src = response["photo"]
+        document.querySelector(".avatarNames").appendChild(img)
+    }
+});
+
+
+
 // Обработчики для меню с троеточием
 for (let count = 0; count < dotsMenu.length; count++) {
     dotsMenu[count].addEventListener("click", () => {
@@ -55,6 +110,8 @@ for (let count = 0; count < dotsMenu.length; count++) {
         }
     });
 }
+
+
 
 let countImagesPost = 0
 let postsArray = document.querySelectorAll('.post')
@@ -158,6 +215,8 @@ if (imageInput) {
         });
     });
 }
+
+
 
 // Работа с тегами
 let allTags = [];
@@ -388,17 +447,100 @@ document.querySelector(".PostPostInput").addEventListener("scroll", () => {
     document.querySelectorAll(".PostPostInput .post").forEach(post => {
         if (!post.dataset.viewed && isPostInViewport(post)) {
             post.dataset.viewed = 'true';
+            // let new_post_element = document.createElement('div')
+            // new_post_element.classList.add("post")
+            // new_post_element.id = `post${document.querySelectorAll('.post')[document.querySelectorAll('.post').length - 1].getAttribute("value") - 1}`
+            // new_post_element.setAttribute("value", document.querySelectorAll('.post')[document.querySelectorAll('.post').length - 1].getAttribute("value") - 1)
+            // document.querySelector(".PostPostInput").appendChild(new_post_element)
             $.ajax({
-                url: `/publications/view_post/${post.getAttribute("value")}/`,
+                url: `/publications/view_post/${post.getAttribute("value")}`,
                 type: 'POST',
                 data: {
                     'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
                 },
                 success: function (response) {
-                    console.log(response)
+                    let allPostsPks = []
+                    document.querySelectorAll(".post").forEach(element => {
+                        allPostsPks.push(parseInt(element.getAttribute("value")))
+                    });
+                    
+                    console.log(Math.min(...allPostsPks))
+                    // $.ajax({
+                    //     url: `/show_post/${Math.min(...allPostsPks) - 1}/`,
+                    //     type: 'POST',
+                    //     data: {
+                    //         'csrfmiddlewaretoken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    //     },
+                    //     success: function (response) {
+                    //         console.log(Math.min(...allPostsPks))
+                    //         let last_id_post = JSON.parse(response["post"])[0].pk
+                    //         let new_post_element = document.querySelector(`#post${JSON.parse(response["post"])[0].pk}`)
+                    //         console.log(JSON.parse(response["post"])[0].pk )
+                            
+                    //         new_post_element.innerHTML = `
+                    //             <div class="postHeader">
+                    //                 <img src="{{post.author.avatar_set.last.image.url}}" class="avatar">
+                    //                 <p class="text">{{ post.author.user.username }}</p>
+                    //                 <div class="paintingDiv">
+                    //                     {% if user.profile.signature == None %}
+                    //                     <img src="{{post.author.signature.url}}" class="painting">
+                    //                     {% endif %}
+                    //                 </div>
+                    //             </div>
+
+                    //             <div class="postMain">
+                    //                 <p class="text">
+                    //                     ${JSON.parse(response["post"])[0].title}<br>
+                    //                     ${JSON.parse(response["post"])[0].content}
+                    //                 </p>
+                    //                 <p class="hashtags">
+                                        
+                    //                 </p>
+                    //                 <a href="{{ post.article_link }}" class="publicationLink">{{ post.article_link }}</a>
+
+                    //                 <div class="images">
+                    //                     {% for img in post.images.all %}
+                    //                     <img src="{{ img.file.url }}">
+                    //                     {% endfor %}
+                    //                 </div>
+                    //             </div>
+
+                    //             <div class="postFooter">
+                    //                 <div class="likesViews">
+                    //                     <p class="likes like-button {% if profile_now in post.likes.all %}liked{% endif %}"
+                    //                         id="{{ post.id }}" value="{% url 'likes' post.pk %}"><img src="{% static 'images/likes.png' %}"
+                    //                             class="likesImg" id="like{{post.id}}"><b>{{post.likes.all|length}}</b>
+                    //                         Вподобань</p>
+                    //                     <p class="likes"><img src="{% static 'images/views.png' %}" class="likesImg">
+                    //                         {{post.views.all|length }}
+                    //                         Переглядів</p>
+                    //                 </div>
+                    //             </div>
+                    //         `
+                    //         let tags_list = JSON.parse(response["post"])[0].tags
+                    //         let final_tags = []
+                    //         final_tags.forEach(element => {
+                    //             if (element != ""){
+                    //                 final_tags.push(element)
+                    //             }
+                    //         });
+                    //         console.log(document.querySelector(`#post${last_id_post}`))
+                    //         document.querySelector(".PostPostInput").appendChild(new_post_element)
+                    //         final_tags.forEach(element => {
+                    //             new_post_element.querySelector(".hashtags").innerHTML += `${element}`
+                    //         });
+
+                    //     }
+                    // });
+
                 }
             });
+
+
         }
     });
 })
+
+
+
 

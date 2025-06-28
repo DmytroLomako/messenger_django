@@ -1,8 +1,8 @@
 from django.views.generic import TemplateView
-from authorization.models import Profile, Friendship
+from user_app.models import Profile, Friendship
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect, JsonResponse
-from publications.models import Post
+from post_app.models import Post
 from django.shortcuts import redirect
 
 class FriendsView(TemplateView):
@@ -51,9 +51,13 @@ class FriendsView(TemplateView):
         return context
     
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
+        try:
+            if not request.user.is_authenticated:
+                return redirect("register")
+        except:
             return redirect("register")
         return super().dispatch(request, *args, **kwargs)
+
     
 class RequestsView(TemplateView):
     template_name = "requests.html"

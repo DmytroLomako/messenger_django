@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block title %} Main Page {% endblock %}
+
+{% block link %}
+<link rel="stylesheet" href="{% static 'styles/chats.css' %}">
+<script src="{% static 'js/jquery-3.7.1.min.js' %}" defer></script>
+<script src="{% static 'js/oneChat.js' %}" defer></script>
+<script src="{% static 'js/all_chats.js' %}" defer></script>
+{% endblock %}
+
+{% block content %}
+<header>
+    <img src="{% static 'images/logo.png' %}" class="logo">
+    {% csrf_token %}
+    <div class="tabsExit">
+        <div class="tabs">
+            <a href="{% url 'main' %}" class="main tab"><img src="{% static 'images/main.png' %}">Головна</a>
+
+            <a href="{% url 'my_publications' %}" class="publications tab"><img
+                    src="{% static 'images/publications.png' %}">Мої публікації</a>
+
+            <a href="{% url 'friends' %}" class="friends tab">
+                <p class="friends-tracker">{{requests|length}}</p><img src="{% static 'images/friends.png' %}">Друзі
+            </a>
+
+            <a href="{% url 'chats' %}" class="chats tab tab-now"><img src="{% static 'images/chat.png' %}">Чати</a>
+
+            <a href="{% url 'settings' user.pk %}" class="settings tab"><img
+                    src="{% static 'images/settings.png' %}">Налаштування</a>
+
+        </div>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button class="exit" onclick=""><img src=" {% static 'images/exit.png' %}">Вихід</button>
+        </form>
+
+    </div>
+</header>
+
+<main>
+    <div class="contacts-and-create-div">
+        <button class="create-chat-btn"><img class="plus-icon" src="{% static 'images/plus.png' %}" alt="">Створити
+            груповий чат</button>
+        <div class="contacts">
+            <div class="contacts-header">
+                <img class="contacts-icon" src="{% static 'images/people.png' %}" alt="">
+                <p>Контакти</p>
+            </div>
+            <input class="search" type="text" placeholder="Пошук">
+            <div class="all-contacts">
+                {% for friend in friends %}
+                {% if friend.profile2 == request.user.profile %}
+                <div class="profile" id="{{friend.profile1.id}}">
+                    <img class="avatarImage" src="{{friend.profile1.avatar_set.last.image.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}</p>
+                    </div>
+                </div>
+                {% else %}
+                <div class="profile" id="{{friend.profile2.id}}">
+                    <img class="avatarImage" src="{{friend.profile2.avatar_set.last.image.url}}" alt="">
+                    <div class="profile-text-div">
+                        <p>{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!-- <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div>
+                <div class="profile">
+                    <img class="avatarImage" src="{% static 'images/avatar14.png' %}" alt="">
+                    <div class="profile-text-div">
+                        <p>Jane Cooper</p>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </div>
+    <div class="speak-div">
+        <div class="headerGroup">
+            <div class="headerStart">
+                <label for="backBtn">
+                    <img src="{% static 'images/back.png' %}" class="backImg">
+                </label>
+                
+                {% if group.avatar.url == user.profile.avatar_set.last.image.url %}
+                {% if group.members.last.avatar_set.last.url == user.profile.avatar_set.last.image.url %}
+                <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                {% else %}
+                <img class="avatarImage" src="{{group.members.last.avatar_set.last.image.url}}" alt="">
+                {% endif %}
+                {% else %}
+                {% if group.avatar %}
+                <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                {% endif %}
+                {% endif %}
+                <div class="nameAndMembers">
+                    <p class="groupName">{{group.name}}</p>
+                    <p class="membersCount">{{len_members}} учасники, 1 в мережі</p>
+                </div>
+                <button class="hidden" id="backBtn" value="{{group.id}}"></button>
+
+            </div>
+            {% if is_admin_group and not group.is_personal_chat %}
+            <div class="dotsDiv">
+                <form method="post">
+                    {% csrf_token %}
+
+                    <button type="button"><img src="{% static 'images/dots_menu.png' %}" class="dots"></button>
+                    <button class="edit" type="button" id="{{group.id}}"><img class="minilogo"
+                            src="{% static 'images/edit.png' %}" alt="">Редагувати
+                        Групу
+                    </button>
+                    <hr>
+                    <button type="button" class="delete" name="delete" id="{{group.id}}">
+                        <img class="minilogo" src="{% static 'images/deletePost.png' %}">
+                        Видлалити групу
+                    </button>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+        <div class="mainGroup">
+            {% for message in chat_messages %}
+            {% if message.author == profile_now %}
+            <div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+                </div>
+                <div class="messageFromMe message" id="message{{message.id}}" value="{{message.sent_at}}">
+                    <div class="nonAvatarFromMe">
+                        <div class="usernameAndTextcontent">
+                            {% if message.attached_image %}
+                            <img src="{{ message.attached_image.url }}" class="messageImage">
+                            {% endif %}
+                            <p class="messageContent">{{message.content}}</p>
+                        </div>
+                        <p class="datetime" id="datetimeFromMe">{{message.sent_at|date:'c'}}</p>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="fullMessage">
+                <div class="messagesDateWrapperDiv">
+                    <p id="date{{message.id}}" class="hidden messagesDateWrapper">{{message.sent_at|date:'c'}}</p>
+                </div>
+                <div class="message" id="message{{message.id}}" value="{{message.sent_at}}">
+                    <img src="{{message.author.avatar_set.last.image.url}}" class="avatarMessage">
+                    <div class="nonAvatar">
+                        <div class="usernameAndTextcontent">
+                            <p class="authorUsename">{{message.author.user.first_name}}
+                                {{message.author.user.last_name}}
+                            </p>
+                            {% if message.attached_image %}
+                            <img src="{{ message.attached_image.url }}" class="messageImage">
+                            {% endif %}
+                            <p class="messageContent">{{message.content}}</p>
+
+                        </div>
+
+                        <p class="datetime">{{message.sent_at|date:'c'}}</p>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% endfor %}
+        </div>
+        <div class="bottomGroup">
+            <form method="post" class="messageForm">
+                {% csrf_token %}
+                <input type="hidden" class="authorId" id="{{user.first_name}}">
+                <div class="inputAndImages">
+                    <input type="text" name="messageInput" id="id_message" class="input" placeholder="Повідомлення">
+                    <div class="imagesMessageDiv"></div>
+                </div>
+                <input id="sendImg2" type="file" class="sendImg2 hidden"></input>
+
+                <label for="sendImg2">
+                    <img src="{% static 'images/add_image.png' %}" class="sendImgImage">
+                </label>
+
+                <button class="sendEmoji"></button>
+
+                <label for="sendEmoji">
+                    <img src="{% static 'images/add_emoji.png' %}" class="sendEmojiImage">
+                </label>
+
+                <button class="submit" id="sendMessage"><img src="{% static 'images/send.png' %}" class="sendImg"
+                        value="{{group.id}}"></button>
+            </form>
+        </div>
+
+    </div>
+    <div class="chat-messages-div">
+        <div class="messages">
+            <div class="message-header">
+                <div class="message-header-text">
+                    <img src="{% static 'images/chat2.png' %}" alt="">
+                    <p>Повідомлення</p>
+                </div>
+                <a class="see-all" href="">Дивитись всі</a>
+            </div>
+            <div class="profiles-all-div">
+                {% for group in groups %}
+                {% if group.is_personal_chat %}
+                <div class="profiles-div chat{{group.id}}">
+                    <div class="profles" id="{{group.id}}">
+                        {% if group.avatar.url == user.profile.avatar_set.last.image.url %}
+                        {% if group.members.last.avatar_set.last.url == user.profile.avatar_set.last.image.url %}
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% else %}
+                        <img class="avatarImage" src="{{group.members.last.avatar_set.last.image.url}}" alt="">
+                        {% endif %}
+                        {% else %}
+                        {% if group.avatar %}
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        {% endif %}
+                        {% endif %}
+                        <div class="profiles-text">
+                            <div class="header-time-prfl-text">
+                                <p>{{group.name}}</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
+                            </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <div class="group-chats">
+            <div class="message-header">
+                <div class="message-header-text">
+                    <img src="{% static 'images/chat2.png' %}" alt="">
+                    <p>Групові чати</p>
+                </div>
+                <a class="see-all" href="">Дивитись всі</a>
+            </div>
+            <div class="groups-all-div">
+
+                {% for group in groups %}
+                {% if not group.is_personal_chat %}
+                <div class="profiles-div chat{{group.id}}">
+                    <div class="profles" id="{{message.group.id}}">
+                        <img class="avatarImage" src="{{group.avatar.url}}" alt="">
+                        <div class="profiles-text" id="{{group.id}}">
+                            <div class="header-time-prfl-text">
+                                <p>{{group.name}}</p>
+                                <p class="time-text datetime">{{group.chatmessage_set.last.sent_at|date:'c'}}</p>
+                            </div>
+                            <p class="text-content">{{group.chatmessage_set.last.content}}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="background-blur">
+
+        <form method="post" enctype="multipart/form-data" id="create_group">
+            <input type="hidden" class="list_of_members" id="" value="{{list_of_members}}">
+            <input type="hidden" class="group_id" value="{{group_id}}">
+            <input type="hidden" name="formType" value="create" class="formType">
+            <input type="hidden" class="choosedUsers" name="choosedUsers">
+            <div class="group-create">
+                {% csrf_token %}
+                <input type="hidden" class="postPkInput" name="post_id" value="">
+                <button type="button" id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Нова група</p>
+                <input type="text" placeholder="Пошук" class="input_find" id="">
+                <p class="choosed-num">Вибрано: 0</p>
+                <div class="list-of-friends">
+                    {% for friend in friends %}
+                    {% if friend.profile1 == request.user.profile %}
+                    <div class="userChoose">
+                        <img src="{{friend.profile2.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile2.user.first_name}} {{friend.profile2.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile2.pk}}">
+                    </div>
+                    {% else %}
+                    <div class="userChoose">
+                        <img src="{{friend.profile1.avatar_set.last.image.url}}" class="avatar">
+                        <p class="nameLastName">{{friend.profile1.user.first_name}} {{friend.profile1.user.last_name}}
+                        </p>
+                        <input type="checkbox" class="addedCheckbox" value="{{friend.profile1.pk}}">
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="btns">
+                    <button class="skipBtn btn" type="button">Скасувати</button>
+                    <button class="next btn" type="button">Далі</button>
+                </div>
+            </div>
+
+
+
+
+            <div class="group-create-2-step group-create">
+                <input type="hidden" class="postPkInput" name="post_id">
+                <button type="button" id="cancel-bg-blur">x</button>
+                <p class="NameTitle">Нова група</p>
+                <div class="nameInputBlock">
+                    <label for="nameInput">
+                        <p class="nameLabel">Назва</p>
+                    </label>
+
+                    <input type="text" required id="nameInput" placeholder="Введіть назву" class="input_find" id=""
+                        name="group_name">
+                </div>
+
+                <div class="GroupAvatarChoose">
+                    <input type="file" accept="*" class="hidden ImageInput" id="inputAvatarGroup" name="avatar_group">
+                    <div class="GroupAvatarDiv">
+                        <img src="{% static 'images/newGroup.png' %}" class="GroupAvatar">
+                    </div>
+                    <div class="divPhoto">
+                        <label for="inputAvatarGroup">
+                            <div class="AddPhoto">
+                                <img src="{% static 'images/add_tag.png' %}" class="small_logo">
+                                <p class="AddPhotoText">Додайте фото</p>
+                            </div>
+                        </label>
+
+                        <label for="inputAvatarGroup">
+                            <div class="choosePhoto">
+                                <img src="{% static 'images/publications.png' %}" class="small_logo">
+                                <p class="AddPhotoText">Оберіть фото</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <p class="nameLabel">Учасники</p>
+                <div class="group-members">
+
+                </div>
+
+                <div class="btns">
+                    <button class="skipBtn skipBtn-2-step btn" type="button">Назад</button>
+                    <button class="submit next btn">Створити групи</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock %}

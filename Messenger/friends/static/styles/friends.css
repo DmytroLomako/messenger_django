@@ -180,12 +180,26 @@ main {
     display: flex;
     flex-wrap: wrap;
     width: 48.07vw;
-    max-height: 55.56vh;
+    height: 55.56vh;
+    overflow-y: hidden;
+    overflow-x: hidden;
     border: 1px solid #CDCED2;
     border-radius: 0.52vw;
     background-color: white;
     padding-bottom: 16px;
 }
+
+.recommendations-friends-page {
+    display: flex;
+    flex-wrap: wrap;
+    width: 48.07vw;
+    border: 1px solid #CDCED2;
+    border-radius: 0.52vw;
+    background-color: white;
+    padding-bottom: 16px;
+}
+
+
 
 .recommendations-friends-div {
     display: flex;
@@ -194,6 +208,8 @@ main {
     gap: 0.74vh;
     margin-left: 1.04vw;
     margin-top: 1.48vh;
+    overflow-y: none;
+    overflow-x: none;
 }
 
 .all-friends {

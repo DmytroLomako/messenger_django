@@ -4,12 +4,12 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.models import User
 from .forms import UserUpdateForm
 from django.views.generic import ListView
-from authorization.models import Profile, Avatar, Friendship
+from user_app.models import Profile, Avatar, Friendship
 from django.contrib import messages
 from .models import *
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
-from authorization.models import VerificationCode
+from user_app.models import VerificationCode
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 # Create your views here.
@@ -34,7 +34,10 @@ class UserUpdateView(UpdateView):
         return redirect(self.get_success_url())
     
     def dispatch(self, request, pk,*args, **kwargs):
-        if not request.user.is_authenticated:
+        try:
+            if not request.user.is_authenticated:
+                return redirect("register")
+        except:
             return redirect("register")
         print(request.user)
         if request.user.username:
