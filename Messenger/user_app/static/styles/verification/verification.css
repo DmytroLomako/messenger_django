@@ -17,7 +17,7 @@ body {
 
 header {
     width: 100%;
-    height: 88px;
+    height: 8.8vh;
     background-color: white;
     display: flex;
     justify-content: center;
@@ -33,21 +33,21 @@ label,
 input {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 0.6vh;
 }
 
 input {
-    margin-top: 6px;
-    width: 50px;
-    height: 45px;
-    border: 1px solid #CDCED2;
-    border-radius: 10px;
-    padding-left: 16px;
+    margin-top: 0.6vh;
+    width: 5vw;
+    height: 4.5vh;
+    border: 0.1vw solid #CDCED2;
+    border-radius: 1vh;
+    padding-left: 1.6vw;
 }
 
 .inputBlocks {
     display: flex;
-    gap: 16px;
+    gap: 1.6vw;
     align-items: center;
     justify-content: center;
 }
@@ -60,15 +60,6 @@ ul {
     display: none;
 }
 
-/* #id_password2 {
-    margin-top: -16px;
-} */
-
-
-/* #id_password2 label {
-    margin-top: -16px;
-} */
-
 main {
     width: 100vw;
     height: 100vh;
@@ -77,81 +68,76 @@ main {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    padding-bottom: 60px;
+    padding-bottom: 6vh;
 }
 
 form {
     display: flex;
     flex-direction: column;
-    gap: 36px;
+    gap: 3.6vh;
 }
 
 .formDiv {
     width: 25.56vw;
     background-color: white;
-
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-top: 4.62vh;
     box-sizing: border-box;
-
-    border-radius: 20px;
+    border-radius: 2vh;
     gap: 1.89vw;
     z-index: 100;
     padding-bottom: 8.78vh;
 }
 
-
 .greatings {
-    font-size: 24px;
+    font-size: 2.4vh;
     color: #070A1C;
 }
 
 .choosed {
     font-weight: 700;
     color: #070A1C;
-    border-bottom: 2px solid black;
+    border-bottom: 0.2vh solid black;
 }
 
 .regLogin {
     display: flex;
-    gap: 24px;
+    gap: 2.4vw;
 }
 
 a {
-    font-size: 16px;
+    font-size: 1.6vh;
     color: #81818D;
     width: 100%;
-    height: 16px;
+    height: 1.6vh;
     display: flex;
     box-sizing: border-box;
     align-items: center;
     justify-content: center;
     text-align: center;
     text-decoration: none;
-    margin-top: -15px;
+    margin-top: -1.5vh;
 }
 
 .withoutButton {
-    width: 400px;
-    height: 230px;
+    width: 40vw;
+    height: 23vh;
     display: flex;
     box-sizing: border-box;
     flex-direction: column;
-    gap: 16px;
+    gap: 1.6vh;
 }
 
 .submit {
-    width: 400px;
-    height: 52px;
+    width: 40vw;
+    height: 5.2vh;
     display: flex;
     align-items: center;
     justify-content: center;
-
     background-color: #543C52;
-    border-radius: 1234px;
-
+    border-radius: 123.4vw;
     color: white;
     border: 0;
 }
@@ -160,10 +146,9 @@ a {
     display: none;
 }
 
-
 .guide {
-    width: 400px;
-    height: 54px;
+    width: 40vw;
+    height: 5.4vh;
     text-align: center;
 }
 

@@ -6,7 +6,7 @@ from .forms import UserUpdateForm
 from django.views.generic import ListView
 from user_app.models import Profile, Avatar, Friendship
 from django.contrib import messages
-from .models import *
+from post_app.models import *
 from django.http import JsonResponse
 from django.contrib.auth.hashers import make_password
 from user_app.models import VerificationCode

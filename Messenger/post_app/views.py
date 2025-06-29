@@ -118,6 +118,7 @@ class MyPublicationsView(CreateView):
                 return redirect("register")
         except:
             return redirect("register")
+        return super().dispatch(request, *args, **kwargs)
     
 def delete(request, post_pk):
     try:

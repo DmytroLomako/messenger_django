@@ -59,6 +59,10 @@ class MainView(CreateView):
         return context
     
     def dispatch(self, request, *args, **kwargs):
+        if len(Tag.objects.all()) == 0:
+            standart_tags_list = ["#відпочинок", "#натхнення", "#життя", "#природа", "#читання", "#спокій", "#гармонія", "#музика", "#фільми", "#подорожі"]
+            for tag in standart_tags_list:
+                Tag.objects.create(name = tag)
         try:
             if request.user.email:
                 return super().dispatch(request, *args, **kwargs)
@@ -66,6 +70,8 @@ class MainView(CreateView):
                 return redirect("login")
         except:
             return redirect("login")
+        
+        
 def create_name_surname(request):
     if request.method == "POST":
         name = request.POST.get("name")
